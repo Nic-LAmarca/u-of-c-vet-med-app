@@ -30,11 +30,11 @@ public class AnimalDAOImpl implements AnimalDAO
 
     @Override
     public List<Animal> getAll() {
-        return jdbcTemplate.query("SELECT * FROM animal", new BeanPropertyRowMapper<Animal>(Animal.class));
+        return jdbcTemplate.query("SELECT * FROM ANIMAL", new BeanPropertyRowMapper<Animal>(Animal.class));
     }
 
     @Override
     public Animal getById(int id) {
-        return jdbcTemplate.queryForObject("SELECT * FROM animal WHERE id=?", new BeanPropertyRowMapper<Animal>(Animal.class), id);
+        return jdbcTemplate.queryForObject("SELECT * FROM ANIMAL WHERE id=?", new BeanPropertyRowMapper<Animal>(Animal.class), id);
     }
 }

@@ -12,7 +12,7 @@ public class UserController {
     @Autowired
     private UserDAO uDAO;
 
-    @GetMapping("/user")
+    @GetMapping("/users")
     public List<Users> getAnimals()
     {
         return uDAO.getAll();

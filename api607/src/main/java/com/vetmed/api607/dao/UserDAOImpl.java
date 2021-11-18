@@ -32,5 +32,10 @@ public class UserDAOImpl implements UserDAO{
         return jdbcTemplate.query("SELECT * FROM USERS", new BeanPropertyRowMapper<Users>(Users.class));
     }
 
+    @Override
+    public Users getById(int id) {
+        return jdbcTemplate.queryForObject("SELECT * FROM ANIMAL WHERE id=?", new BeanPropertyRowMapper<Users>(Users.class), id);
+    }
+
 
 }

@@ -9,8 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Images {
     private Integer id;
-    private String user_name;
-    private String user_type;
-    private String email;
-    private String activation_date;
+    private String user_id;
+    private String createdate;
+    private String address;
+    private String animal_id;
+    private String image_type;
+
 }

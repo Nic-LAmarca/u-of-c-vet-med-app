@@ -3,26 +3,26 @@
 
 ## Endpoints
 GET:
-Comment
+Comment - FP63
 
-List of Animals
+List of Animals - FP52
 
-History
+History - FP59
 
-Individual User
+Individual User - FP60
 
-Images
+Images - FP58
 
-Animal Status Images
+Animal Status Images - FP62
 
-List of Animals
+List of Animals - FP53
 
-Individual Animal
+Individual Animal - FP55
 
-Treatment Method
+Treatment Method - FP54
 
-Medical Records
+Medical Records - FP57
 
-Animal Status History
+Animal Status History - FP61
 
-Prescription
+Prescription - FP56

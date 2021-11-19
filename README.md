@@ -3,7 +3,6 @@
 
 ## Endpoints
 ### GET:
-<br />
 Comment - FP63
 
 List of Animals - FP52
@@ -29,7 +28,6 @@ Animal Status History - FP61
 Prescription - FP56
 
 ### PUT
-<br />
 Animal - FP64
 
 User - FP65

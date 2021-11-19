@@ -2,7 +2,7 @@
 607 final project
 
 ## Endpoints
-GET:
+### GET:
 <br />
 Comment - FP63
 
@@ -28,7 +28,7 @@ Animal Status History - FP61
 
 Prescription - FP56
 
-PUT
+### PUT
 <br />
 Animal - FP64
 

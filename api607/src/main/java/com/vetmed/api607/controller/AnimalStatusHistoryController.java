@@ -17,8 +17,8 @@ public class AnimalStatusHistoryController {
     @Autowired
     private AnimalStatusHistoryDAO animalStatusHistoryDAO;
 
-    @GetMapping("/animal_history/{id}")
-    public List<AnimalStatusHistory> getAnimalStatusHistory(@PathVariable int animal_id)
+    @GetMapping("/animal/status/history/{animal_id}")
+    public AnimalStatusHistory getAnimalStatusHistory(@PathVariable int animal_id)
     {
         return animalStatusHistoryDAO.getAnimalStatusHistory(animal_id);
     }

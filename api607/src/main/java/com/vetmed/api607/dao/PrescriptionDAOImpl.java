@@ -29,6 +29,6 @@ public class PrescriptionDAOImpl implements PrescriptionDAO{
 
     @Override
     public List<Prescription> getAll() {
-        return jdbcTemplate.query("SELECT * FROM prescription", new BeanPropertyRowMapper<Prescription>(Prescription.class));
+        return jdbcTemplate.query("SELECT * FROM medicalrecordstype", new BeanPropertyRowMapper<Prescription>(Prescription.class));
     }
 }

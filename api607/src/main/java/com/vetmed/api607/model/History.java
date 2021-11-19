@@ -7,7 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Record {
+public class History {
     private Integer id;
-    private String record_type;
+    private String history_date;
+    private String history_type;
+    private String history_value;
+    private String user_id;
+    private String animal_id;
 }

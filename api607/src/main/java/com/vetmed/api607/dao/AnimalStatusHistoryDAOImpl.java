@@ -17,7 +17,7 @@ public class AnimalStatusHistoryDAOImpl implements AnimalStatusHistoryDAO
     @Override
     public List<AnimalStatusHistory> getAnimalStatusHistory(int animal_id)
     {
-        return jdbcTemplate.query("SELECT * FROM animalstatushistory WHERE animal_id = ?", new BeanPropertyRowMapper<AnimalStatusHistory>(AnimalStatusHistory.class));
+        return jdbcTemplate.query("SELECT * FROM animalstatushistory WHERE animal_id = ?", new BeanPropertyRowMapper<AnimalStatusHistory>(AnimalStatusHistory.class),animal_id);
 
     }
 }

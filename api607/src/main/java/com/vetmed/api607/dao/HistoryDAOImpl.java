@@ -1,24 +1,25 @@
 package com.vetmed.api607.dao;
 
-import com.vetmed.api607.model.Record;
+import com.vetmed.api607.model.History;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 @Repository
-public class RecordDAOImpl implements RecordDAO{
+public class HistoryDAOImpl implements HistoryDAO{
     @Autowired
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public int save(Record record) {
+    public int save(History history) {
         return 0;
     }
 
     @Override
-    public int update(Record record, int id) {
+    public int update(History history, int id) {
         return 0;
     }
 
@@ -28,7 +29,7 @@ public class RecordDAOImpl implements RecordDAO{
     }
 
     @Override
-    public List<Record> getAll() {
-        return jdbcTemplate.query("SELECT * FROM medicalrecordstype", new BeanPropertyRowMapper<Record>(Record.class));
+    public List<History> getAll() {
+        return jdbcTemplate.query("SELECT * FROM History", new BeanPropertyRowMapper<History>(History.class));
     }
 }

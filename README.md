@@ -2,6 +2,8 @@
 607 final project
 
 ## Endpoints
+These are the stages that were followed in order to build and test each of the endpoints.
+
 ### Database
 To complete the endpoint examples for this portion of the project, we decided it would be easiest to quickly create a sample database that would be similar to what will actually be used as an end result. We did so in MySQL by creating a new database with a simple SQL command and then used Table Data Import Wizard to populate the database with the data provided by Majid in an excel spreadsheet.
 

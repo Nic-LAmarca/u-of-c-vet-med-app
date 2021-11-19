@@ -29,9 +29,9 @@ Images - FP58
 
 Animal Status Images - FP62
 
-List of Animals - FP53
+Individual Animal - FP53
 
-Individual Animal - FP55
+List of Users - FP55
 
 Treatment Method - FP54
 

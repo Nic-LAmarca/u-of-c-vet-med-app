@@ -37,4 +37,7 @@ public class AnimalDAOImpl implements AnimalDAO
     public Animal getById(int id) {
         return jdbcTemplate.queryForObject("SELECT * FROM ANIMAL WHERE id=?", new BeanPropertyRowMapper<Animal>(Animal.class), id);
     }
+
+
+
 }

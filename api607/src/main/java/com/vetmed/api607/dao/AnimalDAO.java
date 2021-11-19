@@ -15,4 +15,5 @@ public interface AnimalDAO
     List<Animal> getAll();
 
     Animal getById(int id);
+
 }

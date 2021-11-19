@@ -18,17 +18,28 @@ Below, we show each of the endpoints that have been created and tested. In order
 
 #### GET:
 Comment - FP63
+
 List of Animals - FP52
+
 History - FP59
+
 Individual User - FP60
+
 Images - FP58
+
 Individual Animal - FP53
+
 List of Users - FP55
+
 Treatment Method - FP54
+
 Medical Records - FP57
+
 Animal Status History - FP61
+
 Prescription - FP56
 
 #### POST:
 Animal - FP64
+
 User - FP65

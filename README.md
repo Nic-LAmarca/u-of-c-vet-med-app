@@ -41,7 +41,7 @@ Animal Status History - FP61
 
 Prescription - FP56
 
-#### PUT
+#### POST:
 Animal - FP64
 
 User - FP65

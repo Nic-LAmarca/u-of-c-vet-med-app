@@ -27,8 +27,6 @@ Individual User - FP60
 
 Images - FP58
 
-Animal Status Images - FP62
-
 Individual Animal - FP53
 
 List of Users - FP55

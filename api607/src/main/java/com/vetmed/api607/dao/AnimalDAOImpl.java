@@ -15,9 +15,8 @@ public class AnimalDAOImpl implements AnimalDAO
 
     @Override
     public int add(Animal animal) {
-        return jdbcTemplate.update("INSERT INTO animal (id, animal_type, weight, tattoo, city_tattoo, bod, bread, sex, rfid, microchip, draught, meat, distinguishing, features, color) " +
-                    "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", new Object[] { animal.getId(), animal.getAnimal_type(), animal.getWeight(), animal.getTattoo(), animal.getCity_tattoo(),
-                    animal.getBod(), animal.getBread(), animal.getSex(), animal.getRfid(), animal.getMicrochip(), animal.getDraught(), animal.getMeat(), animal.getDistinguishing(), animal.getFeatures(), animal.getColor()});
+        return jdbcTemplate.update("INSERT INTO animal (id, animal_type, weight, tattoo, city_tattoo, bod, bread, sex, rfid, microchip, animal_status, draught, meat, region, subspecies, distinguishing, features, color) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", new Object[] { animal.getId(), animal.getAnimal_type(), animal.getWeight(), animal.getTattoo(), animal.getCity_tattoo(),
+                    animal.getBod(), animal.getBread(), animal.getSex(), animal.getRfid(), animal.getMicrochip(),animal.getAnimal_status(), animal.getDraught(), animal.getMeat(), animal.getRegion(),animal.getSubspecies(), animal.getDistinguishing(), animal.getFeatures(), animal.getColor()});
     }
 
     @Override

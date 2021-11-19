@@ -14,8 +14,11 @@ public class AnimalDAOImpl implements AnimalDAO
     JdbcTemplate jdbcTemplate;
 
     @Override
-    public int save(Animal animal) {
-        return 0;
+    public int add(Animal animal) {
+        return jdbcTemplate.update("INSERT INTO animal (id, type, weight, tattoo, city_tattoo, dob, breed, sex, rfid, microchip, status, draught, meat, region, distinguishing_features, color) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                new Object[] { animal.getId(), animal.getType(), animal.getWeight(), animal.getTattoo(), animal.getCity_tattoo(),
+            animal.getDob(), animal.getBreed(), animal.getSex(), animal.getRfid(), animal.getMicrochip(), animal.getStatus(),animal.getDraught(), animal.getMeat(), animal.getRegion(),
+                        animal.getDistinguishing_features(), animal.getColor()});
     }
 
     @Override

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface AnimalDAO
 {
-    int save(Animal animal);
+    int add(Animal animal);
 
     int update(Animal animal, int id);
 

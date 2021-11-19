@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
+
 
 @Data
 @AllArgsConstructor
@@ -15,7 +17,7 @@ public class Animal
     private Double weight;
     private Integer tattoo;
     private String city_tattoo;
-    private String dob;
+    private Date dob;
     private String breed;
     private String sex;
     private Long rfid;

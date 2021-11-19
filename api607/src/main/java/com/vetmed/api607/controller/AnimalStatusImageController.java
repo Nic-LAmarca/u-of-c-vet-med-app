@@ -15,7 +15,7 @@ public class AnimalStatusImageController
     @Autowired
     private AnimalStatusImageDAO animalStatusImageDAO;
 
-    @GetMapping("/animal/status/images/{id}")
+    @GetMapping("/animal-status-images/{status_history}")
     public AnimalStatusImage getByStatusHistoryId(@PathVariable int status_history)
     {
         return animalStatusImageDAO.getByStatusHistoryId(status_history);

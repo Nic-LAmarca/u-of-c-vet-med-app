@@ -13,89 +13,137 @@ public class DbController {
     private Properties dbDetails;
     private ResultSet results;
 
-    // ******************************************************
-    // ****** SECTION USED FOR USER QUERY INTERACTIONS ******
-    // ******************************************************
+    // ********************************************************
+    // ****** SECTION USED FOR ANIMAL QUERY INTERACTIONS ******
+    // ********************************************************
 
     /**
      *
-     * Method is used to search the database for a user with the entered id and return the User object if found
+     * Method is used to search the database for an Animal with the entered id and return the Animal object if found
      *
      * @param id is the unique id value to search with
-     * @return a new user object that matches the id passed as an argument
+     * @return a new Animal object that matches the id passed as an argument
      */
-    public User searchForUser(int id) {
-        User foundUser = new User();
+    public Animal searchForAnimal(int id) {
+        Animal foundAnimal = new Animal();
         try {
-            String query = "SELECT * FROM USER WHERE userId = ?";
+            String query = "SELECT * FROM ANIMAL WHERE animalId = ?";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setInt(1, id);
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
-                if (results.getInt("userId") == id) {
-                    foundUser.setUserId(id);
-                    foundUser.setFName(results.getString("fName"));
-                    foundUser.setLName(results.getString("lName"));
-                    foundUser.setEmail(results.getString("email"));
-                    foundUser.setActivationDate(results.getDate("activationDate").toString());
-                    foundUser.setUserType(results.getString("userType"));
+                if (results.getInt("animalId") == id) {
+                    foundAnimal.setAnimalId(id);
+                    foundAnimal.setAnimalName(results.getString("animalName"));
+                    foundAnimal.setSpecies(results.getString("species"));
+                    foundAnimal.setWeight(results.getDouble("weight"));
+                    foundAnimal.setTattooNum(results.getInt("tattooNum"));
+                    foundAnimal.setCityTattoo(results.getString("cityTattoo"));
+                    foundAnimal.setBirthDate(results.getDate("birthDate").toString());
+                    foundAnimal.setBreed(results.getString("breed"));
+                    foundAnimal.setSex(results.getString("sex"));
+                    foundAnimal.setRfid(results.getLong("rfid"));
+                    foundAnimal.setMicrochip(results.getLong("microchip"));
+                    foundAnimal.setStatusType(results.getString("statusType"));
+                    foundAnimal.setAvailable(results.getBoolean("available"));
+                    foundAnimal.setPurpose(results.getString("purpose"));
+                    foundAnimal.setRegion(results.getString("region"));
+                    foundAnimal.setSubspecies(results.getString("subspecies"));
+                    foundAnimal.setColor(results.getString("color"));
+                    foundAnimal.setDistinguishingFeatures(results.getString("distinguishingFeatures"));
                 }
             }
             myStmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return foundAnimal;
     }
 
     /**
      *
-     * Method is used to return an arraylist of users that are in the database
+     * Method is used to return an arraylist of Animals that are in the database
      *
-     * @return a new list of user objects from the db
+     * @return a new list of Animal objects from the db
      */
-    public ArrayList<User> getAllUsers() {
-        ArrayList<User> userList = new ArrayList<User>();
+    public ArrayList<Animal> getAllAnimals() {
+        ArrayList<Animal> animalList = new ArrayList<Animal>();
         try {
-            String query = "SELECT * FROM USER";
+            String query = "SELECT * FROM ANIMAL";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
-                User addUser = new User();
-                addUser.setUserId(results.getInt("userId"));
-                addUser.setFName(results.getString("fName"));
-                addUser.setLName(results.getString("lName"));
-                addUser.setEmail(results.getString("email"));
-                addUser.setActivationDate(results.getDate("activationDate").toString());
-                addUser.setUserType(results.getString("userType"));
-                userList.add(addUser);
+                Animal addAnimal = new Animal();
+                addAnimal.setAnimalId(results.getInt("animalId"));
+                addAnimal.setAnimalName(results.getString("animalName"));
+                addAnimal.setSpecies(results.getString("species"));
+                addAnimal.setWeight(results.getDouble("weight"));
+                addAnimal.setTattooNum(results.getInt("tattooNum"));
+                addAnimal.setCityTattoo(results.getString("cityTattoo"));
+                addAnimal.setBirthDate(results.getDate("birthDate").toString());
+                addAnimal.setBreed(results.getString("breed"));
+                addAnimal.setSex(results.getString("sex"));
+                addAnimal.setRfid(results.getLong("rfid"));
+                addAnimal.setMicrochip(results.getLong("microchip"));
+                addAnimal.setStatusType(results.getString("statusType"));
+                addAnimal.setAvailable(results.getBoolean("available"));
+                addAnimal.setPurpose(results.getString("purpose"));
+                addAnimal.setRegion(results.getString("region"));
+                addAnimal.setSubspecies(results.getString("subspecies"));
+                addAnimal.setColor(results.getString("color"));
+                addAnimal.setDistinguishingFeatures(results.getString("distinguishingFeatures"));
+                animalList.add(addAnimal);
             }
             myStmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return userList;
+        return animalList;
     }
 
     /**
      *
-     * Method is used to add a user into the database based on the entered credentials
+     * Method is used to add an Animal into the database based on the entered credentials
      *
-     * @param fName is the first name of the user
-     * @param lName is the last name of the user
-     * @param email is the email of the user
-     * @param activationDate is the date that the user is activated in the system
-     * @param userType is the type of user (Student, Teacher, Admin ...)
+     * @param animalName is the name of the animal
+     * @param species is the species of the animal
+     * @param weight is the weight of the animal
+     * @param tattooNum is the tattoo number of the animal
+     * @param cityTattoo is the city tattoo of the animal
+     * @param birthDate is the birthdate of the animal
+     * @param breed is the breed of the animal
+     * @param sex is the sex of the animal
+     * @param rfid is the rfid of the animal
+     * @param microchip is the microchip of the animal
+     * @param statusType is the status of the animal
+     * @param purpose is the purpose of the animal
+     * @param region is the region of the animal
+     * @param subspecies is the subspecies of the animal
+     * @param color is the color of the animal
+     * @param distinguishingFeatures are the distinguishing features of the animal
      */
-    public void addUser(String fName, String lName, String email, String activationDate, String userType) {
+    public void addAnimal(String animalName, String species, Double weight, int tattooNum, String cityTattoo, String birthDate, String breed,
+                           String sex, long rfid, long microchip, String statusType, String purpose, String region, String subspecies, String color, String distinguishingFeatures) {
         try {
-            String query = "INSERT INT0 USER (fName, lName, email, activationDate, userType) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INT0 ANIMAL (animalName, species, weight, tattooNum, cityTattoo, birthDate, breed, sex, rfid, microchip, statusType, available, purpose, region, subspecies, color, distinguishingFeatures) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
-            myStmt.setString(1, fName);
-            myStmt.setString(1, lName);
-            myStmt.setString(1, email);
-            myStmt.setDate(1, Date.valueOf(activationDate));
-            myStmt.setString(1, userType);
+            myStmt.setString(1, animalName);
+            myStmt.setString(2, species);
+            myStmt.setDouble(3, weight);
+            myStmt.setInt(4, tattooNum);
+            myStmt.setString(5, cityTattoo);
+            myStmt.setDate(6, Date.valueOf(birthDate));
+            myStmt.setString(7, breed);
+            myStmt.setString(8, sex);
+            myStmt.setLong(9, rfid);
+            myStmt.setLong(10, microchip);
+            myStmt.setString(11, statusType);
+            myStmt.setBoolean(12, true);
+            myStmt.setString(13, purpose);
+            myStmt.setString(14, region);
+            myStmt.setString(15, subspecies);
+            myStmt.setString(16, color);
+            myStmt.setString(17, distinguishingFeatures);
             myStmt.executeQuery();
             myStmt.close();
         } catch (Exception e) {
@@ -103,11 +151,405 @@ public class DbController {
         }
     }
 
-    // ******************************************************
-    // ****** SECTION USED FOR USER QUERY INTERACTIONS ******
-    // ******************************************************
+    // ********************************************************
+    // ****** SECTION USED FOR ANIMAL QUERY INTERACTIONS ******
+    // ********************************************************
 
 
+
+
+
+
+
+
+
+
+    // *********************************************************
+    // ****** SECTION USED FOR COMMENT QUERY INTERACTIONS ******
+    // *********************************************************
+
+    /**
+     *
+     * Method is used to search the database for an Comment with the entered id and return the Comment object if found
+     *
+     * @param id is the unique id value to search with
+     * @return a new Comment object that matches the id passed as an argument
+     */
+    public Comment searchForComment(int id) {
+        Comment foundComment = new Comment();
+        try {
+            String query = "SELECT * FROM COMMENT WHERE commentId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, id);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                if (results.getInt("commentId") == id) {
+                    foundComment.setCommentId(id);
+                    foundComment.setUserId(results.getInt("userId"));
+                    foundComment.setAnimalId(results.getInt("animalId"));
+                    foundComment.setDescription(results.getString("description"));
+                    foundComment.setDate(results.getDate("date").toString());
+                }
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return foundComment;
+    }
+
+    /**
+     *
+     * Method is used to return an arraylist of Comments that are in the database
+     *
+     * @return a new list of Comment objects from the db
+     */
+    public ArrayList<Comment> getAllComments() {
+        ArrayList<Comment> commentList = new ArrayList<Comment>();
+        try {
+            String query = "SELECT * FROM COMMENT";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                Comment addComment= new Comment();
+                addComment.setCommentId(results.getInt("commentId"));
+                addComment.setUserId(results.getInt("userId"));
+                addComment.setAnimalId(results.getInt("animalId"));
+                addComment.setDescription(results.getString("description"));
+                addComment.setDate(results.getDate("date").toString());
+                commentList.add(addComment);
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return commentList;
+    }
+
+    /**
+     *
+     * Method is used to add a Comment into the database
+     *
+     * @param userId is the user entering the comment
+     * @param animalId is the animal being commented on
+     * @param description is the comment description
+     * @param date is the date the comment was made
+     */
+    public void addComment(int userId, int animalId, String description, String date){
+        try {
+            String query = "INSERT INT0 COMMENT (userId, animalId, description, date) VALUES (?, ?, ?, ?)";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, userId);
+            myStmt.setInt(2, animalId);
+            myStmt.setString(3, description);
+            myStmt.setDate(4, Date.valueOf(date));
+            myStmt.executeQuery();
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // *********************************************************
+    // ****** SECTION USED FOR COMMENT QUERY INTERACTIONS ******
+    // *********************************************************
+
+
+
+
+
+
+
+
+
+
+    // *********************************************************
+    // ****** SECTION USED FOR HISTORY QUERY INTERACTIONS ******
+    // *********************************************************
+
+    /**
+     *
+     * Method is used to search the database for History with the entered id and return the History object if found
+     *
+     * @param id is the unique id value to search with
+     * @return a new History object that matches the id passed as an argument
+     */
+    public History searchForHistory(int id) {
+        History foundHistory = new History();
+        try {
+            String query = "SELECT * FROM HISTORY WHERE HistoryId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, id);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                if (results.getInt("historyId") == id) {
+                    foundHistory.setHistoryId(id);
+                    foundHistory.setDate(results.getDate("date").toString());
+                    foundHistory.setAnimalId(results.getInt("animalId"));
+                    foundHistory.setMeasurement(results.getString("measurement"));
+                    foundHistory.setValue(results.getDouble("value"));
+                    foundHistory.setUserId(results.getInt("userId"));
+                }
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return foundHistory;
+    }
+
+    /**
+     *
+     * Method is used to return an arraylist of History that are in the database
+     *
+     * @return a new list of History objects from the db
+     */
+    public ArrayList<History> getAllHistorys() {
+        ArrayList<History> historyList = new ArrayList<History>();
+        try {
+            String query = "SELECT * FROM HISTORY";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                History addHistory= new History();
+                addHistory.setHistoryId(results.getInt("historyId"));
+                addHistory.setDate(results.getDate("date").toString());
+                addHistory.setAnimalId(results.getInt("animalId"));
+                addHistory.setMeasurement(results.getString("measurement"));
+                addHistory.setValue(results.getDouble("value"));
+                addHistory.setUserId(results.getInt("userId"));
+                historyList.add(addHistory);
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return historyList;
+    }
+
+    /**
+     *
+     * Method is used to add a History into the database
+     *
+     * @param date is the date the history is for
+     * @param animalId is the animal being recorded
+     * @param measurement is the measurement type
+     * @param value is the result of the measurement
+     * @param userId is the user entering the history
+     */
+    public void addHistory(String date, int animalId, String measurement, Double value, int userId){
+        try {
+            String query = "INSERT INT0 HISTORY (date, animalId, measurement, value, userId) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setDate(1, Date.valueOf(date));
+            myStmt.setInt(2, animalId);
+            myStmt.setString(3, measurement);
+            myStmt.setDouble(4, value);
+            myStmt.setInt(5, userId);
+            myStmt.executeQuery();
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // *********************************************************
+    // ****** SECTION USED FOR HISTORY QUERY INTERACTIONS ******
+    // *********************************************************
+
+
+
+
+
+
+
+
+
+
+    // *********************************************************
+    // ****** SECTION USED FOR IMAGE QUERY INTERACTIONS ********
+    // *********************************************************
+
+    /**
+     *
+     * Method is used to search the database for Image with the entered id and return the Image object if found
+     *
+     * @param id is the unique id value to search with
+     * @return a new Image object that matches the id passed as an argument
+     */
+    public Image searchForImage(int id) {
+        Image foundImage= new Image();
+        try {
+            String query = "SELECT * FROM IMAGE WHERE ImageId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, id);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                if (results.getInt("imageId") == id) {
+                    foundImage.setImageId(id);
+                    foundImage.setUserId(results.getInt("userId"));
+                    foundImage.setCreationDate(results.getDate("creationDate").toString());
+                    foundImage.setFile(results.getString("file"));
+                    foundImage.setAnimalId(results.getInt("animalId"));
+                    foundImage.setType(results.getString("type"));
+                }
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return foundImage;
+    }
+
+    /**
+     *
+     * Method is used to return an arraylist of Image that are in the database
+     *
+     * @return a new list of Image objects from the db
+     */
+    public ArrayList<Image> getAllImages() {
+        ArrayList<Image> imageList = new ArrayList<Image>();
+        try {
+            String query = "SELECT * FROM IMAGE";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                Image addImage= new Image();
+                addImage.setImageId(results.getInt("imageId"));
+                addImage.setUserId(results.getInt("userId"));
+                addImage.setCreationDate(results.getDate("creationDate").toString());
+                addImage.setFile(results.getString("file"));
+                addImage.setAnimalId(results.getInt("animalId"));
+                addImage.setType(results.getString("type"));
+                imageList.add(addImage);
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return imageList;
+    }
+
+    /**
+     *
+     * Method is used to add an image into the database
+     *
+     * @param userId is the user entering the image
+     * @param creationDate is the date the image was taken
+     * @param file is the file path for the image
+     * @param animalId is the animal that the image relates to
+     * @param type is the type of image being taken
+     */
+    public void addImage(int userId, String creationDate, String file, int animalId, String type){
+        try {
+            String query = "INSERT INT0 IMAGE (userId, creationDate, file, animalId, type) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, userId);
+            myStmt.setDate(2, Date.valueOf(creationDate));
+            myStmt.setString(3, file);
+            myStmt.setInt(4, animalId);
+            myStmt.setString(5, type);
+            myStmt.executeQuery();
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // *********************************************************
+    // ****** SECTION USED FOR IMAGE QUERY INTERACTIONS ********
+    // *********************************************************
+
+
+
+
+
+
+
+
+
+
+    // **************************************************************************
+    // ****** SECTION USED FOR MEDICAL RECORD HISTORY QUERY INTERACTIONS ********
+    // **************************************************************************
+
+    /**
+     *
+     * Method is used to search the database for Medical Record History with the entered id and return the Medical Record History object if found
+     *
+     * @param id is the unique id value to search with
+     * @return a new Medical Record History object that matches the id passed as an argument
+     */
+    public MedicalRecordHistory searchForMedicalRecordHistory(int id) {
+        MedicalRecordHistory foundMedicalRecordHistory= new MedicalRecordHistory();
+        try {
+            String query = "SELECT * FROM MEDICAL_RECORD_HISTORY WHERE medicalRecordHistoryId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, id);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                if (results.getInt("medicalRecordHistoryId") == id) {
+                    foundMedicalRecordHistory.setMedicalRecordId(id);
+                    foundMedicalRecordHistory.setAnimalId(results.getInt("animalId"));
+                    foundMedicalRecordHistory.setDate(results.getDate("date").toString());
+                }
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return foundMedicalRecordHistory;
+    }
+
+    /**
+     *
+     * Method is used to return an arraylist of Medical Record History that are in the database
+     *
+     * @return a new list of Medical Record History objects from the db
+     */
+    public ArrayList<MedicalRecordHistory> getAllMedicalRecordHistory() {
+        ArrayList<MedicalRecordHistory> medicalRecordHistoryList = new ArrayList<MedicalRecordHistory>();
+        try {
+            String query = "SELECT * FROM MEDICAL_RECORD_HISTORY";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                MedicalRecordHistory addMedicalRecordHistory= new MedicalRecordHistory();
+                addMedicalRecordHistory.setMedicalRecordId(results.getInt("medicalRecordId"));
+                addMedicalRecordHistory.setAnimalId(results.getInt("animalId"));
+                addMedicalRecordHistory.setDate(results.getDate("date").toString());
+                medicalRecordHistoryList.add(addMedicalRecordHistory);
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return medicalRecordHistoryList;
+    }
+
+    /**
+     *
+     * Method is used to add Medical Record History into the database
+     *
+     * @param animalId is the animal to add Medical Record History for
+     * @param date is the date the Medical Record History is being added
+     */
+    public void addMedicalRecordHistory(int animalId, String date){
+        try {
+            String query = "INSERT INT0 MEDICAL_RECORD_HISTORY (AnimalId, date) VALUES (?, ?)";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, animalId);
+            myStmt.setDate(2, Date.valueOf(date));
+            myStmt.executeQuery();
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // **************************************************************************
+    // ****** SECTION USED FOR MEDICAL RECORD HISTORY QUERY INTERACTIONS ********
+    // **************************************************************************
 
 
 
@@ -193,4 +635,106 @@ public class DbController {
     // *********************************************************************
     // ****** SECTION USED FOR MEDICAL RECORD TYPE QUERY INTERACTIONS ******
     // *********************************************************************
+
+
+
+
+
+
+
+
+
+    // ******************************************************
+    // ****** SECTION USED FOR USER QUERY INTERACTIONS ******
+    // ******************************************************
+
+    /**
+     *
+     * Method is used to search the database for a user with the entered id and return the User object if found
+     *
+     * @param id is the unique id value to search with
+     * @return a new user object that matches the id passed as an argument
+     */
+    public User searchForUser(int id) {
+        User foundUser = new User();
+        try {
+            String query = "SELECT * FROM USER WHERE userId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, id);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                if (results.getInt("userId") == id) {
+                    foundUser.setUserId(id);
+                    foundUser.setFName(results.getString("fName"));
+                    foundUser.setLName(results.getString("lName"));
+                    foundUser.setEmail(results.getString("email"));
+                    foundUser.setActivationDate(results.getDate("activationDate").toString());
+                    foundUser.setUserType(results.getString("userType"));
+                }
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     *
+     * Method is used to return an arraylist of users that are in the database
+     *
+     * @return a new list of user objects from the db
+     */
+    public ArrayList<User> getAllUsers() {
+        ArrayList<User> userList = new ArrayList<User>();
+        try {
+            String query = "SELECT * FROM USER";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                User addUser = new User();
+                addUser.setUserId(results.getInt("userId"));
+                addUser.setFName(results.getString("fName"));
+                addUser.setLName(results.getString("lName"));
+                addUser.setEmail(results.getString("email"));
+                addUser.setActivationDate(results.getDate("activationDate").toString());
+                addUser.setUserType(results.getString("userType"));
+                userList.add(addUser);
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return userList;
+    }
+
+    /**
+     *
+     * Method is used to add a user into the database based on the entered credentials
+     *
+     * @param fName is the first name of the user
+     * @param lName is the last name of the user
+     * @param email is the email of the user
+     * @param activationDate is the date that the user is activated in the system
+     * @param userType is the type of user (Student, Teacher, Admin ...)
+     */
+    public void addUser(String fName, String lName, String email, String activationDate, String userType) {
+        try {
+            String query = "INSERT INT0 USER (fName, lName, email, activationDate, userType) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setString(1, fName);
+            myStmt.setString(2, lName);
+            myStmt.setString(3, email);
+            myStmt.setDate(4, Date.valueOf(activationDate));
+            myStmt.setString(5, userType);
+            myStmt.executeQuery();
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // ******************************************************
+    // ****** SECTION USED FOR USER QUERY INTERACTIONS ******
+    // ******************************************************
 }

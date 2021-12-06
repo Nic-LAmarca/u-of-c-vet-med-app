@@ -31,6 +31,7 @@ public class Animal
     private String features;
     private String color;
 
+    //TODO figure out what to keep here and use for database
 //    private Integer id;
 //    private String animal_type;
 //    private String name;

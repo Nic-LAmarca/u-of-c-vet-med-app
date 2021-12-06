@@ -29,6 +29,33 @@ public class DbController {
         }
         return null;
     }
+    public Users searchUsers(int id){
+        ArrayList<Users> users = new ArrayList<Users>();
+        try {
+            String query = "SELECT * FROM USERS WHERE userId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, id);
+
+            ResultSet results = myStmt.executeQuery();
+
+            while (results.next()) {
+                if (results.getInt("userId") == id) {
+                    Users u = new Users();
+                    u.setId(id);
+                    u.setEmail(results.getString("email"));
+                    u.setUser_type(results.getString("user_type"));
+                    p.setCardHolderName(results.getString("holderName"));
+                    p.setCardNum(results.getString("cardNumber"));
+                    p.setExpiry(results.getDate("expiry").toLocalDate());
+
+                    myStmt.close();
+                    return p;
+                }
+            }
+
+    }
+
+
 
     public Users verifyLogin(String username, String password){
         for(int i = 0; i < userList.size(); i++){

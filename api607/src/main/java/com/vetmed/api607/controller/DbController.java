@@ -2,16 +2,30 @@ package com.vetmed.api607.controller;
 
 import com.vetmed.api607.model.*;
 
+import java.io.FileReader;
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.sql.Date;
 
 public class DbController {
+    private static DbController instanceVar;
     private Connection dbConnect;
     private Properties dbDetails;
     private ResultSet results;
+
+    public DbController(){
+        try{
+            String dbDetailsLocation = "src/main/resources/application.properties";
+            this.dbDetails = new Properties();
+            this.dbDetails.load(new FileReader(dbDetailsLocation));
+            String connectionString = String.format("jdbc:mysql://%s:%s/%s", this.dbDetails.getProperty("db.host"), this.dbDetails.getProperty("db.port"), this.dbDetails.getProperty("db.schema"));
+            this.dbConnect = DriverManager.getConnection(connectionString, this.dbDetails.getProperty("db.user"), this.dbDetails.getProperty("db.password"));
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     // ********************************************************
     // ****** SECTION USED FOR ANIMAL QUERY INTERACTIONS ******

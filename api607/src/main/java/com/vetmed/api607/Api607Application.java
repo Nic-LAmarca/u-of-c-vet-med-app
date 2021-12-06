@@ -1,6 +1,5 @@
 package com.vetmed.api607;
 
-import com.vetmed.api607.controller.DbController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

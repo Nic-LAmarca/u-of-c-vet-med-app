@@ -24,6 +24,7 @@
   .AnimalP-grid-item1 {
     border: 1px solid rgba(0, 0, 0, 0.8);
     text-align: justify;
+    vertical-align: text-bottom;
     grid-column: 1/span 3;
     grid-row: 1;
 

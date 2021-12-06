@@ -31,18 +31,4 @@ public class Animal
     private String color;
     private String distinguishingFeatures;
 
-    //TODO figure out what to keep here and use for database
-//    private Integer id;
-//    private String animal_type;
-//    private String name;
-//    private boolean available;
-//
-//    public Animal(int id, String type, String name)
-//    {
-//        setAnimal_type(type);
-//        setId(id);
-//        setName(name);
-//        setAvailable(true);
-//    }
-//
-}
+

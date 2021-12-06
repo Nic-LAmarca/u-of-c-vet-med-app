@@ -1,7 +1,7 @@
  import React,{useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-import {Button, Form, Dropdown, DropdownButton, Table, ListGroup} from "react-bootstrap";
+import {Button, Form, Dropdown, DropdownButton, Table, ListGroup,Tabs,Tab,TabContent,TabContainer,Nav,NavItem,Row,Col} from "react-bootstrap";
 import axios from "axios";
 import './AnimalProfileStudent.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
@@ -143,22 +143,53 @@ export default function AnimalProfileStudentDashboard() {
                 </tr>
                 </tbody>
             </Table>
-            <Tabs
-                defaultActiveKey="home"
-                transition={false}
-                id="noanim-tab-example"
-                className="mb-3"
-            >
-                <Tab eventKey="home" title="Home">
+            <Tab.Container id="left-tabs-example" defaultActiveKey="first" >
 
-                </Tab>
-                <Tab eventKey="profile" title="Profile">
-
-                </Tab>
-                <Tab eventKey="contact" title="Contact" disabled>
-                    
-                </Tab>
-            </Tabs>
+                <div className="AnimalP-grid-item7">
+                <Nav variant="pills"  >
+                    <Nav.Item>
+                        <Nav.Link eventKey="first">Tab 1</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link eventKey="second">Tab 2</Nav.Link>
+                    </Nav.Item>
+                </Nav>
+                </div>
+                <div >
+                    <Tab.Content >
+                        <Tab.Pane eventKey="first">
+                            hi hello
+                        </Tab.Pane>
+                        <Tab.Pane eventKey="second">
+                            hello hello
+                        </Tab.Pane>
+                    </Tab.Content>
+                </div>
+            </Tab.Container>
+            {/*<Tab.Container id="left-tabs-example" defaultActiveKey="first" >*/}
+            {/*    <Row className="AnimalP-grid-item7">*/}
+            {/*        <Col sm={3}>*/}
+            {/*            <Nav variant="pills" className="flex-column">*/}
+            {/*                <Nav.Item>*/}
+            {/*                    <Nav.Link eventKey="first">Tab 1</Nav.Link>*/}
+            {/*                </Nav.Item>*/}
+            {/*                <Nav.Item>*/}
+            {/*                    <Nav.Link eventKey="second">Tab 2</Nav.Link>*/}
+            {/*                </Nav.Item>*/}
+            {/*            </Nav>*/}
+            {/*        </Col>*/}
+            {/*        <Col sm={9}>*/}
+            {/*            <Tab.Content>*/}
+            {/*                <Tab.Pane eventKey="first">*/}
+            {/*                    hi hello*/}
+            {/*                </Tab.Pane>*/}
+            {/*                <Tab.Pane eventKey="second">*/}
+            {/*                    hello hello*/}
+            {/*                </Tab.Pane>*/}
+            {/*            </Tab.Content>*/}
+            {/*        </Col>*/}
+            {/*    </Row>*/}
+            {/*</Tab.Container>*/}
 
         </div>
     );

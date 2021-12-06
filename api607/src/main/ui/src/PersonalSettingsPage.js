@@ -49,7 +49,7 @@ export default function PersonalSettingsDashboard() {
     //
     // async function makeRequest(event) {
     //     event.preventDefault();
-    //     await axios.post('http://localhost:8080/NavADashboard',
+    //     await axios.post('http://localhost:8080/Personalashboard',
     //         null,
     //         {
     //             params: {
@@ -91,7 +91,7 @@ export default function PersonalSettingsDashboard() {
     //
     // async function CancelRequest(event) {
     //     event.preventDefault();
-    //     await axios.post('http://localhost:8080/NavADashboard',
+    //     await axios.post('http://localhost:8080/Personalashboard',
     //         null,
     //         {
     //             params: {
@@ -109,11 +109,11 @@ export default function PersonalSettingsDashboard() {
 
     return (
 
-        <div className="NavAD-grid-container">
-            <h1 className ="NavAD-grid-item1">
+        <div className="Personal-grid-container">
+            <h1 className ="Personal-grid-item1">
                 Personal Settings
             </h1>
-            <Form className="NavAD-grid-item6">
+            <Form className="Personal-grid-item6">
                 <Form.Group>
                     <Form.Label>Username</Form.Label>
                     <Form.Control
@@ -156,7 +156,7 @@ export default function PersonalSettingsDashboard() {
                 <Button>Edit</Button>
 
             </Form>
-            <Button className = "NavAD-grid-item3">Save</Button>
+            <Button className = "Personal-grid-item3">Save</Button>
 
 
 

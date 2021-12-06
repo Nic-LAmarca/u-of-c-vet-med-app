@@ -54,8 +54,8 @@
   .AnimalP-grid-item5{
     border: 1px solid rgba(0, 0, 0, 0.8);
     text-align: left;
-    font-style: oblique;
-    font-size: large;
+    /*font-style: oblique;*/
+    /*font-size: large;*/
     grid-column: 3/ span 4;
     grid-row: 2/span 8;
   }
@@ -71,7 +71,7 @@
   .AnimalP-grid-item7 {
     border: 1px solid rgba(0, 0, 0, 0.8);
     text-align: justify;
-    grid-column: 5/span 10;
+    grid-column: 8/span 10;
     grid-row: 8;
 
   }

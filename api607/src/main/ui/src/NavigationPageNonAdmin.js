@@ -49,7 +49,7 @@ export default function NavNonADashboard() {
     //
     // async function makeRequest(event) {
     //     event.preventDefault();
-    //     await axios.post('http://localhost:8080/NavADashboard',
+    //     await axios.post('http://localhost:8080/NavNonAdminashboard',
     //         null,
     //         {
     //             params: {
@@ -91,7 +91,7 @@ export default function NavNonADashboard() {
     //
     // async function CancelRequest(event) {
     //     event.preventDefault();
-    //     await axios.post('http://localhost:8080/NavADashboard',
+    //     await axios.post('http://localhost:8080/NavNonAdminashboard',
     //         null,
     //         {
     //             params: {
@@ -109,22 +109,22 @@ export default function NavNonADashboard() {
 
     return (
 
-        <div className="NavAD-grid-container">
-            <h1 className ="NavAD-grid-item1">
+        <div className="NavNonAdmin-grid-container">
+            <h1 className ="NavNonAdmin-grid-item1">
                 Navigation Page
             </h1>
-            <Button className="NavAD-grid-item2">
+            <Button className="NavNonAdmin-grid-item2">
                 User
             </Button>
-            <Button className="NavAD-grid-item3">
+            <Button className="NavNonAdmin-grid-item3">
                 Personal Settings
             </Button>
 
-            <Button className="NavAD-grid-item4">
+            <Button className="NavNonAdmin-grid-item4">
                 Logout
             </Button>
 
-            <Form className="NavAD-grid-item6">
+            <Form className="NavNonAdmin-grid-item6">
                 <Form.Group>
                     <Form.Label>Animal Name</Form.Label>
                     <Form.Control
@@ -161,12 +161,12 @@ export default function NavNonADashboard() {
 
                     />
                 </Form.Group>
-                <Button className>Search</Button>
+                <Button>Search</Button>
             </Form>
-            <p className="NavAD-grid-item13">
+            <h1 className="NavNonAdmin-grid-item13">
                 Results
-            </p>
-            <Table  className="NavAD-grid-item14" striped bordered hover>
+            </h1>
+            <Table  className="NavNonAdmin-grid-item14" striped bordered hover>
                 <thead>
                 <tr>
                     <th>#</th>

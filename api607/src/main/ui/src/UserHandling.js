@@ -49,7 +49,7 @@ export default function UserHandlingDashboard() {
     //
     // async function makeRequest(event) {
     //     event.preventDefault();
-    //     await axios.post('http://localhost:8080/NavADashboard',
+    //     await axios.post('http://localhost:8080/UserHashboard',
     //         null,
     //         {
     //             params: {
@@ -91,7 +91,7 @@ export default function UserHandlingDashboard() {
     //
     // async function CancelRequest(event) {
     //     event.preventDefault();
-    //     await axios.post('http://localhost:8080/NavADashboard',
+    //     await axios.post('http://localhost:8080/UserHashboard',
     //         null,
     //         {
     //             params: {
@@ -109,11 +109,11 @@ export default function UserHandlingDashboard() {
 
     return (
 
-        <div className="NavAD-grid-container">
-            <h1 className ="NavAD-grid-item1">
+        <div className="UserH-grid-container">
+            <h1 className ="UserH-grid-item1">
                 User Handling
             </h1>
-            <Form className="NavAD-grid-item2">
+            <Form className="UserH-grid-item2">
                 <Form.Group>
                     <Form.Label>Username</Form.Label>
                     <Form.Control
@@ -156,9 +156,9 @@ export default function UserHandlingDashboard() {
 
 
             </Form>
-            <Button className = "NavAD-grid-item4">Add User</Button>
-            <Button className = "NavAD-grid-item5">Remove User</Button>
-            <Button className = "NavAD-grid-item6">Block User</Button>
+            <Button className = "UserH-grid-item4">Add User</Button>
+            <Button className = "UserH-grid-item5">Remove User</Button>
+            <Button className = "UserH-grid-item6">Block User</Button>
 
 
 

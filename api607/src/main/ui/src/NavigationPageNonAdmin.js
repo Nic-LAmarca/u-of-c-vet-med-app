@@ -119,7 +119,6 @@ export default function NavNonADashboard() {
             <Button className="NavNonAdmin-grid-item3">
                 Personal Settings
             </Button>
-
             <Button className="NavNonAdmin-grid-item4">
                 Logout
             </Button>

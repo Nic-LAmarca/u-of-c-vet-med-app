@@ -10,8 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Comment
 {
-    private Integer id;
-    private Integer user_id;
-    private Integer animal_id;
+    private Integer commentId;
+    private Integer userId;
+    private Integer animalId;
     private String description;
+    private String date;
 }

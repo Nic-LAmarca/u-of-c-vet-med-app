@@ -77,34 +77,7 @@ public class DbController {
         return userList;
     }
 
-    /**
-     *
-     * Method is used to add a PrescriptionHistory into the database based on the entered credentials
-     *
-     * @param userId is the ID of the user prescribing the medication
-     * @param animalId is the ID of the animal who the prescription history is for
-     * @param date is the date the prescription was written
-     * @param drugName is the name of the prescribed drug
-     * @param instructions are the instructions for how to take the drug
-     * @param dosage is the required dosage to be taken
-     * @param deliveryMethod is how the medication should be taken
-     */
-    public void addPrescriptionHistory( int userId, int animalId, String date, String drugName, String instructions, double dosage, String deliveryMethod) {
-        try {
-            String query = "INSERT INT0 USER (userId, animalId, date, drugName, instructions, dosage, deliveryMethod) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
-            myStmt.setInt(1, userId);
-            myStmt.setInt(1, animalId);
-            myStmt.setDate(1, Date.valueOf(date));
-            myStmt.setString(1, drugName);
-            myStmt.setString(1, instructions);
-            myStmt.setDouble(1, dosage);
-            myStmt.setString(1, deliveryMethod);
-            myStmt.executeQuery();
-            myStmt.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
     }
 
     // ******************************************************
@@ -230,6 +203,118 @@ public class DbController {
                 if (results.getInt("prescriptionId") == id) {
                     foundPH.setPrescriptionId(id);
                     foundPH.setUserId(results.getInt("userId"));
+                    foundPH.setAnimalId(results.getInt("animalId"));
+                    foundPH.setDate((results.getDate("date").toString()));
+                    foundPH.setDrugName(results.getString("drugName"));
+                    foundPH.setInstructions(results.getString("instructions"));
+                    foundPH.setDosage(results.getDouble("dosage"));
+                    foundPH.setDeliveryMethod(results.getString("deliveryMethod"));
+                }
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     *
+     * Method is used to return an arraylist of PrescriptionHistory objects that are in the database
+     *
+     * @return a new list of PrescriptionHistory objects from the db
+     */
+    public ArrayList<PrescriptionHistory> getAllPrescriptionHistories() {
+        ArrayList<PrescriptionHistory> prescriptionHistoryArrayList = new ArrayList<PrescriptionHistory>();
+        try {
+            String query = "SELECT * FROM PRESCRIPTION_HISTORY";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                PrescriptionHistory addPH = new PrescriptionHistory();
+                addPH.setPrescriptionId(id);
+                addPH.setUserId(results.getInt("userId"));
+                addPH.setAnimalId(results.getInt("animalId"));
+                addPH.setDate((results.getDate("date").toString()));
+                addPH.setDrugName(results.getString("drugName"));
+                addPH.setInstructions(results.getString("instructions"));
+                addPH.setDosage(results.getDouble("dosage"));
+                addPH.setDeliveryMethod(results.getString("deliveryMethod"));
+                prescriptionHistoryArrayList.add(addPH);
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return prescriptionHistoryArrayList;
+    }
+
+    /**
+     *
+     * Method is used to add a PrescriptionHistory into the database based on the entered credentials
+     *
+     * @param userId is the ID of the user prescribing the medication
+     * @param animalId is the ID of the animal who the prescription history is for
+     * @param date is the date the prescription was written
+     * @param drugName is the name of the prescribed drug
+     * @param instructions are the instructions for how to take the drug
+     * @param dosage is the required dosage to be taken
+     * @param deliveryMethod is how the medication should be taken
+     */
+    public void addPrescriptionHistory( int userId, int animalId, String date, String drugName, String instructions, double dosage, String deliveryMethod) {
+        try {
+            String query = "INSERT INT0 USER (userId, animalId, date, drugName, instructions, dosage, deliveryMethod) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, userId);
+            myStmt.setInt(1, animalId);
+            myStmt.setDate(1, Date.valueOf(date));
+            myStmt.setString(1, drugName);
+            myStmt.setString(1, instructions);
+            myStmt.setDouble(1, dosage);
+            myStmt.setString(1, deliveryMethod);
+            myStmt.executeQuery();
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    // **********************************************************************
+    // ****** SECTION USED FOR PRESCRIPTION HISTORY QUERY INTERACTIONS ******
+    // **********************************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+    // *********************************************************
+    // ****** SECTION USED FOR REQUEST QUERY INTERACTIONS ******
+    // *********************************************************
+
+    /**
+     *
+     * Method is used to search the database for a Request with the entered id and return the User object if found
+     *
+     * @param id is the unique id value to search with
+     * @return a new PrescriptionHistory object that matches the id passed as an argument
+     */
+    public  Request searchForRequest(int id) {
+        Request foundRequest = new Request();
+        try {
+            String query = "SELECT * FROM REQUEST WHERE requestId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, id);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                if (results.getInt("requestId") == id) {
+                    foundRequest.setRequestId(id);
+                    foundPH.setUserId(results.getInt("userId"));
                     foundPH.setDate((results.getDate("date").toString()));
                     foundPH.setDrugName(results.getString("drugName"));
                     foundPH.setInstructions(results.getString("instructions"));
@@ -291,7 +376,7 @@ public class DbController {
             e.printStackTrace();
         }
     }
-    // **********************************************************************
-    // ****** SECTION USED FOR PRESCRIPTION HISTORY QUERY INTERACTIONS ******
-    // **********************************************************************
+    // *********************************************************
+    // ****** SECTION USED FOR REQUEST QUERY INTERACTIONS ******
+    // *********************************************************
 }

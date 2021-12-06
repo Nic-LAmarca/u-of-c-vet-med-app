@@ -56,155 +56,155 @@ public class Users {
         this.userCount += 1;
     }
 
-    public Request getTeacherAnimalRequest(Request animalRequest)
-    {
-        for(int i = 0; i < teacherAnimalRequestList.size(); i++)
-        {
-            if(animalRequest == teacherAnimalRequestList.get(i))
-            {
-                return animalRequest;
-            }
-        }
-        return null;
-    }
+//    public Request getTeacherAnimalRequest(Request animalRequest)
+//    {
+//        for(int i = 0; i < teacherAnimalRequestList.size(); i++)
+//        {
+//            if(animalRequest == teacherAnimalRequestList.get(i))
+//            {
+//                return animalRequest;
+//            }
+//        }
+//        return null;
+//    }
+//
+//    public Request getAdminAnimalRequest(Request animalRequest)
+//    {
+//        for(int i = 0; i < adminAnimalRequestApprovalList.size(); i++){
+//            if(animalRequest == adminAnimalRequestApprovalList.get(i)){
+//                return animalRequest;
+//            }
+//        }
+//        return null;
+//    }
+//
+//    public Request getTechnicianAnimalRequest(Request animalRequest)
+//    {
+//        for(int i = 0; i < technicianAnimalRequestApprovalList.size(); i++)
+//        {
+//            if(animalRequest == technicianAnimalRequestApprovalList.get(i))
+//            {
+//                return animalRequest;
+//            }
+//        }
+//        return null;
+//    }
 
-    public Request getAdminAnimalRequest(Request animalRequest)
-    {
-        for(int i = 0; i < adminAnimalRequestApprovalList.size(); i++){
-            if(animalRequest == adminAnimalRequestApprovalList.get(i)){
-                return animalRequest;
-            }
-        }
-        return null;
-    }
-
-    public Request getTechnicianAnimalRequest(Request animalRequest)
-    {
-        for(int i = 0; i < technicianAnimalRequestApprovalList.size(); i++)
-        {
-            if(animalRequest == technicianAnimalRequestApprovalList.get(i))
-            {
-                return animalRequest;
-            }
-        }
-        return null;
-    }
-
-    public String makeRequest(Animal animal)
-    {
-
-        Request request = new Request(this, animal);
-        adminAnimalRequestApprovalList.add(request);
-        teacherAnimalRequestList.add(request);
-        return "Request sent.";
-
-    }
-
-
-    public Request searchNewTeacherRequests(int id)
-    {
-        for (int i = 0; i < teacherAnimalRequestList.size(); i++)
-        {
-            if (id == teacherAnimalRequestList.get(i).getRequestId())
-            {
-                return teacherAnimalRequestList.get(i);
-            }
-        }
-        return null;
-    }
-
-    public Request searchNewAdminRequests(int id)
-    {
-        for(int i = 0; i < adminAnimalRequestApprovalList.size(); i++)
-        {
-            if(id == adminAnimalRequestApprovalList.get(i).getRequestId())
-            {
-                return adminAnimalRequestApprovalList.get(i);
-            }
-        }
-        return null;
-    }
-
-    public void adminApproval(Request request)
-    {
-        request.setAdminApproved(true);
-        request.setNewStatus(false);
-        adminAnimalRequestApprovalList.remove(request);
-        technicianAnimalRequestApprovalList.add(request);
-    }
-
-    public void adminRejection(Request request)
-    {
-        request.setAdminApproved(false);
-        request.setRequestSuccessful(false);
-        request.setNewStatus(false);
-        adminAnimalRequestApprovalList.remove(request);
-    }
-
-    public Request searchNewTechnicianRequests(int id){
-        for(int i = 0; i < technicianAnimalRequestApprovalList.size(); i++)
-        {
-            if(id == teacherAnimalRequestList.get(i).getRequestId()){
-                return technicianAnimalRequestApprovalList.get(i);
-            }
-        }
-        return null;
-    }
-
-    public void technicianAppoval(Request request)
-    {
-        request.setTechnicianApproved(true);
-        request.setRequestSuccessful(true);
-        request.setRequestComplete(true);
-        request.getRequestedAnimal().setAvailable(false);
-        technicianAnimalRequestApprovalList.remove(request);
-    }
-
-    public void technicalRejection(Request request)
-    {
-        request.setTechnicianApproved(false);
-        request.setRequestSuccessful(false);
-        request.setRequestComplete(true);
-        technicianAnimalRequestApprovalList.remove(request);
-    }
-
-    public String cancelRequest(int id)
-    {
-        String message;
-        Request toBeCancelled = searchNewTeacherRequests(id);
-        if (toBeCancelled.isNewStatus()) {
-            teacherAnimalRequestList.remove(toBeCancelled);
-            adminAnimalRequestApprovalList.remove(toBeCancelled);
-            message = " Request Successfully Cancelled!";
-            return message;
-        }
-        else if ((toBeCancelled.isNewStatus() == false) && (toBeCancelled.isAdminApproved() == true) && (toBeCancelled.isRequestComplete() == false))
-        {
-            teacherAnimalRequestList.remove(toBeCancelled);
-            adminAnimalRequestApprovalList.remove(toBeCancelled);
-            message =  " Request Successfully Cancelled!";
-            return message;
-        }
-        message =  "Error. Request may no longer be cancelled.";
-        return  message;
-    }
-        public String getRequestStatus(int id)
-        {
-          String status;
-          Request request = searchNewTeacherRequests(id);
-          if (request.isRequestSuccessful())
-          {
-            status = "Your request for Animal " + request.getRequestedAnimal().getId() + " was accepted!" ;
-            return status;
-          }
-          else if (request.isRequestSuccessful() == false && request.isRequestComplete())
-          {
-              status = "Your request for Animal " + request.getRequestedAnimal().getId() + " was rejected." ;
-              return status;
-          }
-          status = "Request still in progress.";
-          return status;
-        }
+//    public String makeRequest(Animal animal)
+//    {
+//
+//        Request request = new Request(this.getId(), animal.getId(), );
+//        adminAnimalRequestApprovalList.add(request);
+//        teacherAnimalRequestList.add(request);
+//        return "Request sent.";
+//
+//    }
+//
+//
+//    public Request searchNewTeacherRequests(int id)
+//    {
+//        for (int i = 0; i < teacherAnimalRequestList.size(); i++)
+//        {
+//            if (id == teacherAnimalRequestList.get(i).getRequestId())
+//            {
+//                return teacherAnimalRequestList.get(i);
+//            }
+//        }
+//        return null;
+//    }
+//
+//    public Request searchNewAdminRequests(int id)
+//    {
+//        for(int i = 0; i < adminAnimalRequestApprovalList.size(); i++)
+//        {
+//            if(id == adminAnimalRequestApprovalList.get(i).getRequestId())
+//            {
+//                return adminAnimalRequestApprovalList.get(i);
+//            }
+//        }
+//        return null;
+//    }
+//
+//    public void adminApproval(Request request)
+//    {
+//        request.setAdminApproved(true);
+//        request.setNewStatus(false);
+//        adminAnimalRequestApprovalList.remove(request);
+//        technicianAnimalRequestApprovalList.add(request);
+//    }
+//
+//    public void adminRejection(Request request)
+//    {
+//        request.setAdminApproved(false);
+//        request.setRequestSuccessful(false);
+//        request.setNewStatus(false);
+//        adminAnimalRequestApprovalList.remove(request);
+//    }
+//
+//    public Request searchNewTechnicianRequests(int id){
+//        for(int i = 0; i < technicianAnimalRequestApprovalList.size(); i++)
+//        {
+//            if(id == teacherAnimalRequestList.get(i).getRequestId()){
+//                return technicianAnimalRequestApprovalList.get(i);
+//            }
+//        }
+//        return null;
+//    }
+//
+//    public void technicianAppoval(Request request)
+//    {
+//        request.setTechnicianApproved(true);
+//        request.setRequestSuccessful(true);
+//        request.setRequestComplete(true);
+//        request.getRequestedAnimal().setAvailable(false);
+//        technicianAnimalRequestApprovalList.remove(request);
+//    }
+//
+//    public void technicalRejection(Request request)
+//    {
+//        request.setTechnicianApproved(false);
+//        request.setRequestSuccessful(false);
+//        request.setRequestComplete(true);
+//        technicianAnimalRequestApprovalList.remove(request);
+//    }
+//
+//    public String cancelRequest(int id)
+//    {
+//        String message;
+//        Request toBeCancelled = searchNewTeacherRequests(id);
+//        if (toBeCancelled.isNewStatus()) {
+//            teacherAnimalRequestList.remove(toBeCancelled);
+//            adminAnimalRequestApprovalList.remove(toBeCancelled);
+//            message = " Request Successfully Cancelled!";
+//            return message;
+//        }
+//        else if ((toBeCancelled.isNewStatus() == false) && (toBeCancelled.isAdminApproved() == true) && (toBeCancelled.isRequestComplete() == false))
+//        {
+//            teacherAnimalRequestList.remove(toBeCancelled);
+//            adminAnimalRequestApprovalList.remove(toBeCancelled);
+//            message =  " Request Successfully Cancelled!";
+//            return message;
+//        }
+//        message =  "Error. Request may no longer be cancelled.";
+//        return  message;
+//    }
+//        public String getRequestStatus(int id)
+//        {
+//          String status;
+//          Request request = searchNewTeacherRequests(id);
+//          if (request.isRequestSuccessful())
+//          {
+//            status = "Your request for Animal " + request.getRequestedAnimal().getId() + " was accepted!" ;
+//            return status;
+//          }
+//          else if (request.isRequestSuccessful() == false && request.isRequestComplete())
+//          {
+//              status = "Your request for Animal " + request.getRequestedAnimal().getId() + " was rejected." ;
+//              return status;
+//          }
+//          status = "Request still in progress.";
+//          return status;
+//        }
 
 
 

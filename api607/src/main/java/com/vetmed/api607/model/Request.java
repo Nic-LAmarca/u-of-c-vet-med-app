@@ -4,11 +4,10 @@ import lombok.Data;
 @Data
 public class Request
 {
-    Animal requestedAnimal;
-    Users requestee;
-    boolean newStatus;
-    static  int requestCount = 0;
     int requestId;
+    int  animalId;
+    int  userId;
+    boolean newStatus;
     boolean adminApproved;
     boolean technicianApproved;
     boolean requestComplete;
@@ -30,12 +29,16 @@ public class Request
         return technicianApproved;
     }
 
-    public Request(Users user, Animal animal) {
-        requestCount++;
-        setRequestId(requestCount);
-        setRequestee(user);
-        setRequestedAnimal(animal);
+    public Request(int userId, int animalId, int requestId) {
+
+        setRequestId(requestId);
+        setUserId(userId);
+        setAnimalId(animal);
         setNewStatus(true);
+        setAdminApproved(false);
+        setTechnicianApproved(false);
         setRequestComplete(false);
+        setRequestSuccessful(false);
+
     }
 }

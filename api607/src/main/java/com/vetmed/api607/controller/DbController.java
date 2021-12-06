@@ -2,7 +2,6 @@ package com.vetmed.api607.controller;
 
 import com.vetmed.api607.model.Animal;
 import com.vetmed.api607.model.Request;
-import com.vetmed.api607.model.Users;
 
 import java.util.ArrayList;
 

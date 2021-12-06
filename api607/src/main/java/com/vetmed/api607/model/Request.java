@@ -1,44 +1,19 @@
 package com.vetmed.api607.model;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public class Request
-{
-    int requestId;
-    int  animalId;
-    int  userId;
-    boolean newStatus;
-    boolean adminApproved;
-    boolean technicianApproved;
-    boolean requestComplete;
-    boolean requestSuccessful;
+@AllArgsConstructor
+@NoArgsConstructor
+public class Request {
+    private int requestId;
+    private int animalId;
+    private int userId;
+    private boolean newStatus;
+    private boolean adminApproved;
+    private boolean technicianApproved;
+    private boolean requestComplete;
+    private boolean requestSuccessful;
 
-    public void setAdminApproved(boolean adminApproved) {
-        this.adminApproved = adminApproved;
-    }
-
-    public void setTechnicianApproved(boolean technicianApproved) {
-        this.technicianApproved = technicianApproved;
-    }
-
-    public boolean isAdminApproved() {
-        return adminApproved;
-    }
-
-    public boolean isTechnicianApproved() {
-        return technicianApproved;
-    }
-
-    public Request(int userId, int animalId, int requestId) {
-
-        setRequestId(requestId);
-        setUserId(userId);
-        setAnimalId(animal);
-        setNewStatus(true);
-        setAdminApproved(false);
-        setTechnicianApproved(false);
-        setRequestComplete(false);
-        setRequestSuccessful(false);
-
-    }
 }

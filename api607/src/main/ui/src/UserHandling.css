@@ -1,0 +1,148 @@
+@media all and (min-width: 480px) {
+  .NavAD {
+    padding: 60px 0;
+  }
+
+  .NavAD form {
+    margin: 0 auto;
+    max-width: 320px;
+  }
+
+  .NavAD-logout {
+    text-align: right;
+  }
+
+  .NavAD-grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;
+    grid-template-rows: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
+    padding: 10px;
+    grid-gap: 0cm;
+
+  }
+/*Title:navigation page*/
+  .NavAD-grid-item1 {
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    text-align: justify;
+    grid-column: 1/span 4;
+    grid-row: 2;
+
+  }
+ /*user*/
+  .NavAD-grid-item2 {
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    text-align: left;
+    grid-column: 3/ span 5;
+    grid-row: 6/ span 6;
+  }
+  /*personal settings*/
+  .NavAD-grid-item3 {
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    text-align: center;
+    grid-column: 11;
+    grid-row: 2;
+
+  }
+/*edit users */
+  .NavAD-grid-item4 {
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    text-align: left;
+    grid-column: 11;
+    grid-row: 3;
+  }
+  /*logout*/
+  .NavAD-grid-item5{
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    text-align: left;
+    font-style: oblique;
+    font-size: large;
+    grid-column: 11;
+    grid-row: 4;
+  }
+/*animal name*/
+  .NavAD-grid-item6 {
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    text-align: justify;
+    grid-column: 11;
+    grid-row: 5;
+
+  }
+/*text box*/
+  .NavAD-grid-item7 {
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    text-align: justify;
+    grid-column: 3;
+    grid-row: 5;
+
+  }
+/*species*/
+  .NavAD-grid-item8 {
+    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+    text-align: center;
+    grid-column: 4;
+    grid-row: 5;
+
+  }
+  /*species text box*/
+  .NavAD-grid-item9 {
+    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+    text-align: left;
+    grid-column: 5;
+    grid-row: 5;
+  }
+  /*breed*/
+  .NavAD-grid-item10{
+    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+    text-align: left;
+    font-style: oblique;
+    font-size: large;
+    grid-column: 6;
+    grid-row:5;
+  }
+  /*breed box*/
+  .NavAD-grid-item11 {
+    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+    text-align: justify;
+    grid-column: 7;
+    grid-row: 5;
+  }
+  /*status*/
+  .NavAD-grid-item12{
+    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+    text-align: left;
+    font-style: oblique;
+    font-size: large;
+    grid-column: 8;
+    grid-row:5;
+  }
+  /*status box*/
+  .NavAD-grid-item13 {
+    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+    text-align: justify;
+    grid-column: 9;
+    grid-row: 5;
+  }
+  /*Results Title*/
+  .NavAD-grid-item14{
+    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+    text-align: justify;
+    grid-column: 9;
+    grid-row:6;
+  }
+  /*Results Title*/
+  .NavAD-grid-item15{
+    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+    text-align: left;
+    font-style: oblique;
+    font-size: large;
+    grid-column: 6;
+    grid-row:10;
+  }
+  /*result*/
+  .NavAD-grid-item16 {
+    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+    text-align: justify;
+    grid-column: 3/span 9;
+    grid-row: 11;
+  }
+}

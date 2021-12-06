@@ -1,33 +1,36 @@
 package com.vetmed.api607.controller;
 
-import com.vetmed.api607.dao.AnimalDAO;
+import com.vetmed.api607.model.Request;
+import com.vetmed.api607.model.Users;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import com.vetmed.api607.model.Animal;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
-
+@CrossOrigin (origins = "http://localhost:3000")
 @RestController
+@RequestMapping()
 public class AnimalController
 {
-    @Autowired
-    private AnimalDAO aDAO;
+    private DbController db = new DbController();
 
-    @GetMapping("/animals")
-    public List<Animal> getAnimals()
+    @CrossOrigin
+    @GetMapping("/teacherAvailableAnimals")
+    public ArrayList<Integer> getAvailableAnimals()
     {
-        return aDAO.getAll();
+        ArrayList<Integer> availableAnimals = new ArrayList<Integer>();
+        for(int i = 0; i < db.getAvailableAnimalList().size(); i++){
+            if(db.getAvailableAnimalList().get(i).isAvailable()){
+                availableAnimals.add(db.getAvailableAnimalList().get(i).getId());
+            }
+        }
+        return availableAnimals;
     }
 
     @GetMapping("/animals/{id}")
     public Animal getAnimalById(@PathVariable int id)
     {
-        return aDAO.getById(id);
-    }
-
-    @PostMapping("/animals")
-    public String addAnimal(@RequestBody Animal animal)
-    {
-        return aDAO.add(animal) + " number of rows added to the animal table.";
+        return db.searchAnimals(id);
     }
 }

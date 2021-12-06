@@ -1,0 +1,110 @@
+@media all and (min-width: 480px) {
+  .TeacherD {
+    padding: 60px 0;
+  }
+
+  .TeacherD form {
+    margin: 0 auto;
+    max-width: 320px;
+  }
+
+  .TeacherD-logout {
+    text-align: right;
+  }
+
+  .TeacherD-grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
+    padding: 10px;
+    grid-gap: 0cm;
+
+  }
+
+  .TeacherD-grid-item1 {
+    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+    text-align: justify;
+    grid-column: 1/span 2;
+    grid-row: 1;
+
+  }
+
+  .TeacherD-grid-item2 {
+    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+    text-align: right;
+    grid-column: 3;
+    grid-row: 1;
+
+  }
+
+  .TeacherD-grid-item3 {
+    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+    text-align: center;
+    grid-column: 1;
+    grid-row: 6;
+
+  }
+
+  .TeacherD-grid-item4 {
+    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+    text-align: left;
+    grid-column: 3;
+    grid-row: 6;
+  }
+  .TeacherD-grid-item5{
+    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+    text-align: left;
+    font-style: oblique;
+    font-size: large;
+    grid-column: 2;
+    grid-row: 6;
+  }
+
+    .TeacherD-grid-item6 {
+      /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+      text-align: justify;
+      grid-column: 2/span 2;
+      grid-row: 8;
+
+    }
+
+    .TeacherD-grid-item7 {
+      /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+      text-align: justify;
+      grid-column: 2/span 2;
+      grid-row: 7;
+
+    }
+
+      .TeacherD-grid-item8 {
+        /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+        text-align: center;
+        grid-column: 1;
+        grid-row: 11;
+
+      }
+
+      .TeacherD-grid-item9 {
+        /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+        text-align: left;
+        grid-column: 3;
+        grid-row: 11;
+      }
+
+      .TeacherD-grid-item10{
+        /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+        text-align: left;
+        font-style: oblique;
+        font-size: large;
+        grid-column: 2;
+        grid-row: 11;
+      }
+
+        .TeacherD-grid-item11 {
+          /*border: 1px solid rgba(0, 0, 0, 0.8);*/
+          text-align: justify;
+          grid-column: 2/span 2;
+          grid-row: 13;
+
+        }
+}

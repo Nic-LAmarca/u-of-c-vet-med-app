@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class History {
-    private Integer id;
-    private String history_date;
-    private String history_type;
-    private String history_value;
-    private String user_id;
-    private String animal_id;
+    private int historyId;
+    private String date;
+    private int animalId;
+    private String measurement;
+    private double value;
+    private int userId;
 }

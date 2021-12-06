@@ -13,23 +13,23 @@ import java.sql.Date;
 public class Animal
 {
     private Integer id;
-    private String animal_type;
+    private String animalName;
+    private String species;
     private Double weight;
-    private Integer tattoo;
-    private String city_tattoo;
-    private Date bod;
-    private String bread;
+    private Integer tattooNum;
+    private String cityTattoo;
+    private Date birthDate;
+    private String breed;
     private String sex;
     private Long rfid;
     private Long microchip;
-    private String animal_status;
-    private String draught;
-    private String meat;
+    private String statusType;
+    private boolean available;
+    private String purpose;
     private String region;
     private String subspecies;
-    private String distinguishing;
-    private String features;
     private String color;
+    private String distinguishingFeatures;
 
 //    private Integer id;
 //    private String animal_type;

@@ -567,7 +567,7 @@ public class DbController {
 
     /**
      *
-     * Method is used to search the database for a MedicalRecordType with the entered id and return the User object if found
+     * Method is used to search the database for a MedicalRecordType with the entered id and return the object if found
      *
      * @param id is the unique id value to search with
      * @return a new MedicalRecordType object that matches the id passed as an argument
@@ -580,7 +580,7 @@ public class DbController {
             myStmt.setInt(1, id);
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
-                if (results.getInt("userId") == id) {
+                if (results.getInt("medicalRecordId") == id) {
                     foundMRT.setMedicalRecordId(id);
                     foundMRT.setMedicalRecordType(results.getString("medicalRecordType"));
                 }
@@ -655,7 +655,7 @@ public class DbController {
 
     /**
      *
-     * Method is used to search the database for a PrescriptionHistory with the entered id and return the User object if found
+     * Method is used to search the database for a PrescriptionHistory with the entered id and return the object if found
      *
      * @param id is the unique id value to search with
      * @return a new PrescriptionHistory object that matches the id passed as an argument
@@ -699,7 +699,7 @@ public class DbController {
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
                 PrescriptionHistory addPH = new PrescriptionHistory();
-                addPH.setPrescriptionId(id);
+                addPH.setPrescriptionId(results.getInt("prescriptionId"));
                 addPH.setUserId(results.getInt("userId"));
                 addPH.setDate((results.getDate("date").toString()));
                 addPH.setDrugName(results.getString("drugName"));
@@ -733,12 +733,12 @@ public class DbController {
             String query = "INSERT INT0 USER (userId, animalId, date, drugName, instructions, dosage, deliveryMethod) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setInt(1, userId);
-            myStmt.setInt(1, animalId);
-            myStmt.setDate(1, Date.valueOf(date));
-            myStmt.setString(1, drugName);
-            myStmt.setString(1, instructions);
-            myStmt.setDouble(1, dosage);
-            myStmt.setString(1, deliveryMethod);
+            myStmt.setInt(2, animalId);
+            myStmt.setDate(3, Date.valueOf(date));
+            myStmt.setString(4, drugName);
+            myStmt.setString(5, instructions);
+            myStmt.setDouble(6, dosage);
+            myStmt.setString(7, deliveryMethod);
             myStmt.executeQuery();
             myStmt.close();
         } catch (Exception e) {
@@ -767,7 +767,7 @@ public class DbController {
 
     /**
      *
-     * Method is used to search the database for a Request with the entered id and return the User object if found
+     * Method is used to search the database for a Request with the entered id and return the object if found
      *
      * @param id is the unique id value to search with
      * @return a new Request object that matches the id passed as an argument
@@ -812,7 +812,7 @@ public class DbController {
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
                 Request addRequest = new Request();
-                addRequest.setRequestId(id);
+                addRequest.setRequestId(results.getInt("requestId");
                 addRequest.setAnimalId(results.getInt("animalId"));
                 addRequest.setUserId(results.getInt("userId"));
                 addRequest.setNewStatus(results.getBoolean("newStatus"));
@@ -846,11 +846,11 @@ public class DbController {
             String query = "INSERT INT0 REQUEST (animalId, userId, newStatus, adminApproved, technicianApproved, requestComplete, requestSuccessful) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setInt(1, animalId);
-            myStmt.setInt(1, userId);
-            myStmt.setBoolean(1, adminApproved);
-            myStmt.setBoolean(1, technicianApproved);
-            myStmt.setBoolean(1, requestComplete);
-            myStmt.setBoolean(1, requestSuccessful);
+            myStmt.setInt(2, userId);
+            myStmt.setBoolean(3, adminApproved);
+            myStmt.setBoolean(4, technicianApproved);
+            myStmt.setBoolean(5, requestComplete);
+            myStmt.setBoolean(6, requestSuccessful);
             myStmt.executeQuery();
             myStmt.close();
         } catch (Exception e) {
@@ -877,7 +877,7 @@ public class DbController {
     // ********************************************************
     /**
      *
-     * Method is used to search the database for a Status with the entered id and return the User object if found
+     * Method is used to search the database for a Status with the entered id and return the object if found
      *
      * @param id is the unique id value to search with
      * @return a new Status object that matches the id passed as an argument
@@ -920,21 +920,19 @@ public class DbController {
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
                 Status addStatus = new Status();
-                addStatus.setStatusId(id);
+                addStatus.setStatusId(results.getInt("statusId");
                 addStatus.setAnimalId(results.getInt("animalId"));
-                addStatus.setUserId(results.getInt("userId"));
-                afoundStatus.setDate(results.getDate("date").toString());
+                addStatus.setDate(results.getDate("date").toString());
                 addStatus.setLocation(results.getString("location"));
                 addStatus.setStatusType(results.getString("statusType"));
                 addStatus.setImageId(results.getInt("imageId"));
-                addStatus.setRequestSuccessful(results.getBoolean("requestSuccessful"));
                 statusArrayList.add(addStatus);
             }
             myStmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return requestArrayList;
+        return statusArrayList;
     }
 
     /**
@@ -953,11 +951,11 @@ public class DbController {
             String query = "INSERT INT0 STATUS (animalId, date, description, location, statusType, imageId) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setInt(1, animalId);
-            myStmt.setDate(1, Date.valueOf(date));
-            myStmt.setString(1, description);
-            myStmt.setString(1, location);
-            myStmt.setString(1, statusType);
-            myStmt.setInt(1, imageId);
+            myStmt.setDate(2, Date.valueOf(date));
+            myStmt.setString(3, description);
+            myStmt.setString(4, location);
+            myStmt.setString(5, statusType);
+            myStmt.setInt(6, imageId);
             myStmt.executeQuery();
             myStmt.close();
         } catch (Exception e) {
@@ -984,12 +982,12 @@ public class DbController {
     // *******************************************************************
     /**
      *
-     * Method is used to search the database for a Treatment History with the entered id and return the User object if found
+     * Method is used to search the database for a Treatment History with the entered id and return the object if found
      *
      * @param id is the unique id value to search with
      * @return a new TreatmentHistory object that matches the id passed as an argument
      */
-    public  Status searchForTreatmentHistory(int id) {
+    public  TreatmentHistory searchForTreatmentHistory(int id) {
         TreatmentHistory foundTH = new TreatmentHistory();
         try {
             String query = "SELECT * FROM TREATMENT_HISTORY WHERE statusId = ?";
@@ -1024,7 +1022,7 @@ public class DbController {
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
                 TreatmentHistory addTH = new TreatmentHistory();
-                addTH.setTreatmentId(id);
+                addTH.setTreatmentId(results.getInt("treatmentId"));
                 addTH.setAnimalId(results.getInt("animalId"));
                 addTH.setDate(results.getDate("date").toString());
 
@@ -1049,7 +1047,7 @@ public class DbController {
             String query = "INSERT INT0 TREATMENT_HISTORY (animalId, date) VALUES (?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setInt(1, animalId);
-            myStmt.setDate(1, Date.valueOf(date));
+            myStmt.setDate(2, Date.valueOf(date));
             myStmt.executeQuery();
             myStmt.close();
         } catch (Exception e) {
@@ -1115,7 +1113,7 @@ public class DbController {
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
                 TreatmentMethod addTM = new TreatmentMethod();
-                addTM.setTreatmentId(id);
+                addTM.setTreatmentId(results.getInt("treatmentId"));
                 addTM.setTreatmentType(results.getString("treatmentType"));
                 treatmentMethodArrayList.add(addTm);
             }

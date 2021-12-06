@@ -14,7 +14,7 @@ After the database was created, we then wrote the necessary classes and interfac
 To ensure that these requests worked, we used Postman and created a workspace for our team to test the results.
 
 ### 4. Requests
-Below, we show each of the endpoints that have been created and tested. In order to test these results, a new user would need to first create a database and then pull our program from our GitHub repository before testing the results on Postman.
+Below, we show each of the endpoints that have been created and tested. In order to test these results, a new user would need to first create a database and then pull our program from our GitHub repository before testing the results on Postman. However, we have saved each of the endpoints in postman as an example and pasted them in the story associated with the endpoint in Jira.
 
 #### GET:
 Comment - FP63
@@ -26,8 +26,6 @@ History - FP59
 Individual User - FP60
 
 Images - FP58
-
-Animal Status Images - FP62
 
 Individual Animal - FP53
 

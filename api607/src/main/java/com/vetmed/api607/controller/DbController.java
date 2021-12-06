@@ -868,6 +868,203 @@ public class DbController {
 
 
 
+
+
+
+
+    // ********************************************************
+    // ****** SECTION USED FOR STATUS QUERY INTERACTIONS ******
+    // ********************************************************
+    /**
+     *
+     * Method is used to search the database for a Status with the entered id and return the User object if found
+     *
+     * @param id is the unique id value to search with
+     * @return a new Status object that matches the id passed as an argument
+     */
+    public  Status searchForStatus(int id) {
+        Status foundStatus = new Status();
+        try {
+            String query = "SELECT * FROM STATUS WHERE statusId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, id);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                if (results.getInt("statusId") == id) {
+                    foundStatus.setStatusId(id);
+                    foundStatus.setAnimalId(results.getInt("animalId"));
+                    foundStatus.setDate(results.getDate("date").toString());
+                    foundStatus.setLocation(results.getString("location"));
+                    foundStatus.setStatusType(results.getString("statusType"));
+                    foundStatus.setImageId(results.getInt("imageId"));
+                }
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return foundStatus;
+    }
+
+    /**
+     *
+     * Method is used to return an arraylist of Status objects that are in the database
+     *
+     * @return a new list of Status objects from the db
+     */
+    public ArrayList<Status> getAllStatuses() {
+        ArrayList<Status> statusArrayList = new ArrayList<Status>();
+        try {
+            String query = "SELECT * FROM STATUS";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                Status addStatus = new Status();
+                addStatus.setStatusId(id);
+                addStatus.setAnimalId(results.getInt("animalId"));
+                addStatus.setUserId(results.getInt("userId"));
+                afoundStatus.setDate(results.getDate("date").toString());
+                addStatus.setLocation(results.getString("location"));
+                addStatus.setStatusType(results.getString("statusType"));
+                addStatus.setImageId(results.getInt("imageId"));
+                addStatus.setRequestSuccessful(results.getBoolean("requestSuccessful"));
+                statusArrayList.add(addStatus);
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return requestArrayList;
+    }
+
+    /**
+     *
+     * Method is used to add a Status into the database based on the entered credentials
+     *
+     * @param animalId is the ID of the animal who the prescription history is for
+     * @param date the date the status was created
+     * @param description the status description
+     * @param location the location where the status was made
+     * @param statusType the type of status
+     * @param imageId the ID of the associated image, if any
+     */
+    public void addRequest(int animalId, String date, String description, String location, String statusType, int imageId) {
+        try {
+            String query = "INSERT INT0 STATUS (animalId, date, description, location, statusType, imageId) VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, animalId);
+            myStmt.setDate(1, Date.valueOf(date));
+            myStmt.setString(1, description);
+            myStmt.setString(1, location);
+            myStmt.setString(1, statusType);
+            myStmt.setInt(1, imageId);
+            myStmt.executeQuery();
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    // ********************************************************
+    // ****** SECTION USED FOR STATUS QUERY INTERACTIONS ******
+    // ********************************************************
+
+
+
+
+
+
+
+
+
+
+
+
+    // *******************************************************************
+    // ****** SECTION USED FOR TREATMENT HISTORY QUERY INTERACTIONS ******
+    // *******************************************************************
+    /**
+     *
+     * Method is used to search the database for a Treatment History with the entered id and return the User object if found
+     *
+     * @param id is the unique id value to search with
+     * @return a new TreatmentHistory object that matches the id passed as an argument
+     */
+    public  Status searchForTreatmentHistory(int id) {
+        TreatmentHistory foundTH = new TreatmentHistory();
+        try {
+            String query = "SELECT * FROM TREATMENT_HISTORY WHERE statusId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, id);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                if (results.getInt("treatmentId") == id) {
+                    foundTH.setStatusId(id);
+                    foundTH.setAnimalId(results.getInt("animalId"));
+                    foundTH.setDate(results.getDate("date").toString());
+                }
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return foundTH;
+    }
+
+    /**
+     *
+     * Method is used to return an arraylist of TreatmentHistory objects that are in the database
+     *
+     * @return a new list of TreatmentHistory objects from the db
+     */
+    public ArrayList<TreatmentHistory> getAllTreatmentHistories() {
+        ArrayList<TreatmentHistory> treatmentHistoryArrayList = new ArrayList<TreatmentHistory>();
+        try {
+            String query = "SELECT * FROM TREATMENT_HISTORY";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                TreatmentHistory addTH = new TreatmentHistory();
+                addTH.setTreatmentId(id);
+                addTH.setAnimalId(results.getInt("animalId"));
+                addTH.setDate(results.getDate("date").toString());
+
+                treatmentHistoryArrayList.add(addTH);
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return treatmentHistoryArrayList;
+    }
+
+    /**
+     *
+     * Method is used to add a TreatmentHistory into the database based on the entered credentials
+     *
+     * @param animalId is the ID of the animal who the prescription history is for
+     * @param date the date the status was created
+     */
+    public void addRequest(int animalId, String date) {
+        try {
+            String query = "INSERT INT0 TREATMENT_HISTORY (animalId, date) VALUES (?, ?)";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, animalId);
+            myStmt.setDate(1, Date.valueOf(date));
+            myStmt.executeQuery();
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    // *******************************************************************
+    // ****** SECTION USED FOR TREATMENT HISTORY QUERY INTERACTIONS ******
+    // *******************************************************************
+
+
+
+
+
+
     // ******************************************************
     // ****** SECTION USED FOR USER QUERY INTERACTIONS ******
     // ******************************************************

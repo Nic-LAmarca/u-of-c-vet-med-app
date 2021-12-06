@@ -1,6 +1,8 @@
 package com.vetmed.api607.controller;
 
 import com.vetmed.api607.model.User;
+import com.vetmed.api607.model.Animal;
+import com.vetmed.api607.model.Request;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;

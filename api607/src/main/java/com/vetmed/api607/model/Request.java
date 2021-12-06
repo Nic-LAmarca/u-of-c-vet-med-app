@@ -1,5 +1,4 @@
 package com.vetmed.api607.model;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,4 +15,5 @@ public class Request {
     private boolean technicianApproved;
     private boolean requestComplete;
     private boolean requestSuccessful;
+
 }

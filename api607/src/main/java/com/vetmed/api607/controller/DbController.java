@@ -668,8 +668,8 @@ public class DbController {
             myStmt.setInt(1, id);
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
-                if (results.getInt("requestId") == id) {
-                    foundRequest.setRequestId(id);
+                if (results.getInt("prescriptionId") == id) {
+                    foundPH.setPrescriptionId(id);
                     foundPH.setUserId(results.getInt("userId"));
                     foundPH.setDate((results.getDate("date").toString()));
                     foundPH.setDrugName(results.getString("drugName"));
@@ -770,7 +770,7 @@ public class DbController {
      * Method is used to search the database for a Request with the entered id and return the User object if found
      *
      * @param id is the unique id value to search with
-     * @return a new PrescriptionHistory object that matches the id passed as an argument
+     * @return a new Request object that matches the id passed as an argument
      */
     public  Request searchForRequest(int id) {
         Request foundRequest = new Request();
@@ -782,12 +782,13 @@ public class DbController {
             while (results.next()) {
                 if (results.getInt("requestId") == id) {
                     foundRequest.setRequestId(id);
-                    foundPH.setUserId(results.getInt("userId"));
-                    foundPH.setDate((results.getDate("date").toString()));
-                    foundPH.setDrugName(results.getString("drugName"));
-                    foundPH.setInstructions(results.getString("instructions"));
-                    foundPH.setDosage(results.getDouble("dosage"));
-                    foundPH.setDeliveryMethod(results.getString("deliveryMethod"));
+                    foundRequest.setAnimalId(results.getInt("animalId"));
+                    foundRequest.setUserId(results.getInt("userId"));
+                    foundRequest.setNewStatus(results.getBoolean("newStatus"));
+                    foundRequest.setAdminApproved(results.getBoolean("adminApproved"));
+                    foundRequest.setTechnicianApproved(results.getBoolean("technicianApproved"));
+                    foundRequest.setRequestComplete(results.getBoolean("requestComplete"));
+                    foundRequest.setRequestSuccessful(results.getBoolean("requestSuccessful"));
                 }
             }
             myStmt.close();
@@ -799,45 +800,57 @@ public class DbController {
 
     /**
      *
-     * Method is used to return an arraylist of PrescriptionHistory objects that are in the database
+     * Method is used to return an arraylist of Request objects that are in the database
      *
-     * @return a new list of PrescriptionHistory objects from the db
+     * @return a new list of Request objects from the db
      */
-    public ArrayList<PrescriptionHistory> getAllPrescriptionHistories() {
-        ArrayList<PrescriptionHistory> prescriptionHistoryArrayList = new ArrayList<PrescriptionHistory>();
+    public ArrayList<Request> getAllRequests() {
+        ArrayList<Request> requestArrayList = new ArrayList<Request>();
         try {
-            String query = "SELECT * FROM PRESCRIPTION_HISTORY";
+            String query = "SELECT * FROM REQUEST";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
-                PrescriptionHistory addPH = new PrescriptionHistory();
-                addPH.setPrescriptionId(id);
-                addPH.setUserId(results.getInt("userId"));
-                addPH.setDate((results.getDate("date").toString()));
-                addPH.setDrugName(results.getString("drugName"));
-                addPH.setInstructions(results.getString("instructions"));
-                addPH.setDosage(results.getDouble("dosage"));
-                addPH.setDeliveryMethod(results.getString("deliveryMethod"));
-                prescriptionHistoryArrayList.add(addPH);
+                Request addRequest = new Request();
+                addRequest.setRequestId(id);
+                addRequest.setAnimalId(results.getInt("animalId"));
+                addRequest.setUserId(results.getInt("userId"));
+                addRequest.setNewStatus(results.getBoolean("newStatus"));
+                addRequest.setAdminApproved(results.getBoolean("adminApproved"));
+                addRequest.setTechnicianApproved(results.getBoolean("technicianApproved"));
+                addRequest.setRequestComplete(results.getBoolean("requestComplete"));
+                addRequest.setRequestSuccessful(results.getBoolean("requestSuccessful"));
+                requestArrayList.add(addRequest);
             }
             myStmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return prescriptionHistoryArrayList;
+        return requestArrayList;
     }
 
     /**
      *
-     * Method is used to add a PrescriptionHistory into the database based on the entered credentials
+     * Method is used to add a Request into the database based on the entered credentials
      *
-     * @param PrescriptionHistory the type of the Medical Record
+     * @param userId is the ID of the user prescribing the medication
+     * @param animalId is the ID of the animal who the prescription history is for
+     * @param newStatus is the status of if the request is new or not
+     * @param adminApproved states if an admin has approved the request yet or not
+     * @param technicianApproved states if a technician has approved the request yet or not
+     * @param requestComplete states if the request has been completed
+     * @param requestSuccessful states if the request was succesful
      */
-    public void addPRescriptionHistory(String prescriptionHistory) {
+    public void addRequest(int animalId, int userId, boolean newStatus, boolean adminApproved, boolean technicianApproved, boolean requestComplete, boolean requestSuccessful) {
         try {
-            String query = "INSERT INT0 PRESCRIPTION_HISTORY (prescriptionHistory) VALUES (?)";
+            String query = "INSERT INT0 REQUEST (animalId, userId, newStatus, adminApproved, technicianApproved, requestComplete, requestSuccessful) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
-            myStmt.setString(1, medicalRecordType);
+            myStmt.setInt(1, animalId);
+            myStmt.setInt(1, userId);
+            myStmt.setBoolean(1, adminApproved);
+            myStmt.setBoolean(1, technicianApproved);
+            myStmt.setBoolean(1, requestComplete);
+            myStmt.setBoolean(1, requestSuccessful);
             myStmt.executeQuery();
             myStmt.close();
         } catch (Exception e) {

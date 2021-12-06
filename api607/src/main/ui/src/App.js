@@ -7,6 +7,8 @@ import AdminDashboard from './AdminDashboard';
 import TechnicianDashboard from './TechnicianDashboard';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import NavigationPageAdmin from "./NavigationPageAdmin";
+import NavigationPageNonAdmin from "./NavigationPageNonAdmin";
 
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
                       <Route path ='/teacherdashboard' element={<TeacherDashboard/>}/>
                       <Route path ='/Admindashboard' element={<AdminDashboard/>}/>
                       <Route path ='/techniciandashboard' element={<TechnicianDashboard/>}/>
+                      <Route path ='/navadashboard' element={<NavigationPageAdmin/>}/>
+                      <Route path ='/navnadashboard' element={<NavigationPageNonAdmin/>}/>
                   </Routes>
 
               </div>

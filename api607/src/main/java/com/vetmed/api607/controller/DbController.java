@@ -1065,6 +1065,92 @@ public class DbController {
 
 
 
+
+
+
+
+
+
+    // ******************************************************************
+    // ****** SECTION USED FOR TREATMENT METHOD QUERY INTERACTIONS ******
+    // ******************************************************************
+    /**
+     *
+     * Method is used to search the database for a Treatment Method with the entered id and return the object if found
+     *
+     * @param id is the unique id value to search with
+     * @return a new TreatmentMethod object that matches the id passed as an argument
+     */
+    public  TreatmentMethod searchForTreatmentMethod(int id) {
+        TreatmentMethod foundTM = new TreatmentMethod();
+        try {
+            String query = "SELECT * FROM TREATMENT_METHOD WHERE treatmentId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, id);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                if (results.getInt("treatmentId") == id) {
+                    foundTM.setTreatmentId(id);
+                    foundTM.setTreatmentType(results.getString("treatmentType"));
+                }
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return foundTM;
+    }
+
+    /**
+     *
+     * Method is used to return an arraylist of TreatmentMethod objects that are in the database
+     *
+     * @return a new list of TreatmentMethod objects from the db
+     */
+    public ArrayList<TreatmentMethod> getAllTreatmentMethods() {
+        ArrayList<TreatmentMethod> treatmentMethodArrayList = new ArrayList<TreatmentMethod>();
+        try {
+            String query = "SELECT * FROM TREATMENT_METHOD";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                TreatmentMethod addTM = new TreatmentMethod();
+                addTM.setTreatmentId(id);
+                addTM.setTreatmentType(results.getString("treatmentType"));
+                treatmentMethodArrayList.add(addTm);
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return treatmentMethodArrayList;
+    }
+
+    /**
+     *
+     * Method is used to add a TreatmentMethod into the database based on the entered credentials
+     *
+     * @param treatmentType the type of treatment
+     */
+    public void addRequest(String treatmentType) {
+        try {
+            String query = "INSERT INT0 TREATMENT_METHOD (treatmentType) VALUES (?)";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setString(1, treatmentType);
+            myStmt.executeQuery();
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    // ******************************************************************
+    // ****** SECTION USED FOR TREATMENT METHOD QUERY INTERACTIONS ******
+    // ******************************************************************
+
+
+
+
+
     // ******************************************************
     // ****** SECTION USED FOR USER QUERY INTERACTIONS ******
     // ******************************************************

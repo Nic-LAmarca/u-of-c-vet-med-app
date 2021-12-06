@@ -10,15 +10,14 @@ import java.sql.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Animal
-{
-    private Integer id;
+public class Animal {
+    private int animalId;
     private String animalName;
     private String species;
     private Double weight;
-    private Integer tattooNum;
+    private int tattooNum;
     private String cityTattoo;
-    private Date birthDate;
+    private String birthDate;
     private String breed;
     private String sex;
     private Long rfid;
@@ -30,5 +29,6 @@ public class Animal
     private String subspecies;
     private String color;
     private String distinguishingFeatures;
+}
 
 

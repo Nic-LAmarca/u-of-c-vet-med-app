@@ -15,18 +15,18 @@ public class AnimalController
 {
     private DbController db = new DbController();
 
-    @CrossOrigin
-    @GetMapping("/teacherAvailableAnimals")
-    public ArrayList<Integer> getAvailableAnimals()
-    {
-        ArrayList<Integer> availableAnimals = new ArrayList<Integer>();
-        for(int i = 0; i < db.getAvailableAnimalList().size(); i++){
-            if(db.getAvailableAnimalList().get(i).isAvailable()){
-                availableAnimals.add(db.getAvailableAnimalList().get(i).getId());
-            }
-        }
-        return availableAnimals;
-    }
+//    @CrossOrigin
+//    @GetMapping("/teacherAvailableAnimals")
+//    public ArrayList<Integer> getAvailableAnimals()
+//    {
+//        ArrayList<Integer> availableAnimals = new ArrayList<Integer>();
+//        for(int i = 0; i < db.getAvailableAnimalList().size(); i++){
+//            if(db.getAvailableAnimalList().get(i).isAvailable()){
+//                availableAnimals.add(db.getAvailableAnimalList().get(i).getId());
+//            }
+//        }
+//        return availableAnimals;
+//    }
 
     @GetMapping("/animals/{id}")
     public Animal getAnimalById(@PathVariable int id)

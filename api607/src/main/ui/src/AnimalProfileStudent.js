@@ -1,5 +1,6 @@
- import React,{useState} from "react";
+import React,{useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {Tab, Tabs} from 'react-tabs';
 
 import {Button, Form, Dropdown, DropdownButton, Table, ListGroup} from "react-bootstrap";
 import axios from "axios";

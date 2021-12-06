@@ -2,17 +2,12 @@ package com.vetmed.api607.controller;
 
 import com.vetmed.api607.model.LoginData;
 import com.vetmed.api607.model.TeacherRequestData;
-import com.vetmed.api607.model.Users;
-
+import com.vetmed.api607.model.User;
 import com.vetmed.api607.model.TeacherRequestData;
-//import com.vetmed.api607.service.UsersService;
 import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.web.bind.annotation.*;
-
 import javax.websocket.server.PathParam;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 @CrossOrigin(origins = "http://localhost:3000")
@@ -23,7 +18,7 @@ public class UserController {
     private DbController db = new DbController();
 
     @GetMapping()
-    public ArrayList<Users> getUsers()
+    public ArrayList<User> getUsers()
     {
         return db.getUserList();
     }
@@ -33,7 +28,7 @@ public class UserController {
     @PostMapping("/login")
     public String userLogin(@RequestBody LoginData loginData) {
         if (db.verifyLogin(loginData.getUsername(), loginData.getPassword()) != null) {
-            return db.verifyLogin(loginData.getUsername(), loginData.getPassword()).getUser_type();
+            return db.verifyLogin(loginData.getUsername(), loginData.getPassword()).getUserType();
         } else {
             return "";
         }
@@ -53,7 +48,7 @@ public class UserController {
     @PostMapping("/teacherRequest{requestAnimalId}")
     public String teacherRequest(@PathParam("requestAnimalId") int requestAnimalId) {
         if(db.searchAnimals(requestAnimalId) != null){
-            Users u = new Users(0, "test", "test", "test", "test");
+            User u = new User(0, "test", "test", "test", "test");
             u.makeRequest(db.searchAnimals(requestAnimalId));
             return db.searchAnimals(requestAnimalId).getName() + " has been requested.";
         }

@@ -1,13 +1,9 @@
 package com.vetmed.api607.controller;
 
-import com.vetmed.api607.model.Request;
-import com.vetmed.api607.model.Users;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import com.vetmed.api607.model.Animal;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 @CrossOrigin (origins = "http://localhost:3000")
 @RestController
 @RequestMapping()

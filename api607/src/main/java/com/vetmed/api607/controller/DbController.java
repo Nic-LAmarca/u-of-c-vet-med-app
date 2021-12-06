@@ -79,23 +79,27 @@ public class DbController {
 
     /**
      *
-     * Method is used to add a user into the database based on the entered credentials
+     * Method is used to add a PrescriptionHistory into the database based on the entered credentials
      *
-     * @param fName is the first name of the user
-     * @param lName is the last name of the user
-     * @param email is the email of the user
-     * @param activationDate is the date that the user is activated in the system
-     * @param userType is the type of user (Student, Teacher, Admin ...)
+     * @param userId is the ID of the user prescribing the medication
+     * @param animalId is the ID of the animal who the prescription history is for
+     * @param date is the date the prescription was written
+     * @param drugName is the name of the prescribed drug
+     * @param instructions are the instructions for how to take the drug
+     * @param dosage is the required dosage to be taken
+     * @param deliveryMethod is how the medication should be taken
      */
-    public void addUser(String fName, String lName, String email, String activationDate, String userType) {
+    public void addPrescriptionHistory( int userId, int animalId, String date, String drugName, String instructions, double dosage, String deliveryMethod) {
         try {
-            String query = "INSERT INT0 USER (fName, lName, email, activationDate, userType) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INT0 USER (userId, animalId, date, drugName, instructions, dosage, deliveryMethod) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
-            myStmt.setString(1, fName);
-            myStmt.setString(1, lName);
-            myStmt.setString(1, email);
-            myStmt.setDate(1, Date.valueOf(activationDate));
-            myStmt.setString(1, userType);
+            myStmt.setInt(1, userId);
+            myStmt.setInt(1, animalId);
+            myStmt.setDate(1, Date.valueOf(date));
+            myStmt.setString(1, drugName);
+            myStmt.setString(1, instructions);
+            myStmt.setDouble(1, dosage);
+            myStmt.setString(1, deliveryMethod);
             myStmt.executeQuery();
             myStmt.close();
         } catch (Exception e) {
@@ -193,4 +197,101 @@ public class DbController {
     // *********************************************************************
     // ****** SECTION USED FOR MEDICAL RECORD TYPE QUERY INTERACTIONS ******
     // *********************************************************************
+
+
+
+
+
+
+
+
+
+
+
+    // **********************************************************************
+    // ****** SECTION USED FOR PRESCRIPTION HISTORY QUERY INTERACTIONS ******
+    // **********************************************************************
+
+    /**
+     *
+     * Method is used to search the database for a PrescriptionHistory with the entered id and return the User object if found
+     *
+     * @param id is the unique id value to search with
+     * @return a new PrescriptionHistory object that matches the id passed as an argument
+     */
+    public  PrescriptionHistory searchForPrescriptionHistory(int id) {
+        PrescriptionHistory foundPH = new PrescriptionHistory();
+        try {
+            String query = "SELECT * FROM PRESCRIPTION_HISTORY WHERE prescriptionId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, id);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                if (results.getInt("prescriptionId") == id) {
+                    foundPH.setPrescriptionId(id);
+                    foundPH.setUserId(results.getInt("userId"));
+                    foundPH.setDate((results.getDate("date").toString()));
+                    foundPH.setDrugName(results.getString("drugName"));
+                    foundPH.setInstructions(results.getString("instructions"));
+                    foundPH.setDosage(results.getDouble("dosage"));
+                    foundPH.setDeliveryMethod(results.getString("deliveryMethod"));
+                }
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     *
+     * Method is used to return an arraylist of PrescriptionHistory objects that are in the database
+     *
+     * @return a new list of PrescriptionHistory objects from the db
+     */
+    public ArrayList<PrescriptionHistory> getAllPrescriptionHistories() {
+        ArrayList<PrescriptionHistory> prescriptionHistoryArrayList = new ArrayList<PrescriptionHistory>();
+        try {
+            String query = "SELECT * FROM PRESCRIPTION_HISTORY";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                PrescriptionHistory addPH = new PrescriptionHistory();
+                addPH.setPrescriptionId(id);
+                addPH.setUserId(results.getInt("userId"));
+                addPH.setDate((results.getDate("date").toString()));
+                addPH.setDrugName(results.getString("drugName"));
+                addPH.setInstructions(results.getString("instructions"));
+                addPH.setDosage(results.getDouble("dosage"));
+                addPH.setDeliveryMethod(results.getString("deliveryMethod"));
+                prescriptionHistoryArrayList.add(addPH);
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return prescriptionHistoryArrayList;
+    }
+
+    /**
+     *
+     * Method is used to add a PrescriptionHistory into the database based on the entered credentials
+     *
+     * @param PrescriptionHistory the type of the Medical Record
+     */
+    public void addPRescriptionHistory(String prescriptionHistory) {
+        try {
+            String query = "INSERT INT0 PRESCRIPTION_HISTORY (prescriptionHistory) VALUES (?)";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setString(1, medicalRecordType);
+            myStmt.executeQuery();
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    // **********************************************************************
+    // ****** SECTION USED FOR PRESCRIPTION HISTORY QUERY INTERACTIONS ******
+    // **********************************************************************
 }

@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import {useNavigate} from "react-router-dom";
+
 import {Button, Form, Dropdown, DropdownButton, Table, ListGroup,Tabs,Tab,TabContent,TabContainer,Nav,NavItem,Row,Col} from "react-bootstrap";
 
 import axios from "axios";
@@ -153,15 +154,24 @@ export default function AnimalProfileStudentDashboard() {
                     <Nav.Item>
                         <Nav.Link eventKey="second">Tab 2</Nav.Link>
                     </Nav.Item>
+
                 </Nav>
                 </div>
-                <div >
+                <div className="AnimalP-grid-item6">
                     <Tab.Content >
                         <Tab.Pane eventKey="first">
                             hi hello
                         </Tab.Pane>
                         <Tab.Pane eventKey="second">
                             hello hello
+                            dont stop believing
+                            seasoning is the reason for the season
+                            hello hello
+                            dont stop believing
+                            seasoning is the reason for the season
+                            hello hello
+                            dont stop believing
+                            seasoning is the reason for the season
                         </Tab.Pane>
                     </Tab.Content>
                 </div>

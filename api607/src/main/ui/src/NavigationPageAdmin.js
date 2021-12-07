@@ -1,7 +1,7 @@
  import React,{useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-import {Button, Form,Dropdown,DropdownButton,ListGroup} from "react-bootstrap";
+import {Button, Form, Dropdown, DropdownButton, ListGroup, Table} from "react-bootstrap";
 import axios from "axios";
 import './NavigationPageAdmin.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
@@ -113,7 +113,7 @@ export default function NavADashboard() {
             <h1 className ="NavAD-grid-item1">
                 Navigation Page
             </h1>
-            <Button className="NavAD-grid-item2">
+            <Button className="NavAD-grid-item2" >
                 User
             </Button>
             <Button className="NavAD-grid-item3">
@@ -165,24 +165,41 @@ export default function NavADashboard() {
                 </Form.Group>
                 <Button className>Search</Button>
             </Form>
-            <p className="NavAD-grid-item13">
+            <h1 className="NavAD-grid-item13">
                 Results
-            </p>
-            <ListGroup className="NavAD-grid-item14">
-                <ListGroup.Item action href="#link1">
-                    Link 1
-                </ListGroup.Item>
-                <ListGroup.Item action href="#link2" >
-                    Link 2
-                </ListGroup.Item>
-                <ListGroup.Item action href="#link3">
-                    This one is a button
-                </ListGroup.Item>
+            </h1>
+            <Table  className="NavAD-grid-item14" striped bordered hover>
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td colSpan="2">Larry the Bird</td>
+                    <td>@twitter</td>
+                </tr>
+                </tbody>
                 {/*<ul>*/}
                 {/*    {requests.map(requests => <DropdownItem onClick={handleRequestSelect}>{requests}</DropdownItem>)}*/}
                 {/*</ul>*/}
-            </ListGroup>,
-
+            </Table>
 
         </div>
     );

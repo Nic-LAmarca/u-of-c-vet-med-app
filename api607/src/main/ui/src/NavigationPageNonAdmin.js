@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 
 import {Button, Form,Dropdown,DropdownButton,Table} from "react-bootstrap";
 import axios from "axios";
-import './NavigationPageAdmin.css';
+import './NavigationPageNonAdmin.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
 
 
@@ -113,13 +113,12 @@ export default function NavNonADashboard() {
             <h1 className ="NavNonAdmin-grid-item1">
                 Navigation Page
             </h1>
-            <Button className="NavNonAdmin-grid-item2">
+            <Button className="NavNonAdmin-grid-item2" >
                 User
             </Button>
             <Button className="NavNonAdmin-grid-item3">
                 Personal Settings
             </Button>
-
             <Button className="NavNonAdmin-grid-item4">
                 Logout
             </Button>

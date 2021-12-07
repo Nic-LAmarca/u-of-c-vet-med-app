@@ -826,7 +826,7 @@ public class DbController {
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
                 Request addRequest = new Request();
-                addRequest.setRequestId(results.getInt("requestId");
+                addRequest.setRequestId(results.getInt("requestId"));
                 addRequest.setAnimalId(results.getInt("animalId"));
                 addRequest.setUserId(results.getInt("userId"));
                 addRequest.setNewStatus(results.getBoolean("newStatus"));
@@ -934,7 +934,7 @@ public class DbController {
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
                 Status addStatus = new Status();
-                addStatus.setStatusId(results.getInt("statusId");
+                addStatus.setStatusId(results.getInt("statusId"));
                 addStatus.setAnimalId(results.getInt("animalId"));
                 addStatus.setDate(results.getDate("date").toString());
                 addStatus.setLocation(results.getString("location"));
@@ -1004,13 +1004,13 @@ public class DbController {
     public  TreatmentHistory searchForTreatmentHistory(int id) {
         TreatmentHistory foundTH = new TreatmentHistory();
         try {
-            String query = "SELECT * FROM TREATMENT_HISTORY WHERE statusId = ?";
+            String query = "SELECT * FROM TREATMENT_HISTORY WHERE treatmentId = ?";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setInt(1, id);
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
                 if (results.getInt("treatmentId") == id) {
-                    foundTH.setStatusId(id);
+                    foundTH.setTreatmentId(id);
                     foundTH.setAnimalId(results.getInt("animalId"));
                     foundTH.setDate(results.getDate("date").toString());
                 }
@@ -1129,7 +1129,7 @@ public class DbController {
                 TreatmentMethod addTM = new TreatmentMethod();
                 addTM.setTreatmentId(results.getInt("treatmentId"));
                 addTM.setTreatmentType(results.getString("treatmentType"));
-                treatmentMethodArrayList.add(addTm);
+                treatmentMethodArrayList.add(addTM);
             }
             myStmt.close();
         } catch (Exception e) {

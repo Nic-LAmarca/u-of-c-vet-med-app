@@ -1130,6 +1130,7 @@ public class DbController {
                 addTM.setTreatmentId(results.getInt("treatmentId"));
                 addTM.setTreatmentType(results.getString("treatmentType"));
                 treatmentMethodArrayList.add(addTM);
+
             }
             myStmt.close();
         } catch (Exception e) {

@@ -31,7 +31,7 @@
  /*user*/
   .NavAD-grid-item2 {
     border: 1px solid rgba(0, 0, 0, 0.8);
-    text-align: right;
+    text-align: center;
     grid-column: 11;
     grid-row: 1;
   }
@@ -46,14 +46,14 @@
 /*edit users */
   .NavAD-grid-item4 {
     border: 1px solid rgba(0, 0, 0, 0.8);
-    text-align: left;
+    text-align: center;
     grid-column: 11;
     grid-row: 3;
   }
   /*logout*/
   .NavAD-grid-item5{
     border: 1px solid rgba(0, 0, 0, 0.8);
-    text-align: left;
+    text-align: center;
     font-style: oblique;
     font-size: large;
     grid-column: 11;

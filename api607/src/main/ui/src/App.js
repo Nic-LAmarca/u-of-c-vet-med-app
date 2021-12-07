@@ -12,7 +12,9 @@ import NavigationPageNonAdmin from "./NavigationPageNonAdmin";
 import PersonalSettingsDashboard from "./PersonalSettingsPage";
 import UserHandlingDashboard from "./UserHandling";
 import AnimalProfileStudentDashboard from "./AnimalProfileStudent";
-
+import AnimalProfileAttendantDashboard from "./AnimalProfileAttendant";
+import AnimalProfileTeacherDashboard from "./AnimalProfileTeacher";
+import AnimalProfileTechnicianDashboard from "./AnimalProfileTechnician";
 
 function App() {
   return (
@@ -22,21 +24,8 @@ function App() {
               <div className="header">
               </div>
               <div className= "content">
-                  <NavLink  exact activeClassName="active" to="/">Login</NavLink>
-                  <NavLink  exact activeClassName="active" to="/teacherdashboard">Teacher</NavLink>
-                  <NavLink  exact activeClassName="active" to="/Admindashboard">Admin</NavLink>
-                  <NavLink  exact activeClassName="active" to="/techniciandashboard">Technician</NavLink>
-                  <NavLink  exact activeClassName="active" to="/navadashboard">Nav Page Admin</NavLink>
-                  <NavLink  exact activeClassName="active" to="/navnadashboard">Nav Page Non Admin</NavLink>
-                  <NavLink  exact activeClassName="active" to="/personalsettings">Personal Setting</NavLink>
-                  <NavLink  exact activeClassName="active" to="/userhandling">User Handling</NavLink>
-                  <NavLink  exact activeClassName="active" to="/animalprofilestudent">Animal Profile Student</NavLink>
-
                   <Routes>
-                     
-
                       <Route  exact path ='/' element={<Login/>}/>
-
                       <Route path ='/teacherdashboard' element={<TeacherDashboard/>}/>
                       <Route path ='/Admindashboard' element={<AdminDashboard/>}/>
                       <Route path ='/techniciandashboard' element={<TechnicianDashboard/>}/>
@@ -45,12 +34,12 @@ function App() {
                       <Route path ='/personalsettings' element={<PersonalSettingsDashboard/>}/>
                       <Route path ='/userhandling' element={<UserHandlingDashboard/>}/>
                       <Route path ='/animalprofilestudent' element={<AnimalProfileStudentDashboard/>}/>
+                      <Route path ='/animalprofileattendant' element={<AnimalProfileStudentDashboard/>}/>
+                      <Route path ='/animalprofileteacher' element={<AnimalProfileStudentDashboard/>}/>
+                      <Route path ='/animalprofiletechnician' element={<AnimalProfileStudentDashboard/>}/>
                   </Routes>
-
               </div>
           </BrowserRouter>
-
-
       </div>
   );
 }

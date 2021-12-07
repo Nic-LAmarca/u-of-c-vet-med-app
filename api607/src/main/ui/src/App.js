@@ -12,6 +12,9 @@ import NavigationPageNonAdmin from "./NavigationPageNonAdmin";
 import PersonalSettingsDashboard from "./PersonalSettingsPage";
 import UserHandlingDashboard from "./UserHandling";
 import AnimalProfileStudentDashboard from "./AnimalProfileStudent";
+import AnimalProfileAttendantDashboard from "./AnimalProfileAttendant";
+import AnimalProfileTeacherDashboard from "./AnimalProfileTeacher";
+import AnimalProfileTechnicianDashboard from "./AnimalProfileTechnician";
 
 
 function App() {
@@ -31,6 +34,9 @@ function App() {
                   <NavLink  exact activeClassName="active" to="/personalsettings">Personal Setting</NavLink>
                   <NavLink  exact activeClassName="active" to="/userhandling">User Handling</NavLink>
                   <NavLink  exact activeClassName="active" to="/animalprofilestudent">Animal Profile Student</NavLink>
+                  <NavLink  exact activeClassName="active" to="/animalprofileattendant">Animal Profile Student</NavLink>
+                  <NavLink  exact activeClassName="active" to="/animalprofileteacher">Animal Profile Student</NavLink>
+                  <NavLink  exact activeClassName="active" to="/animalprofiletechnician">Animal Profile Student</NavLink>
 
                   <Routes>
                      
@@ -45,6 +51,10 @@ function App() {
                       <Route path ='/personalsettings' element={<PersonalSettingsDashboard/>}/>
                       <Route path ='/userhandling' element={<UserHandlingDashboard/>}/>
                       <Route path ='/animalprofilestudent' element={<AnimalProfileStudentDashboard/>}/>
+                      <Route path ='/animalprofileattendant' element={<AnimalProfileStudentDashboard/>}/>
+                      <Route path ='/animalprofileteacher' element={<AnimalProfileStudentDashboard/>}/>
+                      <Route path ='/animalprofiletechnician' element={<AnimalProfileStudentDashboard/>}/>
+
                   </Routes>
 
               </div>

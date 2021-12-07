@@ -109,16 +109,16 @@ export default function AnimalProfileStudentDashboard() {
                         <Nav.Link eventKey="fourth">Prescriptions</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link eventKey="fifth">Alerts</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey="sixth">Requests</Nav.Link>
+                        <Nav.Link eventKey="fifth">Requests</Nav.Link>
                     </Nav.Item>
                 </Nav>
                 </div>
                 <div className="AnimalP-grid-item6">
                     <Tab.Content >
                         <Tab.Pane eventKey="first">
+                        <input className="AnimalP-comment-item1" placeholder="Enter Comment Here"></input>
+                        <button className="AnimalP-submit-item1" type="submit">Submit</button>
+
                             <Table striped bordered hover className="AnimalP-grid-item100">
                                 <thead>
                                     <tr>
@@ -139,22 +139,21 @@ export default function AnimalProfileStudentDashboard() {
                             </Table>
                         </Tab.Pane>
                         <Tab.Pane eventKey="second">
+                            <h100 className="AnimalP-photo-item1">SparkyPhoto1.png</h100>
+                            <h101 className="AnimalP-photo-item2">SparkyPhoto2.png</h101>
+                            <h102 className="AnimalP-photo-item3">SparkyPhoto3.png</h102>
                         </Tab.Pane>
                         <Tab.Pane eventKey="third">
                             <Table striped bordered hover className="AnimalP-grid-item100">
                                 <thead>
                                     <tr>
-                                        <th scope="col">commentId</th>
-                                        <th scope="col">User Name</th>
-                                        <th scope="col">Description</th>
+                                        <th scope="col">Treatment</th>
                                         <th scope="col">Date</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>1</td>
-                                        <td>Calvin</td>
-                                        <td>Sparky looks healthy</td>
+                                        <td>Physical Exam</td>
                                         <td>2021-11-24</td>
                                     </tr>
                                 </tbody>
@@ -164,9 +163,10 @@ export default function AnimalProfileStudentDashboard() {
                         <Table striped bordered hover className="AnimalP-grid-item100">
                             <thead>
                                 <tr>
-                                    <th scope="col">commentId</th>
+                                    <th scope="col">prescriptionId</th>
                                     <th scope="col">User Name</th>
-                                    <th scope="col">Description</th>
+                                    <th scope="col">Drug Name</th>
+                                    <th scope="col">Instructions</th>
                                     <th scope="col">Date</th>
                                 </tr>
                             </thead>
@@ -174,8 +174,9 @@ export default function AnimalProfileStudentDashboard() {
                                 <tr>
                                     <td>1</td>
                                     <td>Calvin</td>
-                                    <td>Sparky looks healthy</td>
-                                    <td>2021-11-24</td>
+                                    <td>Advil</td>
+                                    <td>Take 2 every 4 hours</td>
+                                    <td>2021-10-10</td>
                                 </tr>
                             </tbody>
                         </Table>
@@ -184,38 +185,20 @@ export default function AnimalProfileStudentDashboard() {
                         <Table striped bordered hover className="AnimalP-grid-item100">
                             <thead>
                                 <tr>
-                                    <th scope="col">commentId</th>
-                                    <th scope="col">User Name</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Date</th>
+                                    <th scope="col">requestId</th>
+                                    <th scope="col">adminApproved</th>
+                                    <th scope="col">technicianApproved</th>
+                                    <th scope="col">Complete</th>
+                                    <th scope="col">Successful</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td>Calvin</td>
-                                    <td>Sparky looks healthy</td>
-                                    <td>2021-11-24</td>
-                                </tr>
-                            </tbody>
-                        </Table>
-                    </Tab.Pane>
-                    <Tab.Pane eventKey="sixth">
-                        <Table striped bordered hover className="AnimalP-grid-item100">
-                            <thead>
-                                <tr>
-                                    <th scope="col">commentId</th>
-                                    <th scope="col">User Name</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Calvin</td>
-                                    <td>Sparky looks healthy</td>
-                                    <td>2021-11-24</td>
+                                    <td>false</td>
+                                    <td>false</td>
+                                    <td>false</td>
+                                    <td>false</td>
                                 </tr>
                             </tbody>
                         </Table>

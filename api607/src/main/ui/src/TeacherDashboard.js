@@ -111,7 +111,7 @@ export default function TeacherDashboard() {
 
         <div className="TeacherD-grid-container">
             <div className="TeacherD-grid-item1">
-                <h1> Teacher DashBoard </h1>
+                <h1> Teacher Dashboard </h1>
             </div>
             <div className="TeacherD-grid-item2">
                 <Button variant="light" onClick={handleLogout}>Logout</Button>

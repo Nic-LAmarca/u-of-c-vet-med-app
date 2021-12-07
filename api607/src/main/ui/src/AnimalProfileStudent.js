@@ -1,8 +1,8 @@
 import React,{useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-
 import {Button, Form, Dropdown, DropdownButton, Table, ListGroup,Tabs,Tab,TabContent,TabContainer,Nav,NavItem,Row,Col} from "react-bootstrap";
+
 import axios from "axios";
 import './AnimalProfileStudent.css';
 import DropdownItem from "react-bootstrap/DropdownItem";

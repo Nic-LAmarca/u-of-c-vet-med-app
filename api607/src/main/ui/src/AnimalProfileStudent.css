@@ -14,8 +14,8 @@
 
   .AnimalP-grid-container {
     display: grid;
-    grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
-    grid-template-rows:  auto auto auto auto auto auto auto auto ;
+    grid-template-columns: 75px 75px 75px 75px 75px 75px 75px 250px 250px 250px;
+    grid-template-rows:  75px 75px 75px 75px 75px 75px 75px 75px 75px 75px;
     padding: 10px;
     grid-gap: 0cm;
 
@@ -64,7 +64,7 @@
   .AnimalP-grid-item6 {
     border: 1px solid rgba(0, 0, 0, 0.8);
     text-align: justify;
-    grid-column: 5/span 10;
+    grid-column: 8/ span 10;
     grid-row: 2/ span 7;
 
   }
@@ -73,7 +73,7 @@
     border: 1px solid rgba(0, 0, 0, 0.8);
     text-align: justify;
     grid-column: 8/span 10;
-    grid-row: 8;
+    grid-row: 9;
 
   }
 /*!**!*/

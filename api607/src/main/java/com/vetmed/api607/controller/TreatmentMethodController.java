@@ -12,4 +12,5 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping()
 public class TreatmentMethodController {
+    private DbController db = new DbController();
 }

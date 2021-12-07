@@ -84,7 +84,7 @@ export default function AdminDashboard() {
 
         <div className="AdminD-grid-container">
             <div className="AdminD-grid-item1">
-                <h1> Admin DashBoard </h1>
+                <h1> Admin Dashboard </h1>
             </div>
             <div className="AdminD-grid-item2">
                 <Button variant="light" onClick={handleLogout}>Logout</Button>
@@ -107,7 +107,7 @@ export default function AdminDashboard() {
                 Request Selected: {requestId}
             </p>
             <Button className="AdminD-grid-item4" onClick={approveRequest} variant="info">Approve Request</Button>
-            <Button className="AdminD-grid-item6" onClick={denyRequest} variant="danger">Cancel Request</Button>
+            <Button className="AdminD-grid-item6" onClick={denyRequest} variant="danger">Deny Request</Button>
             <b className="AdminD-grid-item7">
                 Request Approved/Cancelled: {requestMessage}
             </b>

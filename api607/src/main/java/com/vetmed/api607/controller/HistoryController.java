@@ -12,5 +12,5 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping()
 public class HistoryController {
-
+    private DbController db = new DbController();
 }

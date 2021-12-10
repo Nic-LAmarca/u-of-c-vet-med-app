@@ -1004,7 +1004,7 @@ public class DbController {
     public  TreatmentHistory searchForTreatmentHistory(int id) {
         TreatmentHistory foundTH = new TreatmentHistory();
         try {
-            String query = "SELECT * FROM TREATMENT_HISTORY WHERE statusId = ?";
+            String query = "SELECT * FROM TREATMENT_HISTORY WHERE treatmentId = ?";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setInt(1, id);
             ResultSet results = myStmt.executeQuery();
@@ -1129,6 +1129,8 @@ public class DbController {
                 TreatmentMethod addTM = new TreatmentMethod();
                 addTM.setTreatmentId(results.getInt("treatmentId"));
                 addTM.setTreatmentType(results.getString("treatmentType"));
+                treatmentMethodArrayList.add(addTM);
+
             }
             myStmt.close();
         } catch (Exception e) {

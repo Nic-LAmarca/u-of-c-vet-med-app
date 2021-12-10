@@ -12,4 +12,5 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping()
 public class RequestController {
+    private DbController db = new DbController();
 }

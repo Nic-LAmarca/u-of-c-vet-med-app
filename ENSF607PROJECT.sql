@@ -1,4 +1,4 @@
-
+DROP DATABASE ENSF607PROJECT;
 CREATE DATABASE IF NOT EXISTS ENSF607PROJECT;
 USE ENSF607PROJECT;
 CREATE TABLE IF NOT EXISTS ANIMAL
@@ -186,7 +186,7 @@ VALUES (1,				"Sparky",				"Dog",				3.6,				234234,				"HOC London",				"2018-0
 		(2,				"Seabrease",			"Horse",			68,					564543,				"ABC Paris",				"2018-08-31 00:00:00",				"Quarter Horse",		"FM",				8987498179390,				5671876189197,				"Injured",					true,				null,				null,null,				null,				null,				"Bay",								"Stocky, compact"),
         (3,				"Lily",					"Cow",				127,				981733,				"CBH India",				"2018-02-28 00:00:00",				"Abigar",				"MN",				83612863189,				812381931998,				"Sick",						true,				null,				null,"Dairy",				"Spain",			"Taurus",			null,								null);
 
-INSERT INTO USER (userId, fName, lName, email, activationDate, userType)
+INSERT INTO USER (userId, fName, lName, email, activationDate, userType, password)
 VALUES (1,				"user",				"1",				"admin@ucalgary.ca",				"2021-03-04 00:00:00",				"Administrator",				"password1"),		
 		(2,				"user",				"2",				"a.technician@ucalgary.ca",			"2021-03-04 00:00:00",				"Animal Health Technician",				"password2"),	
         (3,				"user",				"3",				"teacher@ucalgary.ca",				"2021-04-05 00:00:00",				"Teaching Technician",				"password3"),	

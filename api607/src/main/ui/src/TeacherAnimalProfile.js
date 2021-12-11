@@ -10,17 +10,17 @@ import DropdownItem from "react-bootstrap/DropdownItem";
 
 export default function TeacherAnimalProfile() {
     return (
-        <div className="TeachAnimalP-grid-container">
-            <h3 className="TeachAnimalP-grid-item1">
+        <div className="TeacherAnimalProfile-grid-container">
+            <h3 className="TeacherAnimalProfile-grid-item1">
                 Sparky
             </h3>
-            <h3 className="TeachAnimalP-grid-item2">
+            <h3 className="TeacherAnimalProfile-grid-item2">
                 ID # 1
             </h3>
-            <h3 className="TeachAnimalP-grid-item3">
+            <h3 className="TeacherAnimalProfile-grid-item3">
                 Status: Healthy
             </h3>
-            <Table striped bordered hover className="TeachAnimalP-grid-item5">
+            <Table striped bordered hover className="TeacherAnimalProfile-grid-item5">
                 <tbody>
                 <tr>
                     <td>ID# </td>
@@ -94,7 +94,7 @@ export default function TeacherAnimalProfile() {
             </Table>
             <Tab.Container id="left-tabs-example" defaultActiveKey="first" >
 
-                <div className="TeachAnimalP-grid-item7">
+                <div className="TeacherAnimalProfile-grid-item7">
                 <Nav variant="pills"  >
                     <Nav.Item>
                         <Nav.Link eventKey="first">Comments</Nav.Link>
@@ -113,13 +113,13 @@ export default function TeacherAnimalProfile() {
                     </Nav.Item>
                 </Nav>
                 </div>
-                <div className="TeachAnimalP-grid-item6">
+                <div className="TeacherAnimalProfile-grid-item6">
                     <Tab.Content >
                         <Tab.Pane eventKey="first">
-                        <input className="TeachAnimalP-comment-item1" placeholder="Enter Comment Here"></input>
-                        <button className="TeachAnimalP-submit-item1" type="submit">Submit</button>
+                        <input className="TeacherAnimalProfile-comment-item1" placeholder="Enter Comment Here"></input>
+                        <button className="TeacherAnimalProfile-submit-item1" type="submit">Submit</button>
 
-                            <Table striped bordered hover className="TeachAnimalP-grid-item100">
+                            <Table striped bordered hover className="TeacherAnimalProfile-grid-item100">
                                 <thead>
                                     <tr>
                                         <th scope="col">commentId</th>
@@ -139,12 +139,12 @@ export default function TeacherAnimalProfile() {
                             </Table>
                         </Tab.Pane>
                         <Tab.Pane eventKey="second">
-                            <h100 className="TeachAnimalP-photo-item1">SparkyPhoto1.png</h100>
-                            <h101 className="TeachAnimalP-photo-item2">SparkyPhoto2.png</h101>
-                            <h102 className="TeachAnimalP-photo-item3">SparkyPhoto3.png</h102>
+                            <h100 className="TeacherAnimalProfile-photo-item1">SparkyPhoto1.png</h100>
+                            <h101 className="TeacherAnimalProfile-photo-item2">SparkyPhoto2.png</h101>
+                            <h102 className="TeacherAnimalProfile-photo-item3">SparkyPhoto3.png</h102>
                         </Tab.Pane>
                         <Tab.Pane eventKey="third">
-                            <Table striped bordered hover className="TeachAnimalP-grid-item100">
+                            <Table striped bordered hover className="TeacherAnimalProfile-grid-item100">
                                 <thead>
                                     <tr>
                                         <th scope="col">Treatment</th>
@@ -160,7 +160,7 @@ export default function TeacherAnimalProfile() {
                             </Table>
                         </Tab.Pane>
                         <Tab.Pane eventKey="fourth">
-                        <Table striped bordered hover className="TeachAnimalP-grid-item100">
+                        <Table striped bordered hover className="TeacherAnimalProfile-grid-item100">
                             <thead>
                                 <tr>
                                     <th scope="col">prescriptionId</th>
@@ -182,7 +182,7 @@ export default function TeacherAnimalProfile() {
                         </Table>
                     </Tab.Pane>
                     <Tab.Pane eventKey="fifth">
-                        <Table striped bordered hover className="TeachAnimalP-grid-item100">
+                        <Table striped bordered hover className="TeacherAnimalProfile-grid-item100">
                             <thead>
                                 <tr>
                                     <th scope="col">requestId</th>

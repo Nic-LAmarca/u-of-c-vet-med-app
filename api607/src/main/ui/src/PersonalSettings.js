@@ -9,11 +9,11 @@ import DropdownItem from "react-bootstrap/DropdownItem";
 
 export default function PersonalSettings() {
     return (
-        <div className="Personal-grid-container">
-            <h1 className ="Personal-grid-item1">
+        <div className="PersonalSettings-grid-container">
+            <h1 className ="PersonalSettings-grid-item1">
                 Personal Settings
             </h1>
-            <Form className="Personal-grid-item2">
+            <Form className="PersonalSettings-grid-item2">
                 <Form.Group>
                     <Form.Label>Username</Form.Label>
                     <Form.Control
@@ -47,7 +47,7 @@ export default function PersonalSettings() {
                     />
                 </Form.Group>
             </Form>
-            <Button className = "Personal-grid-item3">Save</Button>
+            <Button className = "PersonalSettings-grid-item3">Save</Button>
         </div>
     );
 }

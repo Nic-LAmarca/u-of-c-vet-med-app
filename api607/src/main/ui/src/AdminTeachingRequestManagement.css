@@ -1,18 +1,18 @@
 @media all and (min-width: 480px) {
-  .AdminD {
+  .AdminTeachingRequestManagement {
     padding: 60px 0;
   }
 
-  .AdminD form {
+  .AdminTeachingRequestManagement form {
     margin: 0 auto;
     max-width: 320px;
   }
 
-  .AdminD-logout {
+  .AdminTeachingRequestManagement-logout {
     text-align: right;
   }
 
-  .AdminD-grid-container {
+  .AdminTeachingRequestManagement-grid-container {
     display: grid;
     grid-template-columns: auto auto auto auto auto auto auto auto;
     grid-template-rows: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
@@ -21,7 +21,7 @@
 
   }
 
-    .AdminD-grid-item1 {
+    .AdminTeachingRequestManagement-grid-item1 {
       /*border: 1px solid rgba(0, 0, 0, 0.8);*/
       text-align: justify;
       grid-column: 1/span 2;
@@ -29,7 +29,7 @@
 
     }
 
-    .AdminD-grid-item2 {
+    .AdminTeachingRequestManagement-grid-item2 {
       /*border: 1px solid rgba(0, 0, 0, 0.8);*/
       text-align: right;
       grid-column: 7;
@@ -37,7 +37,7 @@
 
     }
 
-    .AdminD-grid-item3 {
+    .AdminTeachingRequestManagement-grid-item3 {
       /*border: 1px solid rgba(0, 0, 0, 0.8);*/
       text-align: center;
       grid-column: 1;
@@ -45,13 +45,13 @@
 
     }
 
-    .AdminD-grid-item4 {
+    .AdminTeachingRequestManagement-grid-item4 {
       /*border: 1px solid rgba(0, 0, 0, 0.8);*/
       text-align: left;
       grid-column: 6/span 2;
       grid-row: 6;
     }
-    .AdminD-grid-item5{
+    .AdminTeachingRequestManagement-grid-item5{
       /*border: 1px solid rgba(0, 0, 0, 0.8);*/
       text-align: center;
       font-size: large;
@@ -59,7 +59,7 @@
       grid-row: 6;
     }
 
-  .AdminD-grid-item6 {
+  .AdminTeachingRequestManagement-grid-item6 {
     /*border: 1px solid rgba(0, 0, 0, 0.8);*/
     text-align: center;
     grid-column: 6/span 2;
@@ -67,7 +67,7 @@
 
   }
 
-  .AdminD-grid-item7 {
+  .AdminTeachingRequestManagement-grid-item7 {
     /*border: 1px solid rgba(0, 0, 0, 0.8);*/
     text-align: center;
     grid-column: 2/span 2;

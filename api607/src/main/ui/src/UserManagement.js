@@ -9,11 +9,11 @@ import DropdownItem from "react-bootstrap/DropdownItem";
 
 export default function UserManagement() {
     return (
-        <div className="UserHandling-grid-container">
-            <h1 className ="UserHandling-grid-item1">
+        <div className="UserManagement-grid-container">
+            <h1 className ="UserManagement-grid-item1">
                 User Handling
             </h1>
-            <Form className="UserHandling-grid-item2">
+            <Form className="UserManagement-grid-item2">
                 <Form.Group>
                     <Form.Label>First Name</Form.Label>
                     <Form.Control
@@ -45,9 +45,9 @@ export default function UserManagement() {
                     />
                 </Form.Group>
             </Form>
-            <Button className = "UserHandling-grid-item3">Add User</Button>
-            <Button className = "UserHandling-grid-item4">Block User</Button>
-            <Button className = "UserHandling-grid-item5">Remove User</Button>
+            <Button className = "UserManagement-grid-item3">Add User</Button>
+            <Button className = "UserManagement-grid-item4">Block User</Button>
+            <Button className = "UserManagement-grid-item5">Remove User</Button>
         </div>
     );
 }

@@ -1,18 +1,18 @@
 @media all and (min-width: 480px) {
-  .AttAnimalP {
+  .AdminAnimalProfile {
     padding: 60px 0;
   }
 
-  .AttAnimalP form {
+  .AdminAnimalProfile form {
     margin: 0 auto;
     max-width: 320px;
   }
 
-  .AttAnimalP-logout {
+  .AdminAnimalProfile-logout {
     text-align: right;
   }
 
-  .AttAnimalP-grid-container {
+  .AdminAnimalProfile-grid-container {
     display: grid;
     grid-template-columns: 75px 75px 75px 75px 75px 75px 75px 250px 250px 250px;
     grid-template-rows:  75px 75px 75px 75px 75px 75px 75px 75px 75px 75px;
@@ -20,8 +20,8 @@
     grid-gap: 0cm;
 
   }
-/*Animal Name*/
-  .AttAttAnimalP-grid-item1 {
+
+  .AdminAnimalProfile-grid-item1 {
     vertical-align: middle;
     border: 1px solid rgba(0, 0, 0, 0.8);
     text-align: center;
@@ -29,30 +29,30 @@
     grid-row: 1;
 
   }
- /*Animal ID*/
-  .AttAttAnimalP-grid-item2 {
+
+  .AdminAnimalProfile-grid-item2 {
     border: 1px solid rgba(0, 0, 0, 0.8);
     text-align: center;
     grid-column: 8/ span 4;
     grid-row: 1;
   }
-  /*Status*/
-  .AttAnimalP-grid-item3 {
+
+  .AdminAnimalProfile-grid-item3 {
     border: 1px solid rgba(0, 0, 0, 0.8);
     text-align: center;
     grid-column: 13/span 5;
     grid-row: 1;
 
   }
-/*Button group */
-  .AttAnimalP-grid-item4 {
+
+  .AdminAnimalProfile-grid-item4 {
     border: 1px solid rgba(0, 0, 0, 0.8);
     text-align: left;
     grid-column: 1/span 2 ;
     grid-row: 2/span 8;
   }
-  /*Animal Info*/
-  .AttAnimalP-grid-item5{
+
+  .AdminAnimalProfile-grid-item5{
     border: 1px solid rgba(0, 0, 0, 0.8);
     text-align: left;
     /*font-style: oblique;*/
@@ -60,16 +60,16 @@
     grid-column: 1/ span 6;
     grid-row: 2/span 8;
   }
-/*Result Area*/
-  .AttAnimalP-grid-item6 {
+
+  .AdminAnimalProfile-grid-item6 {
     border: 1px solid rgba(0, 0, 0, 0.8);
     text-align: justify;
     grid-column: 8/ span 10;
     grid-row: 2/ span 9;
 
   }
-/*result Area toggles*/
-  .AttAnimalP-grid-item7 {
+
+  .AdminAnimalProfile-grid-item7 {
     display: inline-block;
     border: none;
 
@@ -78,14 +78,15 @@
     grid-row: 11;
 
   }
-  .AttAnimalP-comment-item1{
+
+  .AdminAnimalProfile-comment-item1{
     height: 100px;
     width: 50%;
     border: 1px solid rgba(0, 0, 0, 0.8);
     text-align: center;
   }
 
-    .AttAnimalP-submit-item1{
+    .AdminAnimalProfile-submit-item1{
       height: 50px;
       width: 25%;
       float: center;
@@ -96,7 +97,7 @@
       color: white;
     }
 
-    .AttAnimalP-photo-item1{
+    .AdminAnimalProfile-photo-item1{
       display: inline-block;
       border: 1px solid rgba(0, 0, 0, 0.8);
       text-align: center;
@@ -104,16 +105,7 @@
       width: 300px;
       height: 300px;
     }
-    .AttAnimalP-photo-item2{
-      display: inline-block;
-      border: 1px solid rgba(0, 0, 0, 0.8);
-      text-align: center;
-      margin: 1% 1%;
-      width: 300px;
-      height: 300px;
-    }
-
-    .AttAnimalP-photo-item3{
+    .AdminAnimalProfile-photo-item2{
       display: inline-block;
       border: 1px solid rgba(0, 0, 0, 0.8);
       text-align: center;
@@ -122,75 +114,12 @@
       height: 300px;
     }
 
-
-/*!**!*/
-/*  .AnimalP-grid-item8 {*/
-/*    !*border: 1px solid rgba(0, 0, 0, 0.8);*!*/
-/*    text-align: center;*/
-/*    grid-column: 4;*/
-/*    grid-row: 5;*/
-
-/*  }*/
-/*  !*species text box*!*/
-/*  .AnimalP-grid-item9 {*/
-/*    !*border: 1px solid rgba(0, 0, 0, 0.8);*!*/
-/*    text-align: left;*/
-/*    grid-column: 5;*/
-/*    grid-row: 5;*/
-/*  }*/
-/*  !*breed*!*/
-/*  .AnimalP-grid-item10{*/
-/*    !*border: 1px solid rgba(0, 0, 0, 0.8);*!*/
-/*    text-align: left;*/
-/*    font-style: oblique;*/
-/*    font-size: large;*/
-/*    grid-column: 6;*/
-/*    grid-row:5;*/
-/*  }*/
-/*  !*breed box*!*/
-/*  .AnimalP-grid-item11 {*/
-/*    !*border: 1px solid rgba(0, 0, 0, 0.8);*!*/
-/*    text-align: justify;*/
-/*    grid-column: 7;*/
-/*    grid-row: 5;*/
-/*  }*/
-/*  !*status*!*/
-/*  .AnimalP-grid-item12{*/
-/*    !*border: 1px solid rgba(0, 0, 0, 0.8);*!*/
-/*    text-align: left;*/
-/*    font-style: oblique;*/
-/*    font-size: large;*/
-/*    grid-column: 8;*/
-/*    grid-row:5;*/
-/*  }*/
-/*  !*status box*!*/
-/*  .AnimalP-grid-item13 {*/
-/*    !*border: 1px solid rgba(0, 0, 0, 0.8);*!*/
-/*    text-align: justify;*/
-/*    grid-column: 9;*/
-/*    grid-row: 5;*/
-/*  }*/
-/*  !*Results Title*!*/
-/*  .AnimalP-grid-item14{*/
-/*    !*border: 1px solid rgba(0, 0, 0, 0.8);*!*/
-/*    text-align: justify;*/
-/*    grid-column: 9;*/
-/*    grid-row:6;*/
-/*  }*/
-/*  !*Results Title*!*/
-/*  .AnimalP-grid-item15{*/
-/*    !*border: 1px solid rgba(0, 0, 0, 0.8);*!*/
-/*    text-align: left;*/
-/*    font-style: oblique;*/
-/*    font-size: large;*/
-/*    grid-column: 6;*/
-/*    grid-row:10;*/
-/*  }*/
-/*  !*result*!*/
-/*  .AnimalP-grid-item16 {*/
-/*    !*border: 1px solid rgba(0, 0, 0, 0.8);*!*/
-/*    text-align: justify;*/
-/*    grid-column: 3/span 9;*/
-/*    grid-row: 11;*/
-/*  }*/
+    .AdminAnimalProfile-photo-item3{
+      display: inline-block;
+      border: 1px solid rgba(0, 0, 0, 0.8);
+      text-align: center;
+      margin: 1% 1%;
+      width: 300px;
+      height: 300px;
+    }
 }

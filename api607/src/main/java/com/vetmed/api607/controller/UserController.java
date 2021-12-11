@@ -17,7 +17,6 @@ public class UserController {
     @CrossOrigin
     @PostMapping("/login{email, password}")
     public String login(@PathParam("email") String email, @PathParam("password") String password){
-        System.out.println(email + " " + password);
         User u = db.searchUserByEmailAndPassword(email, password);
         return u.getUserType();
     }

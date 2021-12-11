@@ -30,8 +30,10 @@ export default function AdminNavigation() {
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
-                                <Button variant="primary" href="#action1">Personal Settings</Button><br/>
-                                <Button variant="info" href="#action2">Edit Users</Button><br/>
+                                <Button variant="info" href="#action1">Personal Settings</Button><br/>
+                                <Button variant="info" href="#action2">User Management</Button><br/>
+                                <Button variant="info" href="#action2">Teacher Request Management</Button><br/>
+                                <Button variant="info" href=">Animal Management</Button><br/>
                                 <Button variant="secondary" href="#action2">Logout</Button>
                             </Nav>
                         </Offcanvas.Body>

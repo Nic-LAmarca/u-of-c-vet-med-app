@@ -7,7 +7,7 @@ import './TeacherTeachingRequest.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
 
 
-export default function TeacherDashboard() {
+export default function TeacherTeachingRequest() {
     let [animals,setAnimals] = useState([]);
     const [requestAnimalId, setRequestAnimalId] = useState();
     const [requestAnimal, setRequestAnimal] = useState('');

@@ -7,7 +7,7 @@ import './TechnicianTeachingRequestManagement.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
 
 
-export default function TechnicianDashboard() {
+export default function TechnicianTeachingRequestManagement() {
     let [requests,setRequests] = useState([]);
     const [requestId, setRequestId] = useState();
     const [requestMessage, setRequestMessage] = useState('');

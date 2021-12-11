@@ -7,7 +7,7 @@ import './UserManagement.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
 
 
-export default function UserHandlingDashboard() {
+export default function UserManagement() {
     return (
         <div className="UserHandling-grid-container">
             <h1 className ="UserHandling-grid-item1">

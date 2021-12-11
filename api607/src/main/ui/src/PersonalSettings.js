@@ -3,11 +3,11 @@ import {useNavigate} from "react-router-dom";
 
 import {Button, Form,Dropdown,DropdownButton,Table} from "react-bootstrap";
 import axios from "axios";
-import './PersonalSettingsPage.css';
+import './PersonalSettings.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
 
 
-export default function PersonalSettingsDashboard() {
+export default function PersonalSettings() {
     return (
         <div className="Personal-grid-container">
             <h1 className ="Personal-grid-item1">

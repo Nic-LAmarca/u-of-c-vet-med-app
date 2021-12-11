@@ -7,7 +7,7 @@ import './AdminTeachingRequestManagement.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
 
 
-export default function AdminDashboard() {
+export default function AdminTeachingRequestManagement() {
     let [requests,setRequests] = useState([]);
     const [requestId, setRequestId] = useState();
     const [requestMessage, setRequestMessage] = useState('');

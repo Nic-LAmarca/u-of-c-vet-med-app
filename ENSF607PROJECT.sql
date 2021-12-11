@@ -133,10 +133,10 @@ VALUES (1,				"Sparky",				"Dog",				3.6,				234234,				"HOC London",				"2018-0
         (3,				"Lily",					"Cow",				127,				981733,				"CBH India",				"2018-02-28 00:00:00",				"Abigar",				"MN",				83612863189,				812381931998,				"Sick",						true,				null,				null,"Dairy",				"Spain",			"Taurus",			null,								null);
 
 INSERT INTO USER (userId, fName, lName, email, activationDate, userType)
-VALUES (1,				"user",				"1",				"admin@ucalgary.ca",				"2021-03-04 00:00:00",				"admin"),		
-		(2,				"user",				"2",				"a.technician@ucalgary.ca",			"2021-03-04 00:00:00",				"animal technician"),	
-        (3,				"user",				"3",				"teacher@ucalgary.ca",				"2021-04-05 00:00:00",				"teacher"),	
-        (4,				"user",				"4",				"student1@ucalgary.ca",				"2021-03-19 00:00:00",				"student");
+VALUES (1,				"user",				"1",				"admin@ucalgary.ca",				"2021-03-04 00:00:00",				"Administrator"),		
+		(2,				"user",				"2",				"a.technician@ucalgary.ca",			"2021-03-04 00:00:00",				"Animal Health Technician"),	
+        (3,				"user",				"3",				"teacher@ucalgary.ca",				"2021-04-05 00:00:00",				"Teaching Technician"),	
+        (4,				"user",				"4",				"student1@ucalgary.ca",				"2021-03-19 00:00:00",				"Student");
 
 INSERT INTO TREATMENT_METHOD (treatmentId, treatmentType)
 VALUES (1,	"Physical Exam"),

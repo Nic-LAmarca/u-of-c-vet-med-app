@@ -8,7 +8,7 @@ import './StudentAnimalProfile.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
 
 
-export default function AnimalProfileStudentDashboard() {
+export default function StudentAnimalProfile() {
     return (
         <div className="AnimalP-grid-container">
             <h3 className="AnimalP-grid-item1">

@@ -7,7 +7,7 @@ import './AdminNavigation.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
 
 
-export default function NavADashboard() {
+export default function AdminNavigation() {
     // let [animals,setAnimals] = useState([]);
     // const [requestAnimalId, setRequestAnimalId] = useState();
     // const [requestAnimal, setRequestAnimal] = useState('');

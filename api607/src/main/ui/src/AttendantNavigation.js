@@ -7,7 +7,7 @@ import './AttendantNavigation.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
 
 
-export default function NavNonADashboard() {
+export default function AttendantNavigation() {
     return (
         <div className="NavNonAdmin-grid-container">
             <h1 className ="NavNonAdmin-grid-item1">

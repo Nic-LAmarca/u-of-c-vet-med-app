@@ -7,7 +7,7 @@ import './AdminAnimalManagement.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
 
 
-export default function UserHandlingDashboard() {
+export default function AdminAnimalManagement() {
     return (
         <div className="UserHandling-grid-container">
             <h1 className ="UserHandling-grid-item1">

@@ -24,7 +24,6 @@ export default function Login() {
                 }
             })
             .then(function(response){
-                console.log(response)
                 if(response.data == "Administrator"){
                     history("/AdminNavigationPage");
                 }

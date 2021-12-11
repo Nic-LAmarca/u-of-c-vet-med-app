@@ -1181,21 +1181,18 @@ public class DbController {
         User foundUser = new User();
         try {
             String query = "SELECT * FROM USER WHERE email = ? AND password = ?";
-
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setString(1, email);
             myStmt.setString(2, password);
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
-                if (results.getString("email") == email && results.getString("password") == password) {
-                    foundUser.setUserId(results.getInt("userId"));
-                    foundUser.setFName(results.getString("fName"));
-                    foundUser.setLName(results.getString("lName"));
-                    foundUser.setEmail(results.getString("email"));
-                    foundUser.setActivationDate(results.getDate("activationDate").toString());
-                    foundUser.setUserType(results.getString("userType"));
-                    foundUser.setPassword(results.getString("password"));
-                }
+                foundUser.setUserId(results.getInt("userId"));
+                foundUser.setFName(results.getString("fName"));
+                foundUser.setLName(results.getString("lName"));
+                foundUser.setEmail(results.getString("email"));
+                foundUser.setActivationDate(results.getDate("activationDate").toString());
+                foundUser.setUserType(results.getString("userType"));
+                foundUser.setPassword(results.getString("password"));
             }
             myStmt.close();
         } catch (Exception e) {

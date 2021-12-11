@@ -10,17 +10,17 @@ import DropdownItem from "react-bootstrap/DropdownItem";
 
 export default function TechnicianAnimalProfile() {
     return (
-        <div className="TechAnimalP-grid-container">
-            <h3 className="TechAnimalP-grid-item1">
+        <div className="TechnicianAnimalProfile-grid-container">
+            <h3 className="TechnicianAnimalProfile-grid-item1">
                 Sparky
             </h3>
-            <h3 className="TechAnimalP-grid-item2">
+            <h3 className="TechnicianAnimalProfile-grid-item2">
                 ID # 1
             </h3>
-            <h3 className="TechAnimalP-grid-item3">
+            <h3 className="TechnicianAnimalProfile-grid-item3">
                 Status: Healthy
             </h3>
-            <Table striped bordered hover className="TechAnimalP-grid-item5">
+            <Table striped bordered hover className="TechnicianAnimalProfile-grid-item5">
                 <tbody>
                 <tr>
                     <td>ID# </td>
@@ -94,7 +94,7 @@ export default function TechnicianAnimalProfile() {
             </Table>
             <Tab.Container id="left-tabs-example" defaultActiveKey="first" >
 
-                <div className="TechAnimalP-grid-item7">
+                <div className="TechnicianAnimalProfile-grid-item7">
                 <Nav variant="pills"  >
                     <Nav.Item>
                         <Nav.Link eventKey="first">Comments</Nav.Link>
@@ -113,13 +113,13 @@ export default function TechnicianAnimalProfile() {
                     </Nav.Item>
                 </Nav>
                 </div>
-                <div className="TechAnimalP-grid-item6">
+                <div className="TechnicianAnimalProfile-grid-item6">
                     <Tab.Content >
                         <Tab.Pane eventKey="first">
-                        <input className="TechAnimalP-comment-item1" placeholder="Enter Comment Here"></input>
-                        <button className="TechAnimalP-submit-item1" type="submit">Submit</button>
+                        <input className="TechnicianAnimalProfile-comment-item1" placeholder="Enter Comment Here"></input>
+                        <button className="TechnicianAnimalProfile-submit-item1" type="submit">Submit</button>
 
-                            <Table striped bordered hover className="TechAnimalP-grid-item100">
+                            <Table striped bordered hover className="TechnicianAnimalProfile-grid-item100">
                                 <thead>
                                     <tr>
                                         <th scope="col">commentId</th>
@@ -139,12 +139,12 @@ export default function TechnicianAnimalProfile() {
                             </Table>
                         </Tab.Pane>
                         <Tab.Pane eventKey="second">
-                            <h100 className="TechAnimalP-photo-item1">SparkyPhoto1.png</h100>
-                            <h101 className="TechAnimalP-photo-item2">SparkyPhoto2.png</h101>
-                            <h102 className="TechAnimalP-photo-item3">SparkyPhoto3.png</h102>
+                            <h100 className="TechnicianAnimalProfile-photo-item1">SparkyPhoto1.png</h100>
+                            <h101 className="TechnicianAnimalProfile-photo-item2">SparkyPhoto2.png</h101>
+                            <h102 className="TechnicianAnimalProfile-photo-item3">SparkyPhoto3.png</h102>
                         </Tab.Pane>
                         <Tab.Pane eventKey="third">
-                            <Table striped bordered hover className="TechAnimalP-grid-item100">
+                            <Table striped bordered hover className="TechnicianAnimalProfile-grid-item100">
                                 <thead>
                                     <tr>
                                         <th scope="col">Treatment</th>
@@ -160,7 +160,7 @@ export default function TechnicianAnimalProfile() {
                             </Table>
                         </Tab.Pane>
                         <Tab.Pane eventKey="fourth">
-                        <Table striped bordered hover className="TechAnimalP-grid-item100">
+                        <Table striped bordered hover className="TechnicianAnimalProfile-grid-item100">
                             <thead>
                                 <tr>
                                     <th scope="col">prescriptionId</th>
@@ -182,7 +182,7 @@ export default function TechnicianAnimalProfile() {
                         </Table>
                     </Tab.Pane>
                     <Tab.Pane eventKey="fifth">
-                        <Table striped bordered hover className="TechAnimalP-grid-item100">
+                        <Table striped bordered hover className="TechnicianAnimalProfile-grid-item100">
                             <thead>
                                 <tr>
                                     <th scope="col">requestId</th>

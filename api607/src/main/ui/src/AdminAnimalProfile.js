@@ -10,17 +10,17 @@ import DropdownItem from "react-bootstrap/DropdownItem";
 
 export default function AdminAnimalProfile() {
     return (
-        <div className="AttAnimalP-grid-container">
-            <h3 className="AttAnimalP-grid-item1">
+        <div className="AdminAnimalProfile-grid-container">
+            <h3 className="AdminAnimalProfile-grid-item1">
                 Sparky
             </h3>
-            <h3 className="AttAnimalP-grid-item2">
+            <h3 className="AdminAnimalProfile-grid-item2">
                 ID # 1
             </h3>
-            <h3 className="AttAnimalP-grid-item3">
+            <h3 className="AdminAnimalProfile-grid-item3">
                 Status: Healthy
             </h3>
-            <Table striped bordered hover className="AttAnimalP-grid-item5">
+            <Table striped bordered hover className="AdminAnimalProfile-grid-item5">
                 <tbody>
                 <tr>
                     <td>ID# </td>
@@ -94,7 +94,7 @@ export default function AdminAnimalProfile() {
             </Table>
             <Tab.Container id="left-tabs-example" defaultActiveKey="first" >
 
-                <div className="AttAnimalP-grid-item7">
+                <div className="AdminAnimalProfile-grid-item7">
                 <Nav variant="pills"  >
                     <Nav.Item>
                         <Nav.Link eventKey="first">Comments</Nav.Link>
@@ -113,13 +113,13 @@ export default function AdminAnimalProfile() {
                     </Nav.Item>
                 </Nav>
                 </div>
-                <div className="AttAnimalP-grid-item6">
+                <div className="AdminAnimalProfile-grid-item6">
                     <Tab.Content >
                         <Tab.Pane eventKey="first">
-                        <input className="AttAnimalP-comment-item1" placeholder="Enter Comment Here"></input>
-                        <button className="AttAnimalP-submit-item1" type="submit">Submit</button>
+                        <input className="AdminAnimalProfile-comment-item1" placeholder="Enter Comment Here"></input>
+                        <button className="AdminAnimalProfile-submit-item1" type="submit">Submit</button>
 
-                            <Table striped bordered hover className="AttAnimalP-grid-item100">
+                            <Table striped bordered hover className="AdminAnimalProfile-grid-item100">
                                 <thead>
                                     <tr>
                                         <th scope="col">commentId</th>
@@ -139,12 +139,12 @@ export default function AdminAnimalProfile() {
                             </Table>
                         </Tab.Pane>
                         <Tab.Pane eventKey="second">
-                            <h100 className="AttAnimalP-photo-item1">SparkyPhoto1.png</h100>
-                            <h101 className="AttAnimalP-photo-item2">SparkyPhoto2.png</h101>
-                            <h102 className="AttAnimalP-photo-item3">SparkyPhoto3.png</h102>
+                            <h100 className="AdminAnimalProfile-photo-item1">SparkyPhoto1.png</h100>
+                            <h101 className="AdminAnimalProfile-photo-item2">SparkyPhoto2.png</h101>
+                            <h102 className="AdminAnimalProfile-photo-item3">SparkyPhoto3.png</h102>
                         </Tab.Pane>
                         <Tab.Pane eventKey="third">
-                            <Table striped bordered hover className="AttAnimalP-grid-item100">
+                            <Table striped bordered hover className="AdminAnimalProfile-grid-item100">
                                 <thead>
                                     <tr>
                                         <th scope="col">Treatment</th>
@@ -160,7 +160,7 @@ export default function AdminAnimalProfile() {
                             </Table>
                         </Tab.Pane>
                         <Tab.Pane eventKey="fourth">
-                        <Table striped bordered hover className="AttAnimalP-grid-item100">
+                        <Table striped bordered hover className="AdminAnimalProfile-grid-item100">
                             <thead>
                                 <tr>
                                     <th scope="col">prescriptionId</th>
@@ -182,7 +182,7 @@ export default function AdminAnimalProfile() {
                         </Table>
                     </Tab.Pane>
                     <Tab.Pane eventKey="fifth">
-                        <Table striped bordered hover className="AttAnimalP-grid-item100">
+                        <Table striped bordered hover className="AdminAnimalProfile-grid-item100">
                             <thead>
                                 <tr>
                                     <th scope="col">requestId</th>

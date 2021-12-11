@@ -1,4 +1,4 @@
-DROP DATABASE ENSF607PROJECT;
+DROP DATABASE ensf607project;
 CREATE DATABASE IF NOT EXISTS ENSF607PROJECT;
 USE ENSF607PROJECT;
 CREATE TABLE IF NOT EXISTS ANIMAL
@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS USER
      email					VARCHAR(30)		NOT NULL,
      activationDate			datetime		NOT NULL,
      userType				VARCHAR(30)		NOT NULL,
+     password				VARCHAR(30)		NOT NULL,
      primary key(userId));
      
 CREATE TABLE IF NOT EXISTS TREATMENT_METHOD
@@ -51,7 +52,15 @@ CREATE TABLE IF NOT EXISTS COMMENT
      date				datetime		NOT NULL,
      primary key(commentId),
      foreign key(userId) references USER(userId),
-     foreign key(animalId) references ANIMAL(animalId));
+     foreign key(animalId) references ANIMAL(animalId),
+	 CONSTRAINT commentAnimalCascade
+     FOREIGN KEY (animalId)
+     REFERENCES ANIMAL (animalId)
+     ON DELETE CASCADE,
+     CONSTRAINT commentUserCascade
+     FOREIGN KEY (userId)
+     REFERENCES USER (userId)
+     ON DELETE CASCADE);
     
 CREATE TABLE IF NOT EXISTS PRESCRIPTION_HISTORY
 	(prescriptionId		int				NOT NULL auto_increment,
@@ -64,7 +73,15 @@ CREATE TABLE IF NOT EXISTS PRESCRIPTION_HISTORY
      deliveryMethod		VARCHAR(50)		NOT NULL,
      primary key(prescriptionId),
      foreign key(userId) references USER(userId),
-     foreign key(animalId) references ANIMAL(animalId));
+     foreign key(animalId) references ANIMAL(animalId),
+	 CONSTRAINT prescriptionHistoryAnimalCascade
+     FOREIGN KEY (animalId)
+     REFERENCES ANIMAL (animalId)
+     ON DELETE CASCADE,
+     CONSTRAINT prescriptionHistoryUserCascade
+     FOREIGN KEY (userId)
+     REFERENCES USER (userId)
+     ON DELETE CASCADE);
      
 CREATE TABLE IF NOT EXISTS IMAGE
 	(imageId			int				NOT NULL auto_increment,
@@ -75,7 +92,15 @@ CREATE TABLE IF NOT EXISTS IMAGE
      type				VARCHAR(30)		NOT NULL,
      primary key(imageId),
      foreign key(userId) references USER(userId),
-     foreign key(animalId) references ANIMAL(animalId));
+     foreign key(animalId) references ANIMAL(animalId),
+     CONSTRAINT imageAnimalCascade
+     FOREIGN KEY (animalId)
+     REFERENCES ANIMAL (animalId)
+     ON DELETE CASCADE,
+     CONSTRAINT imageUserCascade
+     FOREIGN KEY (userId)
+     REFERENCES USER (userId)
+     ON DELETE CASCADE);
  
 CREATE TABLE IF NOT EXISTS STATUS
 	(statusId			int				NOT NULL auto_increment,
@@ -87,7 +112,11 @@ CREATE TABLE IF NOT EXISTS STATUS
      imageId			int				NOT NULL,
      primary key(statusId),
      foreign key(animalId) references ANIMAL(animalId),
-     foreign key(imageId) references IMAGE(imageId));
+     foreign key(imageId) references IMAGE(imageId),
+	 CONSTRAINT statusAnimalCascade
+     FOREIGN KEY (animalId)
+     REFERENCES ANIMAL (animalId)
+     ON DELETE CASCADE);
 
 CREATE TABLE IF NOT EXISTS HISTORY
 	(historyId			int				NOT NULL auto_increment,
@@ -98,20 +127,37 @@ CREATE TABLE IF NOT EXISTS HISTORY
      userId				int				NOT NULL,
     primary key(historyId),
     foreign key(animalId) references ANIMAL(animalId),
-    foreign key(userId) references USER(userId));
+    foreign key(userId) references USER(userId),
+     CONSTRAINT historyAnimalCascade
+     FOREIGN KEY (animalId)
+     REFERENCES ANIMAL (animalId)
+     ON DELETE CASCADE,
+     CONSTRAINT historyUserCascade
+     FOREIGN KEY (userId)
+     REFERENCES USER (userId)
+     ON DELETE CASCADE);
+    
  
 CREATE TABLE IF NOT EXISTS MEDICAL_RECORD_HISTORY
 	(medicalRecordId	int				NOT NULL auto_increment,
      animalId			int				NOT NULL,
      date				date			NOT NULL,
      primary key(medicalRecordId),
-     foreign key(animalId) references ANIMAL(animalId));
+     foreign key(animalId) references ANIMAL(animalId),
+     CONSTRAINT mwdicalRecordHistoryAnimalCascade
+     FOREIGN KEY (animalId)
+     REFERENCES ANIMAL (animalId)
+     ON DELETE CASCADE);
    
 CREATE TABLE IF NOT EXISTS TREATMENT_HISTORY
 	(treatmentId		int				NOT NULL auto_increment,
      animalId			int				NOT NULL,
      date				datetime		NOT NULL,
-     primary key(treatmentId));
+     primary key(treatmentId),
+	 CONSTRAINT treatmentHistoryAnimalCascade
+     FOREIGN KEY (animalId)
+     REFERENCES ANIMAL (animalId)
+     ON DELETE CASCADE);
      
 CREATE TABLE IF NOT EXISTS REQUEST
 	(requestId			int				NOT NULL auto_increment,
@@ -124,7 +170,15 @@ CREATE TABLE IF NOT EXISTS REQUEST
      requestSuccessful	boolean			NOT NULL,
      primary key(requestId),
      foreign key(animalId) references ANIMAL(animalId),
-     foreign key(userId) references USER(userId));
+     foreign key(userId) references USER(userId),
+     CONSTRAINT requestAnimalCascade
+     FOREIGN KEY (animalId)
+     REFERENCES ANIMAL (animalId)
+     ON DELETE CASCADE,
+     CONSTRAINT requestUserCascade
+     FOREIGN KEY (userId)
+     REFERENCES USER (userId)
+     ON DELETE CASCADE);
      
      
 INSERT INTO ANIMAL (animalId, animalName, species, weight, tattooNum, cityTattoo, birthDate, breed, sex, rfid, microchip, statusType, available, location, alert, purpose, region, subspecies, color, distinguishingFeatures)
@@ -132,11 +186,11 @@ VALUES (1,				"Sparky",				"Dog",				3.6,				234234,				"HOC London",				"2018-0
 		(2,				"Seabrease",			"Horse",			68,					564543,				"ABC Paris",				"2018-08-31 00:00:00",				"Quarter Horse",		"FM",				8987498179390,				5671876189197,				"Injured",					true,				null,				null,null,				null,				null,				"Bay",								"Stocky, compact"),
         (3,				"Lily",					"Cow",				127,				981733,				"CBH India",				"2018-02-28 00:00:00",				"Abigar",				"MN",				83612863189,				812381931998,				"Sick",						true,				null,				null,"Dairy",				"Spain",			"Taurus",			null,								null);
 
-INSERT INTO USER (userId, fName, lName, email, activationDate, userType)
-VALUES (1,				"user",				"1",				"admin@ucalgary.ca",				"2021-03-04 00:00:00",				"Administrator"),		
-		(2,				"user",				"2",				"a.technician@ucalgary.ca",			"2021-03-04 00:00:00",				"Animal Health Technician"),	
-        (3,				"user",				"3",				"teacher@ucalgary.ca",				"2021-04-05 00:00:00",				"Teaching Technician"),	
-        (4,				"user",				"4",				"student1@ucalgary.ca",				"2021-03-19 00:00:00",				"Student");
+INSERT INTO USER (userId, fName, lName, email, activationDate, userType, password)
+VALUES (1,				"user",				"1",				"admin@ucalgary.ca",				"2021-03-04 00:00:00",				"Administrator",				"password1"),		
+		(2,				"user",				"2",				"a.technician@ucalgary.ca",			"2021-03-04 00:00:00",				"Animal Health Technician",				"password2"),	
+        (3,				"user",				"3",				"teacher@ucalgary.ca",				"2021-04-05 00:00:00",				"Teaching Technician",				"password3"),	
+        (4,				"user",				"4",				"student1@ucalgary.ca",				"2021-03-19 00:00:00",				"Student",				"password4");
 
 INSERT INTO TREATMENT_METHOD (treatmentId, treatmentType)
 VALUES (1,	"Physical Exam"),

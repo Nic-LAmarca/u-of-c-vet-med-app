@@ -15,6 +15,7 @@ public class User {
     private String email;
     private String activationDate;
     private String userType;
+    private String password;
 }
 
 

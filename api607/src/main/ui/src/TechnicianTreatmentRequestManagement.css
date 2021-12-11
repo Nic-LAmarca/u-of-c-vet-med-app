@@ -1,18 +1,18 @@
 @media all and (min-width: 480px) {
-  .TechnicianD {
+  .TechnicianTreatmentRequestManagement {
     padding: 60px 0;
   }
 
-  .TechnicianD form {
+  .TechnicianTreatmentRequestManagement form {
     margin: 0 auto;
     max-width: 320px;
   }
 
-  .TechnicianD-logout {
+  .TechnicianTreatmentRequestManagement-logout {
     text-align: right;
   }
 
-  .TechnicianD-grid-container {
+  .TechnicianTreatmentRequestManagement-grid-container {
     display: grid;
     grid-template-columns: auto auto auto auto auto auto auto auto;
     grid-template-rows: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
@@ -21,7 +21,7 @@
 
   }
 
-  .TechnicianD-grid-item1 {
+  .TechnicianTreatmentRequestManagement-grid-item1 {
     /*border: 1px solid rgba(0, 0, 0, 0.8);*/
     text-align: justify;
     grid-column: 1/span 3;
@@ -29,7 +29,7 @@
 
   }
 
-  .TechnicianD-grid-item2 {
+  .TechnicianTreatmentRequestManagement-grid-item2 {
     /*border: 1px solid rgba(0, 0, 0, 0.8);*/
     text-align: right;
     font-size: x-large;
@@ -38,7 +38,7 @@
 
   }
 
-    .TechnicianD-grid-item3 {
+    .TechnicianTreatmentRequestManagement-grid-item3 {
       /*border: 1px solid rgba(0, 0, 0, 0.8);*/
       text-align: center;
       grid-column: 1;
@@ -46,13 +46,13 @@
 
     }
 
-    .TechnicianD-grid-item4 {
+    .TechnicianTreatmentRequestManagement-grid-item4 {
       /*border: 1px solid rgba(0, 0, 0, 0.8);*/
       text-align: left;
       grid-column: 6/span 2;
       grid-row: 6;
     }
-    .TechnicianD-grid-item5{
+    .TechnicianTreatmentRequestManagement-grid-item5{
       /*border: 1px solid rgba(0, 0, 0, 0.8);*/
       text-align: center;
       font-size: large;
@@ -60,7 +60,7 @@
       grid-row: 6;
     }
 
-  .TechnicianD-grid-item6 {
+  .TechnicianTreatmentRequestManagement-grid-item6 {
     /*border: 1px solid rgba(0, 0, 0, 0.8);*/
     text-align: center;
     grid-column: 6/span 2;
@@ -68,7 +68,7 @@
 
   }
 
-  .TechnicianD-grid-item7 {
+  .TechnicianTreatmentRequestManagement-grid-item7 {
     /*border: 1px solid rgba(0, 0, 0, 0.8);*/
     text-align: center;
     grid-column: 2/span 2;

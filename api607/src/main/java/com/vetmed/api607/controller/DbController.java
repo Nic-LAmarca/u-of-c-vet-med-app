@@ -60,6 +60,8 @@ public class DbController {
                     foundAnimal.setMicrochip(results.getLong("microchip"));
                     foundAnimal.setStatusType(results.getString("statusType"));
                     foundAnimal.setAvailable(results.getBoolean("available"));
+                    foundAnimal.setPurpose(results.getString("location"));
+                    foundAnimal.setRegion(results.getString("alert"));
                     foundAnimal.setPurpose(results.getString("purpose"));
                     foundAnimal.setRegion(results.getString("region"));
                     foundAnimal.setSubspecies(results.getString("subspecies"));
@@ -101,6 +103,8 @@ public class DbController {
                 addAnimal.setMicrochip(results.getLong("microchip"));
                 addAnimal.setStatusType(results.getString("statusType"));
                 addAnimal.setAvailable(results.getBoolean("available"));
+                addAnimal.setPurpose(results.getString("location"));
+                addAnimal.setRegion(results.getString("alert"));
                 addAnimal.setPurpose(results.getString("purpose"));
                 addAnimal.setRegion(results.getString("region"));
                 addAnimal.setSubspecies(results.getString("subspecies"));
@@ -138,9 +142,9 @@ public class DbController {
      * @param distinguishingFeatures are the distinguishing features of the animal
      */
     public void addAnimal(String animalName, String species, Double weight, int tattooNum, String cityTattoo, String birthDate, String breed,
-                           String sex, long rfid, long microchip, String statusType, String purpose, String region, String subspecies, String color, String distinguishingFeatures) {
+                           String sex, long rfid, long microchip, String statusType, String location, String alert,  String purpose, String region, String subspecies, String color, String distinguishingFeatures) {
         try {
-            String query = "INSERT INT0 ANIMAL (animalName, species, weight, tattooNum, cityTattoo, birthDate, breed, sex, rfid, microchip, statusType, available, purpose, region, subspecies, color, distinguishingFeatures) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INT0 ANIMAL (animalName, species, weight, tattooNum, cityTattoo, birthDate, breed, sex, rfid, microchip, statusType, available, location, alert, purpose, region, subspecies, color, distinguishingFeatures) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setString(1, animalName);
             myStmt.setString(2, species);
@@ -154,11 +158,13 @@ public class DbController {
             myStmt.setLong(10, microchip);
             myStmt.setString(11, statusType);
             myStmt.setBoolean(12, true);
-            myStmt.setString(13, purpose);
-            myStmt.setString(14, region);
-            myStmt.setString(15, subspecies);
-            myStmt.setString(16, color);
-            myStmt.setString(17, distinguishingFeatures);
+            myStmt.setString(13, location);
+            myStmt.setString(14, alert);
+            myStmt.setString(15, purpose);
+            myStmt.setString(16, region);
+            myStmt.setString(17, subspecies);
+            myStmt.setString(18, color);
+            myStmt.setString(19, distinguishingFeatures);
             myStmt.executeQuery();
             myStmt.close();
         } catch (Exception e) {
@@ -1168,6 +1174,39 @@ public class DbController {
     // ****** SECTION USED FOR USER QUERY INTERACTIONS ******
     // ******************************************************
 
+
+    /**
+     *
+     * Method is used to search the database for a user with the entered username and passowrd, then return the User object if found
+     *
+     * @param email is the email entered
+     * @param password is the password entered
+     * @return the User object associated with the input username and password
+     */
+    public User searchUserByEmailAndPassword(String email, String password) {
+        User foundUser = new User();
+        try {
+            String query = "SELECT * FROM USER WHERE email = ? AND password = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setString(1, email);
+            myStmt.setString(2, password);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                foundUser.setUserId(results.getInt("userId"));
+                foundUser.setFName(results.getString("fName"));
+                foundUser.setLName(results.getString("lName"));
+                foundUser.setEmail(results.getString("email"));
+                foundUser.setActivationDate(results.getDate("activationDate").toString());
+                foundUser.setUserType(results.getString("userType"));
+                foundUser.setPassword(results.getString("password"));
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return foundUser;
+    }
+
     /**
      *
      * Method is used to search the database for a user with the entered id and return the User object if found
@@ -1191,6 +1230,7 @@ public class DbController {
                     foundUser.setEmail(results.getString("email"));
                     foundUser.setActivationDate(results.getDate("activationDate").toString());
                     foundUser.setUserType(results.getString("userType"));
+                    foundUser.setPassword(results.getString("password"));
 
                 }
             }
@@ -1222,6 +1262,7 @@ public class DbController {
                 addUser.setEmail(results.getString("email"));
                 addUser.setActivationDate(results.getDate("activationDate").toString());
                 addUser.setUserType(results.getString("userType"));
+                addUser.setPassword(results.getString("password"));
                 userList.add(addUser);
             }
             myStmt.close();
@@ -1234,24 +1275,25 @@ public class DbController {
 
 
 
-                /**
-                *
-                * Method is used to add a user into the database based on the entered credentials
-                *
-                * @param fName is the first name of the user
-                * @param lName is the last name of the user
-                * @param email is the email of the user
-                * @param activationDate is the date that the user is activated in the system
-                * @param userType is the type of user (Student, Teacher, Admin ...)
-                */
-    public void addUser(String fName, String lName, String email, String activationDate, String userType) {
+    /**
+    *
+    * Method is used to add a user into the database based on the entered credentials
+    *
+    * @param fName is the first name of the user
+    * @param lName is the last name of the user
+    * @param email is the email of the user
+    * @param activationDate is the date that the user is activated in the system
+    * @param userType is the type of user (Student, Teacher, Admin ...)
+    */
+    public void addUser(String fName, String lName, String email, String activationDate, String userType, String password) {
         try {
-            String query = "INSERT INT0 USER (fName, lName, email, activationDate, userType) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INT0 USER (fName, lName, email, activationDate, userType, password) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setString(1, fName);
             myStmt.setString(2, lName);
             myStmt.setString(3, email);
             myStmt.setDate(4, Date.valueOf(activationDate));
+            myStmt.setString(5, password);
 
             myStmt.executeQuery();
             myStmt.close();

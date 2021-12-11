@@ -24,6 +24,8 @@ public class Animal {
     private Long microchip;
     private String statusType;
     private boolean available;
+    private String location;
+    private String alert;
     private String purpose;
     private String region;
     private String subspecies;

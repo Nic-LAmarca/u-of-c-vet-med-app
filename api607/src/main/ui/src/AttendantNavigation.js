@@ -9,21 +9,21 @@ import DropdownItem from "react-bootstrap/DropdownItem";
 
 export default function AttendantNavigation() {
     return (
-        <div className="NavNonAdmin-grid-container">
-            <h1 className ="NavNonAdmin-grid-item1">
+        <div className="AttendantNavigation-grid-container">
+            <h1 className ="AttendantNavigation-grid-item1">
                 Navigation Page
             </h1>
-            <Button className="NavNonAdmin-grid-item2" >
+            <Button className="AttendantNavigation-grid-item2" >
                 User
             </Button>
-            <Button className="NavNonAdmin-grid-item3">
+            <Button className="AttendantNavigation-grid-item3">
                 Personal Settings
             </Button>
-            <Button className="NavNonAdmin-grid-item4">
+            <Button className="AttendantNavigation-grid-item4">
                 Logout
             </Button>
 
-            <Form className="NavNonAdmin-grid-item6">
+            <Form className="AttendantNavigation-grid-item6">
                 <Form.Group>
                     <Form.Label>Animal Name</Form.Label>
                     <Form.Control
@@ -58,10 +58,10 @@ export default function AttendantNavigation() {
                 </Form.Group>
                 <Button>Search</Button>
             </Form>
-            <h1 className="NavNonAdmin-grid-item13">
+            <h1 className="AttendantNavigation-grid-item13">
                 Results
             </h1>
-            <Table  className="NavNonAdmin-grid-item14" striped bordered hover>
+            <Table  className="AttendantNavigation-grid-item14" striped bordered hover>
                 <thead>
                 <tr>
                     <th>#</th>

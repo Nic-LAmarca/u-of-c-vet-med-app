@@ -1,18 +1,18 @@
 @media all and (min-width: 480px) {
-  .TechAnimalP {
+  .TechnicianAnimalProfile {
     padding: 60px 0;
   }
 
-  .TechAnimalP form {
+  .TechnicianAnimalProfile form {
     margin: 0 auto;
     max-width: 320px;
   }
 
-  .TechAnimalP-logout {
+  .TechnicianAnimalProfile-logout {
     text-align: right;
   }
 
-  .TechAnimalP-grid-container {
+  .TechnicianAnimalProfile-grid-container {
     display: grid;
     grid-template-columns: 75px 75px 75px 75px 75px 75px 75px 250px 250px 250px;
     grid-template-rows:  75px 75px 75px 75px 75px 75px 75px 75px 75px 75px;
@@ -21,7 +21,7 @@
 
   }
 /*Animal Name*/
-  .TechAnimalP-grid-item1 {
+  .TechnicianAnimalProfile-grid-item1 {
     vertical-align: middle;
     border: 1px solid rgba(0, 0, 0, 0.8);
     text-align: center;
@@ -30,14 +30,14 @@
 
   }
  /*Animal ID*/
-  .TechAnimalP-grid-item2 {
+  .TechnicianAnimalProfile-grid-item2 {
     border: 1px solid rgba(0, 0, 0, 0.8);
     text-align: center;
     grid-column: 8/ span 4;
     grid-row: 1;
   }
   /*Status*/
-  .TechAnimalP-grid-item3 {
+  .TechnicianAnimalProfile-grid-item3 {
     border: 1px solid rgba(0, 0, 0, 0.8);
     text-align: center;
     grid-column: 13/span 5;
@@ -45,14 +45,14 @@
 
   }
 /*Button group */
-  .TechAnimalP-grid-item4 {
+  .TechnicianAnimalProfile-grid-item4 {
     border: 1px solid rgba(0, 0, 0, 0.8);
     text-align: left;
     grid-column: 1/span 2 ;
     grid-row: 2/span 8;
   }
   /*Animal Info*/
-  .TechAnimalP-grid-item5{
+  .TechnicianAnimalProfile-grid-item5{
     border: 1px solid rgba(0, 0, 0, 0.8);
     text-align: left;
     /*font-style: oblique;*/
@@ -61,7 +61,7 @@
     grid-row: 2/span 8;
   }
 /*Result Area*/
-  .TechAnimalP-grid-item6 {
+  .TechnicianAnimalProfile-grid-item6 {
     border: 1px solid rgba(0, 0, 0, 0.8);
     text-align: justify;
     grid-column: 8/ span 10;
@@ -69,7 +69,7 @@
 
   }
 /*result Area toggles*/
-  .TechAnimalP-grid-item7 {
+  .TechnicianAnimalProfile-grid-item7 {
     display: inline-block;
     border: none;
 
@@ -78,14 +78,14 @@
     grid-row: 11;
 
   }
-  .TechAnimalP-comment-item1{
+  .TechnicianAnimalProfile-comment-item1{
     height: 100px;
     width: 50%;
     border: 1px solid rgba(0, 0, 0, 0.8);
     text-align: center;
   }
 
-    .TechAnimalP-submit-item1{
+    .TechnicianAnimalProfile-submit-item1{
       height: 50px;
       width: 25%;
       float: center;
@@ -96,7 +96,7 @@
       color: white;
     }
 
-    .TechAnimalP-photo-item1{
+    .TechnicianAnimalProfile-photo-item1{
       display: inline-block;
       border: 1px solid rgba(0, 0, 0, 0.8);
       text-align: center;
@@ -104,16 +104,7 @@
       width: 300px;
       height: 300px;
     }
-    .TechAnimalP-photo-item2{
-      display: inline-block;
-      border: 1px solid rgba(0, 0, 0, 0.8);
-      text-align: center;
-      margin: 1% 1%;
-      width: 300px;
-      height: 300px;
-    }
-
-    .TechAnimalP-photo-item3{
+    .TechnicianAnimalProfile-photo-item2{
       display: inline-block;
       border: 1px solid rgba(0, 0, 0, 0.8);
       text-align: center;
@@ -122,75 +113,12 @@
       height: 300px;
     }
 
-
-/*!**!*/
-/*  .AnimalP-grid-item8 {*/
-/*    !*border: 1px solid rgba(0, 0, 0, 0.8);*!*/
-/*    text-align: center;*/
-/*    grid-column: 4;*/
-/*    grid-row: 5;*/
-
-/*  }*/
-/*  !*species text box*!*/
-/*  .AnimalP-grid-item9 {*/
-/*    !*border: 1px solid rgba(0, 0, 0, 0.8);*!*/
-/*    text-align: left;*/
-/*    grid-column: 5;*/
-/*    grid-row: 5;*/
-/*  }*/
-/*  !*breed*!*/
-/*  .AnimalP-grid-item10{*/
-/*    !*border: 1px solid rgba(0, 0, 0, 0.8);*!*/
-/*    text-align: left;*/
-/*    font-style: oblique;*/
-/*    font-size: large;*/
-/*    grid-column: 6;*/
-/*    grid-row:5;*/
-/*  }*/
-/*  !*breed box*!*/
-/*  .AnimalP-grid-item11 {*/
-/*    !*border: 1px solid rgba(0, 0, 0, 0.8);*!*/
-/*    text-align: justify;*/
-/*    grid-column: 7;*/
-/*    grid-row: 5;*/
-/*  }*/
-/*  !*status*!*/
-/*  .AnimalP-grid-item12{*/
-/*    !*border: 1px solid rgba(0, 0, 0, 0.8);*!*/
-/*    text-align: left;*/
-/*    font-style: oblique;*/
-/*    font-size: large;*/
-/*    grid-column: 8;*/
-/*    grid-row:5;*/
-/*  }*/
-/*  !*status box*!*/
-/*  .AnimalP-grid-item13 {*/
-/*    !*border: 1px solid rgba(0, 0, 0, 0.8);*!*/
-/*    text-align: justify;*/
-/*    grid-column: 9;*/
-/*    grid-row: 5;*/
-/*  }*/
-/*  !*Results Title*!*/
-/*  .AnimalP-grid-item14{*/
-/*    !*border: 1px solid rgba(0, 0, 0, 0.8);*!*/
-/*    text-align: justify;*/
-/*    grid-column: 9;*/
-/*    grid-row:6;*/
-/*  }*/
-/*  !*Results Title*!*/
-/*  .AnimalP-grid-item15{*/
-/*    !*border: 1px solid rgba(0, 0, 0, 0.8);*!*/
-/*    text-align: left;*/
-/*    font-style: oblique;*/
-/*    font-size: large;*/
-/*    grid-column: 6;*/
-/*    grid-row:10;*/
-/*  }*/
-/*  !*result*!*/
-/*  .AnimalP-grid-item16 {*/
-/*    !*border: 1px solid rgba(0, 0, 0, 0.8);*!*/
-/*    text-align: justify;*/
-/*    grid-column: 3/span 9;*/
-/*    grid-row: 11;*/
-/*  }*/
+    .TechnicianAnimalProfile-photo-item3{
+      display: inline-block;
+      border: 1px solid rgba(0, 0, 0, 0.8);
+      text-align: center;
+      margin: 1% 1%;
+      width: 300px;
+      height: 300px;
+    }
 }

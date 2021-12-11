@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 
 import {Button, Form,Dropdown,DropdownButton,Table} from "react-bootstrap";
 import axios from "axios";
-import './NavigationPageNonAdmin.css';
+import './StudentNavigation.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
 
 

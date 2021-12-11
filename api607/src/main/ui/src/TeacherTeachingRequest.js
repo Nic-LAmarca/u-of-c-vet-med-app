@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 
 import {Button, Form,Dropdown,DropdownButton} from "react-bootstrap";
 import axios from "axios";
-import './TeacherDashboard.css';
+import './TeacherTeachingRequest.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
 
 

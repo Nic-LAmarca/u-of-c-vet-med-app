@@ -33,7 +33,7 @@ export default function AdminNavigation() {
                                 <Button variant="info" href="#action1">Personal Settings</Button><br/>
                                 <Button variant="info" href="#action2">User Management</Button><br/>
                                 <Button variant="info" href="#action2">Teacher Request Management</Button><br/>
-                                <Button variant="info" href=">Animal Management</Button><br/>
+                                <Button variant="info" href="#action">Animal Management</Button><br/>
                                 <Button variant="secondary" href="#action2">Logout</Button>
                             </Nav>
                         </Offcanvas.Body>

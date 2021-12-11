@@ -15,6 +15,8 @@ CREATE TABLE IF NOT EXISTS ANIMAL
      microchip			long			NOT NULL,
      statusType			VARCHAR(30)		NOT NULL,
      available			boolean			NOT NULL,
+     location			VARCHAR(30),
+     alert				VARCHAR(30),
      purpose			VARCHAR(30),
      region				VARCHAR(30),
      subspecies			VARCHAR(30),
@@ -125,16 +127,16 @@ CREATE TABLE IF NOT EXISTS REQUEST
      foreign key(userId) references USER(userId));
      
      
-INSERT INTO ANIMAL (animalId, animalName, species, weight, tattooNum, cityTattoo, birthDate, breed, sex, rfid, microchip, statusType, available, purpose, region, subspecies, color, distinguishingFeatures)
-VALUES (1,				"Sparky",				"Dog",				3.6,				234234,				"HOC London",				"2018-08-15 00:00:00",				"Beagle",				"MN",				197839178371,				176387613813,				"Available",				true,				null,				null,				null,				"Brown, Black, White",				"Baying bark"),
-		(2,				"Seabrease",			"Horse",			68,					564543,				"ABC Paris",				"2018-08-31 00:00:00",				"Quarter Horse",		"FM",				8987498179390,				5671876189197,				"Injured",					true,				null,				null,				null,				"Bay",								"Stocky, compact"),
-        (3,				"Lily",					"Cow",				127,				981733,				"CBH India",				"2018-02-28 00:00:00",				"Abigar",				"MN",				83612863189,				812381931998,				"Sick",						true,				"Dairy",				"Spain",			"Taurus",			null,								null);
+INSERT INTO ANIMAL (animalId, animalName, species, weight, tattooNum, cityTattoo, birthDate, breed, sex, rfid, microchip, statusType, available, location, alert, purpose, region, subspecies, color, distinguishingFeatures)
+VALUES (1,				"Sparky",				"Dog",				3.6,				234234,				"HOC London",				"2018-08-15 00:00:00",				"Beagle",				"MN",				197839178371,				176387613813,				"Available",				true,				null,				null,				null,				null,				null,				"Brown, Black, White",				"Baying bark"),
+		(2,				"Seabrease",			"Horse",			68,					564543,				"ABC Paris",				"2018-08-31 00:00:00",				"Quarter Horse",		"FM",				8987498179390,				5671876189197,				"Injured",					true,				null,				null,null,				null,				null,				"Bay",								"Stocky, compact"),
+        (3,				"Lily",					"Cow",				127,				981733,				"CBH India",				"2018-02-28 00:00:00",				"Abigar",				"MN",				83612863189,				812381931998,				"Sick",						true,				null,				null,"Dairy",				"Spain",			"Taurus",			null,								null);
 
 INSERT INTO USER (userId, fName, lName, email, activationDate, userType)
-VALUES (1,				"user",				"1",				"admin@ucalgary.ca",				"2021-03-04 00:00:00",				"admin"),		
-		(2,				"user",				"2",				"a.technician@ucalgary.ca",			"2021-03-04 00:00:00",				"animal technician"),	
-        (3,				"user",				"3",				"teacher@ucalgary.ca",				"2021-04-05 00:00:00",				"teacher"),	
-        (4,				"user",				"4",				"student1@ucalgary.ca",				"2021-03-19 00:00:00",				"student");
+VALUES (1,				"user",				"1",				"admin@ucalgary.ca",				"2021-03-04 00:00:00",				"Administrator"),		
+		(2,				"user",				"2",				"a.technician@ucalgary.ca",			"2021-03-04 00:00:00",				"Animal Health Technician"),	
+        (3,				"user",				"3",				"teacher@ucalgary.ca",				"2021-04-05 00:00:00",				"Teaching Technician"),	
+        (4,				"user",				"4",				"student1@ucalgary.ca",				"2021-03-19 00:00:00",				"Student");
 
 INSERT INTO TREATMENT_METHOD (treatmentId, treatmentType)
 VALUES (1,	"Physical Exam"),

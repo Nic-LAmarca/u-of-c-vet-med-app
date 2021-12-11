@@ -27,14 +27,20 @@ export default function Login() {
         })
         .then(function(response){
             console.log(response)
-            if(response.data == "teacher"){
-                history("/TeacherDashboard");
+            if(response.data == "Administrator"){
+                history("/AdminNavigationPage");
             }
-            else if(response.data == "admin"){
-                history("/AdminDashboard");
+            else if(response.data == "Animal Health Attendant"){
+                history("/AttendantNavigationPage");
             }
-            else if(response.data == "technician"){
-                history("/TechnicianDashboard");
+            else if(response.data == "Animal Health Technician"){
+                history("/TechnicianNavigationPage");
+            }
+            else if(response.data == "Student"){
+                history("/StudentNavigationPage");
+            }
+            else if(response.data == "Teaching Technician"){
+                history("/TeacherNavigationPage");
             }
         })
         .catch(function(error){

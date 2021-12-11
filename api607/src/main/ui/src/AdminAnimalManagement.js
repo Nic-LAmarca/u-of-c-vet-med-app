@@ -3,51 +3,51 @@ import {useNavigate} from "react-router-dom";
 
 import {Button, Form,Dropdown,DropdownButton,Table} from "react-bootstrap";
 import axios from "axios";
-import './PersonalSettingsPage.css';
+import './AdminAnimalManagement.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
 
 
-export default function PersonalSettingsDashboard() {
+export default function AdminAnimalManagement() {
     return (
-        <div className="Personal-grid-container">
-            <h1 className ="Personal-grid-item1">
-                Personal Settings
+        <div className="UserHandling-grid-container">
+            <h1 className ="UserHandling-grid-item1">
+                User Handling
             </h1>
-            <Form className="Personal-grid-item2">
+            <Form className="UserHandling-grid-item2">
                 <Form.Group>
-                    <Form.Label>Username</Form.Label>
+                    <Form.Label>First Name</Form.Label>
                     <Form.Control
                         autoFocus
-                        // type="username"
-                        // value={username}
+                    />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Last Name</Form.Label>
+                    <Form.Control
+                        autoFocus
                     />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Email</Form.Label>
                     <Form.Control
                         autoFocus
-                        // type="username"
-                        // value={username}
-                    />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label>Phone Number</Form.Label>
-                    <Form.Control
-                        autoFocus
-                        // type="username"
-                        // value={username}
                     />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                         autoFocus
-                        // type="username"
-                        // value={username}
+                    />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>User Type (e.g. Admin, Teacher, Technician etc.)</Form.Label>
+                    <Form.Control
+                        autoFocus
                     />
                 </Form.Group>
             </Form>
-            <Button className = "Personal-grid-item3">Save</Button>
+            <Button className = "UserHandling-grid-item3">Add User</Button>
+            <Button className = "UserHandling-grid-item4">Block User</Button>
+            <Button className = "UserHandling-grid-item5">Remove User</Button>
         </div>
     );
 }

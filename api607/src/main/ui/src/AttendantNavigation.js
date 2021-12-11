@@ -3,11 +3,11 @@ import {useNavigate} from "react-router-dom";
 
 import {Button, Form,Dropdown,DropdownButton,Table} from "react-bootstrap";
 import axios from "axios";
-import './NavigationPageNonAdmin.css';
+import './AttendantNavigation.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
 
 
-export default function NavNonADashboard() {
+export default function AttendantNavigation() {
     return (
         <div className="NavNonAdmin-grid-container">
             <h1 className ="NavNonAdmin-grid-item1">

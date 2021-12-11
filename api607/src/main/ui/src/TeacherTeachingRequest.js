@@ -3,11 +3,11 @@ import {useNavigate} from "react-router-dom";
 
 import {Button, Form,Dropdown,DropdownButton} from "react-bootstrap";
 import axios from "axios";
-import './TeacherDashboard.css';
+import './TeacherTeachingRequest.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
 
 
-export default function TeacherDashboard() {
+export default function TeacherTeachingRequest() {
     let [animals,setAnimals] = useState([]);
     const [requestAnimalId, setRequestAnimalId] = useState();
     const [requestAnimal, setRequestAnimal] = useState('');

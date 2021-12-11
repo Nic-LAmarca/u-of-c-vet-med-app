@@ -3,11 +3,11 @@ import {useNavigate} from "react-router-dom";
 
 import {Button, Form,Dropdown,DropdownButton} from "react-bootstrap";
 import axios from "axios";
-import './AdminDashboard.css';
+import './AdminTeachingRequestManagement.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
 
 
-export default function AdminDashboard() {
+export default function AdminTeachingRequestManagement() {
     let [requests,setRequests] = useState([]);
     const [requestId, setRequestId] = useState();
     const [requestMessage, setRequestMessage] = useState('');

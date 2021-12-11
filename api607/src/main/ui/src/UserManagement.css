@@ -1,6 +1,6 @@
 @media all and (min-width: 480px) {
 
-  .UserHandling-grid-container {
+  .UserManagement-grid-container {
     display: grid;
     grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
     grid-template-rows: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
@@ -9,7 +9,7 @@
 
   }
 /*Title: User Handling*/
-  .UserHandling-grid-item1 {
+  .UserManagement-grid-item1 {
     border: none;
     text-align: justify;
     grid-column: 4/span 4;
@@ -17,14 +17,14 @@
 
   }
  /*Form*/
-  .UserHandling-grid-item2 {
+  .UserManagement-grid-item2 {
     border: none;
     text-align: left;
     grid-column: 3/ span 5;
     grid-row: 6/ span 6;
   }
   /*Add User*/
-  .UserHandling-grid-item3 {
+  .UserManagement-grid-item3 {
     display: inline-block;
     width: 150px;
     border: 1px solid black;
@@ -34,7 +34,7 @@
     grid-row: 14;
   }
 /*Block User*/
-  .UserHandling-grid-item4 {
+  .UserManagement-grid-item4 {
     display: inline-block;
     width: 150px;
     border: 1px solid black;
@@ -44,7 +44,7 @@
     grid-row: 14;
   }
   /*Remove User*/
-  .UserHandling-grid-item5 {
+  .UserManagement-grid-item5 {
     display: inline-block;
     width: 150px;
     border: 1px solid black;

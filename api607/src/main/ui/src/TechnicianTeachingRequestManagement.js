@@ -82,11 +82,11 @@ export default function TechnicianTeachingRequestManagement() {
 
     return (
 
-        <div className="TechnicianD-grid-container">
-            <div className="TechnicianD-grid-item1">
+        <div className="TechnicianTeachingRequestManagement-grid-container">
+            <div className="TechnicianTeachingRequestManagement-grid-item1">
                 <h1> Technician DashBoard </h1>
             </div>
-            <div className="TechnicianD-grid-item2">
+            <div className="TechnicianTeachingRequestManagement-grid-item2">
                 <Button variant="light" onClick={handleLogout}>Logout</Button>
                 {/*<input*/}
                 {/*    type = "Button"*/}
@@ -95,7 +95,7 @@ export default function TechnicianTeachingRequestManagement() {
                 {/*/>*/}
             </div>
             <br/><br/>
-            <DropdownButton className= "TechnicianD-grid-item3" id="dropdown-basic-button" title="Requests" onClick={dropDown} alignRight>
+            <DropdownButton className= "TechnicianTeachingRequestManagement-grid-item3" id="dropdown-basic-button" title="Requests" onClick={dropDown} alignRight>
                 {/*<Dropdown.Item href="#/action-1">A</Dropdown.Item>*/}
                 {/*<Dropdown.Item href="#/action-2">Another action</Dropdown.Item>*/}
                 {/*<Dropdown.Item href="#/action-3">Something else</Dropdown.Item>*/}
@@ -103,12 +103,12 @@ export default function TechnicianTeachingRequestManagement() {
                     {requests.map(requests => <DropdownItem onClick={handleRequestSelect}>{requests}</DropdownItem>)}
                 </ul>
             </DropdownButton>
-            <p className="TechnicianD-grid-item5">
+            <p className="TechnicianTeachingRequestManagement-grid-item5">
                 Request Selected: {requestId}
             </p>
-            <Button className="TechnicianD-grid-item4" onClick={approveRequest} variant="info">Approve Request</Button>
-            <Button className="TechnicianD-grid-item6" onClick={denyRequest} variant="danger">Cancel Request</Button>
-            <b className="TechnicianD-grid-item7">
+            <Button className="TechnicianTeachingRequestManagement-grid-item4" onClick={approveRequest} variant="info">Approve Request</Button>
+            <Button className="TechnicianTeachingRequestManagement-grid-item6" onClick={denyRequest} variant="danger">Cancel Request</Button>
+            <b className="TechnicianTeachingRequestManagement-grid-item7">
                 Request Approved/Cancelled: {requestMessage}
             </b>
         </div>

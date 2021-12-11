@@ -109,11 +109,11 @@ export default function TeacherTeachingRequest() {
 
     return (
 
-        <div className="TeacherD-grid-container">
-            <div className="TeacherD-grid-item1">
+        <div className="TeacherTeachingRequest-grid-container">
+            <div className="TeacherTeachingRequest-grid-item1">
                 <h1> Teacher Dashboard </h1>
             </div>
-            <div className="TeacherD-grid-item2">
+            <div className="TeacherTeachingRequest-grid-item2">
                 <Button variant="light" onClick={handleLogout}>Logout</Button>
                 {/*<input*/}
                 {/*    type = "Button"*/}
@@ -122,7 +122,7 @@ export default function TeacherTeachingRequest() {
                 {/*/>*/}
             </div>
             <br/><br/>
-            <DropdownButton  className= "TeacherD-grid-item3" id="dropdown-basic-button" title="Animals" onClick={dropDown}  alignRight>
+            <DropdownButton  className= "TeacherTeachingRequest-grid-item3" id="dropdown-basic-button" title="Animals" onClick={dropDown}  alignRight>
                 <Dropdown.Item></Dropdown.Item>
                 {/*<Dropdown.Item href="#/action-2">Another action</Dropdown.Item>*/}
                 {/*<Dropdown.Item href="#/action-3">Something else</Dropdown.Item>*/}
@@ -130,15 +130,15 @@ export default function TeacherTeachingRequest() {
                     {animals.map(animals => <DropdownItem custom onClick={handleSelect}>{animals}</DropdownItem>)}
                 </ul>
             </DropdownButton>
-            <b className="TeacherD-grid-item5">
+            <b className="TeacherTeachingRequest-grid-item5">
                 Animal Selected: {requestAnimalId}
             </b>
-            <Button className="TeacherD-grid-item4" onClick={makeRequest} variant="info">Send Request</Button>
-            <b className="TeacherD-grid-item6">
+            <Button className="TeacherTeachingRequest-grid-item4" onClick={makeRequest} variant="info">Send Request</Button>
+            <b className="TeacherTeachingRequest-grid-item6">
                 Animal Requested: {requestAnimal}
             </b>
             <br/><br/>
-            <DropdownButton  className= "TeacherD-grid-item8" id="dropdown-basic-button" title="Requests" onClick={cancelDropDown}  alignRight>
+            <DropdownButton  className= "TeacherTeachingRequest-grid-item8" id="dropdown-basic-button" title="Requests" onClick={cancelDropDown}  alignRight>
                 <Dropdown.Item></Dropdown.Item>
                 {/*<Dropdown.Item href="#/action-2">Another action</Dropdown.Item>*/}
                 {/*<Dropdown.Item href="#/action-3">Something else</Dropdown.Item>*/}
@@ -146,11 +146,11 @@ export default function TeacherTeachingRequest() {
                     {requests.map(requests => <DropdownItem custom onClick={handleCancelSelect}>{requests}</DropdownItem>)}
                 </ul>
             </DropdownButton>
-            <b className="TeacherD-grid-item10">
+            <b className="TeacherTeachingRequest-grid-item10">
                 Request Selected: {cancelRequestId}
             </b>
-            <Button className="TeacherD-grid-item9" onClick={cancelRequest} variant="info">Cancel Request</Button>
-            <b className="TeacherD-grid-item11">
+            <Button className="TeacherTeachingRequest-grid-item9" onClick={cancelRequest} variant="info">Cancel Request</Button>
+            <b className="TeacherTeachingRequest-grid-item11">
                 Request Cancelled: {cancelRequest}
             </b>
         </div>

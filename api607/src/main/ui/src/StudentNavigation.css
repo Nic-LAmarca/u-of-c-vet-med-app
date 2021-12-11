@@ -1,148 +1,44 @@
-@media all and (min-width: 480px) {
-  .NavNonAdmin {
-    padding: 60px 0;
-  }
 
-  .NavNonAdmin form {
-    margin: 0 auto;
-    max-width: 320px;
-  }
+    .StudentNavigation-grid-container{
+        display: grid;
+        grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto;
+        grid-template-rows: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
+        padding: 10px;
+        grid-gap: 0cm;
+    }
 
-  .NavNonAdmin-logout {
-    text-align: right;
-  }
+    .StudentNavigation-grid-item1 {
+        text-align: center;
+        grid-column: 6/span 2;
+        grid-row: 1;
+    }
 
-  .NavNonAdmin-grid-container {
-    display: grid;
-    grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;
-    grid-template-rows: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
-    padding: 10px;
-    grid-gap: 0cm;
+    .StudentNavigation-grid-item2 {
+        border: solid black;
+        border-width: thin;
+        border-radius: 5px;
+        text-align: center;
+        grid-column: 12;
+        grid-row: 1;
+    }
 
-  }
-/*Title:navigation page*/
-  .NavNonAdmin-grid-item1 {
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    text-align: justify;
-    grid-column: 1/span 4;
-    grid-row: 2;
+    .StudentNavigation-grid-item3 {
+        border: solid black;
+        border-width: thin;
+        border-radius: 5px;
+        text-align: center;
+        grid-column: 12;
+        grid-row: 2;
+    }
 
-  }
- /*user*/
-  .NavNonAdmin-grid-item2 {
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    text-align: right;
-    grid-column: 11;
-    grid-row: 1;
-  }
-  /*personal settings*/
-  .NavNonAdmin-grid-item3 {
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    text-align: center;
-    grid-column: 11;
-    grid-row: 2;
+    .StudentNavigation-grid-item4 {
+        text-align: center;
+        grid-column: 6/span 2;
+        grid-row: 6;
+    }
 
-  }
-/*edit users */
-  .NavNonAdmin-grid-item4 {
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    text-align: left;
-    grid-column: 11;
-    grid-row: 3;
-  }
-  /*logout*/
-  .NavNonAdmin-grid-item5{
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    text-align: left;
-    font-style: oblique;
-    font-size: large;
-    grid-column: 11;
-    grid-row: 4;
-  }
-/*animal name*/
-  .NavNonAdmin-grid-item6 {
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    text-align: justify;
-    grid-column: 2/span 2;
-    grid-row: 5;
-
-  }
-/*text box*/
-  .NavNonAdmin-grid-item7 {
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    text-align: justify;
-    grid-column: 3;
-    grid-row: 5;
-
-  }
-/*species*/
-  .NavNonAdmin-grid-item8 {
-    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
-    text-align: center;
-    grid-column: 4;
-    grid-row: 5;
-
-  }
-  /*species text box*/
-  .NavNonAdmin-grid-item9 {
-    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
-    text-align: left;
-    grid-column: 5;
-    grid-row: 5;
-  }
-  /*breed*/
-  .NavNonAdmin-grid-item10{
-    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
-    text-align: left;
-    font-style: oblique;
-    font-size: large;
-    grid-column: 6;
-    grid-row:5;
-  }
-  /*breed box*/
-  .NavNonAdmin-grid-item11 {
-    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
-    text-align: justify;
-    grid-column: 7;
-    grid-row: 5;
-  }
-  /*status*/
-  .NavNonAdmin-grid-item12{
-    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
-    text-align: left;
-    font-style: oblique;
-    font-size: large;
-    grid-column: 8;
-    grid-row:5;
-  }
-  /*status box*/
-  .NavNonAdmin-grid-item13 {
-    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
-    text-align: justify;
-    grid-column: 9;
-    grid-row: 5;
-  }
-  /*Results Title*/
-  .NavNonAdmin-grid-item14{
-    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
-    text-align: justify;
-    grid-column: 9;
-    grid-row:6;
-  }
-  /*Results Title*/
-  .NavNonAdmin-grid-item15{
-    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
-    text-align: left;
-    font-style: oblique;
-    font-size: large;
-    grid-column: 6;
-    grid-row:10;
-  }
-  /*result*/
-  .NavNonAdmin-grid-item16 {
-    /*border: 1px solid rgba(0, 0, 0, 0.8);*/
-    text-align: justify;
-    grid-column: 3/span 9;
-    grid-row: 11;
-  }
-}
+    .StudentNavigation-grid-item5 {
+        text-align: center;
+        grid-column: 6/span 2;
+        grid-row: 8;
+    }

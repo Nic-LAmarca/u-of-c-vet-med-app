@@ -95,7 +95,7 @@ export default function AdminTeachingRequestManagement() {
                 {/*/>*/}
             </div>
             <br/><br/>
-            <DropdownButton className= "AdminD-grid-item3" id="dropdown-basic-button" title="Requests" onClick={dropDown} alignRight>
+            <DropdownButton className= "AdminTeachingRequestManagement-grid-item3" id="dropdown-basic-button" title="Requests" onClick={dropDown} alignRight>
                 {/*<Dropdown.Item href="#/action-1">A</Dropdown.Item>*/}
                 {/*<Dropdown.Item href="#/action-2">Another action</Dropdown.Item>*/}
                 {/*<Dropdown.Item href="#/action-3">Something else</Dropdown.Item>*/}
@@ -103,12 +103,12 @@ export default function AdminTeachingRequestManagement() {
                     {requests.map(requests => <DropdownItem onClick={handleRequestSelect}>{requests}</DropdownItem>)}
                 </ul>
             </DropdownButton>
-            <p className="AdminD-grid-item5">
+            <p className="AdminTeachingRequestManagement-grid-item5">
                 Request Selected: {requestId}
             </p>
-            <Button className="AdminD-grid-item4" onClick={approveRequest} variant="info">Approve Request</Button>
-            <Button className="AdminD-grid-item6" onClick={denyRequest} variant="danger">Deny Request</Button>
-            <b className="AdminD-grid-item7">
+            <Button className="AdminTeachingRequestManagement-grid-item4" onClick={approveRequest} variant="info">Approve Request</Button>
+            <Button className="AdminTeachingRequestManagement-grid-item6" onClick={denyRequest} variant="danger">Deny Request</Button>
+            <b className="AdminTeachingRequestManagement-grid-item7">
                 Request Approved/Cancelled: {requestMessage}
             </b>
         </div>

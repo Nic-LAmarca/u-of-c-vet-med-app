@@ -1,6 +1,6 @@
 @media all and (min-width: 480px) {
 
-  .Personal-grid-container {
+  .PersonalSettings-grid-container {
     display: grid;
     grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto;
     grid-template-rows: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
@@ -8,7 +8,7 @@
     grid-gap: 0cm;
   }
 /*Title:Personal Settings Page*/
-  .Personal-grid-item1 {
+  .PersonalSettings-grid-item1 {
     border: none;
     text-align: center;
     grid-column: 5/span 4;
@@ -16,7 +16,7 @@
   }
 
  /*Form*/
-  .Personal-grid-item2 {
+  .PersonalSettings-grid-item2 {
     border: none;
     text-align: left;
     grid-column: 5/span 4;
@@ -24,7 +24,7 @@
   }
 
   /*Save*/
-  .Personal-grid-item3 {
+  .PersonalSettings-grid-item3 {
     border: 1px solid rgba(0, 0, 0, 0.8);
     text-align: center;
     grid-column: 6/span 2;

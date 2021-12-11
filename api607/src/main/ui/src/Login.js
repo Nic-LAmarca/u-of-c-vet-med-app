@@ -24,21 +24,20 @@ export default function Login() {
                 }
             })
             .then(function(response){
-                console.log(response)
                 if(response.data == "Administrator"){
-                    history("/AdminNavigationPage");
+                    history("/AdminNavigation");
                 }
                 else if(response.data == "Animal Health Attendant"){
-                    history("/AttendantNavigationPage");
+                    history("/AttendantNavigation");
                 }
                 else if(response.data == "Animal Health Technician"){
-                    history("/TechnicianNavigationPage");
+                    history("/TechnicianNavigation");
                 }
                 else if(response.data == "Student"){
-                    history("/StudentNavigationPage");
+                    history("/StudentNavigation");
                 }
                 else if(response.data == "Teaching Technician"){
-                    history("/TeacherNavigationPage");
+                    history("/TeacherNavigation");
                 }
             })
             .catch(function(error){

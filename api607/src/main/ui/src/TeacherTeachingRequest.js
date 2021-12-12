@@ -1,10 +1,11 @@
  import React,{useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-import {Button, Form,Dropdown,DropdownButton} from "react-bootstrap";
+import {Button, Form, Dropdown, DropdownButton, Container, Navbar, Image, Offcanvas, Nav, Badge} from "react-bootstrap";
 import axios from "axios";
 import './TeacherTeachingRequest.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
+ import images from "./Images/vetmed.png";
 
 
 export default function TeacherTeachingRequest() {
@@ -108,20 +109,35 @@ export default function TeacherTeachingRequest() {
     // *** All for Request ***
 
     return (
+        <div>
+            <Navbar variant="light" expand={false} bg="white">
+                <Container fluid>
+                    <Navbar.Brand href = "/TeacherNavigation" >
+                        <Image className="d-inline-block align-top" src={images} fluid/>
+                    </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="offcanvasNavbar"/>
+                    <Navbar.Offcanvas
+                        id="offcanvasNavbar me-auto"
+                        aria-labelledby="offcanvasNavbarLabel"
+                        placement="end"
+                    >
+                        <Offcanvas.Header closeButton>
+                            <Offcanvas.Title id="offcanvasNavbarLabel">User Name Here</Offcanvas.Title>
+                        </Offcanvas.Header>
+                        <Offcanvas.Body>
+                            <Nav className="justify-content-end flex-grow-1 pe-3">
+                                <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
+                                <Button variant="info" href="/UserManagement" >User Management</Button><br/>
+                                <Button variant="secondary" href="/" >Logout</Button>
 
-        <div className="TeacherTeachingRequest-grid-container">
-            <div className="TeacherTeachingRequest-grid-item1">
-                <h1> Teacher Dashboard </h1>
-            </div>
-            <div className="TeacherTeachingRequest-grid-item2">
-                <Button variant="light" onClick={handleLogout}>Logout</Button>
-                {/*<input*/}
-                {/*    type = "Button"*/}
-                {/*    value = "Logout"*/}
-                {/*    onClick={handleLogout}*/}
-                {/*/>*/}
-            </div>
-            <br/><br/>
+                            </Nav>
+                        </Offcanvas.Body>
+                    </Navbar.Offcanvas>
+                </Container>
+            </Navbar><br/>
+            <Container>
+
+            </Container>
             <DropdownButton  className= "TeacherTeachingRequest-grid-item3" id="dropdown-basic-button" title="Animals" onClick={dropDown}  alignRight>
                 <Dropdown.Item></Dropdown.Item>
                 {/*<Dropdown.Item href="#/action-2">Another action</Dropdown.Item>*/}

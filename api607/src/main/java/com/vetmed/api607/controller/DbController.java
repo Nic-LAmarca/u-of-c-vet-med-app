@@ -1355,6 +1355,32 @@ public class DbController {
         }
     }
 
+    /**
+     *
+     * Method is used to update a user's settings based on the input arguments
+     *
+     * @param userId is the unique id of the user
+     * @param fName is the first name of the user
+     * @param lName is the last name of the user
+     * @param email is the email of the user
+     * @param password is the password of the user
+     */
+    public void updatePersonalSettings(int userId, String fName, String lName, String email, String password) {
+        try {
+            String query = "UPDATE USER SET fName = ?, lName = ?, email = ?, password = ? WHERE userId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setString(1, fName);
+            myStmt.setString(2, lName);
+            myStmt.setString(3, email);
+            myStmt.setString(4, password);
+            myStmt.setInt(5, userId);
+            myStmt.executeQuery();
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     // ******************************************************
     // ****** SECTION USED FOR USER QUERY INTERACTIONS ******
     // ******************************************************

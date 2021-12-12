@@ -955,7 +955,7 @@ public class DbController {
      * @param id is the unique id value to search with
      * @return a new Status object that matches the id passed as an argument
      */
-    public  Status searchForStatus(int id) {
+    public Status searchForStatus(int id) {
         Status foundStatus = new Status();
         try {
             String query = "SELECT * FROM STATUS WHERE statusId = ?";
@@ -1347,7 +1347,6 @@ public class DbController {
             myStmt.setString(3, email);
             myStmt.setDate(4, Date.valueOf(activationDate));
             myStmt.setString(5, password);
-
             myStmt.executeQuery();
             myStmt.close();
         } catch (Exception e) {
@@ -1374,7 +1373,7 @@ public class DbController {
             myStmt.setString(3, email);
             myStmt.setString(4, password);
             myStmt.setInt(5, userId);
-            myStmt.executeQuery();
+            myStmt.executeUpdate();
             myStmt.close();
         } catch (Exception e) {
             e.printStackTrace();

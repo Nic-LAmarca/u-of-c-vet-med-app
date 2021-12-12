@@ -30,9 +30,6 @@ export default function PersonalSettings() {
     async function updateSettings(event) {
         event.preventDefault();
         var userId = window.localStorage.getItem("userId");
-
-        console.log(fName)
-
         await axios.post('http://localhost:8080/personalSettings',
             null,
             {

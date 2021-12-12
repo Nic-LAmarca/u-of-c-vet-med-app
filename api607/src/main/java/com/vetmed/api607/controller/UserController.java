@@ -19,7 +19,7 @@ public class UserController {
     public String login(@PathParam("email") String email, @PathParam("password") String password){
         User u = db.searchUserByEmailAndPassword(email, password);
         String userValues = u.getUserId() + "-" + u.getUserType();
-        return  userValues;
+        return userValues;
     }
 
     @CrossOrigin

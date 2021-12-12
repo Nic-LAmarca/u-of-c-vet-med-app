@@ -18,6 +18,9 @@ export default function AdminNavigation() {
 
     const history = useNavigate();
 
+    var userId = window.localStorage.getItem('userId')
+    console.log(userId)
+
     window.onload = function() {
         allAnimals();
     };
@@ -133,10 +136,6 @@ export default function AdminNavigation() {
             }
         );
     }
-
-
-    var id = window.localStorage.getItem('userId')
-    console.log(id)
 
     return (
         <div>

@@ -1,10 +1,23 @@
 import React,{useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useHistory, useNavigate} from "react-router-dom";
 
-import {Button, Form,Dropdown,DropdownButton,Table} from "react-bootstrap";
+import {
+    Button,
+    Form,
+    Dropdown,
+    DropdownButton,
+    Table,
+    Row,
+    Container,
+    Navbar,
+    Image,
+    Offcanvas,
+    Nav, Badge, NavbarBrand, Col
+} from "react-bootstrap";
 import axios from "axios";
 import './PersonalSettings.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
+import images from "./Images/vetmed.png";
 
 
 export default function PersonalSettings() {
@@ -12,11 +25,14 @@ export default function PersonalSettings() {
     const [lName, setLName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const history = useNavigate();
 
     async function updateSettings(event) {
         event.preventDefault();
         var userId = window.localStorage.getItem("userId");
+
         console.log(fName)
+
         await axios.post('http://localhost:8080/personalSettings',
             null,
             {
@@ -37,39 +53,72 @@ export default function PersonalSettings() {
         }
 
     return (
-        <div className="PersonalSettings-grid-container">
-            <h1 className ="PersonalSettings-grid-item1">
-                Personal Settings
-            </h1>
+        <div>
+            <Navbar variant="light" expand={false} bg="white">
+                <Container fluid>
+                    <Navbar.Brand href = "#home" >
+                        <Image className="d-inline-block align-top" src={images} fluid/>
+                    </Navbar.Brand>
+                    <NavbarBrand>
+                        Personal Settings
+                    </NavbarBrand>
+                </Container>
+            </Navbar>
+            <Container fluid>
+                <Form>
+                    <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalName">
+                        <Form.Label  column sm= {2}>First Name</Form.Label>
+                        <Col sm={5}>
+                            <Form.Control
+                                type = "name"
+                                placeholder="First Name"
+                                autoFocus
+                                onChange={e=>setFName(e.target.value)}
+                            />
+                        </Col>
 
-            <Form>
-                <Form.Group as={Row} className="mb-3" controlId="formHoizontalUsername">
+                    </Form.Group>
+                    <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalName">
+                        <Form.Label column sm= {2} >Last Name</Form.Label>
+                        <Col sm={5}>
+                            <Form.Control
+                                type = "name"
+                                placeholder="Last Name"
+                                autoFocus
+                                onChange={e=>setLName(e.target.value)}
+                            />
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalEmail">
+                        <Form.Label column sm= {2} >Email</Form.Label>
+                        <Col sm={5}>
+                            <Form.Control
+                                type = "email"
+                                placeholder="email@ucalgary.ca"
+                                autoFocus
+                                onChange={e=>setEmail(e.target.value)}
+                            />
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalPassword">
+                        <Form.Label column sm= {2} >Password</Form.Label>
+                        <Col sm={5}>
+                            <Form.Control
+                                type = "password"
+                                placeholder="Password"
+                                autoFocus
+                                onChange={e=>setPassword(e.target.value)}
+                            />
+                        </Col>
+                    </Form.Group>
+                    <Container className="d-grid gap-5 d-lg-flex justify-content-md-center">
+                    <Button onClick={updateSettings}>Save</Button>
+                    </Container>
+                </Form>
 
-                    <Form.Label onChange={e=>setFName(e.target.value)}>First Name</Form.Label>
-                    <Form.Control
-                        autoFocus
-                        />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label onChange={e=>setLName(e.target.value)}>Last Name</Form.Label>
-                    <Form.Control
-                        autoFocus
-                        />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label onChange={e=>setEmail(e.target.value)}>Email</Form.Label>
-                    <Form.Control
-                        autoFocus
-                        />
-                </Form.Group>
-                <Form.Group>
-                    <Form.Label onChange={e=>setPassword(e.target.value)}>Password</Form.Label>
-                    <Form.Control
-                        autoFocus
-                        />
-                </Form.Group>
-            </Form>
-            <Button className = "PersonalSettings-grid-item3" onClick={updateSettings}>Save</Button>
+            </Container>
+
+
         </div>
     );
 }

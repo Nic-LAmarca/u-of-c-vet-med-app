@@ -9,10 +9,11 @@ import DropdownItem from "react-bootstrap/DropdownItem";
 
 
 export default function AdminAnimalProfile() {
+    var animal = window.localStorage.getItem("animal");
+
     return (
         <div className="AdminAnimalProfile-grid-container">
-            <h3 className="AdminAnimalProfile-grid-item1">
-                Sparky
+            <h3 className="AdminAnimalProfile-grid-item1" value="animal.getAnimalName">
             </h3>
             <h3 className="AdminAnimalProfile-grid-item2">
                 ID # 1

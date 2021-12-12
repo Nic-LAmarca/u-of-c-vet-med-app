@@ -26,7 +26,7 @@ public class AnimalController
         return db.getAllAnimals();
     }
 
-    @GetMapping("/animals{animalName, animalSpecies, animalBreed, animalStatus")
+    @GetMapping("/filteredAnimals{animalName, animalSpecies, animalBreed, animalStatus}")
     public ArrayList<Animal> getFilteredAnimals(@PathParam("animalName") String animalName, @PathParam("animalSpecies") String animalSpecies,
                                                 @PathParam("animalBreed") String animalBreed, @PathParam("animalStatus") String animalStatus)
     {

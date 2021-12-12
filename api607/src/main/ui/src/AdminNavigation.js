@@ -1,7 +1,7 @@
  import React,{useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-import {Button, Form, Dropdown, DropdownButton, ListGroup, Table, Navbar, Container, Image,Offcanvas,Nav,NavDropdown,FormControl} from "react-bootstrap";
+import {Button,Badge, Form, Dropdown, DropdownButton, ListGroup, Table, Navbar, Container, Image,Offcanvas,Nav,NavDropdown,FormControl} from "react-bootstrap";
 import axios from "axios";
 import './AdminNavigation.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
@@ -13,10 +13,10 @@ import DropdownItem from "react-bootstrap/DropdownItem";
 export default function AdminNavigation() {
     return (
         <div>
-            <Navbar variant="light" expand={false} bg="white" >
-                <Container fluid>
+            <Navbar variant="light" expand={false} bg="white">
+                <Container>
                     <Navbar.Brand href = "#home" >
-                        <Image src={images} fluid/>
+                        <Image className="d-inline-block align-top" src={images} fluid/>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="offcanvasNavbar"/>
                     <Navbar.Offcanvas
@@ -32,7 +32,10 @@ export default function AdminNavigation() {
                             <Nav className="justify-content-end flex-grow-1 pe-3">
                                 <Button variant="info" href="#action1">Personal Settings</Button><br/>
                                 <Button variant="info" href="#action2">User Management</Button><br/>
-                                <Button variant="info" href="#action2">Teacher Request Management</Button><br/>
+                                <Button variant="info" href="#action2">
+                                    Teacher Request Management
+                                    <Badge className="ms-2" bg = "danger">8</Badge>
+                                </Button><br/>
                                 <Button variant="info" href="#action">Animal Management</Button><br/>
                                 <Button variant="secondary" href="#action2">Logout</Button>
                             </Nav>
@@ -40,7 +43,10 @@ export default function AdminNavigation() {
                     </Navbar.Offcanvas>
                 </Container>
             </Navbar>
-            <Container><FormComp/><br/><TableComp/></Container>
+            <Container fluid>
+                <FormComp/><br/>
+                <TableComp/>
+            </Container>
 
         </div>
 

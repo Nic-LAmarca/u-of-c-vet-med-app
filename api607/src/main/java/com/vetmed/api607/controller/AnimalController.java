@@ -14,10 +14,10 @@ public class AnimalController
 {
     private DbController db = new DbController();
 
-    @GetMapping("/animal/{id}")
-    public Animal searchForAnimal(@PathVariable int id)
+    @PostMapping("/searchForAnimal{animalId}")
+    public Animal searchForAnimal(@PathParam("animalId") int animalId)
     {
-        return db.searchForAnimal(id);
+        return db.searchForAnimal(animalId);
     }
 
     @GetMapping("/animals")
@@ -26,11 +26,10 @@ public class AnimalController
         return db.getAllAnimals();
     }
 
-    @GetMapping("/animals{animalName, animalSpecies, animalBreed, animalStatus")
+    @GetMapping("/filteredAnimals{animalName, animalSpecies, animalBreed, animalStatus}")
     public ArrayList<Animal> getFilteredAnimals(@PathParam("animalName") String animalName, @PathParam("animalSpecies") String animalSpecies,
                                                 @PathParam("animalBreed") String animalBreed, @PathParam("animalStatus") String animalStatus)
     {
-        System.out.println("Here");
         return db.getFilteredAnimals(animalName, animalSpecies, animalBreed, animalStatus);
     }
 }

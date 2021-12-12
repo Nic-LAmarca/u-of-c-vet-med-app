@@ -16,6 +16,7 @@ public class User {
     private String activationDate;
     private String userType;
     private String password;
+    private Boolean blocked;
 }
 
 

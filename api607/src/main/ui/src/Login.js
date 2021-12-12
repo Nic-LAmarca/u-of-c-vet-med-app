@@ -31,6 +31,7 @@ export default function Login() {
                 var userId = userArray[0]
                 var userType = userArray[1]
                 window.localStorage.setItem('userId',userId)
+                window.localStorage.setItem('userType',userType)
                 if(userType == "Administrator"){
                     history("/AdminNavigation");
                 }
@@ -88,7 +89,7 @@ export default function Login() {
                         </Form.Group>
                     </Form><br/>
                     <Container fluid className="d-grid gap-5 d-lg-flex justify-content-md-center">
-                        <Button tyblock variant="dark" size="lg" type="submit" disabled={!validateForm()}>
+                        <Button tyblock variant="dark" size="lg" type="submit" onClick={handleSubmit} disabled={!validateForm()}>
                             Login
                         </Button>
                     </Container>

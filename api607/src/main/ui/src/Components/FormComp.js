@@ -43,7 +43,7 @@ class FormComp extends Component {
 
                         />
                     </Form.Group><br/>
-                    <Button className>Search</Button>
+                    <Button className onClick="searchAnimal">Search</Button>
                 </Form>
                 <DropdownButton>
                     <DropdownItem>

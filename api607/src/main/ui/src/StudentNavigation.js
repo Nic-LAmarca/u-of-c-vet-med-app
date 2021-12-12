@@ -1,86 +1,95 @@
 import React,{useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-import {Button, Form,Dropdown,DropdownButton,Table} from "react-bootstrap";
+import {
+    Button,
+    Form,
+    Dropdown,
+    DropdownButton,
+    Table,
+    Navbar,
+    Container,
+    Image,
+    Offcanvas,
+    Nav,
+    Badge
+} from "react-bootstrap";
 import axios from "axios";
 import './StudentNavigation.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
+import images from "./Images/vetmed.png";
+import FormComp from "./Components/FormComp";
+import TableComp from "./Components/TableComp";
 
 
 
 export default function StudentNavigation() {
 
-    const history = useNavigate();
-
-    async function handleLogout(event) {
-        event.preventDefault();
-        history('/');
-    }
-
-    async function personalSettings(event) {
-        event.preventDefault();
-        history('/PersonalSettings');
-    }
-
-    async function selectAnimal(event) {
-        event.preventDefault();
-        history('/StudentAnimalProfile');
-    }
-
     return (
-        <div className="StudentNavigation-grid-container">
-            <div className="StudentNavigation-grid-item1">
-                <h1>Student Navigation</h1>
-            </div>
-            <div className="StudentNavigation-grid-item2">
-                <Button variant="light" onClick={handleLogout}>Logout</Button>
-            </div>
-            <div className="StudentNavigation-grid-item3">
-                <Button variant="light" onClick={personalSettings}>Personal Settings</Button>
-            </div>
+        <div>
+            <Navbar variant="light" expand={false} bg="white">
+                <Container fluid>
+                    <Navbar.Brand>
+                        <Image  src={images} fluid/>
+                    </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="offcanvasNavbar"/>
+                    <Navbar.Offcanvas
+                        id="offcanvasNavbar me-auto"
+                        aria-labelledby="offcanvasNavbarLabel"
+                        placement="end"
+                    >
+                        <Offcanvas.Header closeButton>
+                            <Offcanvas.Title id="offcanvasNavbarLabel">User Name Here</Offcanvas.Title>
+                        </Offcanvas.Header>
+                        <Offcanvas.Body>
+                            <Nav className="justify-content-end flex-grow-1 pe-3">
+                                <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
+                                <Button variant="secondary" href="/" >Logout</Button>
 
-            <div className="StudentNavigation-grid-item4">
-                <h3>Animal Profile Selection</h3>
-            </div>
+                            </Nav>
+                        </Offcanvas.Body>
+                    </Navbar.Offcanvas>
+                </Container>
+            </Navbar>
 
-            <Table striped bordered hover className="StudentNavigation-grid-item5">
-                <thead>
+            <Container fluid>
+                <FormComp/><br/>
+                <h1>
+                    Results
+                </h1>
+                <Table responsive striped bordered hover id="table">
+                    <thead>
                     <tr>
-                        <th scope="col">animalId</th>
-                        <th scope="col">animalName</th>
-                        <th scope="col">species</th>
-                        <th scope="col">weight</th>
-                        <th scope="col">tattooNum</th>
-                        <th scope="col">cityTattoo</th>
-                        <th scope="col">birthDate</th>
-                        <th scope="col">breed</th>
-                        <th scope="col">sex</th>
-                        <th scope="col">rfid</th>
-                        <th scope="col">microchip</th>
-                        <th scope="col">statusType</th>
-                        <th scope="col">available</th>
-                        <th scope="col">location</th>
-                        <th scope="col">alert</th>
-                        <th scope="col">purpose</th>
-                        <th scope="col">region</th>
-                        <th scope="col">subspecies</th>
-                        <th scope="col">color</th>
-                        <th scope="col">distinguishingFeatures</th>
-                        <th scope="col">Select</th>
+                        <th>animalId</th>
+                        <th>animalName</th>
+                        <th>species</th>
+                        <th>breed</th>
+                        <th>sex</th>
+                        <th>statusType</th>
+                        <th>available</th>
+                        <th>location</th>
+                        <th>alert</th>
+                        <th>select</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     <tr>
                         <td>1</td>
                         <td>Calvin</td>
                         <td>Sparky looks healthy</td>
                         <td>2021-11-24</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                         <td>
-                            <Button variant="light" onClick={selectAnimal}>Select</Button>
+                            <Button variant="light" href="/StudentAnimalProfile">Select</Button>
                         </td>
                     </tr>
-                </tbody>
-            </Table>
+                    </tbody>
+                </Table>
+            </Container>
         </div>
     );
 }

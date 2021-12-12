@@ -21,6 +21,8 @@ import TechnicianTreatmentRequestManagement from './TechnicianTreatmentRequestMa
 import UserManagement from './UserManagement';
 import images from './Images/vetmed.png';
 import {Col, Container, Image, Navbar, NavbarBrand, Row} from "react-bootstrap";
+import TeacherNavigation from "./TeacherNavigation";
+import TechnicianNavigation from "./TechnicianNavigation";
 
 function App() {
   return (
@@ -49,6 +51,8 @@ function App() {
                       <Route path ='/TechnicianTeachingRequestManagement' element={<TechnicianTeachingRequestManagement/>}/>
                       <Route path ='/TechnicianTreatmentRequestManagement' element={<TechnicianTreatmentRequestManagement/>}/>
                       <Route path ='/UserManagement' element={<UserManagement/>}/>
+                      <Route path ='/TeacherNavigation' element={<TeacherNavigation/>}/>
+                      <Route path ='/TechnicianNavigation' element={<TechnicianNavigation/>}/>
                   </Routes>
               </div>
           </BrowserRouter>

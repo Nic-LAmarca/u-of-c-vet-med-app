@@ -13,8 +13,8 @@ export default function PersonalSettings() {
             <h1 className ="PersonalSettings-grid-item1">
                 Personal Settings
             </h1>
-            <Form className="PersonalSettings-grid-item2">
-                <Form.Group>
+            <Form>
+                <Form.Group as={Row} className="mb-3" controlId="formHoizontalUsername">
                     <Form.Label>Username</Form.Label>
                     <Form.Control
                         autoFocus
@@ -22,7 +22,7 @@ export default function PersonalSettings() {
                         // value={username}
                     />
                 </Form.Group>
-                <Form.Group>
+                <Form.Group as={Row} className="mb-3" controlId="formHoizontalEmail">
                     <Form.Label>Email</Form.Label>
                     <Form.Control
                         autoFocus

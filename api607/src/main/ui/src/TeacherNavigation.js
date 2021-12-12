@@ -22,7 +22,7 @@ import DropdownItem from "react-bootstrap/DropdownItem";
  import TableComp from "./Components/TableComp";
 
 
-export default function AttendantNavigation() {
+export default function TeacherNavigation() {
     let [animals,setAnimals] = useState([]);
     const [animalName, setAnimalName] = useState("");
     const [animalSpecies, setAnimalSpecies] = useState("");
@@ -147,7 +147,7 @@ export default function AttendantNavigation() {
         <div>
             <Navbar variant="light" expand={false} bg="white">
                 <Container fluid>
-                    <Navbar.Brand href = "#home" >
+                    <Navbar.Brand>
                         <Image className="d-inline-block align-top" src={images} fluid/>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="offcanvasNavbar"/>
@@ -164,7 +164,7 @@ export default function AttendantNavigation() {
                                 <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
                                 <Button variant="info" href="/UserManagement" >User Management</Button><br/>
                                 <Button variant="info" href="TeacherRequestManagement" >
-                                    Treatment Request Management
+                                    Teaching Request Management
                                     <Badge className="ms-2" bg = "danger">8</Badge>
                                 </Button><br/>
                                 <Button variant="secondary" href="/" >Logout</Button>
@@ -207,7 +207,7 @@ export default function AttendantNavigation() {
                         <td></td>
                         <td></td>
                         <td>
-                            <Button variant="light" href="/AttendantAnimalProfile">Select</Button>
+                            <Button variant="light" href="/TeacherAnimalProfile">Select</Button>
                         </td>
                     </tr>
                     </tbody>

@@ -1,8 +1,14 @@
+
 import React, {Component, useState} from 'react';
+
 import {Button, Col, Container, Dropdown, DropdownButton, Form, Row,InputGroup} from "react-bootstrap";
 import DropdownItem from "react-bootstrap/DropdownItem";
 import DropdownToggle from "react-bootstrap/DropdownToggle";
 import DropdownMenu from "react-bootstrap/DropdownMenu";
+
+async function Hello(){
+    const [animalName,setAnimalName] = useState();
+}
 
 class FormComp extends Component {
     setName(e)
@@ -27,9 +33,11 @@ class FormComp extends Component {
     }
 
     render() {
+
+
         return (
             <div>
-                <Container>
+                <Container fluid>
                     <Row className="flex-lg-wrap">
                         <Col lg="3">
                             <InputGroup className="me-2"  onChange =  {e => this.setName(e.target.value)} >
@@ -57,11 +65,14 @@ class FormComp extends Component {
                                         type="checkbox"
                                         id="checkbox"
                                         label="Chicken Noodle Soup"
+                                        className="mx-3"
+
                                     />
                                     <Form.Check
                                         type="checkbox"
                                         id="checkbox"
                                         label="Seggs"
+                                        className="mx-3"
                                     />
                                 </DropdownMenu>
                             </Dropdown >
@@ -74,11 +85,13 @@ class FormComp extends Component {
                                         type="checkbox"
                                         id="checkbox"
                                         label="Soup Soup"
+                                        className="mx-3"
                                     />
                                     <Form.Check
                                         type="checkbox"
                                         id="checkbox"
                                         label="Seggsy"
+                                        className="mx-3"
                                     />
                                 </DropdownMenu>
                             </Dropdown >
@@ -86,21 +99,26 @@ class FormComp extends Component {
                                 <DropdownToggle id = "dropdown-autoclose-false" variant="secondary">
                                     Status
                                 </DropdownToggle>
-                                <DropdownMenu >
+
+                                <DropdownMenu className="me-auto">
+
                                     <Form.Check
                                         type="checkbox"
                                         id="checkbox"
                                         label="Warning"
+                                        className="mx-3"
                                     />
                                     <Form.Check
                                         type="checkbox"
                                         id="checkbox"
                                         label="Fine"
+                                        className="mx-3"
                                     />
                                     <Form.Check
                                         type="checkbox"
                                         id="checkbox"
                                         label="Urgent"
+                                        className="mx-3"
                                     />
                                 </DropdownMenu>
                             </Dropdown>

@@ -133,12 +133,14 @@ export default function AdminNavigation() {
         );
     }
 
+
     var id = window.localStorage.getItem('userId')
     console.log(id)
+
     return (
         <div>
             <Navbar variant="light" expand={false} bg="white">
-                <Container>
+                <Container fluid>
                     <Navbar.Brand href = "#home" >
                         <Image className="d-inline-block align-top" src={images} fluid/>
                     </Navbar.Brand>
@@ -157,7 +159,6 @@ export default function AdminNavigation() {
                                 <Button variant="info" href="#action2" onClick={userManagement}>User Management</Button><br/>
                                 <Button variant="info" href="#action2" onClick={teacherRequestManagement}>
                                     Teacher Request Management
-                                    Teacher Request Management
                                     <Badge className="ms-2" bg = "danger">8</Badge>
                                 </Button><br/>
                                 <Button variant="info" href="#action" onClick={animalManagement}>Animal Management</Button><br/>
@@ -168,8 +169,44 @@ export default function AdminNavigation() {
                     </Navbar.Offcanvas>
                 </Container>
             </Navbar>
-
-            <Container fluid><FormComp/><br/><TableComp/></Container>
+            <Container fluid>
+                <FormComp/><br/>
+                <h1>
+                    Results
+                </h1>
+                <Table responsive striped bordered hover id="table">
+                    <thead>
+                    <tr>
+                        <th>animalId</th>
+                        <th>animalName</th>
+                        <th>species</th>
+                        <th>breed</th>
+                        <th>sex</th>
+                        <th>statusType</th>
+                        <th>available</th>
+                        <th>location</th>
+                        <th>alert</th>
+                        <th>select</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Calvin</td>
+                        <td>Sparky looks healthy</td>
+                        <td>2021-11-24</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <Button variant="light" href="/AdminAnimalProfile">Select</Button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </Table>
+            </Container>
 
         </div>
     );

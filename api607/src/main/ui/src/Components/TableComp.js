@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Table} from "react-bootstrap";
+import {Button, Table} from "react-bootstrap";
 
 class TableComp extends Component {
     render() {
@@ -20,10 +20,25 @@ class TableComp extends Component {
                         <th>available</th>
                         <th>location</th>
                         <th>alert</th>
-                        <th>color</th>
                         <th>select</th>
                     </tr>
                     </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Calvin</td>
+                        <td>Sparky looks healthy</td>
+                        <td>2021-11-24</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <Button variant="light" href="/StudentAnimalProfile">Select</Button>
+                        </td>
+                    </tr>
+                    </tbody>
                 </Table>
             </div>
         );

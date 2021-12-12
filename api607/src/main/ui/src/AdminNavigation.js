@@ -16,24 +16,11 @@ export default function AdminNavigation() {
     const [animalBreed, setAnimalBreed] = useState("");
     const [animalStatus, setAnimalStatus] = useState("");
 
-//    const changeStates = ()=>{
-//        setAnimalName({data});
-//    };
-
     const history = useNavigate();
 
     window.onload = function() {
         allAnimals();
     };
-
-    async function setSearchParameters(animalName, animalSpecies, animalBreed, animalStatus) {
-        setAnimalName(animalName)
-        setAnimalSpecies(animalSpecies)
-        setAnimalBreed(animalBreed)
-        setAnimalStatus(animalStatus)
-        "searchAnimals";
-    }
-
 
     async function personalSettings(event) {
         event.preventDefault();
@@ -90,6 +77,7 @@ export default function AdminNavigation() {
                     table.rows[j].cells[7].innerHTML = temp.location
                     table.rows[j].cells[8].innerHTML = temp.alert
                     table.rows[j].cells[9].innerHTML = temp.color
+                    table.rows[j].cells[10].innerHTML = <Button>Select</Button>
                     j = j + 1
                 }
             })

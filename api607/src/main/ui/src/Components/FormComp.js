@@ -1,14 +1,20 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import {Button, DropdownButton, Form} from "react-bootstrap";
 import DropdownItem from "react-bootstrap/DropdownItem";
 
 class FormComp extends Component {
+
+    const [animalName, setAnimalName] = useState("");
+    const [animalSpecies, setAnimalSpecies] = useState("");
+    const [animalBreed, setAnimalBreed] = useState("");
+    const [animalStatus, setAnimalStatus] = useState("");
+
     render() {
         return (
             <div>
                 <Form>
                     <Form.Group>
-                        <Form.Label>Animal Name</Form.Label>
+                        <Form.Label onChange="setAnimal"{e=>()setAnimalName(e.target.value)}>Animal Name</Form.Label>
                         <Form.Control
                             autoFocus
                             // type="username"
@@ -17,7 +23,7 @@ class FormComp extends Component {
                         />
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label>Animal Species</Form.Label>
+                        <Form.Label onChange={e=>()setAnimalSpecies(e.target.value)}>Animal Species</Form.Label>
                         <Form.Control
                             autoFocus
                             // type="username"
@@ -26,7 +32,7 @@ class FormComp extends Component {
                         />
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label>Animal Breed</Form.Label>
+                        <Form.Label onChange={e=>()setAnimalBreed(e.target.value)}>Animal Breed</Form.Label>
                         <Form.Control
                             autoFocus
                             // type="username"
@@ -35,7 +41,7 @@ class FormComp extends Component {
                         />
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label>Animal Status</Form.Label>
+                        <Form.Label onChange={e=>()setAnimalStatus(e.target.value)}>Animal Status</Form.Label>
                         <Form.Control
                             autoFocus
                             // type="username"
@@ -43,7 +49,7 @@ class FormComp extends Component {
 
                         />
                     </Form.Group><br/>
-                    <Button className onClick="searchAnimal">Search</Button>
+                    <Button className onClick="setSearchParameters(animalName, animalSpecies, animalBreed, animalStatus)">Search</Button>
                 </Form>
                 <DropdownButton>
                     <DropdownItem>

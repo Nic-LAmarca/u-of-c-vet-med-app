@@ -1,4 +1,4 @@
- import React,{useState} from "react";
+import React,{useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 import {Button, Form, Dropdown, DropdownButton, ListGroup, Table, Navbar, Container, Image,Offcanvas,Nav,NavDropdown,FormControl} from "react-bootstrap";
@@ -9,7 +9,6 @@ import images from "./Images/vetmed.png";
 import FormComp from "./Components/FormComp";
 import TableComp from "./Components/TableComp";
 
-
 export default function AdminNavigation() {
     let [animals,setAnimals] = useState([]);
     const [animalName, setAnimalName] = useState("");
@@ -17,11 +16,24 @@ export default function AdminNavigation() {
     const [animalBreed, setAnimalBreed] = useState("");
     const [animalStatus, setAnimalStatus] = useState("");
 
+//    const changeStates = ()=>{
+//        setAnimalName({data});
+//    };
+
     const history = useNavigate();
 
     window.onload = function() {
         allAnimals();
     };
+
+    async function setSearchParameters(animalName, animalSpecies, animalBreed, animalStatus) {
+        setAnimalName(animalName)
+        setAnimalSpecies(animalSpecies)
+        setAnimalBreed(animalBreed)
+        setAnimalStatus(animalStatus)
+        "searchAnimals";
+    }
+
 
     async function personalSettings(event) {
         event.preventDefault();
@@ -129,8 +141,8 @@ export default function AdminNavigation() {
         );
     }
 
-var id =window.localStorage.getItem('userId')
-console.log(userId)
+    var id = window.localStorage.getItem('userId')
+    console.log(id)
     return (
         <div>
             <Navbar variant="light" expand={false} bg="white" >

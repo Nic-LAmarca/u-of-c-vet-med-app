@@ -111,7 +111,7 @@ export default function PersonalSettings() {
                             />
                         </Col>
                     </Form.Group>
-                    <Container className="d-grid gap-5 d-lg-flex justify-content-md-center">
+                    <Container fluid className="d-grid gap-5 d-lg-flex justify-content-md-center">
                     <Button onClick={updateSettings}>Save</Button>
                     </Container>
                 </Form>

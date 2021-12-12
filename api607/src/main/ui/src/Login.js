@@ -1,8 +1,10 @@
 import React,{useState} from "react";
-import {Form,Button} from "react-bootstrap";
+import {Form, Button, Container, Navbar, Image, NavbarBrand, Row, Col} from "react-bootstrap";
 import './Login.css';
 import {useNavigate} from "react-router-dom";
 import axios from 'axios';
+import images from "./Images/vetmed.png";
+import blacklogo from "./Images/blacklogo.png";
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -52,30 +54,45 @@ export default function Login() {
     }
 
     return (
-        <div className="Login">
-            <h1> Login Page </h1>
-            <Form onSubmit={handleSubmit}>
-                <Form.Group size="lg" controlId="email">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                        autoFocus
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </Form.Group>
-                <Form.Group size="lg" controlId="password">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </Form.Group>
-                <Button   tyblock size="lg" type="submit" disabled={!validateForm()}>
-                    Login
-                </Button>
-            </Form>
+        <div>
+            <Navbar variant="light" expand={false} bg="white">
+                <Container fluid>
+                    <Navbar.Brand>
+                        <Image className="d-inline-block align-top tr" src={images} fluid/>
+                    </Navbar.Brand>
+                </Container>
+            </Navbar><br/>
+                <Container fluid className="justify-content-md-center">
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalEmail">
+                            <Form.Label column sm={2}>Email</Form.Label>
+                            <Col sm={5}>
+                                <Form.Control
+                                    autoFocus
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalPassword">
+                            <Form.Label column sm={2}>Password</Form.Label>
+                            <Col sm={5}>
+                                <Form.Control
+                                    type="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                            </Col>
+
+                        </Form.Group>
+                    </Form><br/>
+                    <Container fluid className="d-grid gap-5 d-lg-flex justify-content-md-center">
+                        <Button tyblock variant="dark" size="lg" type="submit" disabled={!validateForm()}>
+                            Login
+                        </Button>
+                    </Container>
+                </Container>
         </div>
     );
 }

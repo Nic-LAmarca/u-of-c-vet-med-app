@@ -13,7 +13,13 @@ export default function AdminAnimalProfile() {
     const [animalName, setAnimalName] = useState("");
     const [animalSpecies, setAnimalSpecies] = useState("");
     const [animalStatus, setAnimalStatus] = useState("");
-    window.onload = theProfile();
+    const [description, setDescription] = useState("");
+    window.onload = startup();
+
+    async function startup() {
+        theProfile();
+        theComments();
+    }
 
     async function theProfile() {
         await axios.post('http://localhost:8080/searchForAnimal',
@@ -24,7 +30,7 @@ export default function AdminAnimalProfile() {
                 }
             })
             .then(function(response){
-                var table = document.getElementById("table");
+                var table = document.getElementById("profileTable");
                 const animalFound = response.data
                 setAnimalName(animalFound.animalName)
                 setAnimalSpecies(animalFound.animalSpecies)
@@ -76,6 +82,59 @@ export default function AdminAnimalProfile() {
         );
     }
 
+    async function theComments() {
+        await axios.post('http://localhost:8080/comments',
+        null,
+        {
+            params: {
+                animalId
+            }
+        })
+        .then(function(response){
+            var table = document.getElementById("commentTable");
+            if(table.rows.length <= 1){
+                const commentList = response.data
+                var j = 1;
+                for(var i = 0; i < commentList.length; i++){
+                    var temp = commentList[i]
+                    var row = table.insertRow(j)
+                    for(var k = 0; k < 4; k++){
+                        row.insertCell(k)
+                    }
+                    table.rows[j].cells[0].innerHTML = temp.commentId
+                    table.rows[j].cells[1].innerHTML = temp.userId
+                    table.rows[j].cells[2].innerHTML = temp.description
+                    table.rows[j].cells[3].innerHTML = temp.date
+                    j = j + 1
+                }
+            }
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+    }
+
+    async function addComment(event) {
+        event.preventDefault();
+        console.log("Here")
+        var userId = window.localStorage.getItem("userId");
+        await axios.post('http://localhost:8080/addComment',
+        null,
+        {
+            params: {
+                userId,
+                animalId,
+                description
+            }
+        })
+        .then(function(response){
+            console.log(response)
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+    }
+
     return (
         <div className="AdminAnimalProfile-grid-container">
             <h3 className="AdminAnimalProfile-grid-item1">
@@ -87,7 +146,7 @@ export default function AdminAnimalProfile() {
             <h3 className="AdminAnimalProfile-grid-item3">
                 ID # {animalId}
             </h3>
-            <Table striped bordered hover className="AdminAnimalProfile-grid-item5" id="table">
+            <Table striped bordered hover className="AdminAnimalProfile-grid-item5" id="profileTable">
                 <thead>
                     <tr>
                         <th>Attribute</th>
@@ -119,26 +178,18 @@ export default function AdminAnimalProfile() {
                 <div className="AdminAnimalProfile-grid-item6">
                     <Tab.Content >
                         <Tab.Pane eventKey="first">
-                        <input className="AdminAnimalProfile-comment-item1" placeholder="Enter Comment Here"></input>
-                        <button className="AdminAnimalProfile-submit-item1" type="submit">Submit</button>
+                        <input className="AdminAnimalProfile-comment-item1" placeholder="Enter Comment Here" onChange={(e) => setDescription(e.target.value)}></input>
+                        <button className="AdminAnimalProfile-submit-item1" type="submit" onClick={addComment}>Submit</button>
 
-                            <Table striped bordered hover className="AdminAnimalProfile-grid-item100">
+                            <Table striped bordered hover className="AdminAnimalProfile-grid-item100" id="commentTable">
                                 <thead>
                                     <tr>
                                         <th scope="col">commentId</th>
-                                        <th scope="col">User Name</th>
+                                        <th scope="col">UserId</th>
                                         <th scope="col">Description</th>
                                         <th scope="col">Date</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Calvin</td>
-                                        <td>Sparky looks healthy</td>
-                                        <td>2021-11-24</td>
-                                    </tr>
-                                </tbody>
                             </Table>
                         </Tab.Pane>
                         <Tab.Pane eventKey="second">

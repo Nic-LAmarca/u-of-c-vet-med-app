@@ -89,6 +89,10 @@ export default function AdminNavigation() {
 
     async function searchAnimals(event) {
         event.preventDefault();
+        setAnimalName(window.localStorage.getItem("name"))
+        setAnimalSpecies(window.localStorage.getItem("species"))
+        setAnimalBreed(window.localStorage.getItem("breed"))
+        setAnimalStatus(window.localStorage.getItem("status"))
         await axios.get('http://localhost:8080/animals',
             null,
             {

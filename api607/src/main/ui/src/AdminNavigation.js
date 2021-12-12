@@ -77,7 +77,7 @@ export default function AdminNavigation() {
                     table.rows[j].cells[7].innerHTML = temp.location
                     table.rows[j].cells[8].innerHTML = temp.alert
                     table.rows[j].cells[9].innerHTML = temp.color
-                    table.rows[j].cells[10].innerHTML = <Button>Select</Button>
+                    table.rows[j].cells[10].innerHTML = '<input id="Button" type="button" href="/AdminAnimalProfile" value="Select" />'
                     j = j + 1
                 }
             })
@@ -124,6 +124,7 @@ export default function AdminNavigation() {
                     table.rows[j].cells[7].innerHTML = temp.location
                     table.rows[j].cells[8].innerHTML = temp.alert
                     table.rows[j].cells[9].innerHTML = temp.color
+                    table.rows[j].cells[10].innerHTML = '<input id="Button" type="button" href="/AdminAnimalProfile" value="Select" />'
                     j = j + 1
                 }
             })
@@ -186,25 +187,10 @@ export default function AdminNavigation() {
                         <th>available</th>
                         <th>location</th>
                         <th>alert</th>
+                        <th>color</th>
                         <th>select</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Calvin</td>
-                        <td>Sparky looks healthy</td>
-                        <td>2021-11-24</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <Button variant="light" href="/AdminAnimalProfile">Select</Button>
-                        </td>
-                    </tr>
-                    </tbody>
                 </Table>
             </Container>
 

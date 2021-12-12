@@ -88,7 +88,7 @@ export default function Login() {
                         </Form.Group>
                     </Form><br/>
                     <Container fluid className="d-grid gap-5 d-lg-flex justify-content-md-center">
-                        <Button tyblock variant="dark" size="lg" type="submit" disabled={!validateForm()}>
+                        <Button tyblock variant="dark" size="lg" type="submit" onClick={handleSubmit} disabled={!validateForm()}>
                             Login
                         </Button>
                     </Container>

@@ -78,7 +78,7 @@ export default function UserManagement() {
     return (
         <div className="UserManagement-grid-container">
             <h1 className ="UserManagement-grid-item1">
-                User Handling
+                User Management
             </h1>
             <Form className="UserManagement-grid-item2">
                 <Form.Group>

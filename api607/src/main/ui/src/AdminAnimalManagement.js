@@ -11,7 +11,7 @@ export default function AdminAnimalManagement() {
     return (
         <div className="AdminAnimalManagement-grid-container">
             <h1 className ="AdminAnimalManagement-grid-item1">
-                User Handling
+                Animal Management
             </h1>
             <Form className="AdminAnimalManagement-grid-item2">
                 <Form.Group>

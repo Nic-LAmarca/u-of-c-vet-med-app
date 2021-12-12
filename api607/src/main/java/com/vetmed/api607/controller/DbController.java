@@ -1252,6 +1252,7 @@ public class DbController {
                 foundUser.setActivationDate(results.getDate("activationDate").toString());
                 foundUser.setUserType(results.getString("userType"));
                 foundUser.setPassword(results.getString("password"));
+                foundUser.setBlocked(results.getBoolean("blocked"));
             }
             myStmt.close();
         } catch (Exception e) {
@@ -1284,7 +1285,7 @@ public class DbController {
                     foundUser.setActivationDate(results.getDate("activationDate").toString());
                     foundUser.setUserType(results.getString("userType"));
                     foundUser.setPassword(results.getString("password"));
-
+                    foundUser.setBlocked(results.getBoolean("blocked"));
                 }
             }
             myStmt.close();
@@ -1295,7 +1296,6 @@ public class DbController {
     }
 
     /**
-     *
      *
      * Method is used to return an arraylist of users that are in the database
      *
@@ -1316,6 +1316,7 @@ public class DbController {
                 addUser.setActivationDate(results.getDate("activationDate").toString());
                 addUser.setUserType(results.getString("userType"));
                 addUser.setPassword(results.getString("password"));
+                addUser.setBlocked(results.getBoolean("blocked"));
                 userList.add(addUser);
             }
             myStmt.close();
@@ -1325,8 +1326,6 @@ public class DbController {
         return userList;
 
     }
-
-
 
     /**
     *
@@ -1340,14 +1339,57 @@ public class DbController {
     */
     public void addUser(String fName, String lName, String email, String activationDate, String userType, String password) {
         try {
-            String query = "INSERT INT0 USER (fName, lName, email, activationDate, userType, password) VALUES (?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO USER (fName, lName, email, activationDate, userType, password, blocked) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setString(1, fName);
             myStmt.setString(2, lName);
             myStmt.setString(3, email);
             myStmt.setDate(4, Date.valueOf(activationDate));
-            myStmt.setString(5, password);
-            myStmt.executeQuery();
+            myStmt.setString(5, userType);
+            myStmt.setString(6, password);
+            myStmt.setBoolean(7, false);
+            myStmt.executeUpdate();
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *
+     * Method is used to block a user with the matching email and password
+     *
+     * @param email is the email of the user to block
+     * @param password is the password of the user to block
+     */
+    public void blockUser(String email, String password) {
+        try {
+            String query = "UPDATE USER SET blocked = ? WHERE email = ? AND password = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setBoolean(1, true);
+            myStmt.setString(2, email);
+            myStmt.setString(3, password);
+            myStmt.executeUpdate();
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *
+     * Method is used to remove a user with the matching email and password
+     *
+     * @param email is the email of the user to remove
+     * @param password is the password of the user to remove
+     */
+    public void removeUser(String email, String password) {
+        try {
+            String query = "DELETE FROM USER WHERE email = ? AND password = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setString(1, email);
+            myStmt.setString(2, password);
+            myStmt.executeUpdate();
             myStmt.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -1366,13 +1408,14 @@ public class DbController {
      */
     public void updatePersonalSettings(int userId, String fName, String lName, String email, String password) {
         try {
-            String query = "UPDATE USER SET fName = ?, lName = ?, email = ?, password = ? WHERE userId = ?";
+            String query = "UPDATE USER SET fName = ?, lName = ?, email = ?, password = ?, blocked = ? WHERE userId = ?";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setString(1, fName);
             myStmt.setString(2, lName);
             myStmt.setString(3, email);
             myStmt.setString(4, password);
-            myStmt.setInt(5, userId);
+            myStmt.setBoolean(5, false);
+            myStmt.setInt(6, userId);
             myStmt.executeUpdate();
             myStmt.close();
         } catch (Exception e) {

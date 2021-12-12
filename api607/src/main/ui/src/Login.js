@@ -31,6 +31,7 @@ export default function Login() {
                 var userId = userArray[0]
                 var userType = userArray[1]
                 window.localStorage.setItem('userId',userId)
+                window.localStorage.setItem('userType',userType)
                 if(userType == "Administrator"){
                     history("/AdminNavigation");
                 }

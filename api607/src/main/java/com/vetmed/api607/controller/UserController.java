@@ -21,4 +21,10 @@ public class UserController {
         String userValues = u.getUserId() + "-" + u.getUserType();
         return  userValues;
     }
+
+    @CrossOrigin
+    @PostMapping("/personalSettings{userId, fName, lName, email, password}")
+    public void personalSettings(@PathParam("userId") int userId, @PathParam("fName") String fName, @PathParam("lName") String lName, @PathParam("email") String email, @PathParam("password") String password){
+        db.updatePersonalSettings(userId, fName, lName, email, password);
+    }
 }

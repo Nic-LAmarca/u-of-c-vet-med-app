@@ -2,6 +2,7 @@ package com.vetmed.api607.controller;
 
 import com.vetmed.api607.model.*;
 
+import javax.websocket.server.PathParam;
 import java.io.FileReader;
 import java.sql.*;
 import java.util.ArrayList;
@@ -74,6 +75,58 @@ public class DbController {
             e.printStackTrace();
         }
         return foundAnimal;
+    }
+
+    /**
+     *
+     * Method is used to return an arraylist of animals depending on the filtered parameters being passed
+     *
+     * @param animalName is the name of the animal to search for
+     * @param animalSpecies is the name of the species to search for
+     * @param animalBreed is the name of the breed to search for
+     * @param animalStatus is the name of the status to search for
+     * @return all animals in an arraylist that fit the filter requirements
+     */
+    public ArrayList<Animal> getFilteredAnimals(String animalName, String animalSpecies, String animalBreed, String animalStatus) {
+        ArrayList<Animal> animalList = new ArrayList<Animal>();
+        try {
+            System.out.println("There");
+            String query = "SELECT * FROM ANIMAL WHERE animalName = ?(@animalName IS NULL, animalName, @animalName) AND  animalSpecies = ?(@animalSpecies IS NULL, animalSpecies, @animalSpecies) AND animalBreed = ?(@animalBreed IS NULL, animalBreed, @animalBreed) AND animalStatus = ?(@animalStatus IS NULL, animalStatus, @animalStatus)";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setString(1, animalName);
+            myStmt.setString(2, animalSpecies);
+            myStmt.setString(3, animalBreed);
+            myStmt.setString(4, animalStatus);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                Animal addAnimal = new Animal();
+                addAnimal.setAnimalId(results.getInt("animalId"));
+                addAnimal.setAnimalName(results.getString("animalName"));
+                addAnimal.setSpecies(results.getString("species"));
+                addAnimal.setWeight(results.getDouble("weight"));
+                addAnimal.setTattooNum(results.getInt("tattooNum"));
+                addAnimal.setCityTattoo(results.getString("cityTattoo"));
+                addAnimal.setBirthDate(results.getDate("birthDate").toString());
+                addAnimal.setBreed(results.getString("breed"));
+                addAnimal.setSex(results.getString("sex"));
+                addAnimal.setRfid(results.getLong("rfid"));
+                addAnimal.setMicrochip(results.getLong("microchip"));
+                addAnimal.setStatusType(results.getString("statusType"));
+                addAnimal.setAvailable(results.getBoolean("available"));
+                addAnimal.setPurpose(results.getString("location"));
+                addAnimal.setRegion(results.getString("alert"));
+                addAnimal.setPurpose(results.getString("purpose"));
+                addAnimal.setRegion(results.getString("region"));
+                addAnimal.setSubspecies(results.getString("subspecies"));
+                addAnimal.setColor(results.getString("color"));
+                addAnimal.setDistinguishingFeatures(results.getString("distinguishingFeatures"));
+                animalList.add(addAnimal);
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return animalList;
     }
 
     /**
@@ -1295,6 +1348,32 @@ public class DbController {
             myStmt.setDate(4, Date.valueOf(activationDate));
             myStmt.setString(5, password);
 
+            myStmt.executeQuery();
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     *
+     * Method is used to update a user's settings based on the input arguments
+     *
+     * @param userId is the unique id of the user
+     * @param fName is the first name of the user
+     * @param lName is the last name of the user
+     * @param email is the email of the user
+     * @param password is the password of the user
+     */
+    public void updatePersonalSettings(int userId, String fName, String lName, String email, String password) {
+        try {
+            String query = "UPDATE USER SET fName = ?, lName = ?, email = ?, password = ? WHERE userId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setString(1, fName);
+            myStmt.setString(2, lName);
+            myStmt.setString(3, email);
+            myStmt.setString(4, password);
+            myStmt.setInt(5, userId);
             myStmt.executeQuery();
             myStmt.close();
         } catch (Exception e) {

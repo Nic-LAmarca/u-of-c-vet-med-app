@@ -1,4 +1,6 @@
-import React, {Component,useState} from 'react';
+
+import React, {Component, useState} from 'react';
+
 import {Button, Col, Container, Dropdown, DropdownButton, Form, Row,InputGroup} from "react-bootstrap";
 import DropdownItem from "react-bootstrap/DropdownItem";
 import DropdownToggle from "react-bootstrap/DropdownToggle";
@@ -9,6 +11,27 @@ async function Hello(){
 }
 
 class FormComp extends Component {
+    setName(e)
+    {
+        var name = e;
+        window.localStorage.setItem("name",e);
+    }
+    setSpecies(e)
+    {
+        var species = e;
+        window.localStorage.setItem("species",e);
+    }
+    setBreed(e)
+    {
+        var breed = e;
+        window.localStorage.setItem("breed",e);
+    }
+    setStatus(e)
+    {
+        var status = e;
+        window.localStorage.setItem("status",e);
+    }
+
     render() {
 
 
@@ -17,11 +40,12 @@ class FormComp extends Component {
                 <Container fluid>
                     <Row className="flex-lg-wrap">
                         <Col lg="3">
-                            <InputGroup className="me-2" >
+                            <InputGroup className="me-2"  onChange =  {e => this.setName(e.target.value)} >
                                 {/*<Form.Label>Animal Name</Form.Label>*/}
                                 <Form.Control
                                     autoFocus
                                     placeholder="Animal Name"
+
                                     // type="username"
                                     // value={username}
                                 />
@@ -29,14 +53,14 @@ class FormComp extends Component {
                             </InputGroup><br/>
                         </Col>
                         <Col className="mx-auto">
-                            <Dropdown className="d-inline me-4" autoClose="outside">
+                            <Dropdown className="d-inline me-4" autoClose="outside"  onSelect = {e => this.setSpecies(e.target.value)} >
                                 <DropdownToggle
                                     id = "dropdown-autoclose-false"
                                     variant="secondary"
                                 >
                                     Species
                                 </DropdownToggle>
-                                <DropdownMenu >
+                                <DropdownMenu >/
                                     <Form.Check
                                         type="checkbox"
                                         id="checkbox"
@@ -51,12 +75,12 @@ class FormComp extends Component {
                                         className="mx-3"
                                     />
                                 </DropdownMenu>
-                            </Dropdown>
-                            <Dropdown className="d-inline me-4" autoClose="outside">
+                            </Dropdown >
+                            <Dropdown className="d-inline me-4" autoClose="outside"  onSelect = {e => this.setBreed(e.target.value)} >
                                 <DropdownToggle id = "dropdown-autoclose-false" variant="secondary">
                                     Breed
                                 </DropdownToggle>
-                                <DropdownMenu>
+                                <DropdownMenu >
                                     <Form.Check
                                         type="checkbox"
                                         id="checkbox"
@@ -70,12 +94,14 @@ class FormComp extends Component {
                                         className="mx-3"
                                     />
                                 </DropdownMenu>
-                            </Dropdown>
-                            <Dropdown className="d-inline me-4" autoClose="outside">
+                            </Dropdown >
+                            <Dropdown className="d-inline me-4" autoClose="outside" onSelect = {e => this.setStatus(e.target.value)}>
                                 <DropdownToggle id = "dropdown-autoclose-false" variant="secondary">
                                     Status
                                 </DropdownToggle>
+
                                 <DropdownMenu className="me-auto">
+
                                     <Form.Check
                                         type="checkbox"
                                         id="checkbox"
@@ -109,7 +135,6 @@ class FormComp extends Component {
                         <Row xs ={"auto"}>
 
                     </Row><br/>
-
                 </Container>
 
             </div>

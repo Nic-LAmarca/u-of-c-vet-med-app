@@ -1,4 +1,4 @@
- import React,{useState} from "react";
+import React,{useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 import {Button,Badge, Form, Dropdown, DropdownButton, ListGroup, Table, Navbar, Container, Image,Offcanvas,Nav,NavDropdown,FormControl} from "react-bootstrap";
@@ -8,7 +8,6 @@ import DropdownItem from "react-bootstrap/DropdownItem";
 import images from "./Images/vetmed.png";
 import FormComp from "./Components/FormComp";
 import TableComp from "./Components/TableComp";
-
 
 export default function AdminNavigation() {
     let [animals,setAnimals] = useState([]);
@@ -78,6 +77,7 @@ export default function AdminNavigation() {
                     table.rows[j].cells[7].innerHTML = temp.location
                     table.rows[j].cells[8].innerHTML = temp.alert
                     table.rows[j].cells[9].innerHTML = temp.color
+                    table.rows[j].cells[10].innerHTML = <Button>Select</Button>
                     j = j + 1
                 }
             })
@@ -89,6 +89,10 @@ export default function AdminNavigation() {
 
     async function searchAnimals(event) {
         event.preventDefault();
+        setAnimalName(window.localStorage.getItem("name"))
+        setAnimalSpecies(window.localStorage.getItem("species"))
+        setAnimalBreed(window.localStorage.getItem("breed"))
+        setAnimalStatus(window.localStorage.getItem("status"))
         await axios.get('http://localhost:8080/animals',
             null,
             {
@@ -129,8 +133,10 @@ export default function AdminNavigation() {
         );
     }
 
-var id =window.localStorage.getItem('userId')
-console.log(id)
+
+    var id = window.localStorage.getItem('userId')
+    console.log(id)
+
     return (
         <div>
             <Navbar variant="light" expand={false} bg="white">

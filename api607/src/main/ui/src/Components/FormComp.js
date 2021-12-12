@@ -98,8 +98,6 @@ class FormComp extends Component {
 
                 </Container>
 
-
-
             </div>
         );
     }

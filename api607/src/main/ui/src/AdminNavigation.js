@@ -9,6 +9,7 @@ import images from "./Images/vetmed.png";
 import FormComp from "./Components/FormComp";
 import TableComp from "./Components/TableComp";
 
+
 export default function AdminNavigation() {
     let [animals,setAnimals] = useState([]);
     const [animalName, setAnimalName] = useState("");
@@ -128,6 +129,8 @@ export default function AdminNavigation() {
         );
     }
 
+var id =window.localStorage.getItem('userId')
+console.log(userId)
     return (
         <div>
             <Navbar variant="light" expand={false} bg="white" >

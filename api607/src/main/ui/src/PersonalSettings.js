@@ -63,7 +63,7 @@ export default function PersonalSettings() {
                         Personal Settings
                     </NavbarBrand>
                 </Container>
-            </Navbar>
+            </Navbar><br/>
             <Container fluid>
                 <Form>
                     <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalName">

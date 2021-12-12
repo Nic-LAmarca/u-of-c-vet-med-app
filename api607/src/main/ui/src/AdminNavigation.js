@@ -168,7 +168,7 @@ export default function AdminNavigation() {
                         </Offcanvas.Body>
                     </Navbar.Offcanvas>
                 </Container>
-            </Navbar>
+            </Navbar><br/>
             <Container fluid>
                 <FormComp/><br/>
                 <h1>

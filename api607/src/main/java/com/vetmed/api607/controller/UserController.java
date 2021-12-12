@@ -18,6 +18,7 @@ public class UserController {
     @PostMapping("/login{email, password}")
     public String login(@PathParam("email") String email, @PathParam("password") String password){
         User u = db.searchUserByEmailAndPassword(email, password);
-        return u.getUserType();
+        String userValues = u.getUserId() + "-" + u.getUserType();
+        return  userValues;
     }
 }

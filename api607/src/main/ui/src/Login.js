@@ -24,19 +24,24 @@ export default function Login() {
                 }
             })
             .then(function(response){
-                if(response.data == "Administrator"){
+                var userString = response.data
+                const userArray = userString.split("-")
+                var userId = userArray[0]
+                var userType = userArray[1]
+                window.localStorage.setItem('userId',userId)
+                if(userType == "Administrator"){
                     history("/AdminNavigation");
                 }
-                else if(response.data == "Animal Health Attendant"){
+                else if(userType== "Animal Health Attendant"){
                     history("/AttendantNavigation");
                 }
-                else if(response.data == "Animal Health Technician"){
+                else if(userType == "Animal Health Technician"){
                     history("/TechnicianNavigation");
                 }
-                else if(response.data == "Student"){
+                else if(userType == "Student"){
                     history("/StudentNavigation");
                 }
-                else if(response.data == "Teaching Technician"){
+                else if(userType == "Teaching Technician"){
                     history("/TeacherNavigation");
                 }
             })

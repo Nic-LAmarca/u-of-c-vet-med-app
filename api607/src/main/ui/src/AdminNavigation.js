@@ -10,7 +10,10 @@ import DropdownItem from "react-bootstrap/DropdownItem";
  import TableComp from "./Components/TableComp";
 
 
+
 export default function AdminNavigation() {
+var id =window.localStorage.getItem('userId')
+console.log(userId)
     return (
         <div>
             <Navbar variant="light" expand={false} bg="white" >

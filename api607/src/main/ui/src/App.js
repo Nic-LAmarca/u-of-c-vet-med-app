@@ -19,14 +19,17 @@ import TechnicianAnimalProfile from './TechnicianAnimalProfile';
 import TechnicianTeachingRequestManagement from './TechnicianTeachingRequestManagement';
 import TechnicianTreatmentRequestManagement from './TechnicianTreatmentRequestManagement';
 import UserManagement from './UserManagement';
+import images from './Images/vetmed.png';
+import {Col, Container, Image, Navbar, NavbarBrand, Row} from "react-bootstrap";
 
 function App() {
   return (
       <div>
+
+
           <BrowserRouter>
               {/*<h1>Vet Med</h1>*/}
-              <div className="header">
-              </div>
+
               <div className= "content">
                   <Routes>
                       <Route  exact path ='/' element={<Login/>}/>

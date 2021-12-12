@@ -1272,7 +1272,6 @@ public class DbController {
         User foundUser = new User();
         try {
             String query = "SELECT * FROM USER WHERE userId = ?";
-
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setInt(1, id);
             ResultSet results = myStmt.executeQuery();

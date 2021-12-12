@@ -18,7 +18,7 @@ export default function AdminNavigation() {
 
     const history = useNavigate();
 
-    allAnimals();;
+    allAnimals();
 
     async function personalSettings(event) {
         event.preventDefault();

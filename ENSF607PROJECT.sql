@@ -156,7 +156,7 @@ CREATE TABLE IF NOT EXISTS MEDICAL_RECORD_HISTORY
    
 CREATE TABLE IF NOT EXISTS TREATMENT_HISTORY
 	(treatmentHistoryId	int				 NOT NULL auto_increment,
-    treatmentId		int				NOT NULL,
+     treatmentId		int				NOT NULL,
      animalId			int				NOT NULL,
      date				datetime		NOT NULL,
      requestedBy		int				NOT NULL,
@@ -171,11 +171,11 @@ CREATE TABLE IF NOT EXISTS REQUEST
 	(requestId			int				NOT NULL auto_increment,
      animalId			int				NOT NULL,
      userId				int				NOT NULL,
-     newStatus			boolean			NOT NULL,
      adminApproved		boolean			NOT NULL,
      technicianApproved	boolean			NOT NULL,
      requestComplete	boolean			NOT NULL,
      requestSuccessful	boolean			NOT NULL,
+     requestDate		date			NOT NULL,
      primary key(requestId),
      foreign key(animalId) references ANIMAL(animalId),
      foreign key(userId) references USER(userId),
@@ -269,6 +269,6 @@ VALUES (1,				2,				"Weight",				null,				"2019-04-23 00:00:00",				1),
         (4,				3,				"Temperature",			null,				"2019-04-23 00:00:00",				1),
         (5,				2,				"Dental Status",		null,				"2019-04-24 00:00:00",				1);
         
-INSERT INTO REQUEST (animalId, userId, newStatus, adminApproved, technicianApproved, requestComplete, requestSuccessful)
-VALUES (1,				1,				true,				false,				false,				false,				false),
-		(2,				1,				true,				false,				false,				false,				false);
+INSERT INTO REQUEST (animalId, userId, adminApproved, technicianApproved, requestComplete, requestSuccessful, requestDate)
+VALUES (1,				1,				false,				false,				false,				false,			"2019-04-23 00:00:00"),
+		(2,				1,				false,				false,				false,				false,			"2019-05-24 00:00:00");

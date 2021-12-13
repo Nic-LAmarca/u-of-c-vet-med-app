@@ -8,7 +8,6 @@ import images from "./Images/vetmed.png";
 
 export default function AttendantTreatmentRequestManagement() {
     let [animals,setAnimals] = useState([]);
-    let [requests,setRequests] = useState([]);
     let [treatmentTypeId, setTreatmentTypeId] = useState();
 
     const history = useNavigate();
@@ -99,13 +98,8 @@ export default function AttendantTreatmentRequestManagement() {
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
                                 <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
-                                <Button variant="info" href="TeacherRequestManagement" >
-                                    Attendant Request Management
-                                    <Badge className="ms-2" bg = "danger">8</Badge>
-                                </Button><br/>
-                                <Button variant="info" href="TeacherRequestManagement" >
+                                <Button variant="info" href="/AttendantTreatmentRequest" >
                                     Treatment Request Management
-                                    <Badge className="ms-2" bg = "danger">6</Badge>
                                 </Button><br/>
                                 <Button variant="secondary" href="/" >Logout</Button>
                             </Nav>

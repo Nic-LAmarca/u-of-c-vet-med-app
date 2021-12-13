@@ -24,6 +24,8 @@ export default function TechnicianTreatmentRequestManagement() {
     let [requests,setRequests] = useState([]);
     const [requestId, setRequestId] = useState();
     const [requestMessage, setRequestMessage] = useState('');
+    const [isLoading,setLoading] = useState(true);
+    const [disabled, setDisabled] = useState(false);
 
     const history = useNavigate();
 
@@ -34,41 +36,71 @@ export default function TechnicianTreatmentRequestManagement() {
             .then(function(response){
                 console.log(response.data)
                 setRequests(response.data)
+
             })
             .catch(function(error){
+                // setLoading(false)
                 console.log(error);
             })
     },[])
 
-    async function renderTableBody(){
-        return this.state.requests.map((requests,indexedDB) =>{
-            const { id, name} = requestId
+    function renderTableBody(){
+        return requests.map((value,key) =>{
+            const { acceptedBy,animalId,date,requestedBy,treatmentId} = value
             return(
-                <tr key={id}>
-                    <td>{id}</td>
-                    <td>{name}</td>
+
+                <tr key={treatmentId}>
+                    <td>{treatmentId}</td>
+                    <td>{acceptedBy}</td>
+                    <td>{animalId}</td>
+                    <td>{date}</td>
+                    <td>{requestedBy}</td>
+                    <td><Button onClick={approveRequest} disabled={disabled} variant="success">{disabled ? 'Accepted' : 'Accept'}</Button></td>
+
                 </tr>
+
+
             )
         })
     }
 
+    function renderHeaders(){
+        const headers =["TreatmentId", "AcceptedBy","AnimalId","Date","RequestedBy","Response"]
+        console.log(headers)
+        return headers.map((header)=>{
+            return<th> {header}</th>
+        })
+
+
+    }
+
+    // async function renderHeaders(){
+    //     const header = Object.keys(requests[0])
+    //     console.log(header)
+    //     return header.map((key,value) =>{
+    //         return <th key={value}>{key.toUpperCase()}</th>
+    //     })
+    // }
+
     async function approveRequest(event) {
         event.preventDefault();
-        await axios.post('http://localhost:8080/technicianRequestApproval',
-            null,
-            {
-                params: {
-                    requestId
-                }
-            })
-            .then(function(response){
-                setRequestId();
-                console.log(response.data);
-                setRequestMessage(response.data);
-            })
-            .catch(function(error){
-                console.log(error);
-            });
+        console.log("working")
+        // await axios.post('http://localhost:8080/technicianRequestApproval',
+        //     null,
+        //     {
+        //         params: {
+        //             requestId
+        //         }
+        //     })
+        //     .then(function(response){
+        //         setRequestId();
+        //         console.log(response.data);
+        //         setRequestMessage(response.data);
+        //         setDisabled(true);
+        //     })
+        //     .catch(function(error){
+        //         console.log(error);
+        //     });
         }
 
         async function denyRequest(event) {
@@ -97,7 +129,7 @@ export default function TechnicianTreatmentRequestManagement() {
                         <Image href = "/TechnicianNavigation" className="d-inline-block align-top tr" src={images} fluid/>
                     </Navbar.Brand>
                     <Navbar.Brand>
-                        Technician Request
+                        Technician Treatment Request
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="offcanvasNavbar"/>
                     <Navbar.Offcanvas
@@ -112,13 +144,11 @@ export default function TechnicianTreatmentRequestManagement() {
                             <Nav className="justify-content-end flex-grow-1 pe-3">
                                 <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
                                 <Button variant="info" href="/UserManagement" >User Management</Button><br/>
-                                <Button variant="info" href="TeacherRequestManagement" >
+                                <Button variant="info" href="TechnicianTeachingRequestManagement" >
                                     Teaching Request Management
-                                    <Badge className="ms-2" bg = "danger">8</Badge>
                                 </Button><br/>
-                                <Button variant="info" href="TeacherRequestManagement" >
+                                <Button variant="info" href="/TechnicianTreatmentRequestManagement" >
                                     Treatment Request Management
-                                    <Badge className="ms-2" bg = "danger">6</Badge>
                                 </Button><br/>
                                 <Button variant="secondary" href="/" >Logout</Button>
 
@@ -128,12 +158,15 @@ export default function TechnicianTreatmentRequestManagement() {
                 </Container>
             </Navbar><br/>
             <Container>
-                <Table id = "requests">
+                <Table id = "requests" striped bordered hover responsive>
+                    <thead>
+                        {renderHeaders()}
+                    </thead>
                     <tbody>
-                    <tr>
-                        {requests.map((requests) => <tb>requests</tb>,<Button onClick={approveRequest} variant="info">Approve Request</Button>,<Button onClick={denyRequest} variant="danger">Cancel Request</Button>)}
-                    </tr>
+                        {renderTableBody()}
                     </tbody>
+
+
                 </Table>
             </Container>
         </div>

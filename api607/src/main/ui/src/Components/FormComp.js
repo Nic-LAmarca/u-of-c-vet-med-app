@@ -60,7 +60,7 @@ class FormComp extends Component {
                                 >
                                     Species
                                 </DropdownToggle>
-                                <DropdownMenu >/
+                                <DropdownMenu >
                                     <Form.Check
                                         type="checkbox"
                                         id="checkbox"
@@ -130,7 +130,8 @@ class FormComp extends Component {
                         {/*    */}
                         {/*</Col>*/}
                     </Row><br/>
-                    <Button onClick="searchAnimals">Search By Filter</Button>
+                    <Button onClick = "searchAnimals">Search By Filter </Button>
+
                         <Row xs ={"auto"}>
                     </Row><br/>
                 </Container>

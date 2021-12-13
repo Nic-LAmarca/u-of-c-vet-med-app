@@ -13,7 +13,7 @@ export default function AdminNavigation() {
     let [animals,setAnimals] = useState([]);
     const [animalName, setAnimalName] = useState("");
     const [animalSpecies, setAnimalSpecies] = useState("");
-    const [animalBreed, setAnimalBreed] = useState("");
+    //const [animalBreed, setAnimalBreed] = useState("");
     const [animalStatus, setAnimalStatus] = useState("");
 
     const history = useNavigate();
@@ -57,6 +57,12 @@ export default function AdminNavigation() {
             null,
             )
             .then(function(response){
+
+                const animalList = response.data
+                setAnimals(animalList)
+                //window.localStorage.setItem("allAnimals", animalList)
+                //window.localStorage.setItem("animalCount", animalList.length)
+
                 var table = document.getElementById("table");
                 if(table.rows.length <= 1){
                     const animalList = response.data
@@ -91,30 +97,30 @@ export default function AdminNavigation() {
 
     async function searchAnimals(event) {
         event.preventDefault();
-        setAnimalName(window.localStorage.getItem("name"))
-        setAnimalSpecies(window.localStorage.getItem("species"))
-        setAnimalBreed(window.localStorage.getItem("breed"))
-        setAnimalStatus(window.localStorage.getItem("status"))
+
+        console.log(animalName)
+        console.log(animalSpecies)
+        console.log(animalStatus)
+
         await axios.get('http://localhost:8080/filteredAnimals',
-            null,
+        //null,
             {
                 params: {
-                    animalName,
-                    animalSpecies,
-                    animalBreed,
-                    animalStatus
+                    animalName: animalName,
+                    animalSpecies: animalSpecies,
+                    animalStatus: animalStatus
                 }
             })
             .then(function(response){
-                const animalList = response.data
-                window.localStorage.setItem("animalCount", animalList.length)
+                const filteredAnimalList = response.data
+                 console.log(filteredAnimalList)
                 var table = document.getElementById("table");
                 var j = 1;
                 for(var i = 1; i < table.rows.length; i++){
                     table.deleteRow(i)
                 }
-                for(var i = 0; i < animalList.length; i++){
-                    var temp = animalList[i]
+                for(var i = 0; i < filteredAnimalList.length; i++){
+                    var temp = filteredAnimalList[i]
                     var row = table.insertRow(i+1)
                     for(var k = 0; k < 11; k++){
                         row.insertCell(k)
@@ -161,10 +167,13 @@ export default function AdminNavigation() {
                                     Teacher Request Management
                                     <Badge className="ms-2" bg = "danger">8</Badge>
                                 </Button><br/>
+
+
                                 <Button variant="info" href="/AdminAnimalManagement" >Animal Management</Button><br/>
                                 <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
                                 <Button variant="info" href="/UserManagement" >User Management</Button><br/>
                                 <Button variant="secondary" href="/" >Logout</Button>
+
                             </Nav>
                         </Offcanvas.Body>
                     </Navbar.Offcanvas>
@@ -178,11 +187,17 @@ export default function AdminNavigation() {
                 <Container fluid>
                     <Row className="flex-lg-wrap">
                         <Col lg="3">
-                            <InputGroup className="me-2"  onChange =  {e => this.setName(e.target.value)} >
+
+                            <InputGroup className="me-2" >
+
                                 {/*<Form.Label>Animal Name</Form.Label>*/}
                                 <Form.Control
                                     autoFocus
                                     placeholder="Animal Name"
+                                     value = {animalName}
+                                     onChange =  {(e) => setAnimalName(e.target.value)}
+
+
 
                                     // type="username"
                                     // value={username}
@@ -260,6 +275,39 @@ export default function AdminNavigation() {
                                     />
                                 </DropdownMenu>
                             </Dropdown>
+                        {/*<Col lg="3">*/}
+
+                        {/*    <InputGroup className="me-2"  >*/}
+
+                        {/*        /!*<Form.Label>Animal Name</Form.Label>*!/*/}
+                        {/*        <Form.Control*/}
+                        {/*            autoFocus*/}
+                        {/*            placeholder="Species"*/}
+                        {/*             value = {animalSpecies}*/}
+                        {/*             onChange =  {(e) => setAnimalSpecies(e.target.value)}*/}
+                        {/*        />*/}
+
+                        {/*    </InputGroup><br/>*/}
+                        {/*    </Col>*/}
+                        {/*<Col lg="3">*/}
+
+                        {/*    <InputGroup className="me-2"  >*/}
+
+                        {/*        /!*<Form.Label>Animal Name</Form.Label>*!/*/}
+                        {/*        <Form.Control*/}
+                        {/*            autoFocus*/}
+                        {/*            placeholder="Status"*/}
+                        {/*             value = {animalStatus}*/}
+                        {/*             onChange =  {(e) => setAnimalStatus(e.target.value)}*/}
+
+
+
+                        {/*            // type="username"*/}
+                        {/*            // value={username}*/}
+                        {/*        />*/}
+
+                        {/*    </InputGroup><br/>*/}
+
                         </Col>
                         {/*<Col className="mx-auto">*/}
                         {/*    */}
@@ -268,7 +316,9 @@ export default function AdminNavigation() {
                         {/*    */}
                         {/*</Col>*/}
                     </Row><br/>
-                    <Button onClick="searchAnimals">Search By Filter</Button>
+
+                    <Button onClick= {searchAnimals} >Search By Filter</Button>
+
                         <Row xs ={"auto"}>
                     </Row><br/>
                 </Container>

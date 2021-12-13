@@ -47,7 +47,7 @@ export default function AdminNavigation() {
     async function selectAnimal(event) {
         event.preventDefault();
         console.log("Here")
-        window.localStorage.setItem("animal", 12)
+        window.localStorage.setItem("animal", event.animalId)
         history('/AdminAnimalProfile');
     }
 

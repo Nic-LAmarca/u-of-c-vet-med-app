@@ -17,6 +17,38 @@ export default function AdminNavigation() {
 
     const history = useNavigate();
 
+    async function personalSettings(event) {
+        event.preventDefault();
+        history('/PersonalSettings');
+    }
+
+    async function userManagement(event) {
+        event.preventDefault();
+        history('/UserManagement');
+    }
+
+    async function teacherRequestManagement(event) {
+        event.preventDefault();
+        history('/TeacherRequestManagement');
+    }
+
+    async function animalManagement(event) {
+        event.preventDefault();
+        history('/AnimalManagement');
+    }
+
+    async function logout(event) {
+        event.preventDefault();
+        history('/');
+    }
+
+    async function selectAnimal(event) {
+        event.preventDefault();
+        console.log("Here")
+        window.localStorage.setItem("animal", event.animalId)
+        history('/AdminAnimalProfile');
+    }
+
     useEffect(() => {
         axios.get('http://localhost:8080/animals',
             null,
@@ -57,37 +89,6 @@ export default function AdminNavigation() {
         );
     },[])
 
-    async function personalSettings(event) {
-        event.preventDefault();
-        history('/PersonalSettings');
-    }
-
-    async function userManagement(event) {
-        event.preventDefault();
-        history('/UserManagement');
-    }
-
-    async function teacherRequestManagement(event) {
-        event.preventDefault();
-        history('/TeacherRequestManagement');
-    }
-
-    async function animalManagement(event) {
-        event.preventDefault();
-        history('/AnimalManagement');
-    }
-
-    async function logout(event) {
-        event.preventDefault();
-        history('/');
-    }
-
-    async function selectAnimal(event) {
-        event.preventDefault();
-        console.log("Here")
-        window.localStorage.setItem("animal", 12)
-        history('/AdminAnimalProfile');
-    }
 
 
     async function searchAnimals(event) {

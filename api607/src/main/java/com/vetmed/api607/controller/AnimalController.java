@@ -27,8 +27,8 @@ public class AnimalController {
 
     @CrossOrigin
     @GetMapping("/filteredAnimals{animalName, animalSpecies, animalStatus}")
-    public ArrayList<Animal> getFilteredAnimals(@PathParam("animalName") String animalName, @PathParam("animalSpecies") String animalSpecies,
-                                                @PathParam("animalStatus") String animalStatus) {
+    public ArrayList<Animal> getFilteredAnimals(@PathParam("animalName") String animalName, @PathParam("animalSpecies") String animalSpecies, @PathParam("animalStatus") String animalStatus)
+    {
         return db.getFilteredAnimals(animalName, animalSpecies, animalStatus);
     }
 

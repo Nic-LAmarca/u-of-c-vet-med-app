@@ -1250,7 +1250,6 @@ public class DbController {
                 addTH.setTreatmentId(results.getInt("treatmentId"));
                 addTH.setAnimalId(results.getInt("animalId"));
                 addTH.setDate(results.getDate("date").toString());
-
                 treatmentHistoryArrayList.add(addTH);
             }
             myStmt.close();

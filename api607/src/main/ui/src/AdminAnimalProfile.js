@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 import {Button, Form, Dropdown, DropdownButton, Table, ListGroup,Tabs,Tab,TabContent,TabContainer,Nav,NavItem,Row,Col} from "react-bootstrap";
@@ -14,15 +14,9 @@ export default function AdminAnimalProfile() {
     const [animalSpecies, setAnimalSpecies] = useState("");
     const [animalStatus, setAnimalStatus] = useState("");
     const [description, setDescription] = useState("");
-    window.onload = startup();
 
-    async function startup() {
-        theProfile();
-        theComments();
-    }
-
-    async function theProfile() {
-        await axios.post('http://localhost:8080/searchForAnimal',
+    useEffect(() => {
+        axios.post('http://localhost:8080/searchForAnimal',
             null,
             {
                 params: {
@@ -78,12 +72,8 @@ export default function AdminAnimalProfile() {
             })
             .catch(function(error){
                 console.log(error);
-            }
-        );
-    }
-
-    async function theComments() {
-        await axios.post('http://localhost:8080/comments',
+            })
+        axios.post('http://localhost:8080/comments',
         null,
         {
             params: {
@@ -112,7 +102,7 @@ export default function AdminAnimalProfile() {
         .catch(function(error){
             console.log(error);
         })
-    }
+    },[])
 
     async function addComment(event) {
         event.preventDefault();

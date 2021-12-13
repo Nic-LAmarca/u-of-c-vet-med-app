@@ -1,34 +1,19 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-
-import {
-    Button,
-    Form,
-    Dropdown,
-    DropdownButton,
-    Navbar,
-    Container,
-    Image,
-    Offcanvas,
-    Nav,
-    Badge,
-    Table
-} from "react-bootstrap";
+import {Button, Form, Dropdown, DropdownButton, Navbar, Container, Image, Offcanvas, Nav, Badge, Table} from "react-bootstrap";
 import axios from "axios";
 import './TechnicianTreatmentRequestManagement.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
 import images from "./Images/vetmed.png";
 
-
 export default function TechnicianTreatmentRequestManagement() {
     let [requests,setRequests] = useState([]);
     const [requestId, setRequestId] = useState();
-    const [requestMessage, setRequestMessage] = useState('');
 
     const history = useNavigate();
 
     useEffect(() => {
-        axios.get('http://localhost:8080/technicianTreatmentRequests',
+        axios.get('http://localhost:8080/treatmentRequests',
             null
             )
             .then(function(response){
@@ -41,53 +26,20 @@ export default function TechnicianTreatmentRequestManagement() {
     },[])
 
     async function renderTableBody(){
-        return this.state.requests.map((requests,indexedDB) =>{
-            const { id, name} = requestId
+        return requests.map((requests,indexedDB) =>{
+            const { requestId, name} = requestId
             return(
-                <tr key={id}>
-                    <td>{id}</td>
+                <tr key={requestId}>
+                    <td>{requestId}</td>
                     <td>{name}</td>
                 </tr>
             )
         })
     }
 
-    async function approveRequest(event) {
+    async function acceptRequest(event) {
         event.preventDefault();
-        await axios.post('http://localhost:8080/technicianRequestApproval',
-            null,
-            {
-                params: {
-                    requestId
-                }
-            })
-            .then(function(response){
-                setRequestId();
-                console.log(response.data);
-                setRequestMessage(response.data);
-            })
-            .catch(function(error){
-                console.log(error);
-            });
-        }
-
-        async function denyRequest(event) {
-            event.preventDefault();
-            await axios.post('http://localhost:8080/technicianRequestDenial',
-                null,
-                {
-                    params: {
-                        requestId
-                    }
-                })
-                .then(function(response){
-                    setRequestId();
-                    setRequestMessage(response.data);
-                })
-                .catch(function(error){
-                    console.log(error);
-                });
-            }
+    }
 
     return (
         <div>
@@ -97,7 +49,7 @@ export default function TechnicianTreatmentRequestManagement() {
                         <Image href = "/TechnicianNavigation" className="d-inline-block align-top tr" src={images} fluid/>
                     </Navbar.Brand>
                     <Navbar.Brand>
-                        Technician Request
+                        Technician Treatment Request Management
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="offcanvasNavbar"/>
                     <Navbar.Offcanvas
@@ -131,7 +83,7 @@ export default function TechnicianTreatmentRequestManagement() {
                 <Table id = "requests">
                     <tbody>
                     <tr>
-                        {requests.map((requests) => <tb>requests</tb>,<Button onClick={approveRequest} variant="info">Approve Request</Button>,<Button onClick={denyRequest} variant="danger">Cancel Request</Button>)}
+                        {requests.map((requests) => <tb>requests</tb>,<Button onClick={acceptRequest} variant="info">Accept</Button>)}
                     </tr>
                     </tbody>
                 </Table>

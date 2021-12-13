@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 import {Button, Col, Row, Badge, Form, InputGroup, Dropdown, DropdownButton, ListGroup, Table, Navbar, Container, Image,Offcanvas,Nav,NavDropdown,FormControl} from "react-bootstrap";
@@ -18,46 +18,11 @@ export default function AdminNavigation() {
 
     const history = useNavigate();
 
-    allAnimals();
-
-    async function personalSettings(event) {
-        event.preventDefault();
-        history('/PersonalSettings');
-    }
-
-    async function userManagement(event) {
-        event.preventDefault();
-        history('/UserManagement');
-    }
-
-    async function teacherRequestManagement(event) {
-        event.preventDefault();
-        history('/TeacherRequestManagement');
-    }
-
-    async function animalManagement(event) {
-        event.preventDefault();
-        history('/AnimalManagement');
-    }
-
-    async function logout(event) {
-        event.preventDefault();
-        history('/');
-    }
-
-    async function selectAnimal(event) {
-        event.preventDefault();
-        console.log("Here")
-        window.localStorage.setItem("animal", 12)
-        history('/AdminAnimalProfile');
-    }
-
-    async function allAnimals() {
-        await axios.get('http://localhost:8080/animals',
+    useEffect(() => {
+        axios.get('http://localhost:8080/animals',
             null,
             )
             .then(function(response){
-
                 const animalList = response.data
                 setAnimals(animalList)
                 //window.localStorage.setItem("allAnimals", animalList)
@@ -93,7 +58,40 @@ export default function AdminNavigation() {
                 console.log(error);
             }
         );
+    },[])
+
+    async function personalSettings(event) {
+        event.preventDefault();
+        history('/PersonalSettings');
     }
+
+    async function userManagement(event) {
+        event.preventDefault();
+        history('/UserManagement');
+    }
+
+    async function teacherRequestManagement(event) {
+        event.preventDefault();
+        history('/TeacherRequestManagement');
+    }
+
+    async function animalManagement(event) {
+        event.preventDefault();
+        history('/AnimalManagement');
+    }
+
+    async function logout(event) {
+        event.preventDefault();
+        history('/');
+    }
+
+    async function selectAnimal(event) {
+        event.preventDefault();
+        console.log("Here")
+        window.localStorage.setItem("animal", 12)
+        history('/AdminAnimalProfile');
+    }
+
 
     async function searchAnimals(event) {
         event.preventDefault();

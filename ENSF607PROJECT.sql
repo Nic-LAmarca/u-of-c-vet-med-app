@@ -155,12 +155,13 @@ CREATE TABLE IF NOT EXISTS MEDICAL_RECORD_HISTORY
      ON DELETE CASCADE);
    
 CREATE TABLE IF NOT EXISTS TREATMENT_HISTORY
-	(treatmentId		int				NOT NULL auto_increment,
+	(treatmentHistoryId	int				 NOT NULL auto_increment,
+    treatmentId		int				NOT NULL,
      animalId			int				NOT NULL,
      date				datetime		NOT NULL,
      requestedBy		int				NOT NULL,
      acceptedBy			int,
-     primary key(treatmentId),
+     primary key(treatmentHistoryId),
 	 CONSTRAINT treatmentHistoryAnimalCascade
      FOREIGN KEY (animalId)
      REFERENCES ANIMAL (animalId)

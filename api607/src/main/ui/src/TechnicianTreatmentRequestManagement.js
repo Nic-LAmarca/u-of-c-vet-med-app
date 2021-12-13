@@ -73,6 +73,14 @@ export default function TechnicianTreatmentRequestManagement() {
 
     }
 
+    // async function renderHeaders(){
+    //     const header = Object.keys(requests[0])
+    //     console.log(header)
+    //     return header.map((key,value) =>{
+    //         return <th key={value}>{key.toUpperCase()}</th>
+    //     })
+    // }
+
     async function approveRequest(requestId) {
         var userId = window.localStorage.getItem("userId")
         axios.post('http://localhost:8080/technicianRequestApproval',

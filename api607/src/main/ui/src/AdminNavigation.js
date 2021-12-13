@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 import {Button, Col, Row, Badge, Form, InputGroup, Dropdown, DropdownButton, ListGroup, Table, Navbar, Container, Image,Offcanvas,Nav,NavDropdown,FormControl} from "react-bootstrap";
@@ -52,11 +52,11 @@ export default function AdminNavigation() {
     }
 
     async function allAnimals() {
-        await axios.get('http://localhost:8080/animals',
+    useEffect(() => {
+        axios.get('http://localhost:8080/animals',
             null,
             )
             .then(function(response){
-
                 const animalList = response.data
                 setAnimals(animalList)
 
@@ -90,7 +90,9 @@ export default function AdminNavigation() {
                 console.log(error);
             }
         );
-    }
+    },[])
+
+
 
     async function searchAnimals(event) {
         event.preventDefault();

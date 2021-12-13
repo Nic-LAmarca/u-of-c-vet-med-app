@@ -126,7 +126,7 @@ public class DbController {
             // Case 5- Given animal name and status
             else if(animalSpecies == "")
             {
-                query = "SELECT * FROM ANIMAL WHERE animalName= ? AND stausType = ?";
+                query = "SELECT * FROM ANIMAL WHERE animalName= ? AND statusType = ?";
                 myStmt = this.dbConnect.prepareStatement(query);
                 myStmt.setString(1, animalName);
                 myStmt.setString(2, animalStatus);
@@ -134,12 +134,21 @@ public class DbController {
             // Case 6- Given animal species and status
             else if(animalName == "")
             {
-                query = "SELECT * FROM ANIMAL WHERE species= ? AND stausType = ?";
+                query = "SELECT * FROM ANIMAL WHERE species= ? AND statusType = ?";
                 myStmt = this.dbConnect.prepareStatement(query);
                 myStmt.setString(1, animalSpecies);
                 myStmt.setString(2, animalStatus);
             }
-            //Case 7- Given no values: Returns full list
+            // Case 7- Given all values
+            else if(animalName != "" && animalSpecies != "" && animalStatus != "")
+            {
+                query = "SELECT * FROM ANIMAL WHERE animalName = ? AND species= ? AND statusType = ?";
+                myStmt = this.dbConnect.prepareStatement(query);
+                myStmt.setString(1, animalName);
+                myStmt.setString(2, animalSpecies);
+                myStmt.setString(3, animalStatus);
+            }
+            //Case 8- Given no values
             else
             {
                 query = "SELECT * FROM ANIMAL";

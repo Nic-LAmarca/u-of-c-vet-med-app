@@ -1,13 +1,13 @@
 import React,{useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-import {Button,Badge, Form, Dropdown, DropdownButton, ListGroup, Table, Navbar, Container, Image,Offcanvas,Nav,NavDropdown,FormControl} from "react-bootstrap";
+import {Button, Col, Row, Badge, Form, InputGroup, Dropdown, DropdownButton, ListGroup, Table, Navbar, Container, Image,Offcanvas,Nav,NavDropdown,FormControl} from "react-bootstrap";
+import DropdownItem from "react-bootstrap/DropdownItem";
+import DropdownToggle from "react-bootstrap/DropdownToggle";
+import DropdownMenu from "react-bootstrap/DropdownMenu";
 import axios from "axios";
 import './AdminNavigation.css';
-import DropdownItem from "react-bootstrap/DropdownItem";
 import images from "./Images/vetmed.png";
-import FormComp from "./Components/FormComp";
-import TableComp from "./Components/TableComp";
 
 export default function AdminNavigation() {
     let [animals,setAnimals] = useState([]);
@@ -58,7 +58,9 @@ export default function AdminNavigation() {
             )
             .then(function(response){
                 const animalList = response.data
-                window.localStorage.setItem("animalCount", animalList.length)
+                setAnimals(animalList)
+                //window.localStorage.setItem("allAnimals", animalList)
+                //window.localStorage.setItem("animalCount", animalList.length)
                 var table = document.getElementById("table");
                 var j = 1;
                 for(var i = 0; i < animalList.length; i++){
@@ -89,11 +91,11 @@ export default function AdminNavigation() {
 
     async function searchAnimals(event) {
         event.preventDefault();
-        setAnimalName(window.localStorage.getItem("name"))
-        setAnimalSpecies(window.localStorage.getItem("species"))
-        setAnimalBreed(window.localStorage.getItem("breed"))
-        setAnimalStatus(window.localStorage.getItem("status"))
-        await axios.get('http://localhost:8080/animals',
+        console.log(animalName)
+         console.log(animalBreed)
+          console.log(animalSpecies)
+           console.log(animalStatus)
+        await axios.get('http://localhost:8080/filteredAnimals',
             null,
             {
                 params: {
@@ -105,6 +107,7 @@ export default function AdminNavigation() {
             })
             .then(function(response){
                 const animalList = response.data
+                 console.log(animalList)
                 window.localStorage.setItem("animalCount", animalList.length)
                 var table = document.getElementById("table");
                 var j = 1;
@@ -160,14 +163,96 @@ export default function AdminNavigation() {
                                 </Button><br/>
                                 <Button variant="info" href="#action" onClick={animalManagement}>Animal Management</Button><br/>
                                 <Button variant="secondary" href="#action2" onClick={logout}>Logout</Button>
-
                             </Nav>
                         </Offcanvas.Body>
                     </Navbar.Offcanvas>
                 </Container>
             </Navbar>
             <Container fluid>
-                <FormComp/><br/>
+
+
+
+            <div>
+                <Container fluid>
+                    <Row className="flex-lg-wrap">
+                        <Col lg="3">
+                            <InputGroup className="me-2"  >
+                                {/*<Form.Label>Animal Name</Form.Label>*/}
+                                <Form.Control
+                                    autoFocus
+                                    placeholder="Animal Name"
+                                     value = {animalName}
+                                     onChange =  {(e) => setAnimalName(e.target.value)}
+
+
+                                    // type="username"
+                                    // value={username}
+                                />
+
+                            </InputGroup><br/>
+                        </Col>
+                        <Col className="mx-auto">
+
+                            <Dropdown className="d-inline me-4"  autoClose="outside" >
+                                <DropdownToggle
+                                    id = "dropdown-autoclose-false"
+                                    variant="secondary"
+
+                                >
+                                    Species
+                                </DropdownToggle>
+                                <DropdownMenu >
+                                    {animals.map(item =>(
+                                    <DropdownItem>{item.species}</DropdownItem>
+                                    ))}
+                                </DropdownMenu>
+                            </Dropdown >
+
+
+
+
+
+                            <Dropdown className="d-inline me-4" autoClose="outside"  >
+
+                                <DropdownToggle id = "dropdown-autoclose-false" variant="secondary">
+                                    Breed
+
+                                </DropdownToggle>
+                                <DropdownMenu >
+                                    {animals.map(item =>(
+                                    <DropdownItem >{item.breed}</DropdownItem>
+                                    ))}
+                                </DropdownMenu>
+                            </Dropdown >
+
+
+                            <Dropdown className="d-inline me-4" autoClose="outside">
+                                <DropdownToggle id = "dropdown-autoclose-false" variant="secondary" >
+                                    Status
+                                </DropdownToggle>
+
+                                <DropdownMenu  >
+                                    {animals.map(item =>(
+                                    <DropdownItem>{item.statusType}</DropdownItem>
+                                    ))}
+                                </DropdownMenu>
+                            </Dropdown>
+                        </Col>
+                        {/*<Col className="mx-auto">*/}
+                        {/*    */}
+                        {/*</Col>*/}
+                        {/*<Col className="mx-auto">*/}
+                        {/*    */}
+                        {/*</Col>*/}
+                    </Row><br/>
+                    <Button onClick= {searchAnimals} >Search By Filter</Button>
+                        <Row xs ={"auto"}>
+                    </Row><br/>
+                </Container>
+            </div>
+
+
+
                 <h1>
                     Results
                 </h1>

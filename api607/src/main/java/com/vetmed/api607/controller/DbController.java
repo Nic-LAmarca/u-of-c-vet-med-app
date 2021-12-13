@@ -89,14 +89,22 @@ public class DbController {
      */
     public ArrayList<Animal> getFilteredAnimals(String animalName, String animalSpecies, String animalBreed, String animalStatus) {
         ArrayList<Animal> animalList = new ArrayList<Animal>();
+        System.out.println( "Name:  " + animalName);
+     ;
+        String query;
         try {
+            PreparedStatement myStmt;
             System.out.println("There");
-            String query = "SELECT * FROM ANIMAL WHERE animalName = ?(@animalName IS NULL, animalName, @animalName) AND  animalSpecies = ?(@animalSpecies IS NULL, animalSpecies, @animalSpecies) AND animalBreed = ?(@animalBreed IS NULL, animalBreed, @animalBreed) AND animalStatus = ?(@animalStatus IS NULL, animalStatus, @animalStatus)";
-            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
-            myStmt.setString(1, animalName);
-            myStmt.setString(2, animalSpecies);
-            myStmt.setString(3, animalBreed);
-            myStmt.setString(4, animalStatus);
+            if (animalSpecies == null && animalBreed == null && animalStatus == null)
+            {
+                query = "SELECT * FROM ANIMAL WHERE animalName = ?";
+                myStmt = this.dbConnect.prepareStatement(query);
+                myStmt.setString(1, animalName);
+            }
+            else {
+                query = "SELECT * FROM ANIMAL";
+                myStmt = this.dbConnect.prepareStatement(query);
+            }
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
                 Animal addAnimal = new Animal();
@@ -121,6 +129,7 @@ public class DbController {
                 addAnimal.setColor(results.getString("color"));
                 addAnimal.setDistinguishingFeatures(results.getString("distinguishingFeatures"));
                 animalList.add(addAnimal);
+                System.out.println(addAnimal.getAnimalName());
             }
             myStmt.close();
         } catch (Exception e) {

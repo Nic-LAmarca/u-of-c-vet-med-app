@@ -1,8 +1,6 @@
 package com.vetmed.api607.controller;
 
 import com.vetmed.api607.model.*;
-
-import javax.websocket.server.PathParam;
 import java.io.FileReader;
 import java.sql.*;
 import java.util.ArrayList;
@@ -96,14 +94,63 @@ public class DbController {
         try {
             PreparedStatement myStmt;
 
+            // Case 1- Only given animal name
             if (animalSpecies == "" && animalStatus == "")
             {
                 query = "SELECT * FROM ANIMAL WHERE animalName = ?";
                 myStmt = this.dbConnect.prepareStatement(query);
                 myStmt.setString(1, animalName);
-                System.out.println("There");
             }
-            else {
+            // Case 2- Only given animal species
+            else if( animalName == "" && animalStatus == "")
+            {
+                query = "SELECT * FROM ANIMAL where species = ?";
+                myStmt = this.dbConnect.prepareStatement(query);
+                myStmt.setString(1, animalSpecies);
+            }
+            // Case 3- Only given animal status
+            else if( animalName == "" && animalSpecies == "")
+            {
+                query = "SELECT * FROM ANIMAL WHERE statusType = ?";
+                myStmt = this.dbConnect.prepareStatement(query);
+                myStmt.setString(1, animalStatus);
+            }
+            // Case 4- Given animal name and species
+            else if(animalStatus== "")
+            {
+                query = "SELECT * FROM ANIMAL WHERE animalName= ? AND species = ?";
+                myStmt = this.dbConnect.prepareStatement(query);
+                myStmt.setString(1, animalName);
+                myStmt.setString(2, animalSpecies);
+            }
+            // Case 5- Given animal name and status
+            else if(animalSpecies == "")
+            {
+                query = "SELECT * FROM ANIMAL WHERE animalName= ? AND statusType = ?";
+                myStmt = this.dbConnect.prepareStatement(query);
+                myStmt.setString(1, animalName);
+                myStmt.setString(2, animalStatus);
+            }
+            // Case 6- Given animal species and status
+            else if(animalName == "")
+            {
+                query = "SELECT * FROM ANIMAL WHERE species= ? AND statusType = ?";
+                myStmt = this.dbConnect.prepareStatement(query);
+                myStmt.setString(1, animalSpecies);
+                myStmt.setString(2, animalStatus);
+            }
+            // Case 7- Given all values
+            else if(animalName != "" && animalSpecies != "" && animalStatus != "")
+            {
+                query = "SELECT * FROM ANIMAL WHERE animalName = ? AND species= ? AND statusType = ?";
+                myStmt = this.dbConnect.prepareStatement(query);
+                myStmt.setString(1, animalName);
+                myStmt.setString(2, animalSpecies);
+                myStmt.setString(3, animalStatus);
+            }
+            //Case 8- Given no values
+            else
+            {
                 query = "SELECT * FROM ANIMAL";
                 myStmt = this.dbConnect.prepareStatement(query);
             }
@@ -1201,7 +1248,6 @@ public class DbController {
                 addTH.setTreatmentId(results.getInt("treatmentId"));
                 addTH.setAnimalId(results.getInt("animalId"));
                 addTH.setDate(results.getDate("date").toString());
-
                 treatmentHistoryArrayList.add(addTH);
             }
             myStmt.close();

@@ -56,7 +56,7 @@ export default function TechnicianTreatmentRequestManagement() {
                     <td>{acceptedBy}</td>
                     <td>
                         if(1 == 1){
-                            <td><Button onClick={(e)=>approveRequest(treatmentHistoryId)} variant="success">Accept</Button></td>
+                            <td><Button onClick={(e)=>acceptRequest(treatmentHistoryId)} variant="success">Accept</Button></td>
                         }
                     </td>
                 </tr>
@@ -71,7 +71,7 @@ export default function TechnicianTreatmentRequestManagement() {
         })
     }
 
-    async function approveRequest(requestId) {
+    async function acceptRequest(requestId) {
         var userId = window.localStorage.getItem("userId")
         axios.post('http://localhost:8080/technicianRequestApproval',
              null,
@@ -91,24 +91,6 @@ export default function TechnicianTreatmentRequestManagement() {
              .catch(function(error){
                  console.log(error);
              });;
-    }
-
-    async function denyRequest(event) {
-        event.preventDefault();
-        await axios.post('http://localhost:8080/technicianRequestDenial',
-            null,
-            {
-                params: {
-                    requestId
-                }
-            })
-            .then(function(response){
-                setRequestId();
-                setRequestMessage(response.data);
-            })
-            .catch(function(error){
-                console.log(error);
-            });
     }
 
     return (
@@ -155,8 +137,6 @@ export default function TechnicianTreatmentRequestManagement() {
                     <tbody>
                     {renderTableBody()}
                     </tbody>
-
-
                 </Table>
             </Container>
         </div>

@@ -3,6 +3,7 @@ package com.vetmed.api607.controller;
 import com.vetmed.api607.model.*;
 import java.io.FileReader;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.sql.Date;
@@ -1274,17 +1275,17 @@ public class DbController {
      *
      * Method is used to add a TreatmentHistory into the database based on the entered credentials
      *
+     * @param userId is the ID of the user who is requesting treatment
      * @param animalId is the ID of the animal who the prescription history is for
-     * @param animalId is the ID of the animal who the prescription history is for
-     * @param date the date the status was created
      */
-    public void addTreatment(int treatmentHistoryId, int animalId, String date) {
+    public void makeTreatmentRequest(int userId, int animalId, int treatmentTypeId) {
         try {
-            String query = "INSERT INTO TREATMENT_HISTORY (treatmentId, animalId, date) VALUES (?, ?)";
+            String query = "INSERT INTO TREATMENT_HISTORY (treatmentId, animalId, date, requestedBy) VALUES (?, ?, ?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
-            myStmt.setInt(1, treatmentHistoryId);
+            myStmt.setInt(1, treatmentTypeId);
             myStmt.setInt(2, animalId);
-            myStmt.setDate(3, Date.valueOf(date));
+            myStmt.setDate(3, Date.valueOf(LocalDate.now()));
+            myStmt.setInt(4, userId);
             myStmt.executeUpdate();
             myStmt.close();
         } catch (Exception e) {

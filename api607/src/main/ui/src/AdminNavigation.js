@@ -11,11 +11,14 @@ import images from "./Images/vetmed.png";
 
 export default function AdminNavigation() {
     let [animals,setAnimals] = useState([]);
+
     const [animalName, setAnimalName] = useState("");
     const [animalSpecies, setAnimalSpecies] = useState("");
     const [animalStatus, setAnimalStatus] = useState("");
+    const [animalId, setAnimalId] = useState();
 
     const history = useNavigate();
+
 
     async function personalSettings(event) {
         event.preventDefault();
@@ -45,7 +48,7 @@ export default function AdminNavigation() {
     async function selectAnimal(event) {
         event.preventDefault();
         console.log("Here")
-        window.localStorage.setItem("animal", event.animalId)
+        window.localStorage.setItem("animal", animalId)
         history('/AdminAnimalProfile');
     }
 
@@ -65,7 +68,7 @@ export default function AdminNavigation() {
                     for(var i = 0; i < animalList.length; i++){
                         var temp = animalList[i]
                         var row = table.insertRow(i+1)
-                        for(var k = 0; k < 11; k++){
+                        for(var k = 0; k < 10; k++){
                             row.insertCell(k)
                         }
                         table.rows[j].cells[0].innerHTML = temp.animalId
@@ -78,7 +81,6 @@ export default function AdminNavigation() {
                         table.rows[j].cells[7].innerHTML = temp.location
                         table.rows[j].cells[8].innerHTML = temp.alert
                         table.rows[j].cells[9].innerHTML = temp.color
-                        table.rows[j].cells[10].innerHTML = '<input id="Button" type="button" onClick="selectAnimal" value="Select" />'
                         j = j + 1
                     }
                 }
@@ -88,6 +90,7 @@ export default function AdminNavigation() {
             }
         );
     },[])
+
 
 
 
@@ -117,7 +120,7 @@ export default function AdminNavigation() {
                 for(var i = 0; i < filteredAnimalList.length; i++){
                     var temp = filteredAnimalList[i]
                     var row = table.insertRow(i+1)
-                    for(var k = 0; k < 11; k++){
+                    for(var k = 0; k < 10; k++){
                         row.insertCell(k)
                     }
                     table.rows[j].cells[0].innerHTML = temp.animalId
@@ -130,7 +133,6 @@ export default function AdminNavigation() {
                     table.rows[j].cells[7].innerHTML = temp.location
                     table.rows[j].cells[8].innerHTML = temp.alert
                     table.rows[j].cells[9].innerHTML = temp.color
-                    table.rows[j].cells[10].innerHTML = '<input id="Button" type="button" onClick={selectAnimal} value="Select" />'
                     j = j + 1
                 }
             })
@@ -232,8 +234,6 @@ export default function AdminNavigation() {
                 </Container>
             </div>
 
-
-
                 <h1>
                     Results
                 </h1>
@@ -250,10 +250,29 @@ export default function AdminNavigation() {
                         <th>location</th>
                         <th>alert</th>
                         <th>color</th>
-                        <th>select</th>
                     </tr>
                     </thead>
-                </Table>
+                  </Table>
+                        <Row className="flex-lg-wrap">
+                            <Col lg="2">
+
+                                <InputGroup className="me-2"  >
+
+                                    <Form.Control
+                                        autoFocus
+                                        placeholder="Enter Animal ID"
+                                        value = {animalId}
+                                         onChange =  {(e) => setAnimalId(e.target.value)}
+                                    />
+
+                                </InputGroup><br/>
+
+                            </Col>
+                             <Col lg="3">
+                        <Button onClick= {selectAnimal} >Select Animal</Button>
+                            </Col>
+
+                        </Row><br/>
             </Container>
 
         </div>

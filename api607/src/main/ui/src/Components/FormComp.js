@@ -133,7 +133,6 @@ class FormComp extends Component {
                     <Button onClick = "searchAnimals">Search By Filter </Button>
 
                         <Row xs ={"auto"}>
-
                     </Row><br/>
                 </Container>
 

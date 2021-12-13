@@ -11,4 +11,6 @@ public class TreatmentHistory {
     private int treatmentId;
     private int animalId;
     private String date;
+    private int requestedBy;
+    private int acceptedBy;
 }

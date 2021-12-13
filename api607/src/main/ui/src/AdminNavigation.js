@@ -18,9 +18,7 @@ export default function AdminNavigation() {
 
     const history = useNavigate();
 
-    window.onload = function() {
-        allAnimals();
-    };
+    allAnimals();
 
     async function personalSettings(event) {
         event.preventDefault();
@@ -49,6 +47,8 @@ export default function AdminNavigation() {
 
     async function selectAnimal(event) {
         event.preventDefault();
+        console.log("Here")
+        window.localStorage.setItem("animal", 12)
         history('/AdminAnimalProfile');
     }
 
@@ -57,30 +57,36 @@ export default function AdminNavigation() {
             null,
             )
             .then(function(response){
+
                 const animalList = response.data
                 setAnimals(animalList)
                 //window.localStorage.setItem("allAnimals", animalList)
                 //window.localStorage.setItem("animalCount", animalList.length)
+
                 var table = document.getElementById("table");
-                var j = 1;
-                for(var i = 0; i < animalList.length; i++){
-                    var temp = animalList[i]
-                    var row = table.insertRow(i+1)
-                    for(var k = 0; k < 11; k++){
-                        row.insertCell(k)
+                if(table.rows.length <= 1){
+                    const animalList = response.data
+                    window.localStorage.setItem("animalCount", animalList.length)
+                    var j = 1;
+                    for(var i = 0; i < animalList.length; i++){
+                        var temp = animalList[i]
+                        var row = table.insertRow(i+1)
+                        for(var k = 0; k < 11; k++){
+                            row.insertCell(k)
+                        }
+                        table.rows[j].cells[0].innerHTML = temp.animalId
+                        table.rows[j].cells[1].innerHTML = temp.animalName
+                        table.rows[j].cells[2].innerHTML = temp.species
+                        table.rows[j].cells[3].innerHTML = temp.breed
+                        table.rows[j].cells[4].innerHTML = temp.sex
+                        table.rows[j].cells[5].innerHTML = temp.statusType
+                        table.rows[j].cells[6].innerHTML = temp.available
+                        table.rows[j].cells[7].innerHTML = temp.location
+                        table.rows[j].cells[8].innerHTML = temp.alert
+                        table.rows[j].cells[9].innerHTML = temp.color
+                        table.rows[j].cells[10].innerHTML = '<input id="Button" type="button" onClick="selectAnimal" value="Select" />'
+                        j = j + 1
                     }
-                    table.rows[j].cells[0].innerHTML = temp.animalId
-                    table.rows[j].cells[1].innerHTML = temp.animalName
-                    table.rows[j].cells[2].innerHTML = temp.species
-                    table.rows[j].cells[3].innerHTML = temp.breed
-                    table.rows[j].cells[4].innerHTML = temp.sex
-                    table.rows[j].cells[5].innerHTML = temp.statusType
-                    table.rows[j].cells[6].innerHTML = temp.available
-                    table.rows[j].cells[7].innerHTML = temp.location
-                    table.rows[j].cells[8].innerHTML = temp.alert
-                    table.rows[j].cells[9].innerHTML = temp.color
-                    table.rows[j].cells[10].innerHTML = '<input id="Button" type="button" href="/AdminAnimalProfile" value="Select" />'
-                    j = j + 1
                 }
             })
             .catch(function(error){
@@ -91,10 +97,17 @@ export default function AdminNavigation() {
 
     async function searchAnimals(event) {
         event.preventDefault();
+
         console.log(animalName)
          console.log(animalBreed)
           console.log(animalSpecies)
            console.log(animalStatus)
+
+        setAnimalName(window.localStorage.getItem("name"))
+        setAnimalSpecies(window.localStorage.getItem("species"))
+        setAnimalBreed(window.localStorage.getItem("breed"))
+        setAnimalStatus(window.localStorage.getItem("status"))
+
         await axios.get('http://localhost:8080/filteredAnimals',
             null,
             {
@@ -111,6 +124,9 @@ export default function AdminNavigation() {
                 window.localStorage.setItem("animalCount", animalList.length)
                 var table = document.getElementById("table");
                 var j = 1;
+                for(var i = 1; i < table.rows.length; i++){
+                    table.deleteRow(i)
+                }
                 for(var i = 0; i < animalList.length; i++){
                     var temp = animalList[i]
                     var row = table.insertRow(i+1)
@@ -127,7 +143,7 @@ export default function AdminNavigation() {
                     table.rows[j].cells[7].innerHTML = temp.location
                     table.rows[j].cells[8].innerHTML = temp.alert
                     table.rows[j].cells[9].innerHTML = temp.color
-                    table.rows[j].cells[10].innerHTML = '<input id="Button" type="button" href="/AdminAnimalProfile" value="Select" />'
+                    table.rows[j].cells[10].innerHTML = '<input id="Button" type="button" onClick={selectAnimal} value="Select" />'
                     j = j + 1
                 }
             })
@@ -155,19 +171,22 @@ export default function AdminNavigation() {
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
-                                <Button variant="info" href="#action1" onClick={personalSettings}>Personal Settings</Button><br/>
-                                <Button variant="info" href="#action2" onClick={userManagement}>User Management</Button><br/>
-                                <Button variant="info" href="#action2" onClick={teacherRequestManagement}>
+                                <Button variant="info" href="/TeacherRequestManagement" >
                                     Teacher Request Management
                                     <Badge className="ms-2" bg = "danger">8</Badge>
                                 </Button><br/>
-                                <Button variant="info" href="#action" onClick={animalManagement}>Animal Management</Button><br/>
-                                <Button variant="secondary" href="#action2" onClick={logout}>Logout</Button>
+
+
+                                <Button variant="info" href="/AdminAnimalManagement" >Animal Management</Button><br/>
+                                <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
+                                <Button variant="info" href="/UserManagement" >User Management</Button><br/>
+                                <Button variant="secondary" href="/" >Logout</Button>
+
                             </Nav>
                         </Offcanvas.Body>
                     </Navbar.Offcanvas>
                 </Container>
-            </Navbar>
+            </Navbar><br/>
             <Container fluid>
 
 
@@ -176,13 +195,16 @@ export default function AdminNavigation() {
                 <Container fluid>
                     <Row className="flex-lg-wrap">
                         <Col lg="3">
-                            <InputGroup className="me-2"  >
+
+                            <InputGroup className="me-2"  onChange =  {e => this.setName(e.target.value)} >
+
                                 {/*<Form.Label>Animal Name</Form.Label>*/}
                                 <Form.Control
                                     autoFocus
                                     placeholder="Animal Name"
                                      value = {animalName}
                                      onChange =  {(e) => setAnimalName(e.target.value)}
+
 
 
                                     // type="username"
@@ -235,6 +257,75 @@ export default function AdminNavigation() {
                                     {animals.map(item =>(
                                     <DropdownItem>{item.statusType}</DropdownItem>
                                     ))}
+
+                            <Dropdown className="d-inline me-4" autoClose="outside"  onSelect = {e => this.setSpecies(e.target.value)} >
+                                <DropdownToggle
+                                    id = "dropdown-autoclose-false"
+                                    variant="secondary"
+                                >
+                                    Species
+                                </DropdownToggle>
+                                <DropdownMenu >/
+                                    <Form.Check
+                                        type="checkbox"
+                                        id="checkbox"
+                                        label="Chicken Noodle Soup"
+                                        className="mx-3"
+
+                                    />
+                                    <Form.Check
+                                        type="checkbox"
+                                        id="checkbox"
+                                        label="Seggs"
+                                        className="mx-3"
+                                    />
+                                </DropdownMenu>
+                            </Dropdown >
+                            <Dropdown className="d-inline me-4" autoClose="outside"  onSelect = {e => this.setBreed(e.target.value)} >
+                                <DropdownToggle id = "dropdown-autoclose-false" variant="secondary">
+                                    Breed
+                                </DropdownToggle>
+                                <DropdownMenu >
+                                    <Form.Check
+                                        type="checkbox"
+                                        id="checkbox"
+                                        label="Soup Soup"
+                                        className="mx-3"
+                                    />
+                                    <Form.Check
+                                        type="checkbox"
+                                        id="checkbox"
+                                        label="Seggsy"
+                                        className="mx-3"
+                                    />
+                                </DropdownMenu>
+                            </Dropdown >
+                            <Dropdown className="d-inline me-4" autoClose="outside" onSelect = {e => this.setStatus(e.target.value)}>
+                                <DropdownToggle id = "dropdown-autoclose-false" variant="secondary">
+                                    Status
+                                </DropdownToggle>
+
+                                <DropdownMenu className="me-auto">
+
+                                    <Form.Check
+                                        type="checkbox"
+                                        id="checkbox"
+                                        label="Warning"
+                                        className="mx-3"
+                                    />
+                                    <Form.Check
+                                        type="checkbox"
+                                        id="checkbox"
+                                        label="Fine"
+                                        className="mx-3"
+                                    />
+                                    <Form.Check
+                                        type="checkbox"
+                                        id="checkbox"
+                                        label="Urgent"
+                                        className="mx-3"
+                                    />
+
                                 </DropdownMenu>
                             </Dropdown>
                         </Col>
@@ -245,7 +336,9 @@ export default function AdminNavigation() {
                         {/*    */}
                         {/*</Col>*/}
                     </Row><br/>
+
                     <Button onClick= {searchAnimals} >Search By Filter</Button>
+
                         <Row xs ={"auto"}>
                     </Row><br/>
                 </Container>

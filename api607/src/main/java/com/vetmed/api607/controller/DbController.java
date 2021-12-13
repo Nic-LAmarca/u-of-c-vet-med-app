@@ -206,7 +206,7 @@ public class DbController {
     public void addAnimal(String animalName, String species, Double weight, int tattooNum, String cityTattoo, String birthDate, String breed,
                            String sex, long rfid, long microchip, String statusType, String location, String alert,  String purpose, String region, String subspecies, String color, String distinguishingFeatures) {
         try {
-            String query = "INSERT INT0 ANIMAL (animalName, species, weight, tattooNum, cityTattoo, birthDate, breed, sex, rfid, microchip, statusType, available, location, alert, purpose, region, subspecies, color, distinguishingFeatures) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO ANIMAL (animalName, species, weight, tattooNum, cityTattoo, birthDate, breed, sex, rfid, microchip, statusType, available, location, alert, purpose, region, subspecies, color, distinguishingFeatures) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setString(1, animalName);
             myStmt.setString(2, species);
@@ -227,7 +227,7 @@ public class DbController {
             myStmt.setString(17, subspecies);
             myStmt.setString(18, color);
             myStmt.setString(19, distinguishingFeatures);
-            myStmt.executeQuery();
+            myStmt.executeUpdate();
             myStmt.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -251,6 +251,36 @@ public class DbController {
     // *********************************************************
     // ****** SECTION USED FOR COMMENT QUERY INTERACTIONS ******
     // *********************************************************
+
+    /**
+     *
+     * Method is used to search the database for all comments related to an animal
+     *
+     * @param id is the unique animal id value to search with
+     * @return a new Comment object ArrayList that matches the id passed as an argument
+     */
+    public ArrayList<Comment> animalComments(int id) {
+        ArrayList<Comment> commentList = new ArrayList<Comment>();
+        try {
+            String query = "SELECT * FROM COMMENT WHERE animalId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, id);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                Comment c = new Comment();
+                c.setCommentId(id);
+                c.setUserId(results.getInt("userId"));
+                c.setAnimalId(results.getInt("animalId"));
+                c.setDescription(results.getString("description"));
+                c.setDate(results.getDate("date").toString());
+                commentList.add(c);
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return commentList;
+    }
 
     /**
      *
@@ -321,13 +351,13 @@ public class DbController {
      */
     public void addComment(int userId, int animalId, String description, String date){
         try {
-            String query = "INSERT INT0 COMMENT (userId, animalId, description, date) VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO COMMENT (userId, animalId, description, date) VALUES (?, ?, ?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setInt(1, userId);
             myStmt.setInt(2, animalId);
             myStmt.setString(3, description);
             myStmt.setDate(4, Date.valueOf(date));
-            myStmt.executeQuery();
+            myStmt.executeUpdate();
             myStmt.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -423,7 +453,7 @@ public class DbController {
      */
     public void addHistory(String date, int animalId, String measurement, Double value, int userId){
         try {
-            String query = "INSERT INT0 HISTORY (date, animalId, measurement, value, userId) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO HISTORY (date, animalId, measurement, value, userId) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setDate(1, Date.valueOf(date));
             myStmt.setInt(2, animalId);
@@ -526,7 +556,8 @@ public class DbController {
      */
     public void addImage(int userId, String creationDate, String file, int animalId, String type){
         try {
-            String query = "INSERT INT0 IMAGE (userId, creationDate, file, animalId, type) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO" +
+                    " IMAGE (userId, creationDate, file, animalId, type) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setInt(1, userId);
             myStmt.setDate(2, Date.valueOf(creationDate));
@@ -620,11 +651,11 @@ public class DbController {
      */
     public void addMedicalRecordHistory(int animalId, String date){
         try {
-            String query = "INSERT INT0 MEDICAL_RECORD_HISTORY (AnimalId, date) VALUES (?, ?)";
+            String query = "INSERT INTO MEDICAL_RECORD_HISTORY (AnimalId, date) VALUES (?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setInt(1, animalId);
             myStmt.setDate(2, Date.valueOf(date));
-            myStmt.executeQuery();
+            myStmt.executeUpdate();
             myStmt.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -707,10 +738,10 @@ public class DbController {
      */
     public void addMedicalRecordType(String medicalRecordType) {
         try {
-            String query = "INSERT INT0 MEDICAL_RECORD_TYPE (medicalRecordType) VALUES (?)";
+            String query = "INSERT INTO MEDICAL_RECORD_TYPE (medicalRecordType) VALUES (?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setString(1, medicalRecordType);
-            myStmt.executeQuery();
+            myStmt.executeUpdate();
             myStmt.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -812,7 +843,7 @@ public class DbController {
      */
     public void addPrescriptionHistory( int userId, int animalId, String date, String drugName, String instructions, double dosage, String deliveryMethod) {
         try {
-            String query = "INSERT INT0 USER (userId, animalId, date, drugName, instructions, dosage, deliveryMethod) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO USER (userId, animalId, date, drugName, instructions, dosage, deliveryMethod) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setInt(1, userId);
             myStmt.setInt(2, animalId);
@@ -821,7 +852,7 @@ public class DbController {
             myStmt.setString(5, instructions);
             myStmt.setDouble(6, dosage);
             myStmt.setString(7, deliveryMethod);
-            myStmt.executeQuery();
+            myStmt.executeUpdate();
             myStmt.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -925,7 +956,7 @@ public class DbController {
      */
     public void addRequest(int animalId, int userId, boolean newStatus, boolean adminApproved, boolean technicianApproved, boolean requestComplete, boolean requestSuccessful) {
         try {
-            String query = "INSERT INT0 REQUEST (animalId, userId, newStatus, adminApproved, technicianApproved, requestComplete, requestSuccessful) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO REQUEST (animalId, userId, newStatus, adminApproved, technicianApproved, requestComplete, requestSuccessful) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setInt(1, animalId);
             myStmt.setInt(2, userId);
@@ -933,7 +964,7 @@ public class DbController {
             myStmt.setBoolean(4, technicianApproved);
             myStmt.setBoolean(5, requestComplete);
             myStmt.setBoolean(6, requestSuccessful);
-            myStmt.executeQuery();
+            myStmt.executeUpdate();
             myStmt.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -1028,9 +1059,9 @@ public class DbController {
      * @param statusType the type of status
      * @param imageId the ID of the associated image, if any
      */
-    public void addRequest(int animalId, String date, String description, String location, String statusType, int imageId) {
+    public void addStatus(int animalId, String date, String description, String location, String statusType, int imageId) {
         try {
-            String query = "INSERT INT0 STATUS (animalId, date, description, location, statusType, imageId) VALUES (?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO STATUS (animalId, date, description, location, statusType, imageId) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setInt(1, animalId);
             myStmt.setDate(2, Date.valueOf(date));
@@ -1038,7 +1069,7 @@ public class DbController {
             myStmt.setString(4, location);
             myStmt.setString(5, statusType);
             myStmt.setInt(6, imageId);
-            myStmt.executeQuery();
+            myStmt.executeUpdate();
             myStmt.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -1124,13 +1155,13 @@ public class DbController {
      * @param animalId is the ID of the animal who the prescription history is for
      * @param date the date the status was created
      */
-    public void addRequest(int animalId, String date) {
+    public void addTreatment(int animalId, String date) {
         try {
-            String query = "INSERT INT0 TREATMENT_HISTORY (animalId, date) VALUES (?, ?)";
+            String query = "INSERT INTO TREATMENT_HISTORY (animalId, date) VALUES (?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setInt(1, animalId);
             myStmt.setDate(2, Date.valueOf(date));
-            myStmt.executeQuery();
+            myStmt.executeUpdate();
             myStmt.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -1213,12 +1244,12 @@ public class DbController {
      *
      * @param treatmentType the type of treatment
      */
-    public void addRequest(String treatmentType) {
+    public void addTreatmentType(String treatmentType) {
         try {
-            String query = "INSERT INT0 TREATMENT_METHOD (treatmentType) VALUES (?)";
+            String query = "INSERT INTO TREATMENT_METHOD (treatmentType) VALUES (?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setString(1, treatmentType);
-            myStmt.executeQuery();
+            myStmt.executeUpdate();
             myStmt.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -1281,7 +1312,6 @@ public class DbController {
         User foundUser = new User();
         try {
             String query = "SELECT * FROM USER WHERE userId = ?";
-
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setInt(1, id);
             ResultSet results = myStmt.executeQuery();

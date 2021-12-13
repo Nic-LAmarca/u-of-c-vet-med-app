@@ -154,6 +154,8 @@ CREATE TABLE IF NOT EXISTS TREATMENT_HISTORY
 	(treatmentId		int				NOT NULL auto_increment,
      animalId			int				NOT NULL,
      date				datetime		NOT NULL,
+     requestedBy		int				NOT NULL,
+     acceptedBy			int,
      primary key(treatmentId),
 	 CONSTRAINT treatmentHistoryAnimalCascade
      FOREIGN KEY (animalId)
@@ -191,7 +193,8 @@ INSERT INTO USER (userId, fName, lName, email, activationDate, userType, passwor
 VALUES (1,				"user",				"1",				"admin@ucalgary.ca",				"2021-03-04 00:00:00",				"Administrator",				"password1",					false),		
 		(2,				"user",				"2",				"a.technician@ucalgary.ca",			"2021-03-04 00:00:00",				"Animal Health Technician",				"password2",					false),	
         (3,				"user",				"3",				"teacher@ucalgary.ca",				"2021-04-05 00:00:00",				"Teaching Technician",				"password3",					false),	
-        (4,				"user",				"4",				"student1@ucalgary.ca",				"2021-03-19 00:00:00",				"Student",				"password4",					false);
+        (4,				"user",				"4",				"student1@ucalgary.ca",				"2021-03-19 00:00:00",				"Student",				"password4",					false),
+		(5,				"user",				"5",				"attendant@ucalgary.ca",			"2021-03-19 00:00:00",				"Animal Health Attendant",				"password5",					false);
 
 INSERT INTO TREATMENT_METHOD (treatmentId, treatmentType)
 VALUES (1,	"Physical Exam"),
@@ -202,12 +205,12 @@ VALUES (1,	"Physical Exam"),
         (6,	"Rabies Vaccinations"),
         (7,	"Chemo Treatment");
 
-INSERT INTO TREATMENT_HISTORY (treatmentId, animalId, date)
-VALUES (1,				1,				"2021-03-04 00:00:00"),
-		(2,				1,				"2021-05-10 00:00:00"),
-        (3,				2,				"2021-03-16 00:00:00"),
-        (4,				3,				"2021-01-01 00:00:00"),
-        (5,				3,				"2021-08-12 00:00:00");
+INSERT INTO TREATMENT_HISTORY (treatmentId, animalId, date, requestedBy, acceptedBy)
+VALUES (1,				1,				"2021-03-04 00:00:00",				5,				2),
+		(2,				1,				"2021-05-10 00:00:00",				5,				2),
+        (3,				2,				"2021-03-16 00:00:00",				5,				null),
+        (4,				3,				"2021-01-01 00:00:00",				5,				2),
+        (5,				3,				"2021-08-12 00:00:00",				5,				null);
         
 INSERT INTO MEDICAL_RECORD_TYPE (medicalRecordId, medicalRecordType)
 VALUES (1,	"XRAY"),

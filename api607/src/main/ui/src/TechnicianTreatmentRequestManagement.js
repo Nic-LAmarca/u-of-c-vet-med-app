@@ -27,27 +27,17 @@ export default function TechnicianTreatmentRequestManagement() {
 
     const history = useNavigate();
 
-    async function handleLogout(event) {
-        event.preventDefault();
-        history('/');
-    }
     useEffect(() => {
-        async function populate(){
-            const json = {
-            };
-            await axios.get('http://localhost:8080/technicianNewRequests', json,
-                {
-                    headers: {
-                        'content-type': 'application/json'
-                    }
-                })
-                .then(function(response){
-                    setRequests(response.data);
-                })
-                .catch(function(error){
-                    console.log(error);
-                });
-        }
+        axios.get('http://localhost:8080/technicianTreatmentRequests',
+            null
+            )
+            .then(function(response){
+                console.log(response.data)
+                setRequests(response.data)
+            })
+            .catch(function(error){
+                console.log(error);
+            })
     },[])
 
     async function renderTableBody(){
@@ -60,30 +50,6 @@ export default function TechnicianTreatmentRequestManagement() {
                 </tr>
             )
         })
-    }
-
-    async function dropDown() {
-        const json = {
-        };
-        await axios.get('http://localhost:8080/technicianNewRequests', json,
-        {
-            headers: {
-                'content-type': 'application/json'
-            }
-        })
-        .then(function(response){
-            setRequests(response.data);
-        })
-        .catch(function(error){
-            console.log(error);
-        });
-    }
-
-    async function handleRequestSelect(event){
-        event.preventDefault();
-        event.persist();
-        setRequestId(event.target.text);
-        setRequestMessage();
     }
 
     async function approveRequest(event) {
@@ -122,7 +88,6 @@ export default function TechnicianTreatmentRequestManagement() {
                     console.log(error);
                 });
             }
-
 
     return (
         <div>
@@ -168,27 +133,9 @@ export default function TechnicianTreatmentRequestManagement() {
                     <tr>
                         {requests.map((requests) => <tb>requests</tb>,<Button onClick={approveRequest} variant="info">Approve Request</Button>,<Button onClick={denyRequest} variant="danger">Cancel Request</Button>)}
                     </tr>
-
                     </tbody>
                 </Table>
             </Container>
-
-            {/*<DropdownButton className= "TechnicianTreatmentRequestManagement-grid-item3" id="dropdown-basic-button" title="Requests" onClick={dropDown} alignRight>*/}
-            {/*    /!*<Dropdown.Item href="#/action-1">A</Dropdown.Item>*!/*/}
-            {/*    /!*<Dropdown.Item href="#/action-2">Another action</Dropdown.Item>*!/*/}
-            {/*    /!*<Dropdown.Item href="#/action-3">Something else</Dropdown.Item>*!/*/}
-            {/*    <ul>*/}
-            {/*        {requests.map(requests => <DropdownItem onClick={handleRequestSelect}>{requests}</DropdownItem>)}*/}
-            {/*    </ul>*/}
-            {/*</DropdownButton>*/}
-            {/*<p className="TechnicianTreatmentRequestManagement-grid-item5">*/}
-            {/*    Request Selected: {requestId}*/}
-            {/*</p>*/}
-            {/*<Button onClick={approveRequest} variant="info">Approve Request</Button>*/}
-            {/*<Button onClick={denyRequest} variant="danger">Cancel Request</Button>*/}
-            {/*<b className="TechnicianTreatmentRequestManagement-grid-item7">*/}
-            {/*    Request Approved/Cancelled: {requestMessage}*/}
-            {/*</b>*/}
         </div>
     );
 }

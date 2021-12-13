@@ -1245,7 +1245,8 @@ public class DbController {
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
                 if (results.getInt("treatmentId") == id) {
-                    foundTH.setTreatmentId(id);
+                    foundTH.setTreatmentHistoryId(id);
+                    foundTH.setTreatmentId(results.getInt("treatmentId"));
                     foundTH.setAnimalId(results.getInt("animalId"));
                     foundTH.setDate(results.getDate("date").toString());
                 }
@@ -1271,9 +1272,50 @@ public class DbController {
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
                 TreatmentHistory addTH = new TreatmentHistory();
+                addTH.setTreatmentHistoryId(results.getInt("treatmentHistoryId"));
                 addTH.setTreatmentId(results.getInt("treatmentId"));
                 addTH.setAnimalId(results.getInt("animalId"));
                 addTH.setDate(results.getDate("date").toString());
+                addTH.setRequestedBy(results.getInt("requestedBy"));
+                addTH.setAcceptedBy(results.getInt("acceptedBy"));
+                treatmentHistoryArrayList.add(addTH);
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return treatmentHistoryArrayList;
+    }
+
+    /**
+     *
+     * Method used to update the acceptedBy field based on the provided arguments and return the updated arraylist
+     *
+     * @param userId the user who accepted the request
+     * @param requestId the request being accepted
+     * @return an updated arraylist of treatment requests
+     */
+    public ArrayList<TreatmentHistory> acceptTreatmentRequest(int userId, int requestId) {
+        ArrayList<TreatmentHistory> treatmentHistoryArrayList = new ArrayList<TreatmentHistory>();
+        try {
+            String query = "UPDATE TREATMENT_HISTORY SET acceptedBy = ? WHERE treatmentHistoryId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, userId);
+            myStmt.setInt(2, requestId);
+            myStmt.executeUpdate();
+            myStmt.close();
+
+            String newQuery = "SELECT * FROM TREATMENT_HISTORY";
+            PreparedStatement newStmt = this.dbConnect.prepareStatement(newQuery);
+            ResultSet results = newStmt.executeQuery();
+            while (results.next()) {
+                TreatmentHistory addTH = new TreatmentHistory();
+                addTH.setTreatmentHistoryId(results.getInt("treatmentHistoryId"));
+                addTH.setTreatmentId(results.getInt("treatmentId"));
+                addTH.setAnimalId(results.getInt("animalId"));
+                addTH.setDate(results.getDate("date").toString());
+                addTH.setRequestedBy(results.getInt("requestedBy"));
+                addTH.setAcceptedBy(results.getInt("acceptedBy"));
                 treatmentHistoryArrayList.add(addTH);
             }
             myStmt.close();
@@ -1288,14 +1330,16 @@ public class DbController {
      * Method is used to add a TreatmentHistory into the database based on the entered credentials
      *
      * @param animalId is the ID of the animal who the prescription history is for
+     * @param animalId is the ID of the animal who the prescription history is for
      * @param date the date the status was created
      */
-    public void addTreatment(int animalId, String date) {
+    public void addTreatment(int treatmentHistoryId, int animalId, String date) {
         try {
-            String query = "INSERT INTO TREATMENT_HISTORY (animalId, date) VALUES (?, ?)";
+            String query = "INSERT INTO TREATMENT_HISTORY (treatmentId, animalId, date) VALUES (?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
-            myStmt.setInt(1, animalId);
-            myStmt.setDate(2, Date.valueOf(date));
+            myStmt.setInt(1, treatmentHistoryId);
+            myStmt.setInt(2, animalId);
+            myStmt.setDate(3, Date.valueOf(date));
             myStmt.executeUpdate();
             myStmt.close();
         } catch (Exception e) {

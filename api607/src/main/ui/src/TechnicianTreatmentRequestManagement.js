@@ -34,7 +34,6 @@ export default function TechnicianTreatmentRequestManagement() {
             null
         )
             .then(function(response){
-                console.log(response.data)
                 setRequests(response.data)
 
             })
@@ -46,6 +45,7 @@ export default function TechnicianTreatmentRequestManagement() {
 
     function renderTableBody(){
         return requests.map((value,key) =>{
+<<<<<<< HEAD
             const { acceptedBy,animalId,date,requestedBy,treatmentId} = value
             return(
 
@@ -57,6 +57,22 @@ export default function TechnicianTreatmentRequestManagement() {
                     <td>{requestedBy}</td>
                     <td><Button onClick={approveRequest} disabled={disabled} variant="success">{disabled ? 'Accepted' : 'Accept'}</Button></td>
 
+=======
+            const {treatmentHistoryId, treatmentId, animalId, date, requestedBy, acceptedBy} = value
+            return(
+                <tr key={treatmentHistoryId}>
+                    <td>{treatmentHistoryId}</td>
+                    <td>{treatmentId}</td>
+                    <td>{animalId}</td>
+                    <td>{date}</td>
+                    <td>{requestedBy}</td>
+                    <td>{acceptedBy}</td>
+                    if(1 == 1){
+                            <div>
+                                <td><Button onClick={(e)=>approveRequest(treatmentHistoryId)} variant="success">Accept</Button></td>
+                            </div>
+                    }
+>>>>>>> cg
                 </tr>
 
 
@@ -65,8 +81,12 @@ export default function TechnicianTreatmentRequestManagement() {
     }
 
     function renderHeaders(){
+<<<<<<< HEAD
         const headers =["TreatmentId", "AcceptedBy","AnimalId","Date","RequestedBy","Response"]
         console.log(headers)
+=======
+        const headers =["TreatmentHistoryId", "TreatmentId", "AnimalId","Date","RequestedBy", "AcceptedBy", "Response"]
+>>>>>>> cg
         return headers.map((header)=>{
             return<th> {header}</th>
         })
@@ -74,6 +94,7 @@ export default function TechnicianTreatmentRequestManagement() {
 
     }
 
+<<<<<<< HEAD
     // async function renderHeaders(){
     //     const header = Object.keys(requests[0])
     //     console.log(header)
@@ -101,6 +122,28 @@ export default function TechnicianTreatmentRequestManagement() {
         //     .catch(function(error){
         //         console.log(error);
         //     });
+=======
+    async function approveRequest(requestId) {
+        var userId = window.localStorage.getItem("userId")
+        axios.post('http://localhost:8080/technicianRequestApproval',
+             null,
+             {
+                 params: {
+                     userId,
+                     requestId
+                 }
+             })
+             .then(function(response){
+             console.log(response.data)
+                setRequests(response.data)
+                 setRequestId();
+                 setRequestMessage(response.data);
+                 setDisabled(true);
+             })
+             .catch(function(error){
+                 console.log(error);
+             });;
+>>>>>>> cg
     }
 
     async function denyRequest(event) {

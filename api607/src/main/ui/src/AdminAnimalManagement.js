@@ -96,7 +96,7 @@ export default function AdminAnimalManagement() {
                         <Image className="d-inline-block align-top" src={images} fluid/>
                     </Navbar.Brand>
                     <NavbarBrand>
-                        Personal Settings
+                        Animal Management
                     </NavbarBrand>
                     <Navbar.Toggle aria-controls="offcanvasNavbar"/>
                     <Navbar.Offcanvas
@@ -109,7 +109,7 @@ export default function AdminAnimalManagement() {
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
-                                <Button variant="info" href="/AdminNavigation">Animal Navigation</Button><br/>
+                                <Button variant="info" href="/AdminNavigation">Admin Navigation</Button><br/>
                                 <Button variant="info" href="/TeacherRequestManagement" >
                                     Teacher Request Management
                                     <Badge className="ms-2" bg = "danger">8</Badge>

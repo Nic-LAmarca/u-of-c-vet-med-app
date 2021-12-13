@@ -9,7 +9,7 @@ import DropdownItem from "react-bootstrap/DropdownItem";
 
 
 export default function AdminAnimalProfile() {
-    const [animalId, setAnimalId] = useState(1);
+    const [animalId, setAnimalId] = useState(window.localStorage.getItem("animal"));
     const [animalName, setAnimalName] = useState("");
     const [animalSpecies, setAnimalSpecies] = useState("");
     const [animalStatus, setAnimalStatus] = useState("");

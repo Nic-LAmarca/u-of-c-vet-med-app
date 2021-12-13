@@ -83,23 +83,25 @@ public class DbController {
      *
      * @param animalName is the name of the animal to search for
      * @param animalSpecies is the name of the species to search for
-     * @param animalBreed is the name of the breed to search for
      * @param animalStatus is the name of the status to search for
      * @return all animals in an arraylist that fit the filter requirements
      */
-    public ArrayList<Animal> getFilteredAnimals(String animalName, String animalSpecies, String animalBreed, String animalStatus) {
+    public ArrayList<Animal> getFilteredAnimals(String animalName, String animalSpecies, String animalStatus) {
         ArrayList<Animal> animalList = new ArrayList<Animal>();
         System.out.println( "Name:  " + animalName);
-     ;
+        System.out.println( "Species:  " + animalSpecies);
+        System.out.println( "Status:  " + animalStatus);
+        ;
         String query;
         try {
             PreparedStatement myStmt;
-            System.out.println("There");
-            if (animalSpecies == null && animalBreed == null && animalStatus == null)
+
+            if (animalSpecies == "" && animalStatus == "")
             {
                 query = "SELECT * FROM ANIMAL WHERE animalName = ?";
                 myStmt = this.dbConnect.prepareStatement(query);
                 myStmt.setString(1, animalName);
+                System.out.println("There");
             }
             else {
                 query = "SELECT * FROM ANIMAL";
@@ -137,6 +139,67 @@ public class DbController {
         }
         return animalList;
     }
+
+//    /**
+//     *
+//     * Method is used to return an arraylist of animals depending on the filtered parameters being passed
+//     *
+//     * @param animalName is the name of the animal to search for
+//     * @param animalSpecies is the name of the species to search for
+//     * @param animalBreed is the name of the breed to search for
+//     * @param animalStatus is the name of the status to search for
+//     * @return all animals in an arraylist that fit the filter requirements
+//     */
+//    public ArrayList<Animal> getFilteredAnimals(String animalName, String animalSpecies, String animalBreed, String animalStatus) {
+//        ArrayList<Animal> animalList = new ArrayList<Animal>();
+//        System.out.println( "Name:  " + animalName);
+//     ;
+//        String query;
+//        try {
+//            PreparedStatement myStmt;
+//            System.out.println("There");
+//            if (animalSpecies == null && animalBreed == null && animalStatus == null)
+//            {
+//                query = "SELECT * FROM ANIMAL WHERE animalName = ?";
+//                myStmt = this.dbConnect.prepareStatement(query);
+//                myStmt.setString(1, animalName);
+//            }
+//            else {
+//                query = "SELECT * FROM ANIMAL";
+//                myStmt = this.dbConnect.prepareStatement(query);
+//            }
+//            ResultSet results = myStmt.executeQuery();
+//            while (results.next()) {
+//                Animal addAnimal = new Animal();
+//                addAnimal.setAnimalId(results.getInt("animalId"));
+//                addAnimal.setAnimalName(results.getString("animalName"));
+//                addAnimal.setSpecies(results.getString("species"));
+//                addAnimal.setWeight(results.getDouble("weight"));
+//                addAnimal.setTattooNum(results.getInt("tattooNum"));
+//                addAnimal.setCityTattoo(results.getString("cityTattoo"));
+//                addAnimal.setBirthDate(results.getDate("birthDate").toString());
+//                addAnimal.setBreed(results.getString("breed"));
+//                addAnimal.setSex(results.getString("sex"));
+//                addAnimal.setRfid(results.getLong("rfid"));
+//                addAnimal.setMicrochip(results.getLong("microchip"));
+//                addAnimal.setStatusType(results.getString("statusType"));
+//                addAnimal.setAvailable(results.getBoolean("available"));
+//                addAnimal.setPurpose(results.getString("location"));
+//                addAnimal.setRegion(results.getString("alert"));
+//                addAnimal.setPurpose(results.getString("purpose"));
+//                addAnimal.setRegion(results.getString("region"));
+//                addAnimal.setSubspecies(results.getString("subspecies"));
+//                addAnimal.setColor(results.getString("color"));
+//                addAnimal.setDistinguishingFeatures(results.getString("distinguishingFeatures"));
+//                animalList.add(addAnimal);
+//                System.out.println(addAnimal.getAnimalName());
+//            }
+//            myStmt.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return animalList;
+//    }
 
     /**
      *

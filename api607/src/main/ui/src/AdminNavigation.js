@@ -13,7 +13,7 @@ export default function AdminNavigation() {
     let [animals,setAnimals] = useState([]);
     const [animalName, setAnimalName] = useState("");
     const [animalSpecies, setAnimalSpecies] = useState("");
-    const [animalBreed, setAnimalBreed] = useState("");
+    //const [animalBreed, setAnimalBreed] = useState("");
     const [animalStatus, setAnimalStatus] = useState("");
 
     const history = useNavigate();
@@ -99,36 +99,28 @@ export default function AdminNavigation() {
         event.preventDefault();
 
         console.log(animalName)
-         console.log(animalBreed)
-          console.log(animalSpecies)
-           console.log(animalStatus)
-
-        setAnimalName(window.localStorage.getItem("name"))
-        setAnimalSpecies(window.localStorage.getItem("species"))
-        setAnimalBreed(window.localStorage.getItem("breed"))
-        setAnimalStatus(window.localStorage.getItem("status"))
+        console.log(animalSpecies)
+        console.log(animalStatus)
 
         await axios.get('http://localhost:8080/filteredAnimals',
-            null,
+        //null,
             {
                 params: {
-                    animalName,
-                    animalSpecies,
-                    animalBreed,
-                    animalStatus
+                    animalName: animalName,
+                    animalSpecies: animalSpecies,
+                    animalStatus: animalStatus
                 }
             })
             .then(function(response){
-                const animalList = response.data
-                 console.log(animalList)
-                window.localStorage.setItem("animalCount", animalList.length)
+                const filteredAnimalList = response.data
+                 console.log(filteredAnimalList)
                 var table = document.getElementById("table");
                 var j = 1;
                 for(var i = 1; i < table.rows.length; i++){
                     table.deleteRow(i)
                 }
-                for(var i = 0; i < animalList.length; i++){
-                    var temp = animalList[i]
+                for(var i = 0; i < filteredAnimalList.length; i++){
+                    var temp = filteredAnimalList[i]
                     var row = table.insertRow(i+1)
                     for(var k = 0; k < 11; k++){
                         row.insertCell(k)
@@ -196,7 +188,7 @@ export default function AdminNavigation() {
                     <Row className="flex-lg-wrap">
                         <Col lg="3">
 
-                            <InputGroup className="me-2"  onChange =  {e => this.setName(e.target.value)} >
+                            <InputGroup className="me-2" >
 
                                 {/*<Form.Label>Animal Name</Form.Label>*/}
                                 <Form.Control
@@ -213,121 +205,38 @@ export default function AdminNavigation() {
 
                             </InputGroup><br/>
                         </Col>
-                        <Col className="mx-auto">
+                        <Col lg="3">
 
-                            <Dropdown className="d-inline me-4"  autoClose="outside" >
-                                <DropdownToggle
-                                    id = "dropdown-autoclose-false"
-                                    variant="secondary"
+                            <InputGroup className="me-2"  >
 
-                                >
-                                    Species
-                                </DropdownToggle>
-                                <DropdownMenu >
-                                    {animals.map(item =>(
-                                    <DropdownItem>{item.species}</DropdownItem>
-                                    ))}
-                                </DropdownMenu>
-                            </Dropdown >
+                                {/*<Form.Label>Animal Name</Form.Label>*/}
+                                <Form.Control
+                                    autoFocus
+                                    placeholder="Species"
+                                     value = {animalSpecies}
+                                     onChange =  {(e) => setAnimalSpecies(e.target.value)}
+                                />
 
+                            </InputGroup><br/>
+                            </Col>
+                        <Col lg="3">
 
+                            <InputGroup className="me-2"  >
 
-
-
-                            <Dropdown className="d-inline me-4" autoClose="outside"  >
-
-                                <DropdownToggle id = "dropdown-autoclose-false" variant="secondary">
-                                    Breed
-
-                                </DropdownToggle>
-                                <DropdownMenu >
-                                    {animals.map(item =>(
-                                    <DropdownItem >{item.breed}</DropdownItem>
-                                    ))}
-                                </DropdownMenu>
-                            </Dropdown >
+                                {/*<Form.Label>Animal Name</Form.Label>*/}
+                                <Form.Control
+                                    autoFocus
+                                    placeholder="Status"
+                                     value = {animalStatus}
+                                     onChange =  {(e) => setAnimalStatus(e.target.value)}
 
 
-                            <Dropdown className="d-inline me-4" autoClose="outside">
-                                <DropdownToggle id = "dropdown-autoclose-false" variant="secondary" >
-                                    Status
-                                </DropdownToggle>
 
-                                <DropdownMenu  >
-                                    {animals.map(item =>(
-                                    <DropdownItem>{item.statusType}</DropdownItem>
-                                    ))}
+                                    // type="username"
+                                    // value={username}
+                                />
 
-                            <Dropdown className="d-inline me-4" autoClose="outside"  onSelect = {e => this.setSpecies(e.target.value)} >
-                                <DropdownToggle
-                                    id = "dropdown-autoclose-false"
-                                    variant="secondary"
-                                >
-                                    Species
-                                </DropdownToggle>
-                                <DropdownMenu >/
-                                    <Form.Check
-                                        type="checkbox"
-                                        id="checkbox"
-                                        label="Chicken Noodle Soup"
-                                        className="mx-3"
-
-                                    />
-                                    <Form.Check
-                                        type="checkbox"
-                                        id="checkbox"
-                                        label="Seggs"
-                                        className="mx-3"
-                                    />
-                                </DropdownMenu>
-                            </Dropdown >
-                            <Dropdown className="d-inline me-4" autoClose="outside"  onSelect = {e => this.setBreed(e.target.value)} >
-                                <DropdownToggle id = "dropdown-autoclose-false" variant="secondary">
-                                    Breed
-                                </DropdownToggle>
-                                <DropdownMenu >
-                                    <Form.Check
-                                        type="checkbox"
-                                        id="checkbox"
-                                        label="Soup Soup"
-                                        className="mx-3"
-                                    />
-                                    <Form.Check
-                                        type="checkbox"
-                                        id="checkbox"
-                                        label="Seggsy"
-                                        className="mx-3"
-                                    />
-                                </DropdownMenu>
-                            </Dropdown >
-                            <Dropdown className="d-inline me-4" autoClose="outside" onSelect = {e => this.setStatus(e.target.value)}>
-                                <DropdownToggle id = "dropdown-autoclose-false" variant="secondary">
-                                    Status
-                                </DropdownToggle>
-
-                                <DropdownMenu className="me-auto">
-
-                                    <Form.Check
-                                        type="checkbox"
-                                        id="checkbox"
-                                        label="Warning"
-                                        className="mx-3"
-                                    />
-                                    <Form.Check
-                                        type="checkbox"
-                                        id="checkbox"
-                                        label="Fine"
-                                        className="mx-3"
-                                    />
-                                    <Form.Check
-                                        type="checkbox"
-                                        id="checkbox"
-                                        label="Urgent"
-                                        className="mx-3"
-                                    />
-
-                                </DropdownMenu>
-                            </Dropdown>
+                            </InputGroup><br/>
                         </Col>
                         {/*<Col className="mx-auto">*/}
                         {/*    */}

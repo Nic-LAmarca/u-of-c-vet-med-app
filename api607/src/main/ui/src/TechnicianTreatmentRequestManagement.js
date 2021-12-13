@@ -32,7 +32,7 @@ export default function TechnicianTreatmentRequestManagement() {
     useEffect(() => {
         axios.get('http://localhost:8080/technicianTreatmentRequests',
             null
-            )
+        )
             .then(function(response){
                 console.log(response.data)
                 setRequests(response.data)
@@ -101,25 +101,25 @@ export default function TechnicianTreatmentRequestManagement() {
         //     .catch(function(error){
         //         console.log(error);
         //     });
-        }
+    }
 
-        async function denyRequest(event) {
-            event.preventDefault();
-            await axios.post('http://localhost:8080/technicianRequestDenial',
-                null,
-                {
-                    params: {
-                        requestId
-                    }
-                })
-                .then(function(response){
-                    setRequestId();
-                    setRequestMessage(response.data);
-                })
-                .catch(function(error){
-                    console.log(error);
-                });
-            }
+    async function denyRequest(event) {
+        event.preventDefault();
+        await axios.post('http://localhost:8080/technicianRequestDenial',
+            null,
+            {
+                params: {
+                    requestId
+                }
+            })
+            .then(function(response){
+                setRequestId();
+                setRequestMessage(response.data);
+            })
+            .catch(function(error){
+                console.log(error);
+            });
+    }
 
     return (
         <div>
@@ -160,10 +160,10 @@ export default function TechnicianTreatmentRequestManagement() {
             <Container>
                 <Table id = "requests" striped bordered hover responsive>
                     <thead>
-                        {renderHeaders()}
+                    {renderHeaders()}
                     </thead>
                     <tbody>
-                        {renderTableBody()}
+                    {renderTableBody()}
                     </tbody>
 
 

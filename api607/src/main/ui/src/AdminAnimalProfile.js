@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 import {Button, Form, Dropdown, DropdownButton, Table, ListGroup,Tabs,Tab,TabContent,TabContainer,Nav,NavItem,Row,Col} from "react-bootstrap";
@@ -9,20 +9,15 @@ import DropdownItem from "react-bootstrap/DropdownItem";
 
 
 export default function AdminAnimalProfile() {
-    const [animalId, setAnimalId] = useState(1);
+    const [animalId, setAnimalId] = useState(window.localStorage.getItem("animal"));
     const [animalName, setAnimalName] = useState("");
     const [animalSpecies, setAnimalSpecies] = useState("");
     const [animalStatus, setAnimalStatus] = useState("");
     const [description, setDescription] = useState("");
-    window.onload = startup();
+    const [comments, setComments] = useState("");
 
-    async function startup() {
-        theProfile();
-        theComments();
-    }
-
-    async function theProfile() {
-        await axios.post('http://localhost:8080/searchForAnimal',
+    useEffect(() => {
+        axios.post('http://localhost:8080/searchForAnimal',
             null,
             {
                 params: {
@@ -78,12 +73,8 @@ export default function AdminAnimalProfile() {
             })
             .catch(function(error){
                 console.log(error);
-            }
-        );
-    }
-
-    async function theComments() {
-        await axios.post('http://localhost:8080/comments',
+            })
+        axios.post('http://localhost:8080/comments',
         null,
         {
             params: {
@@ -91,6 +82,7 @@ export default function AdminAnimalProfile() {
             }
         })
         .then(function(response){
+            setComments(response.data)
             var table = document.getElementById("commentTable");
             if(table.rows.length <= 1){
                 const commentList = response.data
@@ -112,7 +104,7 @@ export default function AdminAnimalProfile() {
         .catch(function(error){
             console.log(error);
         })
-    }
+    },[])
 
     async function addComment(event) {
         event.preventDefault();

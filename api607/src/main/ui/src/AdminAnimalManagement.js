@@ -1,50 +1,92 @@
  import React,{useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-import {
-    Button,
-    Form,
-    Dropdown,
-    DropdownButton,
-    Table,
-    Navbar,
-    Container,
-    Image,
-    NavbarBrand,
-    Row, Col, Offcanvas, Nav, Badge,Modal
-} from "react-bootstrap";
+import {Button,Form, Dropdown, DropdownButton, Table, Navbar, Container, Image, NavbarBrand, Row, Col, Offcanvas, Nav, Badge,Modal} from "react-bootstrap";
 import axios from "axios";
 import './AdminAnimalManagement.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
  import images from "./Images/vetmed.png";
 
-
 export default function AdminAnimalManagement() {
     const [validated, setValidated] = useState(false);
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+    const [animalName, setAnimalName] = useState();
+    const [species, setSpecies] = useState();
+    const [weight, setWeight] = useState();
+    const [tattooNum, setTattooNum] = useState();
+    const [cityTattoo, setCityTattoo] = useState();
+    const [dob, setDOB] = useState();
+    const [breed, setBreed] = useState();
+    const [sex, setSex] = useState();
+    const [rfid, setRFID] = useState();
+    const [microchip, setMicrochip] = useState();
+    const [status, setStatus] = useState();
+    const [location, setLocation] = useState();
+    const [purpose, setPurpose] = useState();
+    const [region, setRegion] = useState();
+    const [subspecies, setSubspecies] = useState();
+    const [color, setColor] = useState();
+    const [distinguishingFeatures, setDistinguishingFeatures] = useState();
 
-    const handleSubmit = (event) => {
+    const checkValidity = (event) => {
         const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
+        event.preventDefault();
+        event.stopPropagation();
+        setValidated(true)
+    }
 
-        setValidated(true);
-    };
-    const handleRemove = (event) => {
+    const addAnimal = (event) => {
         const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
+        console.log(rfid)
+        axios.post('http://localhost:8080/addAnimal',
+            null,
+            {
+                params: {
+                    animalName,
+                    species,
+                    weight,
+                    tattooNum,
+                    cityTattoo,
+                    dob,
+                    breed,
+                    sex,
+                    rfid,
+                    microchip,
+                    status,
+                    location,
+                    purpose,
+                    region,
+                    subspecies,
+                    color,
+                    distinguishingFeatures
+                }
+            })
+            .then(function(response){
+                console.log(response)
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+    }
 
-        setValidated(true);
-    };
-
-        const [show, setShow] = useState(false);
-
-        const handleClose = () => setShow(false);
-        const handleShow = () => setShow(true);
+    const removeAnimal = (event) => {
+        const form = event.currentTarget;
+        axios.post('http://localhost:8080/removeAnimal',
+            null,
+            {
+                params: {
+                    rfid
+                }
+            })
+            .then(function(response){
+                console.log(response)
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+        };
 
     return (
         <div className="AdminAnimalManagement-grid-container">
@@ -54,7 +96,7 @@ export default function AdminAnimalManagement() {
                         <Image className="d-inline-block align-top" src={images} fluid/>
                     </Navbar.Brand>
                     <NavbarBrand>
-                        Personal Settings
+                        Animal Management
                     </NavbarBrand>
                     <Navbar.Toggle aria-controls="offcanvasNavbar"/>
                     <Navbar.Offcanvas
@@ -67,7 +109,7 @@ export default function AdminAnimalManagement() {
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
-                                <Button variant="info" href="/AdminNavigation">Animal Navigation</Button><br/>
+                                <Button variant="info" href="/AdminNavigation">Admin Navigation</Button><br/>
                                 <Button variant="info" href="/TeacherRequestManagement" >
                                     Teacher Request Management
                                     <Badge className="ms-2" bg = "danger">8</Badge>
@@ -81,7 +123,7 @@ export default function AdminAnimalManagement() {
                 </Container>
             </Navbar><br/>
             <Container fluid>
-                <Form noValidate validated={validated} onSubmit={handleSubmit}>
+                <Form noValidate validated={validated} onSubmit={checkValidity}>
                     <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalName">
                         <Form.Label  column sm= {2}>Animal Name</Form.Label>
                         <Col sm={5}>
@@ -90,56 +132,58 @@ export default function AdminAnimalManagement() {
                                 type = "name"
                                 placeholder="Animal Name"
                                 autoFocus
-
-                                // onChange={e=>setFName(e.target.value)}
+                                onInput={e=>setAnimalName(e.target.value)}
                             />
                         </Col>
 
                     </Form.Group>
                     <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalName">
-                        <Form.Label column sm= {2} >Species</Form.Label>
+                        <Form.Label column sm= {2}>Species</Form.Label>
                         <Col sm={5}>
                             <Form.Control
                                 required
                                 type = "name"
                                 placeholder="Dog"
                                 autoFocus
-                                // onChange={e=>setLName(e.target.value)}
+                                onInput={e=>setSpecies(e.target.value)}
                             />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalEmail">
-                        <Form.Label column sm= {2} >Weight</Form.Label>
+                        <Form.Label column sm= {2}>Weight</Form.Label>
                         <Col sm={5}>
                             <Form.Control
                                 required
                                 type = "name"
                                 placeholder="20"
                                 autoFocus
+                                onInput={e=>setWeight(e.target.value)}
                                 // onChange={e=>setEmail(e.target.value)}
                             />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalPassword">
-                        <Form.Label column sm= {2} >Tattoo Number</Form.Label>
+                        <Form.Label column sm= {2}>Tattoo Number</Form.Label>
                         <Col sm={5}>
                             <Form.Control
                                 required
                                 type = "name"
                                 placeholder="645374"
                                 autoFocus
+                                onInput={e=>setTattooNum(e.target.value)}
                                 // onChange={e=>setPassword(e.target.value)}
                             />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalName">
-                        <Form.Label  column sm= {2}>city Tattoo</Form.Label>
+                        <Form.Label  column sm= {2} >city Tattoo</Form.Label>
                         <Col sm={5}>
                             <Form.Control
                                 required
                                 type = "name"
                                 placeholder="HOC London"
                                 autoFocus
+                                onInput={e=>setCityTattoo(e.target.value)}
                                 // onChange={e=>setFName(e.target.value)}
                             />
                         </Col>
@@ -153,6 +197,7 @@ export default function AdminAnimalManagement() {
                                 type = "name"
                                 placeholder="2018-08-15"
                                 autoFocus
+                                onInput={e=>setDOB(e.target.value)}
                                 // onChange={e=>setLName(e.target.value)}
                             />
                         </Col>
@@ -165,6 +210,7 @@ export default function AdminAnimalManagement() {
                                 type = "name"
                                 placeholder="Beagle"
                                 autoFocus
+                                onInput={e=>setBreed(e.target.value)}
                                 // onChange={e=>setEmail(e.target.value)}
                             />
                         </Col>
@@ -177,22 +223,23 @@ export default function AdminAnimalManagement() {
                                 type = "name"
                                 placeholder="MN"
                                 autoFocus
+                                onInput={e=>setSex(e.target.value)}
                                 // onChange={e=>setPassword(e.target.value)}
                             />
                         </Col>
                     </Form.Group>
-                    <Form.Group onSubmit={handleRemove} as={Row} className="justify-content-center mb-3" controlId="formHoizontalName">
-                        <Form.Label  column sm= {2}>RFID</Form.Label>
+                    <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalName">
+                        <Form.Label column sm= {2} >RFID</Form.Label>
                         <Col sm={5}>
                             <Form.Control
                                 required
                                 type = "name"
-                                placeholder="74575647537"
+                                placeholder="755675475675"
                                 autoFocus
-                                // onChange={e=>setFName(e.target.value)}
+                                onInput={e=>setRFID(e.target.value)}
+                                // onChange={e=>setLName(e.target.value)}
                             />
                         </Col>
-
                     </Form.Group>
                     <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalName">
                         <Form.Label column sm= {2} >Microchip</Form.Label>
@@ -202,6 +249,7 @@ export default function AdminAnimalManagement() {
                                 type = "name"
                                 placeholder="755675475675"
                                 autoFocus
+                                onInput={e=>setMicrochip(e.target.value)}
                                 // onChange={e=>setLName(e.target.value)}
                             />
                         </Col>
@@ -214,6 +262,20 @@ export default function AdminAnimalManagement() {
                                 type = "name"
                                 placeholder="Available"
                                 autoFocus
+                                onInput={e=>setStatus(e.target.value)}
+                                // onChange={e=>setEmail(e.target.value)}
+                            />
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalEmail">
+                        <Form.Label column sm= {2} >Location</Form.Label>
+                        <Col sm={5}>
+                            <Form.Control
+                                required
+                                type = "name"
+                                placeholder="Calgary"
+                                autoFocus
+                                onInput={e=>setLocation(e.target.value)}
                                 // onChange={e=>setEmail(e.target.value)}
                             />
                         </Col>
@@ -225,17 +287,19 @@ export default function AdminAnimalManagement() {
                                 type = "name"
                                 placeholder="Dairy"
                                 autoFocus
+                                onInput={e=>setPurpose(e.target.value)}
                                 // onChange={e=>setPassword(e.target.value)}
                             />
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalName">
-                        <Form.Label  column sm= {2}>Region</Form.Label>
+                        <Form.Label  column sm= {2} >Region</Form.Label>
                         <Col sm={5}>
                             <Form.Control
                                 type = "name"
                                 placeholder="Spain"
                                 autoFocus
+                                onInput={e=>setRegion(e.target.value)}
                                 // onChange={e=>setFName(e.target.value)}
                             />
                         </Col>
@@ -249,6 +313,7 @@ export default function AdminAnimalManagement() {
                                 type = "name"
                                 placeholder="Taurus"
                                 autoFocus
+                                onInput={e=>setSubspecies(e.target.value)}
                                 // onChange={e=>setLName(e.target.value)}
                             />
                         </Col>
@@ -261,6 +326,7 @@ export default function AdminAnimalManagement() {
                                 type = "name"
                                 placeholder="Brown,Black,White"
                                 autoFocus
+                                onInput={e=>setColor(e.target.value)}
                                 // onChange={e=>setEmail(e.target.value)}
                             />
                         </Col>
@@ -273,26 +339,26 @@ export default function AdminAnimalManagement() {
                                 type = "name"
                                 placeholder="Stocky, Compact"
                                 autoFocus
+                                onInput={e=>setDistinguishingFeatures(e.target.value)}
                                 // onChange={e=>setPassword(e.target.value)}
                             />
                         </Col>
                     </Form.Group>
                     <Container fluid className="d-grid gap-5 d-lg-flex justify-content-md-center">
-                        <Button variant="success" onClick={handleSubmit}>Add Animal</Button>
-                        <Button variant="danger" onClick={handleShow}>
-                            Remove Animal
-                        </Button>
+                        <Button variant="success" onClick={addAnimal}>Add Animal</Button>
+                        <Button variant="danger" onClick={handleShow}>Remove Animal</Button>
                         <Modal show={show} onHide={handleClose}>
                             <Modal.Header closeButton>
                                 <Modal.Title>Remove Animal</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                                <Form.Label >RFID</Form.Label>
+                                <Form.Label>RFID</Form.Label>
                                 <Form.Control
                                     required
                                     type = "name"
                                     placeholder="74575647537"
                                     autoFocus
+                                    onInput={e=>setRFID(e.target.value)}
                                     // onChange={e=>setFName(e.target.value)}
                                 />
                             </Modal.Body>
@@ -300,7 +366,7 @@ export default function AdminAnimalManagement() {
                                 <Button variant="secondary" onClick={handleClose}>
                                     Close
                                 </Button>
-                                <Button variant="danger" onClick={handleClose}>
+                                <Button variant="danger" onClick={removeAnimal}>
                                     Remove Animal
                                 </Button>
                             </Modal.Footer>

@@ -147,11 +147,11 @@ export default function AdminTeachingRequestManagement() {
                             <Nav className="justify-content-end flex-grow-1 pe-3">
                                 <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
                                 <Button variant="info" href="/UserManagement" >User Management</Button><br/>
-                                <Button variant="info" href="TeacherRequestManagement" >
+                                <Button variant="info" href="/TeacherRequestManagement" >
                                     Teaching Request Management
                                     <Badge className="ms-2" bg = "danger">8</Badge>
                                 </Button><br/>
-                                <Button variant="info" href="TeacherRequestManagement" >
+                                <Button variant="info" href="/TeacherRequestManagement" >
                                     Treatment Request Management
                                     <Badge className="ms-2" bg = "danger">6</Badge>
                                 </Button><br/>

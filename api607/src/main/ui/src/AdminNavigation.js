@@ -143,7 +143,7 @@ export default function AdminNavigation() {
         <div>
             <Navbar variant="light" expand={false} bg="white">
                 <Container fluid>
-                    <Navbar.Brand href = "#home" >
+                    <Navbar.Brand >
                         <Image className="d-inline-block align-top" src={images} fluid/>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="offcanvasNavbar"/>
@@ -157,7 +157,7 @@ export default function AdminNavigation() {
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
-                                <Button variant="info" href="/TeacherRequestManagement" >
+                                <Button variant="info" href="/AdminTeachingRequestManagement" >
                                     Teacher Request Management
                                     <Badge className="ms-2" bg = "danger">8</Badge>
                                 </Button><br/>
@@ -198,7 +198,7 @@ export default function AdminNavigation() {
                                 >
                                     Species
                                 </DropdownToggle>
-                                <DropdownMenu >/
+                                <DropdownMenu >
                                     <Form.Check
                                         type="checkbox"
                                         id="checkbox"

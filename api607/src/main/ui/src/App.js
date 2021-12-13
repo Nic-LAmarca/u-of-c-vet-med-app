@@ -53,6 +53,7 @@ function App() {
                       <Route path ='/UserManagement' element={<UserManagement/>}/>
                       <Route path ='/TeacherNavigation' element={<TeacherNavigation/>}/>
                       <Route path ='/TechnicianNavigation' element={<TechnicianNavigation/>}/>
+
                   </Routes>
               </div>
           </BrowserRouter>

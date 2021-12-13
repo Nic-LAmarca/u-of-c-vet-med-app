@@ -342,7 +342,33 @@ public class DbController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    /**
+     *
+     * Method is used to remove an Animal into the database based on the rfid
+     *
+     * @param rfid is the rfid of the animal
+     */
+    public void removeAnimal(long rfid) {
+        try {
+            int animalId = 0;
+            String query = "SELECT animalId FROM ANIMAL WHERE rfid = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setLong(1, rfid);
+            ResultSet results = myStmt.executeQuery();
+            while(results.next()){
+                animalId = results.getInt("animalId");
+            }
+            myStmt.close();
+            String newQuery = "DELETE FROM ANIMAL WHERE animalId = ?";
+            PreparedStatement newStmt = this.dbConnect.prepareStatement(newQuery);
+            newStmt.setInt(1, animalId);
+            newStmt.executeUpdate();
+            newStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // ********************************************************

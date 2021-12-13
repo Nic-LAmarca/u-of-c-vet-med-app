@@ -14,6 +14,7 @@ export default function AdminAnimalProfile() {
     const [animalSpecies, setAnimalSpecies] = useState("");
     const [animalStatus, setAnimalStatus] = useState("");
     const [description, setDescription] = useState("");
+    const [comments, setComments] = useState("");
 
     useEffect(() => {
         axios.post('http://localhost:8080/searchForAnimal',
@@ -81,6 +82,7 @@ export default function AdminAnimalProfile() {
             }
         })
         .then(function(response){
+            setComments(response.data)
             var table = document.getElementById("commentTable");
             if(table.rows.length <= 1){
                 const commentList = response.data

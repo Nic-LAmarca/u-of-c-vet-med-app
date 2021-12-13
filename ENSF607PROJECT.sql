@@ -117,6 +117,10 @@ CREATE TABLE IF NOT EXISTS STATUS
 	 CONSTRAINT statusAnimalCascade
      FOREIGN KEY (animalId)
      REFERENCES ANIMAL (animalId)
+     ON DELETE CASCADE,
+	 CONSTRAINT statusImageCascade
+     FOREIGN KEY (imageId)
+     REFERENCES IMAGE (imageId)
      ON DELETE CASCADE);
 
 CREATE TABLE IF NOT EXISTS HISTORY
@@ -145,7 +149,7 @@ CREATE TABLE IF NOT EXISTS MEDICAL_RECORD_HISTORY
      date				date			NOT NULL,
      primary key(medicalRecordId),
      foreign key(animalId) references ANIMAL(animalId),
-     CONSTRAINT mwdicalRecordHistoryAnimalCascade
+     CONSTRAINT medicalRecordHistoryAnimalCascade
      FOREIGN KEY (animalId)
      REFERENCES ANIMAL (animalId)
      ON DELETE CASCADE);

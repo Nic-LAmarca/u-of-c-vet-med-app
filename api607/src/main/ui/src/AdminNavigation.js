@@ -113,9 +113,10 @@ export default function AdminNavigation() {
                 const filteredAnimalList = response.data
                  console.log(filteredAnimalList)
                 var table = document.getElementById("table");
+                var rowCount = table.rows.length
                 var j = 1;
-                for(var i = 1; i < table.rows.length; i++){
-                    table.deleteRow(i)
+                for(var i = 1; i < rowCount; i++){
+                    table.deleteRow(j)
                 }
                 for(var i = 0; i < filteredAnimalList.length; i++){
                     var temp = filteredAnimalList[i]

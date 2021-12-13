@@ -13,7 +13,6 @@ export default function AdminNavigation() {
     let [animals,setAnimals] = useState([]);
     const [animalName, setAnimalName] = useState("");
     const [animalSpecies, setAnimalSpecies] = useState("");
-    //const [animalBreed, setAnimalBreed] = useState("");
     const [animalStatus, setAnimalStatus] = useState("");
 
     const history = useNavigate();
@@ -60,8 +59,6 @@ export default function AdminNavigation() {
 
                 const animalList = response.data
                 setAnimals(animalList)
-                //window.localStorage.setItem("allAnimals", animalList)
-                //window.localStorage.setItem("animalCount", animalList.length)
 
                 var table = document.getElementById("table");
                 if(table.rows.length <= 1){
@@ -103,12 +100,11 @@ export default function AdminNavigation() {
         console.log(animalStatus)
 
         await axios.get('http://localhost:8080/filteredAnimals',
-        //null,
             {
                 params: {
-                    animalName: animalName,
-                    animalSpecies: animalSpecies,
-                    animalStatus: animalStatus
+                    animalName,
+                    animalSpecies,
+                    animalStatus
                 }
             })
             .then(function(response){
@@ -190,96 +186,21 @@ export default function AdminNavigation() {
 
                             <InputGroup className="me-2" >
 
-                                {/*<Form.Label>Animal Name</Form.Label>*/}
                                 <Form.Control
                                     autoFocus
                                     placeholder="Animal Name"
                                      value = {animalName}
-                                     onChange =  {(e) => setAnimalName(e.target.value)}
+                                      onChange =  {(e) => setAnimalName(e.target.value)}
 
-
-
-                                    // type="username"
-                                    // value={username}
                                 />
 
                             </InputGroup><br/>
                         </Col>
-                        {/*<Col className="mx-auto">*/}
-                            {/*<Dropdown className="d-inline me-4" autoClose="outside"  onSelect = {e => this.setSpecies(e.target.value)} >*/}
-                            {/*    <DropdownToggle*/}
-                            {/*        id = "dropdown-autoclose-false"*/}
-                            {/*        variant="secondary"*/}
-                            {/*    >*/}
-                            {/*        Species*/}
-                            {/*    </DropdownToggle>*/}
-                            {/*    <DropdownMenu >*/}
-                            {/*        <Form.Check*/}
-                            {/*            type="checkbox"*/}
-                            {/*            id="checkbox"*/}
-                            {/*            label="Chicken Noodle Soup"*/}
-                            {/*            className="mx-3"*/}
 
-                            {/*        />*/}
-                            {/*        <Form.Check*/}
-                            {/*            type="checkbox"*/}
-                            {/*            id="checkbox"*/}
-                            {/*            label="Seggs"*/}
-                            {/*            className="mx-3"*/}
-                            {/*        />*/}
-                            {/*    </DropdownMenu>*/}
-                            {/*</Dropdown >*/}
-                            {/*<Dropdown className="d-inline me-4" autoClose="outside"  onSelect = {e => this.setBreed(e.target.value)} >*/}
-                            {/*    <DropdownToggle id = "dropdown-autoclose-false" variant="secondary">*/}
-                            {/*        Breed*/}
-                            {/*    </DropdownToggle>*/}
-                            {/*    <DropdownMenu >*/}
-                            {/*        <Form.Check*/}
-                            {/*            type="checkbox"*/}
-                            {/*            id="checkbox"*/}
-                            {/*            label="Soup Soup"*/}
-                            {/*            className="mx-3"*/}
-                            {/*        />*/}
-                            {/*        <Form.Check*/}
-                            {/*            type="checkbox"*/}
-                            {/*            id="checkbox"*/}
-                            {/*            label="Seggsy"*/}
-                            {/*            className="mx-3"*/}
-                            {/*        />*/}
-                            {/*    </DropdownMenu>*/}
-                            {/*</Dropdown >*/}
-                            {/*<Dropdown className="d-inline me-4" autoClose="outside" onSelect = {e => this.setStatus(e.target.value)}>*/}
-                            {/*    <DropdownToggle id = "dropdown-autoclose-false" variant="secondary">*/}
-                            {/*        Status*/}
-                            {/*    </DropdownToggle>*/}
-
-                            {/*    <DropdownMenu className="me-auto">*/}
-
-                            {/*        <Form.Check*/}
-                            {/*            type="checkbox"*/}
-                            {/*            id="checkbox"*/}
-                            {/*            label="Warning"*/}
-                            {/*            className="mx-3"*/}
-                            {/*        />*/}
-                            {/*        <Form.Check*/}
-                            {/*            type="checkbox"*/}
-                            {/*            id="checkbox"*/}
-                            {/*            label="Fine"*/}
-                            {/*            className="mx-3"*/}
-                            {/*        />*/}
-                            {/*        <Form.Check*/}
-                            {/*            type="checkbox"*/}
-                            {/*            id="checkbox"*/}
-                            {/*            label="Urgent"*/}
-                            {/*            className="mx-3"*/}
-                            {/*        />*/}
-                            {/*    </DropdownMenu>*/}
-                            {/*</Dropdown>*/}
                         <Col lg="3">
 
                             <InputGroup className="me-2"  >
 
-                                {/*<Form.Label>Animal Name</Form.Label>*/}
                                 <Form.Control
                                     autoFocus
                                     placeholder="Species"
@@ -293,28 +214,16 @@ export default function AdminNavigation() {
 
                             <InputGroup className="me-2"  >
 
-                                {/*<Form.Label>Animal Name</Form.Label>*/}
                                 <Form.Control
                                     autoFocus
                                     placeholder="Status"
                                      value = {animalStatus}
                                      onChange =  {(e) => setAnimalStatus(e.target.value)}
-
-
-
-                                    // type="username"
-                                    // value={username}
                                 />
 
                             </InputGroup><br/>
 
                         </Col>
-                        {/*<Col className="mx-auto">*/}
-                        {/*    */}
-                        {/*</Col>*/}
-                        {/*<Col className="mx-auto">*/}
-                        {/*    */}
-                        {/*</Col>*/}
                     </Row><br/>
 
                     <Button onClick= {searchAnimals} >Search By Filter</Button>

@@ -45,19 +45,6 @@ export default function TechnicianTreatmentRequestManagement() {
 
     function renderTableBody(){
         return requests.map((value,key) =>{
-<<<<<<< HEAD
-            const { acceptedBy,animalId,date,requestedBy,treatmentId} = value
-            return(
-
-                <tr key={treatmentId}>
-                    <td>{treatmentId}</td>
-                    <td>{acceptedBy}</td>
-                    <td>{animalId}</td>
-                    <td>{date}</td>
-                    <td>{requestedBy}</td>
-                    <td><Button onClick={approveRequest} disabled={disabled} variant="success">{disabled ? 'Accepted' : 'Accept'}</Button></td>
-
-=======
             const {treatmentHistoryId, treatmentId, animalId, date, requestedBy, acceptedBy} = value
             return(
                 <tr key={treatmentHistoryId}>
@@ -72,21 +59,13 @@ export default function TechnicianTreatmentRequestManagement() {
                                 <td><Button onClick={(e)=>approveRequest(treatmentHistoryId)} variant="success">Accept</Button></td>
                             </div>
                     }
->>>>>>> cg
                 </tr>
-
-
             )
         })
     }
 
     function renderHeaders(){
-<<<<<<< HEAD
-        const headers =["TreatmentId", "AcceptedBy","AnimalId","Date","RequestedBy","Response"]
-        console.log(headers)
-=======
         const headers =["TreatmentHistoryId", "TreatmentId", "AnimalId","Date","RequestedBy", "AcceptedBy", "Response"]
->>>>>>> cg
         return headers.map((header)=>{
             return<th> {header}</th>
         })
@@ -94,7 +73,6 @@ export default function TechnicianTreatmentRequestManagement() {
 
     }
 
-<<<<<<< HEAD
     // async function renderHeaders(){
     //     const header = Object.keys(requests[0])
     //     console.log(header)
@@ -103,26 +81,6 @@ export default function TechnicianTreatmentRequestManagement() {
     //     })
     // }
 
-    async function approveRequest(event) {
-        event.preventDefault();
-        console.log("working")
-        // await axios.post('http://localhost:8080/technicianRequestApproval',
-        //     null,
-        //     {
-        //         params: {
-        //             requestId
-        //         }
-        //     })
-        //     .then(function(response){
-        //         setRequestId();
-        //         console.log(response.data);
-        //         setRequestMessage(response.data);
-        //         setDisabled(true);
-        //     })
-        //     .catch(function(error){
-        //         console.log(error);
-        //     });
-=======
     async function approveRequest(requestId) {
         var userId = window.localStorage.getItem("userId")
         axios.post('http://localhost:8080/technicianRequestApproval',
@@ -143,7 +101,6 @@ export default function TechnicianTreatmentRequestManagement() {
              .catch(function(error){
                  console.log(error);
              });;
->>>>>>> cg
     }
 
     async function denyRequest(event) {

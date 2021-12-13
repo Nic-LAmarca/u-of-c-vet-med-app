@@ -157,14 +157,14 @@ export default function AdminNavigation() {
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
-                                <Button variant="info" href="#action1" onClick={personalSettings}>Personal Settings</Button><br/>
-                                <Button variant="info" href="#action2" onClick={userManagement}>User Management</Button><br/>
-                                <Button variant="info" href="#action2" onClick={teacherRequestManagement}>
+                                <Button variant="info" href="/TeacherRequestManagement" >
                                     Teacher Request Management
                                     <Badge className="ms-2" bg = "danger">8</Badge>
                                 </Button><br/>
-                                <Button variant="info" href="#action" onClick={animalManagement}>Animal Management</Button><br/>
-                                <Button variant="secondary" href="#action2" onClick={logout}>Logout</Button>
+                                <Button variant="info" href="/AdminAnimalManagement" >Animal Management</Button><br/>
+                                <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
+                                <Button variant="info" href="/UserManagement" >User Management</Button><br/>
+                                <Button variant="secondary" href="/" >Logout</Button>
                             </Nav>
                         </Offcanvas.Body>
                     </Navbar.Offcanvas>

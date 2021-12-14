@@ -425,6 +425,15 @@ export default function AdminAnimalProfile() {
                                     </Table>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="fourth">
+                                    <InputGroup className="mb-3 flex-sm-wrap">
+                                        <FormControl
+                                            placeholder="Enter Drug Name Here"
+                                            onChange={(e) => setDescription(e.target.value)}
+                                        />
+                                        <Button variant="success" id="Submit Prescription" onClick={addComment}>
+                                            Submit
+                                        </Button>
+                                    </InputGroup>
                                     <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">
                                         <thead>
                                         <tr>

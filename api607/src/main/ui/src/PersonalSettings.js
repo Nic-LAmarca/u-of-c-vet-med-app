@@ -35,6 +35,83 @@ export default function PersonalSettings() {
             })
         }
 
+    function renderOptions(){
+        if(window.localStorage.getItem("userType") == "Administrator"){
+            return(
+                <Offcanvas.Body >
+                    <Nav className="justify-content-end flex-grow-1 pe-3">
+                        <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
+                        <Button variant="info" href="/AdminAnimalManagement" >Animal Management</Button><br/>
+                        <Button variant="info" href="/AdminUserManagement" >User Management</Button><br/>
+                        <Button variant="info" href="/AdminTeachingRequestManagement">Teaching Request Management</Button><br/>
+                        <Button variant="secondary" href="/" >Logout</Button>
+                    </Nav>
+                </Offcanvas.Body>
+                )
+        }
+        else if(window.localStorage.getItem("userType") == "Student"){
+        return(
+            <div>
+                <Offcanvas.Body >
+                    <Nav className="justify-content-end flex-grow-1 pe-3">
+                        <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
+                        <Button variant="secondary" href="/" >Logout</Button>
+                    </Nav>
+                </Offcanvas.Body>
+            </div>
+            )
+        }
+        else if(window.localStorage.getItem("userType") == "Animal Health Technician"){
+        return(
+            <div>
+                <Offcanvas.Body >
+                    <Nav className="justify-content-end flex-grow-1 pe-3">
+                        <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
+                        <Button variant="info" href="/UserManagement" >User Management</Button><br/>
+                        <Button variant="info" href="TechnicianTeachingRequestManagement" >
+                            Teaching Request Management
+                        </Button><br/>
+                        <Button variant="info" href="TechnicianTreatmentRequestManagement" >
+                            Treatment Request Management
+                        </Button><br/>
+                        <Button variant="secondary" href="/" >Logout</Button>
+                    </Nav>
+                </Offcanvas.Body>
+            </div>
+            )
+        }
+        else if(window.localStorage.getItem("userType") == "Animal Health Attendant"){
+        return(
+            <div>
+                <Offcanvas.Body >
+                    <Nav className="justify-content-end flex-grow-1 pe-3">
+                        <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
+                        <Button variant="info" href="/UserManagement" >User Management</Button><br/>
+                        <Button variant="info" href="AttendantTreatmentRequest" >Treatment Request Management</Button><br/>
+                        <Button variant="secondary" href="/" >Logout</Button>
+                    </Nav>
+                </Offcanvas.Body>
+            </div>
+            )
+        }
+        else if(window.localStorage.getItem("userType") == "Teaching Technician"){
+                return(
+                    <div>
+                        <Offcanvas.Body >
+                            <Nav className="justify-content-end flex-grow-1 pe-3">
+                                <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
+                                <Button variant="info" href="/UserManagement" >User Management</Button><br/>
+                                <Button variant="info" href="/TeacherTeachingRequest" >
+                                    Teaching Requests
+                                </Button><br/>
+                                <Button variant="secondary" href="/" >Logout</Button>
+                            </Nav>
+                        </Offcanvas.Body>
+                    </div>
+                    )
+                }
+    }
+
     return (
     <div>
         <Navbar variant="light" expand={false} bg="white">
@@ -54,17 +131,7 @@ export default function PersonalSettings() {
                     <Offcanvas.Header closeButton>
                         <Offcanvas.Title id="offcanvasNavbarLabel">{window.localStorage.getItem("username")}</Offcanvas.Title>
                     </Offcanvas.Header>
-                    <Offcanvas.Body >
-                            <Nav className="justify-content-end flex-grow-1 pe-3">
-                                <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
-                                <Button variant="info" href="/AdminAnimalManagement" >Animal Management</Button><br/>
-                                <Button variant="info" href="/AdminUserManagement" >User Management</Button><br/>
-                                <Button variant="info" href="/AdminTeachingRequestManagement" >
-                                    Teaching Request Management
-                                </Button><br/>
-                                <Button variant="secondary" href="/" >Logout</Button>
-                            </Nav>
-                    </Offcanvas.Body>
+                    {renderOptions()}
                 </Navbar.Offcanvas>
             </Container>
         </Navbar><br/>

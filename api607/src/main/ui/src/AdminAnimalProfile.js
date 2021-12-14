@@ -149,34 +149,49 @@ export default function AdminAnimalProfile() {
             .catch(function(error){
                 console.log(error);
             })
-            axios.post('http://localhost:8080/animalMedicalRecordHistories',
-                null,
-                {
-                    params:{
-                        animalId
-                    }
-                })
-                .then(function(response){
-                    console.log(response)
-                    setRequest(response.data)
-                })
-                .catch(function(error){
-                    console.log(error);
-                })
-                axios.post('http://localhost:8080/animalHistories',
-                    null,
-                    {
-                        params:{
-                            animalId
-                        }
-                    })
-                    .then(function(response){
-                        console.log(response)
-                        setRequest(response.data)
-                    })
-                    .catch(function(error){
-                        console.log(error);
-                    })
+        axios.post('http://localhost:8080/animalMedicalRecordHistories',
+            null,
+            {
+                params:{
+                    animalId
+                }
+            })
+            .then(function(response){
+                console.log(response)
+                setRequest(response.data)
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+        axios.post('http://localhost:8080/animalHistories',
+          null,
+          {
+              params:{
+                  animalId
+              }
+          })
+          .then(function(response){
+              console.log(response)
+              setRequest(response.data)
+          })
+          .catch(function(error){
+              console.log(error);
+          })
+      axios.post('http://localhost:8080/animalStatusHistory',
+        null,
+        {
+            params:{
+                animalId
+            }
+        })
+        .then(function(response){
+            console.log(response)
+            setRequest(response.data)
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+
     },[])
 
     async function addComment(event) {
@@ -341,6 +356,31 @@ export default function AdminAnimalProfile() {
                     <td>{measurement}</td>
                     <td>{value}</td>
                     <td>{userId}</td>
+                </tr>
+            )
+        })
+    }
+
+    function renderStatusHistoryHeaders(){
+        const headers =["Status Id","Date", "Description", "locations", "Status Type", "Image Id"]
+        return headers.map((header)=>{
+            return(
+                <th> {header}</th>
+            )
+        })
+    }
+
+    function renderStatusHistoryTable(){
+        return comments.map((value,key) =>{
+            const {statusId, date, description, locations, statusType, imageid} = value
+            return(
+                <tr key={statusId}>
+                    <td>{statusId}</td>
+                    <td>{date}</td>
+                    <td>{description}</td>
+                    <td>{locations}</td>
+                    <td>{statusType}</td>
+                    <td>{imageid}</td>
                 </tr>
             )
         })
@@ -533,6 +573,24 @@ export default function AdminAnimalProfile() {
                                         </tbody>
                                     </Table>
                                 </Tab.Pane>
+                                <Tab.Pane eventKey="eighth">
+                                    <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">
+                                        <thead>
+                                        <tr>
+                                            {renderStatusHistoryHeaders()}
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>false</td>
+                                            <td>false</td>
+                                            <td>false</td>
+                                            <td>false</td>
+                                        </tr>
+                                        </tbody>
+                                    </Table>
+                                </Tab.Pane>
                             </Tab.Content>
                             <Nav variant="pills"  >
                                 <Nav.Item>
@@ -555,6 +613,9 @@ export default function AdminAnimalProfile() {
                                 </Nav.Item>
                                 <Nav.Item>
                                     <Nav.Link eventKey="seventh">Animal History</Nav.Link>
+                                </Nav.Item>
+                                <Nav.Item>
+                                    <Nav.Link eventKey="eighth">Status History</Nav.Link>
                                 </Nav.Item>
                             </Nav>
                         </Tab.Container>

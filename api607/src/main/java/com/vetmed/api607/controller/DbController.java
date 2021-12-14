@@ -742,6 +742,38 @@ public class DbController {
 
     /**
      *
+     * Method is used to search the database for all Medical Record items related to an animal
+     *
+     * @param animalId is the unique animal id value to search with
+     * @return a new MedicalRecordHistory object ArrayList that matches the animalId passed as an argument
+     */
+    public ArrayList<MedicalRecordHistory> animalMedicalRecords(int animalId) {
+        ArrayList<MedicalRecordHistory> medicalRecordHistoryArrayList= new ArrayList<MedicalRecordHistory>();
+        try {
+            String query = "SELECT * FROM MEDICAL_RECORD_HISTORY WHERE animalId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, animalId);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                if (results.getInt("animalId") == animalId) {
+                    MedicalRecordHistory addMedicalRecordHistory= new MedicalRecordHistory();
+                    addMedicalRecordHistory.setMedicalRecordHistoryId(results.getInt("medicalRecordHistoryId"));
+                    addMedicalRecordHistory.setMedicalRecordId(results.getInt("medicalRecordId"));
+                    addMedicalRecordHistory.setAnimalId(results.getInt("animalId"));
+                    addMedicalRecordHistory.setDate(results.getDate("date").toString());
+                    medicalRecordHistoryArrayList.add(addMedicalRecordHistory);
+                }
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return medicalRecordHistoryArrayList;
+    }
+
+
+    /**
+     *
      * Method is used to search the database for Medical Record History with the entered id and return the Medical Record History object if found
      *
      * @param id is the unique id value to search with
@@ -1478,6 +1510,9 @@ public class DbController {
     // *******************************************************************
     // ****** SECTION USED FOR TREATMENT HISTORY QUERY INTERACTIONS ******
     // *******************************************************************
+
+
+
 
     /**
      *

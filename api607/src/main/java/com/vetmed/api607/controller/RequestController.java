@@ -32,9 +32,21 @@ public class RequestController {
         return db.getAllTechnicianRequests();
     }
 
-    @PostMapping("/technicianTeachingRequestDecision{userId, requestId, decision}")
-    public ArrayList<Request> technicianApproveTreatmentRequest(@PathParam("userId") int userId, @PathParam("requestId") int requestId, @PathParam("decision") boolean decision) {
-        return db.technicianUpdateTeachingRequest(userId, requestId, decision);
+    @CrossOrigin
+    @GetMapping("/adminTeachingRequests")
+    public ArrayList<Request> adminTeachingRequest()
+    {
+        return db.getAllAdminRequests();
+    }
+
+    @PostMapping("/technicianTeachingRequestDecision{requestId, decision}")
+    public ArrayList<Request> technicianApproveTreatmentRequest(@PathParam("requestId") int requestId, @PathParam("decision") boolean decision) {
+        return db.technicianUpdateTeachingRequest(requestId, decision);
+    }
+
+    @PostMapping("/adminTeachingRequestDecision{requestId, decision}")
+    public ArrayList<Request> adminApproveTreatmentRequest(@PathParam("requestId") int requestId, @PathParam("decision") boolean decision) {
+        return db.adminUpdateTeachingRequest(requestId, decision);
     }
 
 }

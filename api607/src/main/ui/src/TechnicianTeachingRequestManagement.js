@@ -34,8 +34,8 @@ export default function TechnicianTeachingRequestManagement() {
                     <td>{animalId}</td>
                     <td>{userId}</td>
                     <td>{requestDate}</td>
-                    <td><Button onClick={(e)=>approveRequest(requestId)} variant="success">Approve</Button></td>
-                    <td><Button onClick={(e)=>denyRequest(requestId)} variant="danger">Deny</Button></td>
+                    <td><Button onClick={(e)=>updateRequest(requestId, true)} variant="success">Approve</Button></td>
+                    <td><Button onClick={(e)=>updateRequest(requestId, false)} variant="danger">Deny</Button></td>
                 </tr>
             )
         })
@@ -48,29 +48,8 @@ export default function TechnicianTeachingRequestManagement() {
         })
     }
 
-    async function approveRequest(requestId) {
+    async function updateRequest(requestId, decision) {
         var userId = window.localStorage.getItem("userId")
-        var decision = true
-        axios.post('http://localhost:8080/technicianTeachingRequestDecision',
-             null,
-             {
-                 params: {
-                     userId,
-                     requestId,
-                     decision
-                 }
-             })
-             .then(function(response){
-                 setRequests(response.data)
-             })
-             .catch(function(error){
-                 console.log(error);
-             });;
-    }
-
-    async function denyRequest(requestId) {
-        var userId = window.localStorage.getItem("userId")
-        var decision = false
         axios.post('http://localhost:8080/technicianTeachingRequestDecision',
              null,
              {

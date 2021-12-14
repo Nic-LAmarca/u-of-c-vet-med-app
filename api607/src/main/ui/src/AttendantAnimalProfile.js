@@ -299,6 +299,14 @@ export default function AdminAnimalProfile() {
 
         })
     }
+    function renderImage(){
+        return images.map((value,key) =>{
+            const{imageId,userId,creationDate,file,animalId,type} = value
+            return(
+                <Image className="w-50" src={(file)} fluid/>
+            )
+        })
+    }
 
     function renderRequestTable(){
         return comments.map((value,key) =>{
@@ -408,6 +416,7 @@ export default function AdminAnimalProfile() {
                                     </Table>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="second">
+                                    {renderImage}
                                     {/*<h100 className="AdminAnimalProfile-photo-item1">SparkyPhoto1.png</h100>*/}
                                     {/*<h101 className="AdminAnimalProfile-photo-item2">SparkyPhoto2.png</h101>*/}
                                     {/*<h102 className="AdminAnimalProfile-photo-item3">SparkyPhoto3.png</h102>*/}

@@ -385,9 +385,7 @@ export default function AdminAnimalProfile() {
     return images.map((value,key) =>{
         const{imageId,userId,creationDate,file,animalId,type} = value
         return(
-
                 <Image className="w-50" src={(file)} fluid/>
-
         )
     })
     }

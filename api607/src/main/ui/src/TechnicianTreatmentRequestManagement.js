@@ -37,7 +37,7 @@ export default function TechnicianTreatmentRequestManagement() {
                     <td>{requestedBy}</td>
                     <td>{acceptedBy}</td>
 
-                    <td><Button onClick={(e)=>acceptRequest(requestId)} variant="success">Accept</Button></td>
+                    <td><Button onClick={(e)=>acceptRequest(treatmentHistoryId)} variant="success">Accept</Button></td>
 
                 </tr>
             )
@@ -68,7 +68,6 @@ export default function TechnicianTreatmentRequestManagement() {
              .then(function(response){
              console.log(response.data)
                 setRequests(response.data)
-                 setRequestId();
              })
              .catch(function(error){
                  console.log(error);
@@ -96,8 +95,8 @@ export default function TechnicianTreatmentRequestManagement() {
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
+                                <Button variant="info" href="/TechnicianNavigation" >Navigation Screen</Button><br/>
                                 <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
-                                <Button variant="info" href="/UserManagement" >User Management</Button><br/>
                                 <Button variant="info" href="TechnicianTeachingRequestManagement" >
                                     Teaching Request Management
                                 </Button><br/>

@@ -40,11 +40,7 @@ export default function TeacherTeachingRequest() {
                     <td>{species}</td>
                     <td>{breed}</td>
                     <td>{sex}</td>
-                    <td>
-                        if(1 == 1){
-                            <td><Button onClick={(e)=>makeRequest(animalId)} variant="success">Request</Button></td>
-                        }
-                    </td>
+                    <td><Button onClick={(e)=>makeRequest(animalId)} variant="success">Request</Button></td>
                 </tr>
             )
         })
@@ -98,11 +94,10 @@ export default function TeacherTeachingRequest() {
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
+                                <Button variant="info" href="/TeacherNavigation" >Navigation Screen</Button><br/>
                                 <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
-                                <Button variant="info" href="/UserManagement" >
-                                    User Management
-                                </Button><br/>
-                                <Button variant="info" href="/TeacherRequestManagement" >
+                                <Button variant="info" href="/TeacherUserManagement" >User Management</Button><br/>
+                                <Button variant="info" href="/TeacherTeachingRequest" >
                                     Teaching Requests
                                 </Button><br/>
                                 <Button variant="secondary" href="/" >Logout</Button>

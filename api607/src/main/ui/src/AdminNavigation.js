@@ -133,12 +133,13 @@ export default function AdminNavigation() {
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
+                                <Button variant="info" href="/AdminNavigation" >Navigation Screen</Button><br/>
+                                <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
+                                <Button variant="info" href="/AdminAnimalManagement" >Animal Management</Button><br/>
+                                <Button variant="info" href="/AdminUserManagement" >User Management</Button><br/>
                                 <Button variant="info" href="/AdminTeachingRequestManagement" >
                                     Teacher Request Management
                                 </Button><br/>
-                                <Button variant="info" href="/AdminAnimalManagement" >Animal Management</Button><br/>
-                                <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
-                                <Button variant="info" href="/AdminUserManagement" >User Management</Button><br/>
                                 <Button variant="secondary" href="/" >Logout</Button>
 
                             </Nav>

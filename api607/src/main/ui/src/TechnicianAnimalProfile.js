@@ -335,12 +335,14 @@ export default function AdminAnimalProfile() {
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
-                                <Button variant="info" href="/AdminTeachingRequestManagement" >
-                                    Teacher Request Management
-                                </Button><br/>
-                                <Button variant="info" href="/AdminAnimalManagement" >Animal Management</Button><br/>
+                                <Button variant="info" href="/TechnicianNavigation" >Navigation Screen</Button><br/>
                                 <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
-                                <Button variant="info" href="/UserManagement" >User Management</Button><br/>
+                                <Button variant="info" href="TechnicianTeachingRequestManagement" >
+                                    Teaching Request Management
+                                </Button><br/>
+                                <Button variant="info" href="TechnicianTreatmentRequestManagement" >
+                                    Treatment Request Management
+                                </Button><br/>
                                 <Button variant="secondary" href="/" >Logout</Button>
 
                             </Nav>

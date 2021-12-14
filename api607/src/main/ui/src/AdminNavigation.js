@@ -2,9 +2,6 @@ import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 import {Button, Col, Row, Badge, Form, InputGroup, Dropdown, DropdownButton, ListGroup, Table, Navbar, Container, Image,Offcanvas,Nav,NavDropdown,FormControl} from "react-bootstrap";
-import DropdownItem from "react-bootstrap/DropdownItem";
-import DropdownToggle from "react-bootstrap/DropdownToggle";
-import DropdownMenu from "react-bootstrap/DropdownMenu";
 import axios from "axios";
 import './AdminNavigation.css';
 import images from "./Images/vetmed.png";
@@ -19,31 +16,6 @@ export default function AdminNavigation() {
 
     const history = useNavigate();
 
-
-    async function personalSettings(event) {
-        event.preventDefault();
-        history('/PersonalSettings');
-    }
-
-    async function userManagement(event) {
-        event.preventDefault();
-        history('/UserManagement');
-    }
-
-    async function teacherRequestManagement(event) {
-        event.preventDefault();
-        history('/TeacherRequestManagement');
-    }
-
-    async function animalManagement(event) {
-        event.preventDefault();
-        history('/AnimalManagement');
-    }
-
-    async function logout(event) {
-        event.preventDefault();
-        history('/');
-    }
 
     async function selectAnimal(event) {
         event.preventDefault();
@@ -163,7 +135,6 @@ export default function AdminNavigation() {
                             <Nav className="justify-content-end flex-grow-1 pe-3">
                                 <Button variant="info" href="/AdminTeachingRequestManagement" >
                                     Teacher Request Management
-                                    <Badge className="ms-2" bg = "danger">8</Badge>
                                 </Button><br/>
 
 

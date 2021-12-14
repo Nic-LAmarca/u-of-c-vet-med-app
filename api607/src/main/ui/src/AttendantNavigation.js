@@ -139,6 +139,7 @@ export default function AttendantNavigation() {
                                 <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
                                 <Button variant="info" href="/UserManagement" >User Management</Button><br/>
                                 <Button variant="info" href="AttendantTreatmentRequest" >
+
                                     Treatment Request Management
                                 </Button><br/>
                                 <Button variant="secondary" href="/" >Logout</Button>

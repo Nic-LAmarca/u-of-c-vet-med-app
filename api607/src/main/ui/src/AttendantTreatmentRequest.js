@@ -39,11 +39,7 @@ export default function AttendantTreatmentRequestManagement() {
                     <td>{species}</td>
                     <td>{breed}</td>
                     <td>{sex}</td>
-                    <td>
-                        if(1 == 1){
-                            <td><Button onClick={(e)=>makeRequest(animalId)} variant="success">Request</Button></td>
-                        }
-                    </td>
+                    <td><Button onClick={(e)=>makeRequest(animalId)} variant="success">Request</Button></td>
                 </tr>
             )
         })
@@ -97,8 +93,10 @@ export default function AttendantTreatmentRequestManagement() {
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
+                                <Button variant="info" href="/AttendantNavigation" >Navigation Screen</Button><br/>
                                 <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
-                                <Button variant="info" href="/AttendantTreatmentRequest" >
+                                <Button variant="info" href="AttendantTreatmentRequest" >
+
                                     Treatment Request Management
                                 </Button><br/>
                                 <Button variant="secondary" href="/" >Logout</Button>

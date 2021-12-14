@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 @CrossOrigin (origins = "http://localhost:3000")
 @RestController
@@ -19,15 +20,18 @@ public class ImageController {
     private DbController db = new DbController();
 
     @CrossOrigin
-    @GetMapping("/animalImages{animalId}")
+    @PostMapping("/animalImages{animalId}")
     public ArrayList<Image> getAnimalImages(@PathParam("animalId") int animalId) {
         return db.searchForAnimalImages(animalId);
     }
 
     @CrossOrigin
-    @PostMapping("/addImage{userId, creationDate, file, animalId, type}")
-    public void addImage(@PathParam("userId") int userId, @PathParam("creationDate") String creationDate, @PathParam("file") String file, @PathParam("animalId") int animalId, @PathParam("type") String type)
+    @PostMapping("/addImage{userId, fileName, animalId}")
+    public void addImage(@PathParam("userId") int userId, @PathParam("fileName") String fileName, @PathParam("animalId") int animalId)
     {
-        db.addImage(userId, creationDate, file, animalId, type);
+        String separator = "\\";
+        String[] paths = fileName.replaceAll(Pattern.quote(separator), "\\\\").split("\\\\");
+        String file = paths[paths.length-1].replace("jpg", "jpeg");
+        db.addImage(userId, file, animalId, "injury");
     }
 }

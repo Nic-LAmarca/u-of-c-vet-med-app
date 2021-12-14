@@ -755,22 +755,20 @@ public class DbController {
      * Method is used to add an image into the database
      *
      * @param userId is the user entering the image
-     * @param creationDate is the date the image was taken
      * @param file is the file path for the image
      * @param animalId is the animal that the image relates to
      * @param type is the type of image being taken
      */
-    public void addImage(int userId, String creationDate, String file, int animalId, String type){
+    public void addImage(int userId, String file, int animalId, String type){
         try {
-            String query = "INSERT INTO" +
-                    " IMAGE (userId, creationDate, file, animalId, type) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO IMAGE (userId, creationDate, file, animalId, type) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setInt(1, userId);
-            myStmt.setDate(2, Date.valueOf(creationDate));
+            myStmt.setDate(2, Date.valueOf(LocalDate.now()));
             myStmt.setString(3, file);
             myStmt.setInt(4, animalId);
             myStmt.setString(5, type);
-            myStmt.executeQuery();
+            myStmt.executeUpdate();
             myStmt.close();
         } catch (Exception e) {
             e.printStackTrace();

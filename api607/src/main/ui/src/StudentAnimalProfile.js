@@ -1,29 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-
-import {
-    Button,
-    Form,
-    Dropdown,
-    DropdownButton,
-    Table,
-    ListGroup,
-    Tabs,
-    Tab,
-    TabContent,
-    TabContainer,
-    Nav,
-    NavItem,
-    Row,
-    Col,
-    Navbar, Container, Image, Offcanvas,InputGroup,FormControl
-} from "react-bootstrap";
-
+import {Button,Form,Dropdown,DropdownButton,Table,ListGroup,Tabs,Tab,TabContent,TabContainer,Nav,NavItem,Row,Col,Navbar, Container, Image, Offcanvas,InputGroup,FormControl} from "react-bootstrap";
 import axios from "axios";
 import './AdminAnimalProfile.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
 import logo from "./Images/vetmed.png";
-
 
 export default function AdminAnimalProfile() {
     const [animalId, setAnimalId] = useState(window.localStorage.getItem("animal"));
@@ -33,9 +14,7 @@ export default function AdminAnimalProfile() {
     const [description, setDescription] = useState("");
     const [comments, setComments] = useState([]);
     let [animals, setAnimals] = useState([]);
-
-
-
+    const [statusHistories,setStatusHistories] = useState([]);
 
     useEffect(() => {
         axios.post('http://localhost:8080/searchForAnimal',
@@ -98,58 +77,33 @@ export default function AdminAnimalProfile() {
                 console.log(error);
             })
         axios.post('http://localhost:8080/comments',
-            null,
-            {
-                params: {
-                    animalId
-                }
-            })
-            .then(function(response){
-                console.log(response)
-                setComments(response.data)
-                // var table = document.getElementById("commentTable");
-                // if(table.rows.length <= 1){
-                //     const commentList = response.data
-                //     var j = 1;
-                //     for(var i = 0; i < commentList.length; i++){
-                //         var temp = commentList[i]
-                //         var row = table.insertRow(j)
-                //         for(var k = 0; k < 4; k++){
-                //             row.insertCell(k)
-                //         }
-                //         table.rows[j].cells[0].innerHTML = temp.commentId
-                //         table.rows[j].cells[1].innerHTML = temp.userId
-                //         table.rows[j].cells[2].innerHTML = temp.description
-                //         table.rows[j].cells[3].innerHTML = temp.date
-                //         j = j + 1
-                //     }
-                // }
-            })
-            .catch(function(error){
-                console.log(error);
-            })
-    },[])
+        null,
+        {
+            params: {
+                animalId
+            }
+        })
+        .then(function(response){
+            setComments(response.data)
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+      axios.post('http://localhost:8080/animalStatus',
+        null,
+        {
+            params:{
+                animalId
+            }
+        })
+        .then(function(response){
+            setStatusHistories(response.data)
+        })
+        .catch(function(error){
+            console.log(error);
+        })
 
-    async function addComment(event) {
-        event.preventDefault();
-        console.log("Here")
-        var userId = window.localStorage.getItem("userId");
-        await axios.post('http://localhost:8080/addComment',
-            null,
-            {
-                params: {
-                    userId,
-                    animalId,
-                    description
-                }
-            })
-            .then(function(response){
-                console.log(response)
-            })
-            .catch(function(error){
-                console.log(error);
-            })
-    }
+    },[])
 
     // *********************************************************
     // ****** SECTION USED FOR Rendering Tables ******
@@ -158,11 +112,8 @@ export default function AdminAnimalProfile() {
         const headers =["CommentId", "UserId", "Description","Date"]
         return headers.map((header)=>{
             return(
-
-                <th> {header}</th>
-
+                    <th> {header}</th>
             )
-
         })
     }
 
@@ -180,6 +131,30 @@ export default function AdminAnimalProfile() {
         })
     }
 
+    function renderStatusHistoryHeaders(){
+        const headers =["Status Id","Date", "Description", "locations", "Status Type", "Image Id"]
+        return headers.map((header)=>{
+            return(
+                <th> {header}</th>
+            )
+        })
+    }
+
+    function renderStatusHistoryTable(){
+        return statusHistories.map((value,key) =>{
+            const {statusId, date, description, locations, statusType, imageid} = value
+            return(
+                <tr key={statusId}>
+                    <td>{statusId}</td>
+                    <td>{date}</td>
+                    <td>{description}</td>
+                    <td>{locations}</td>
+                    <td>{statusType}</td>
+                    <td>{imageid}</td>
+                </tr>
+            )
+        })
+    }
 
 
     return (
@@ -200,12 +175,8 @@ export default function AdminAnimalProfile() {
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
-                                <Button variant="info" href="/AdminTeachingRequestManagement" >
-                                    Teacher Request Management
-                                </Button><br/>
-                                <Button variant="info" href="/AdminAnimalManagement" >Animal Management</Button><br/>
+                                <Button variant="info" href="/StudentNavigation" >Navigation Screen</Button><br/>
                                 <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
-                                <Button variant="info" href="/UserManagement" >User Management</Button><br/>
                                 <Button variant="secondary" href="/" >Logout</Button>
 
                             </Nav>
@@ -249,17 +220,6 @@ export default function AdminAnimalProfile() {
                         <Tab.Container id="left-tabs-example" defaultActiveKey="first" >
                             <Tab.Content >
                                 <Tab.Pane eventKey="first">
-                                    <InputGroup className="mb-3 flex-sm-wrap">
-                                        <FormControl
-                                            placeholder="Enter Comment Here"
-                                            aria-label="Recipient's username"
-                                            aria-describedby="Submit Comment"
-                                            onChange={(e) => setDescription(e.target.value)}
-                                        />
-                                        <Button variant="success" id="Submit Comment" onClick={addComment}>
-                                            Submit
-                                        </Button>
-                                    </InputGroup>
                                     {/*<input  placeholder="Enter Comment Here" onChange={(e) => setDescription(e.target.value)}></input>*/}
                                     {/*<Button  variant="success" type="submit" onClick={addComment}>Submit</Button>*/}
 
@@ -275,11 +235,26 @@ export default function AdminAnimalProfile() {
                                         </tbody>
                                     </Table>
                                 </Tab.Pane>
+                                <Tab.Pane eventKey="second">
+                                    <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">
+                                        <thead>
+                                        <tr>
+                                            {renderStatusHistoryHeaders()}
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            {renderStatusHistoryTable()}
+                                        </tbody>
+                                    </Table>
+                                </Tab.Pane>
 
                             </Tab.Content>
                             <Nav variant="pills"  >
                                 <Nav.Item>
                                     <Nav.Link eventKey="first">Comments</Nav.Link>
+                                </Nav.Item>
+                                <Nav.Item>
+                                    <Nav.Link eventKey="second">Status History</Nav.Link>
                                 </Nav.Item>
 
                             </Nav>

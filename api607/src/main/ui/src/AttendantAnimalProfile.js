@@ -183,6 +183,7 @@ export default function AdminAnimalProfile() {
     }
     async function addImage(event) {
         event.preventDefault();
+        console.log(fileName)
         var userId = window.localStorage.getItem("userId");
         await axios.post('http://localhost:8080/addImage',
             null,
@@ -190,8 +191,7 @@ export default function AdminAnimalProfile() {
                 params: {
                     userId,
                     fileName,
-                    animalId,
-
+                    animalId
                 }
             })
             .then(function(response){

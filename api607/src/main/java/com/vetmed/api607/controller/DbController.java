@@ -92,28 +92,28 @@ public class DbController {
             PreparedStatement myStmt;
 
             // Case 1- Only given animal name
-            if (animalSpecies == "" && animalStatus == "")
+            if (animalSpecies == "" && animalStatus == "" && animalName != "")
             {
                 query = "SELECT * FROM ANIMAL WHERE animalName = ?";
                 myStmt = this.dbConnect.prepareStatement(query);
                 myStmt.setString(1, animalName);
             }
             // Case 2- Only given animal species
-            else if( animalName == "" && animalStatus == "")
+            else if( animalName == "" && animalStatus == "" && animalSpecies != "")
             {
                 query = "SELECT * FROM ANIMAL where species = ?";
                 myStmt = this.dbConnect.prepareStatement(query);
                 myStmt.setString(1, animalSpecies);
             }
             // Case 3- Only given animal status
-            else if( animalName == "" && animalSpecies == "")
+            else if( animalName == "" && animalSpecies == "" && animalStatus != "")
             {
                 query = "SELECT * FROM ANIMAL WHERE statusType = ?";
                 myStmt = this.dbConnect.prepareStatement(query);
                 myStmt.setString(1, animalStatus);
             }
             // Case 4- Given animal name and species
-            else if(animalStatus== "")
+            else if(animalStatus== "" && animalName != "" && animalSpecies != "" )
             {
                 query = "SELECT * FROM ANIMAL WHERE animalName= ? AND species = ?";
                 myStmt = this.dbConnect.prepareStatement(query);
@@ -121,7 +121,7 @@ public class DbController {
                 myStmt.setString(2, animalSpecies);
             }
             // Case 5- Given animal name and status
-            else if(animalSpecies == "")
+            else if(animalSpecies == "" && animalStatus!= "" && animalName != "" )
             {
                 query = "SELECT * FROM ANIMAL WHERE animalName= ? AND statusType = ?";
                 myStmt = this.dbConnect.prepareStatement(query);
@@ -129,7 +129,7 @@ public class DbController {
                 myStmt.setString(2, animalStatus);
             }
             // Case 6- Given animal species and status
-            else if(animalName == "")
+            else if(animalName == "" && animalSpecies != "" && animalStatus!= "" )
             {
                 query = "SELECT * FROM ANIMAL WHERE species= ? AND statusType = ?";
                 myStmt = this.dbConnect.prepareStatement(query);
@@ -145,18 +145,14 @@ public class DbController {
                 myStmt.setString(2, animalSpecies);
                 myStmt.setString(3, animalStatus);
             }
-            //Case 9 - Given no values
-            else if(animalName == "" && animalSpecies == "" && animalStatus == "")
+            //Case 8 - Given no values
+            else
             {
+                System.out.println("No values");
                 query = "SELECT * FROM ANIMAL";
                 myStmt = this.dbConnect.prepareStatement(query);
             }
 
-            else
-            {
-                query = "SELECT * FROM ANIMAL";
-                myStmt = this.dbConnect.prepareStatement(query);
-            }
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
                 Animal addAnimal = new Animal();
@@ -922,6 +918,42 @@ public class DbController {
     // ****** SECTION USED FOR PRESCRIPTION HISTORY QUERY INTERACTIONS ******
     // **********************************************************************
 
+
+    /**
+     *
+     * Method is used to search the database for all Prescription History items related to an animal
+     *
+     * @param animalId is the unique animal id value to search with
+     * @return a new PrescriptionHistory object ArrayList that matches the animalId passed as an argument
+     */
+    public ArrayList<PrescriptionHistory> animalPrescriptionHistory(int animalId) {
+        ArrayList<PrescriptionHistory> prescriptionHistoryArrayList= new ArrayList<PrescriptionHistory>();
+        try {
+            String query = "SELECT * FROM PRESCRIPTION_HISTORY WHERE animalId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, animalId);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                if (results.getInt("animalId") == animalId) {
+                    PrescriptionHistory addPH = new PrescriptionHistory();
+                    addPH.setPrescriptionId(results.getInt("prescriptionId"));
+                    addPH.setUserId(results.getInt("userId"));
+                    addPH.setAnimalId(results.getInt("animalId"));
+                    addPH.setDate((results.getDate("date").toString()));
+                    addPH.setDrugName(results.getString("drugName"));
+                    addPH.setInstructions(results.getString("instructions"));
+                    addPH.setDosage(results.getDouble("dosage"));
+                    addPH.setDeliveryMethod(results.getString("deliveryMethod"));
+                    prescriptionHistoryArrayList.add(addPH);
+                }
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return prescriptionHistoryArrayList;
+    }
+
     /**
      *
      * Method is used to search the database for a PrescriptionHistory with the entered id and return the object if found
@@ -932,19 +964,21 @@ public class DbController {
     public  PrescriptionHistory searchForPrescriptionHistory(int id) {
         PrescriptionHistory foundPH = new PrescriptionHistory();
         try {
-            String query = "SELECT * FROM PRESCRIPTION_HISTORY WHERE requestId = ?";
+            String query = "SELECT * FROM PRESCRIPTION_HISTORY WHERE prescriptionId = ?";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setInt(1, id);
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
                 if (results.getInt("prescriptionId") == id) {
-                    foundPH.setPrescriptionId(id);
-                    foundPH.setUserId(results.getInt("userId"));
-                    foundPH.setDate((results.getDate("date").toString()));
-                    foundPH.setDrugName(results.getString("drugName"));
-                    foundPH.setInstructions(results.getString("instructions"));
-                    foundPH.setDosage(results.getDouble("dosage"));
-                    foundPH.setDeliveryMethod(results.getString("deliveryMethod"));
+                    PrescriptionHistory addPH = new PrescriptionHistory();
+                    addPH.setPrescriptionId(results.getInt("prescriptionId"));
+                    addPH.setUserId(results.getInt("userId"));
+                    addPH.setAnimalId(results.getInt("animalId"));
+                    addPH.setDate((results.getDate("date").toString()));
+                    addPH.setDrugName(results.getString("drugName"));
+                    addPH.setInstructions(results.getString("instructions"));
+                    addPH.setDosage(results.getDouble("dosage"));
+                    addPH.setDeliveryMethod(results.getString("deliveryMethod"));
                 }
             }
             myStmt.close();
@@ -970,6 +1004,7 @@ public class DbController {
                 PrescriptionHistory addPH = new PrescriptionHistory();
                 addPH.setPrescriptionId(results.getInt("prescriptionId"));
                 addPH.setUserId(results.getInt("userId"));
+                addPH.setAnimalId(results.getInt("animalId"));
                 addPH.setDate((results.getDate("date").toString()));
                 addPH.setDrugName(results.getString("drugName"));
                 addPH.setInstructions(results.getString("instructions"));
@@ -1404,6 +1439,40 @@ public class DbController {
     // *******************************************************************
     // ****** SECTION USED FOR TREATMENT HISTORY QUERY INTERACTIONS ******
     // *******************************************************************
+
+    /**
+     *
+     * Method is used to search the database for all Treatment History items related to an animal
+     *
+     * @param animalId is the unique animal id value to search with
+     * @return a new TreatmentHistory object ArrayList that matches the animalId passed as an argument
+     */
+    public ArrayList<TreatmentHistory> animalTreatmentHistory(int animalId) {
+        ArrayList<TreatmentHistory> treatmentHistoryArrayList= new ArrayList<TreatmentHistory>();
+        try {
+            String query = "SELECT * FROM TREATMENT_HISTORY WHERE animalId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, animalId);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                if (results.getInt("animalId") == animalId) {
+                    TreatmentHistory addTH = new TreatmentHistory();
+                    addTH.setTreatmentHistoryId(results.getInt("treatmentHistoryId"));
+                    addTH.setTreatmentId(results.getInt("treatmentId"));
+                    addTH.setAnimalId(results.getInt("animalId"));
+                    addTH.setDate(results.getDate("date").toString());
+                    addTH.setRequestedBy(results.getInt("requestedBy"));
+                    addTH.setAcceptedBy(results.getInt("acceptedBy"));
+                    treatmentHistoryArrayList.add(addTH);
+                }
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return treatmentHistoryArrayList;
+    }
+
     /**
      *
      * Method is used to search the database for a Treatment History with the entered id and return the object if found
@@ -1505,7 +1574,7 @@ public class DbController {
      * Method is used to add a TreatmentHistory into the database based on the entered credentials
      *
      * @param userId is the ID of the user who is requesting treatment
-     * @param animalId is the ID of the animal who the prescription history is for
+     * @param animalId is the ID of the animal who the treatment history is for
      */
     public void makeTreatmentRequest(int userId, int animalId, int treatmentTypeId) {
         try {

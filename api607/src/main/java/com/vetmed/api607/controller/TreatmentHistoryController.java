@@ -15,6 +15,13 @@ import java.util.ArrayList;
 public class TreatmentHistoryController {
     private DbController db = new DbController();
 
+    @GetMapping("/animalTreatmentHistory{animalId}")
+    public ArrayList<TreatmentHistory> getAnimalTreatmentHistory(@PathParam("animalId") int animalId)
+    {
+        return db.animalTreatmentHistory(animalId);
+    }
+
+
     @GetMapping("/technicianTreatmentRequests")
     public ArrayList<TreatmentHistory> getTreatmentRequestList() {
         return db.getAllTreatmentHistories();

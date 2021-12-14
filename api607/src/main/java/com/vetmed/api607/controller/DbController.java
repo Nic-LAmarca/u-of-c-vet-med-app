@@ -38,8 +38,8 @@ public class DbController {
      * @param id is the unique id value to search with
      * @return a new Animal object that matches the id passed as an argument
      */
-    public ArrayList<Animal> searchForAnimal(int id) {
-        ArrayList<Animal> foundAnimals = new ArrayList<Animal>();
+    public Animal searchForAnimal(int id) {
+        Animal foundAnimal = new Animal();
         try {
             String query = "SELECT * FROM ANIMAL WHERE animalId = ?";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
@@ -47,7 +47,6 @@ public class DbController {
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
                 if (results.getInt("animalId") == id) {
-                    Animal foundAnimal = new Animal();
                     foundAnimal.setAnimalId(id);
                     foundAnimal.setAnimalName(results.getString("animalName"));
                     foundAnimal.setSpecies(results.getString("species"));
@@ -68,14 +67,13 @@ public class DbController {
                     foundAnimal.setSubspecies(results.getString("subspecies"));
                     foundAnimal.setColor(results.getString("color"));
                     foundAnimal.setDistinguishingFeatures(results.getString("distinguishingFeatures"));
-                    foundAnimals.add(foundAnimal);
                 }
             }
             myStmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return foundAnimals;
+        return foundAnimal;
     }
 
     /**

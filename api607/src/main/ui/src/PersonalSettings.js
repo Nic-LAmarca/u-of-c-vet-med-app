@@ -40,6 +40,7 @@ export default function PersonalSettings() {
             return(
                 <Offcanvas.Body >
                     <Nav className="justify-content-end flex-grow-1 pe-3">
+                        <Button variant="info" href="/AdminNavigation" >Navigation Screen</Button><br/>
                         <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
                         <Button variant="info" href="/AdminAnimalManagement" >Animal Management</Button><br/>
                         <Button variant="info" href="/AdminUserManagement" >User Management</Button><br/>
@@ -54,6 +55,7 @@ export default function PersonalSettings() {
             <div>
                 <Offcanvas.Body >
                     <Nav className="justify-content-end flex-grow-1 pe-3">
+                        <Button variant="info" href="/StudentNavigation" >Navigation Screen</Button><br/>
                         <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
                         <Button variant="secondary" href="/" >Logout</Button>
                     </Nav>
@@ -66,8 +68,8 @@ export default function PersonalSettings() {
             <div>
                 <Offcanvas.Body >
                     <Nav className="justify-content-end flex-grow-1 pe-3">
+                        <Button variant="info" href="/TechnicianNavigation" >Navigation Screen</Button><br/>
                         <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
-                        <Button variant="info" href="/UserManagement" >User Management</Button><br/>
                         <Button variant="info" href="TechnicianTeachingRequestManagement" >
                             Teaching Request Management
                         </Button><br/>
@@ -85,9 +87,12 @@ export default function PersonalSettings() {
             <div>
                 <Offcanvas.Body >
                     <Nav className="justify-content-end flex-grow-1 pe-3">
+                        <Button variant="info" href="/AttendantNavigation" >Navigation Screen</Button><br/>
                         <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
-                        <Button variant="info" href="/UserManagement" >User Management</Button><br/>
-                        <Button variant="info" href="AttendantTreatmentRequest" >Treatment Request Management</Button><br/>
+                        <Button variant="info" href="AttendantTreatmentRequest" >
+
+                            Treatment Request Management
+                        </Button><br/>
                         <Button variant="secondary" href="/" >Logout</Button>
                     </Nav>
                 </Offcanvas.Body>
@@ -99,8 +104,9 @@ export default function PersonalSettings() {
                     <div>
                         <Offcanvas.Body >
                             <Nav className="justify-content-end flex-grow-1 pe-3">
+                                <Button variant="info" href="/TeacherNavigation" >Navigation Screen</Button><br/>
                                 <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
-                                <Button variant="info" href="/UserManagement" >User Management</Button><br/>
+                                <Button variant="info" href="/TeacherUserManagement" >User Management</Button><br/>
                                 <Button variant="info" href="/TeacherTeachingRequest" >
                                     Teaching Requests
                                 </Button><br/>

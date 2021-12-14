@@ -136,8 +136,8 @@ export default function AttendantNavigation() {
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
+                                <Button variant="info" href="/AttendantNavigation" >Navigation Screen</Button><br/>
                                 <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
-                                <Button variant="info" href="/UserManagement" >User Management</Button><br/>
                                 <Button variant="info" href="AttendantTreatmentRequest" >
 
                                     Treatment Request Management

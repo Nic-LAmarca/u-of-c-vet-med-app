@@ -117,14 +117,14 @@ export default function AdminAnimalManagement() {
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
-                                <Button variant="info" href="/AdminNavigation">Admin Navigation</Button><br/>
-                                <Button variant="info" href="/TeacherRequestManagement" >
-                                    Teacher Request Management
-                                    <Badge className="ms-2" bg = "danger">8</Badge>
-                                </Button><br/>
+                                <Button variant="info" href="/AdminNavigation" >Navigation Screen</Button><br/>
                                 <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
-                                <Button variant="info" href="/userManagement" >User Management</Button><br/>
-                                <Button variant="secondary" href="/">Logout</Button>
+                                <Button variant="info" href="/AdminAnimalManagement" >Animal Management</Button><br/>
+                                <Button variant="info" href="/AdminUserManagement" >User Management</Button><br/>
+                                <Button variant="info" href="/AdminTeachingRequestManagement" >
+                                    Teacher Request Management
+                                </Button><br/>
+                                <Button variant="secondary" href="/" >Logout</Button>
                             </Nav>
                         </Offcanvas.Body>
                     </Navbar.Offcanvas>

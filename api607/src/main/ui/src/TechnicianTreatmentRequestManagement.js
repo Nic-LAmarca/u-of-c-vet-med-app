@@ -54,11 +54,9 @@ export default function TechnicianTreatmentRequestManagement() {
                     <td>{date}</td>
                     <td>{requestedBy}</td>
                     <td>{acceptedBy}</td>
-                    if(1 == 1){
-                            <div>
-                                <td><Button onClick={(e)=>approveRequest(treatmentHistoryId)} variant="success">Accept</Button></td>
-                            </div>
-                    }
+                    <td><Button onClick={(e)=>approveRequest(treatmentHistoryId)} variant="success">Accept</Button></td>
+
+
                 </tr>
             )
         })
@@ -69,8 +67,6 @@ export default function TechnicianTreatmentRequestManagement() {
         return headers.map((header)=>{
             return<th> {header}</th>
         })
-
-
     }
 
     // async function renderHeaders(){
@@ -82,6 +78,7 @@ export default function TechnicianTreatmentRequestManagement() {
     // }
 
     async function approveRequest(requestId) {
+        setDisabled(true);
         var userId = window.localStorage.getItem("userId")
         axios.post('http://localhost:8080/technicianRequestApproval',
              null,

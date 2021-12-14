@@ -163,10 +163,7 @@ export default function AdminNavigation() {
                             <Nav className="justify-content-end flex-grow-1 pe-3">
                                 <Button variant="info" href="/AdminTeachingRequestManagement" >
                                     Teacher Request Management
-                                    <Badge className="ms-2" bg = "danger">8</Badge>
                                 </Button><br/>
-
-
                                 <Button variant="info" href="/AdminAnimalManagement" >Animal Management</Button><br/>
                                 <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
                                 <Button variant="info" href="/UserManagement" >User Management</Button><br/>

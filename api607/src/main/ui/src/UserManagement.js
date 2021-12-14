@@ -1,10 +1,23 @@
  import React,{useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-import {Button, Form,Dropdown,DropdownButton,Table} from "react-bootstrap";
+import {
+    Button,
+    Form,
+    Dropdown,
+    DropdownButton,
+    Table,
+    Navbar,
+    Container,
+    Image,
+    Offcanvas,
+    Nav,
+    Row, Col, Modal
+} from "react-bootstrap";
 import axios from "axios";
 import './UserManagement.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
+ import images from "./Images/vetmed.png";
 
 
 export default function UserManagement() {
@@ -76,50 +89,89 @@ export default function UserManagement() {
             }
 
     return (
-        <div className="UserManagement-grid-container">
-            <h1 className ="UserManagement-grid-item1">
-                User Management
-            </h1>
-            <Form className="UserManagement-grid-item2">
-                <Form.Group>
-                    <Form.Label>First Name</Form.Label>
-                    <Form.Control
-                        autoFocus
-                        onInput={e=>setFName(e.target.value)}
-                    />
+        <div>
+            <Navbar variant="light" expand={false} bg="white">
+                <Container fluid>
+                    <Navbar.Brand href = "/AdminNavigation" >
+                        <Image className="d-inline-block align-top tr" src={images} fluid/>
+                    </Navbar.Brand>
+                    <Navbar.Brand>
+                        User Management
+                    </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="offcanvasNavbar"/>
+                    <Navbar.Offcanvas
+                        id="offcanvasNavbar me-auto"
+                        aria-labelledby="offcanvasNavbarLabel"
+                        placement="end"
+                    >
+                        <Offcanvas.Header closeButton>
+                            <Offcanvas.Title id="offcanvasNavbarLabel">User Name Here</Offcanvas.Title>
+                        </Offcanvas.Header>
+                        <Offcanvas.Body>
+                            <Nav className="justify-content-end flex-grow-1 pe-3">
+                                <Button variant="info" href="/AdminNavigation" >Admin Navigation</Button><br/>
+                                <Button variant="info" href="/AdminTeachingRequestManagement" >Teacher Request Management</Button><br/>
+                                <Button variant="info" href="/AdminAnimalManagement" >Animal Management</Button><br/>
+                                <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
+                                <Button variant="secondary" href="/" >Logout</Button>
+
+                            </Nav>
+                        </Offcanvas.Body>
+                    </Navbar.Offcanvas>
+                </Container>
+            </Navbar><br/>
+            <Form>
+                <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalName">
+                    <Form.Label  column sm= {2}>First Name</Form.Label>
+                    <Col sm={5}>
+                        <Form.Control
+                            type = "name"
+                            placeholder="First Name"
+                            autoFocus
+                            onChange={e=>setFName(e.target.value)}
+                        />
+                    </Col>
+
                 </Form.Group>
-                <Form.Group>
-                    <Form.Label>Last Name</Form.Label>
-                    <Form.Control
-                        autoFocus
-                        onInput={e=>setLName(e.target.value)}
-                    />
+                <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalName">
+                    <Form.Label column sm= {2} >Last Name</Form.Label>
+                    <Col sm={5}>
+                        <Form.Control
+                            type = "name"
+                            placeholder="Last Name"
+                            autoFocus
+                            onChange={e=>setLName(e.target.value)}
+                        />
+                    </Col>
                 </Form.Group>
-                <Form.Group>
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                        autoFocus
-                        onInput={e=>setEmail(e.target.value)}
-                    />
+                <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalEmail">
+                    <Form.Label column sm= {2} >Email</Form.Label>
+                    <Col sm={5}>
+                        <Form.Control
+                            type = "email"
+                            placeholder="email@ucalgary.ca"
+                            autoFocus
+                            onChange={e=>setEmail(e.target.value)}
+                        />
+                    </Col>
                 </Form.Group>
-                <Form.Group>
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        autoFocus
-                        onInput={e=>setPassword(e.target.value)}
-                    />
+                <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalPassword">
+                    <Form.Label column sm= {2} >Password</Form.Label>
+                    <Col sm={5}>
+                        <Form.Control
+                            type = "password"
+                            placeholder="Password"
+                            autoFocus
+                            onChange={e=>setPassword(e.target.value)}
+                        />
+                    </Col>
                 </Form.Group>
-                <Form.Group>
-                    <Form.Label>User Type (e.g. Admin, Teacher, Technician etc.)</Form.Label>
-                    <Form.Control
-                        autoFocus
-                        onInput={e=>setUserType(e.target.value)}
-                    />
-                </Form.Group>
+                <Container fluid className="gap-1 d-sm-flex justify-content-sm-center">
+                    <Button variant="success" onClick={addUser}>Add User</Button>
+                    <Button variant="dark" onClick={blockUser}>Block User</Button>
+                    <Button variant= "danger " onClick={removeUser}>Remove User</Button>
+                </Container>
             </Form>
-            <Button className = "UserManagement-grid-item3" onClick={addUser}>Add User</Button>
-            <Button className = "UserManagement-grid-item4" onClick={blockUser}>Block User</Button>
-            <Button className = "UserManagement-grid-item5" onClick={removeUser}>Remove User</Button>
         </div>
     );
 }

@@ -19,7 +19,7 @@ public class MedicalRecordHistoryController {
     private DbController db = new DbController();
 
     @CrossOrigin
-    @GetMapping("/animalMedicalRecordHistory{animalId}")
+    @PostMapping("/animalMedicalRecordHistory{animalId}")
     public ArrayList<MedicalRecordHistory> getAnimalMedicalRecordHistory(@PathParam("animalId") int animalId) {
         return db.animalMedicalRecords(animalId);
     }

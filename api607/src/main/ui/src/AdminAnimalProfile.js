@@ -15,9 +15,12 @@ export default function AdminAnimalProfile() {
     const [comments, setComments] = useState([]);
     let [animals, setAnimals] = useState([]);
     let [images,setImages] = useState([]);
-    let [diagnosis,setDiagnosis] = useState([]);
-    let [prescription,setPrescription] = useState([]);
-    let [request,setRequest] = useState([]);
+    let [treatments,setTreatments] = useState([]);
+    let [prescriptions,setPrescriptions] = useState([]);
+    let [requests,setRequests] = useState([]);
+    let [medicalRecordHistories,setMedicalRecordHistories] = useState([]);
+    let [animalHistories,setAnimalHistories] = useState([]);
+    let [statusHistories,setStatusHistories] = useState([]);
 
     useEffect(() => {
         axios.post('http://localhost:8080/searchForAnimal',
@@ -106,7 +109,7 @@ export default function AdminAnimalProfile() {
             .catch(function(error){
                 console.log(error);
             })
-        axios.post('http://localhost:8080/comments',
+        axios.post('http://localhost:8080/animalTreatmentHistory',
             null,
             {
                 params:{
@@ -115,12 +118,12 @@ export default function AdminAnimalProfile() {
             })
             .then(function(response){
                 console.log(response.data)
-                setDiagnosis(response.data)
+                setTreatments(response.data)
             })
             .catch(function(error){
                 console.log(error);
             })
-        axios.post('http://localhost:8080/comments',
+        axios.post('http://localhost:8080/animalPrescriptions',
             null,
             {
                 params:{
@@ -129,12 +132,12 @@ export default function AdminAnimalProfile() {
             })
             .then(function(response){
                 console.log(response.data)
-                setPrescription(response.data)
+                setPrescriptions(response.data)
             })
             .catch(function(error){
                 console.log(error);
             })
-        axios.post('http://localhost:8080/comments',
+        axios.post('http://localhost:8080/animalRequest',
             null,
             {
                 params:{
@@ -143,12 +146,12 @@ export default function AdminAnimalProfile() {
             })
             .then(function(response){
                 console.log(response.data)
-                setRequest(response.data)
+                setRequests(response.data)
             })
             .catch(function(error){
                 console.log(error);
             })
-        axios.post('http://localhost:8080/comments',
+        axios.post('http://localhost:8080/animalMedicalRecordHistory',
             null,
             {
                 params:{
@@ -157,7 +160,7 @@ export default function AdminAnimalProfile() {
             })
             .then(function(response){
                 console.log(response.data)
-                setRequest(response.data)
+                setMedicalRecordHistories(response.data)
             })
             .catch(function(error){
                 console.log(error);
@@ -171,7 +174,7 @@ export default function AdminAnimalProfile() {
           })
           .then(function(response){
             console.log(response.data)
-              setRequest(response.data)
+              setAnimalHistories(response.data)
           })
           .catch(function(error){
               console.log(error);
@@ -185,7 +188,7 @@ export default function AdminAnimalProfile() {
         })
         .then(function(response){
             console.log(response.data)
-            setRequest(response.data)
+            setStatusHistories(response.data)
         })
         .catch(function(error){
             console.log(error);
@@ -249,7 +252,7 @@ export default function AdminAnimalProfile() {
     }
 
     function renderTreatmentTable(){
-        return comments.map((value,key) =>{
+        return treatments.map((value,key) =>{
             const {treatmentHistoryId, treatmentId, date, requestedBy, acceptedBy} = value
             return(
                 <tr key={treatmentHistoryId}>
@@ -273,7 +276,7 @@ export default function AdminAnimalProfile() {
     }
 
     function renderPrescriptionTable(){
-        return comments.map((value,key) =>{
+        return prescriptions.map((value,key) =>{
             const {prescriptionId, userId, date, drugName, instructions, dosage, deliveryMethod} = value
             return(
                 <tr key={prescriptionId}>
@@ -299,8 +302,8 @@ export default function AdminAnimalProfile() {
     }
 
     function renderRequestTable(){
-        return comments.map((value,key) =>{
-            const {requestId, userId, adminApproved, technicianApproved, requestComplete, requestSuccessful} = value
+        return requests.map((value,key) =>{
+            const {requestId, userId, adminApproved, technicianApproved, requestComplete, requestSuccessful, requestDate} = value
             return(
                 <tr key={requestId}>
                     <td>{requestId}</td>
@@ -309,6 +312,7 @@ export default function AdminAnimalProfile() {
                     <td>{technicianApproved}</td>
                     <td>{requestComplete}</td>
                     <td>{requestSuccessful}</td>
+                    <td>{requestDate}</td>
                 </tr>
             )
         })
@@ -324,7 +328,7 @@ export default function AdminAnimalProfile() {
     }
 
     function renderMedicalRecordHistoryTable(){
-        return comments.map((value,key) =>{
+        return medicalRecordHistories.map((value,key) =>{
             const {medicalRecordHistoryId, medicalRecordId, date} = value
             return(
                 <tr key={medicalRecordHistoryId}>
@@ -346,7 +350,7 @@ export default function AdminAnimalProfile() {
     }
 
     function renderHistoryTable(){
-        return comments.map((value,key) =>{
+        return animalHistories.map((value,key) =>{
             const {historyId, date, measurement, result, userId} = value
             return(
                 <tr key={historyId}>
@@ -370,7 +374,7 @@ export default function AdminAnimalProfile() {
     }
 
     function renderStatusHistoryTable(){
-        return comments.map((value,key) =>{
+        return statusHistories.map((value,key) =>{
             const {statusId, date, description, locations, statusType, imageid} = value
             return(
                 <tr key={statusId}>
@@ -491,10 +495,7 @@ export default function AdminAnimalProfile() {
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>Physical Exam</td>
-                                            <td>2021-11-24</td>
-                                        </tr>
+                                            {renderTreatmentTable()}
                                         </tbody>
                                     </Table>
                                 </Tab.Pane>
@@ -506,13 +507,7 @@ export default function AdminAnimalProfile() {
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Calvin</td>
-                                            <td>Advil</td>
-                                            <td>Take 2 every 4 hours</td>
-                                            <td>2021-10-10</td>
-                                        </tr>
+                                            {renderPrescriptionTable()}
                                         </tbody>
                                     </Table>
                                 </Tab.Pane>
@@ -524,13 +519,7 @@ export default function AdminAnimalProfile() {
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>false</td>
-                                            <td>false</td>
-                                            <td>false</td>
-                                            <td>false</td>
-                                        </tr>
+                                            {renderRequestTable()}
                                         </tbody>
                                     </Table>
                                 </Tab.Pane>
@@ -542,13 +531,7 @@ export default function AdminAnimalProfile() {
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>false</td>
-                                            <td>false</td>
-                                            <td>false</td>
-                                            <td>false</td>
-                                        </tr>
+                                            {renderMedicalRecordHistoryTable()}
                                         </tbody>
                                     </Table>
                                 </Tab.Pane>
@@ -560,13 +543,7 @@ export default function AdminAnimalProfile() {
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>false</td>
-                                            <td>false</td>
-                                            <td>false</td>
-                                            <td>false</td>
-                                        </tr>
+                                            {renderCommentTable()}
                                         </tbody>
                                     </Table>
                                 </Tab.Pane>
@@ -578,13 +555,7 @@ export default function AdminAnimalProfile() {
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>false</td>
-                                            <td>false</td>
-                                            <td>false</td>
-                                            <td>false</td>
-                                        </tr>
+                                            {renderCommentTable()}
                                         </tbody>
                                     </Table>
                                 </Tab.Pane>

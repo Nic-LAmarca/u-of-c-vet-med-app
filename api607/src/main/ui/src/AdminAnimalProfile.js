@@ -22,7 +22,7 @@ import {
 import axios from "axios";
 import './AdminAnimalProfile.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
-import images from "./Images/vetmed.png";
+import logo from "./Images/vetmed.png";
 
 
 export default function AdminAnimalProfile() {
@@ -33,6 +33,11 @@ export default function AdminAnimalProfile() {
     const [description, setDescription] = useState("");
     const [comments, setComments] = useState([]);
     let [animals, setAnimals] = useState([]);
+    let [images,setImages] = useState([]);
+    let [diagnosis,setDiagnosis] = useState([]);
+    let [prescription,setPrescription] = useState([]);
+    let [request,setRequest] = useState([]);
+
 
 
     useEffect(() => {
@@ -126,6 +131,62 @@ export default function AdminAnimalProfile() {
         .catch(function(error){
             console.log(error);
         })
+        axios.post('http://localhost:8080/animalImages',
+            null,
+            {
+                params:{
+                    animalId
+                }
+            })
+            .then(function(response){
+                console.log(response)
+                setImages(response.data)
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+        axios.post('http://localhost:8080/animalImages', //change
+            null,
+            {
+                params:{
+                    animalId
+                }
+            })
+            .then(function(response){
+                console.log(response)
+                setDiagnosis(response.data)
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+        axios.post('http://localhost:8080/animalImages',//change
+            null,
+            {
+                params:{
+                    animalId
+                }
+            })
+            .then(function(response){
+                console.log(response)
+                setPrescription(response.data)
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+        axios.post('http://localhost:8080/animalImages', //change
+            null,
+            {
+                params:{
+                    animalId
+                }
+            })
+            .then(function(response){
+                console.log(response)
+                setRequest(response.data)
+            })
+            .catch(function(error){
+                console.log(error);
+            })
     },[])
 
     async function addComment(event) {
@@ -148,30 +209,23 @@ export default function AdminAnimalProfile() {
             console.log(error);
         })
     }
-    function renderAnimals(){
-        return animals.map((animals) => <tb>animals</tb>)
-        // return animals.map((value) =>{
-        //         <tr key={treatmentHistoryId}>
-        //             <td>{treatmentHistoryId}</td>
-        //             <td>{treatmentId}</td>
-        //             <td>{animalId}</td>
-        //             <td>{date}</td>
-        //             <td>{requestedBy}</td>
-        //             <td>{acceptedBy}</td>
-        //             {/*<td><Button onClick={(e)=>approveRequest(treatmentHistoryId)} variant="success">Accept</Button></td>*/}
-        //         </tr>
-        //
-        // })
-    }
 
-    function renderHeaders(){
+    // *********************************************************
+    // ****** SECTION USED FOR Rendering Tables ******
+    // *********************************************************
+    function renderCommentHeaders(){
         const headers =["CommentId", "UserId", "Description","Date"]
         return headers.map((header)=>{
-            return<th> {header}</th>
+            return(
+
+                    <th> {header}</th>
+
+            )
+
         })
     }
 
-    function renderTableBody(){
+    function renderCommentTable(){
         return comments.map((value,key) =>{
             const {commentId, userId, description, date} = value
             return(
@@ -185,12 +239,87 @@ export default function AdminAnimalProfile() {
         })
     }
 
+    function renderDiagnosisHeaders(){
+        const headers =["TreatmentId","Treatment", "Date"]
+        return headers.map((header)=>{
+            return(
+
+                <th> {header}</th>
+
+            )
+
+        })
+    }
+
+    function renderDiagnosisTable(){
+        return comments.map((value,key) =>{
+            const {treatmentId,treatment,date} = value
+            return(
+                <tr key={treatmentId}>
+                    <td>{treatmentId}</td>
+                    <td>{treatment}</td>
+                    <td>{date}</td>
+                </tr>
+            )
+        })
+    }
+    function renderPrescriptionHeaders(){
+        const headers =["PrescriptionId", "UserName", "Drug Name","Instructions","Date"]
+        return headers.map((header)=>{
+            return(
+
+                <th> {header}</th>
+
+            )
+
+        })
+    }
+
+    function renderPrescriptionTable(){
+        return comments.map((value,key) =>{
+            const {prescriptionId, username, drugname,instructions,date} = value
+            return(
+                <tr key={prescriptionId}>
+                    <td>{username}</td>
+                    <td>{drugname}</td>
+                    <td>{instructions}</td>
+                    <td>{date}</td>
+                </tr>
+            )
+        })
+    }
+    function renderRequestHeaders(){
+        const headers =["RequestId", "AdminApproved", "TechnicianApproved","Complete","Successful"]
+        return headers.map((header)=>{
+            return(
+
+                <th> {header}</th>
+
+            )
+
+        })
+    }
+
+    function renderRequestTable(){
+        return comments.map((value,key) =>{
+            const {requestId, adminApproved, technicianApproved,complete,successful} = value
+            return(
+                <tr key={requestId}>
+                    <td>{adminApproved}</td>
+                    <td>{technicianApproved}</td>
+                    <td>{complete}</td>
+                    <td>{successful}</td>
+                </tr>
+            )
+        })
+    }
+
     return (
         <div>
             <Navbar variant="light" expand={false} bg="white">
                 <Container fluid>
                     <Navbar.Brand >
-                        <Image className="d-inline-block align-top" src={images} fluid/>
+                        <Image className="d-inline-block align-top" src={logo} fluid/>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="offcanvasNavbar"/>
                     <Navbar.Offcanvas
@@ -246,9 +375,6 @@ export default function AdminAnimalProfile() {
                                 <th>Value</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            {/*{renderAnimals()}*/}
-                            </tbody>
                         </Table>
                     </Col>
                     <Col>
@@ -269,12 +395,15 @@ export default function AdminAnimalProfile() {
                                     {/*<input  placeholder="Enter Comment Here" onChange={(e) => setDescription(e.target.value)}></input>*/}
                                     {/*<Button  variant="success" type="submit" onClick={addComment}>Submit</Button>*/}
 
-                                    <Table variant="dark" striped bordered hover id="commentTable">
+                                    <Table responsive variant="dark" striped bordered hover id="commentTable">
                                         <thead>
-                                        {renderHeaders()}
+                                        <tr>
+                                            {renderCommentHeaders()}
+                                        </tr>
+
                                         </thead>
                                         <tbody>
-                                        {renderTableBody()}
+                                            {renderCommentTable()}
                                         </tbody>
                                     </Table>
                                 </Tab.Pane>
@@ -284,11 +413,10 @@ export default function AdminAnimalProfile() {
                                     {/*<h102 className="AdminAnimalProfile-photo-item3">SparkyPhoto3.png</h102>*/}
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="third">
-                                    <Table striped bordered hover className="AdminAnimalProfile-grid-item100">
+                                    <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">
                                         <thead>
                                         <tr>
-                                            <th scope="col">Treatment</th>
-                                            <th scope="col">Date</th>
+                                            {renderDiagnosisHeaders()}
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -300,14 +428,10 @@ export default function AdminAnimalProfile() {
                                     </Table>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="fourth">
-                                    <Table striped bordered hover className="AdminAnimalProfile-grid-item100">
+                                    <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">
                                         <thead>
                                         <tr>
-                                            <th scope="col">prescriptionId</th>
-                                            <th scope="col">User Name</th>
-                                            <th scope="col">Drug Name</th>
-                                            <th scope="col">Instructions</th>
-                                            <th scope="col">Date</th>
+                                            {renderPrescriptionHeaders()}
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -322,14 +446,10 @@ export default function AdminAnimalProfile() {
                                     </Table>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="fifth">
-                                    <Table striped bordered hover className="AdminAnimalProfile-grid-item100">
+                                    <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">
                                         <thead>
                                         <tr>
-                                            <th scope="col">requestId</th>
-                                            <th scope="col">adminApproved</th>
-                                            <th scope="col">technicianApproved</th>
-                                            <th scope="col">Complete</th>
-                                            <th scope="col">Successful</th>
+                                            {renderRequestHeaders()}
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -352,7 +472,7 @@ export default function AdminAnimalProfile() {
                                     <Nav.Link eventKey="second">Photos</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <Nav.Link eventKey="third">Diagnoses</Nav.Link>
+                                    <Nav.Link eventKey="third">Diagnosis</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
                                     <Nav.Link eventKey="fourth">Prescriptions</Nav.Link>

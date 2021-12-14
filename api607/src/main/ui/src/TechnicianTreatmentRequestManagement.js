@@ -37,7 +37,7 @@ export default function TechnicianTreatmentRequestManagement() {
                     <td>{requestedBy}</td>
                     <td>{acceptedBy}</td>
 
-                    <td><Button onClick={(e)=>approveRequest(treatmentHistoryId)} variant="success">Accept</Button></td>
+                    <td><Button onClick={(e)=>acceptRequest(requestId)} variant="success">Accept</Button></td>
 
                 </tr>
             )

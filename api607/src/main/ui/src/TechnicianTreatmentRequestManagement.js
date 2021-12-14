@@ -1,31 +1,14 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-
-import {
-    Button,
-    Form,
-    Dropdown,
-    DropdownButton,
-    Navbar,
-    Container,
-    Image,
-    Offcanvas,
-    Nav,
-    Badge,
-    Table
-} from "react-bootstrap";
+import {Button,Form,Dropdown,DropdownButton,Navbar,Container,Image,Offcanvas,Nav,Badge,Table} from "react-bootstrap";
 import axios from "axios";
 import './TechnicianTreatmentRequestManagement.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
 import images from "./Images/vetmed.png";
 
-
 export default function TechnicianTreatmentRequestManagement() {
     let [requests,setRequests] = useState([]);
     const [requestId, setRequestId] = useState();
-    const [requestMessage, setRequestMessage] = useState('');
-    const [isLoading,setLoading] = useState(true);
-    const [disabled, setDisabled] = useState(false);
 
     const history = useNavigate();
 
@@ -38,7 +21,6 @@ export default function TechnicianTreatmentRequestManagement() {
 
             })
             .catch(function(error){
-                // setLoading(false)
                 console.log(error);
             })
     },[])
@@ -73,7 +55,7 @@ export default function TechnicianTreatmentRequestManagement() {
 
     async function acceptRequest(requestId) {
         var userId = window.localStorage.getItem("userId")
-        axios.post('http://localhost:8080/technicianRequestApproval',
+        axios.post('http://localhost:8080/technicianTreatmentRequestApproval',
              null,
              {
                  params: {
@@ -85,8 +67,6 @@ export default function TechnicianTreatmentRequestManagement() {
              console.log(response.data)
                 setRequests(response.data)
                  setRequestId();
-                 setRequestMessage(response.data);
-                 setDisabled(true);
              })
              .catch(function(error){
                  console.log(error);
@@ -101,7 +81,7 @@ export default function TechnicianTreatmentRequestManagement() {
                         <Image href = "/TechnicianNavigation" className="d-inline-block align-top tr" src={images} fluid/>
                     </Navbar.Brand>
                     <Navbar.Brand>
-                        Technician Treatment Request
+                        Technician Treatment Requests
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="offcanvasNavbar"/>
                     <Navbar.Offcanvas

@@ -68,7 +68,7 @@ export default function PersonalSettings() {
                     <Offcanvas.Header closeButton>
                         <Offcanvas.Title id="offcanvasNavbarLabel">{window.localStorage.getItem("username")}</Offcanvas.Title>
                     </Offcanvas.Header>
-                    <Offcanvas.Body>
+                    <Offcanvas.Body >
                             <Nav className="justify-content-end flex-grow-1 pe-3">
                                 <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
                                 <Button variant="info" href="/AdminAnimalManagement" >Animal Management</Button><br/>

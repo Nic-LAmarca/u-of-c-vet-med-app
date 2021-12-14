@@ -175,6 +175,7 @@ export default function AdminAnimalProfile() {
         })
     }
 
+
     return (
         <div>
             <Navbar variant="light" expand={false} bg="white">

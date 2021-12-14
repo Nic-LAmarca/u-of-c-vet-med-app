@@ -1,4 +1,4 @@
- import React,{useState} from "react";
+import React,{useState} from "react";
 import {useNavigate} from "react-router-dom";
 
 import {
@@ -12,15 +12,17 @@ import {
     Image,
     Offcanvas,
     Nav,
-    Row, Col, Modal
+    Row, Col, Modal, FormGroup
 } from "react-bootstrap";
 import axios from "axios";
-import './UserManagement.css';
+import './AdminUserManagement.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
- import images from "./Images/vetmed.png";
+
+import images from "./Images/vetmed.png";
 
 
-export default function UserManagement() {
+
+export default function AdminUserManagement() {
     const [fName, setFName] = useState("");
     const [lName, setLName] = useState("");
     const [email, setEmail] = useState("");
@@ -89,6 +91,7 @@ export default function UserManagement() {
             }
 
     return (
+
         <div>
             <Navbar variant="light" expand={false} bg="white">
                 <Container fluid>
@@ -131,8 +134,8 @@ export default function UserManagement() {
                             onChange={e=>setFName(e.target.value)}
                         />
                     </Col>
-
                 </Form.Group>
+
                 <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalName">
                     <Form.Label column sm= {2} >Last Name</Form.Label>
                     <Col sm={5}>
@@ -172,6 +175,8 @@ export default function UserManagement() {
                     <Button variant= "danger " onClick={removeUser}>Remove User</Button>
                 </Container>
             </Form>
+
         </div>
+
     );
 }

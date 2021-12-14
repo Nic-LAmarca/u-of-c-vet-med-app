@@ -18,11 +18,12 @@ import TeacherTeachingRequest from './TeacherTeachingRequest';
 import TechnicianAnimalProfile from './TechnicianAnimalProfile';
 import TechnicianTeachingRequestManagement from './TechnicianTeachingRequestManagement';
 import TechnicianTreatmentRequestManagement from './TechnicianTreatmentRequestManagement';
-import UserManagement from './UserManagement';
+import AdminUserManagement from './AdminUserManagement';
 import images from './Images/vetmed.png';
 import {Col, Container, Image, Navbar, NavbarBrand, Row} from "react-bootstrap";
 import TeacherNavigation from "./TeacherNavigation";
 import TechnicianNavigation from "./TechnicianNavigation";
+import TeacherUserManagement from "./TeacherUserManagement";
 
 function App() {
   return (
@@ -50,9 +51,10 @@ function App() {
                       <Route path ='/TechnicianAnimalProfile' element={<TechnicianAnimalProfile/>}/>
                       <Route path ='/TechnicianTeachingRequestManagement' element={<TechnicianTeachingRequestManagement/>}/>
                       <Route path ='/TechnicianTreatmentRequestManagement' element={<TechnicianTreatmentRequestManagement/>}/>
-                      <Route path ='/UserManagement' element={<UserManagement/>}/>
+                      <Route path ='/AdminUserManagement' element={<AdminUserManagement/>}/>
                       <Route path ='/TeacherNavigation' element={<TeacherNavigation/>}/>
                       <Route path ='/TechnicianNavigation' element={<TechnicianNavigation/>}/>
+                      <Route path ='/TeacherUserManagement' element={<TeacherUserManagement/>}/>
 
                   </Routes>
               </div>

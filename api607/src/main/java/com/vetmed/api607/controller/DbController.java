@@ -47,7 +47,7 @@ public class DbController {
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
                 if (results.getInt("animalId") == id) {
-                    foundAnimal = new Animal();
+                    Animal foundAnimal = new Animal();
                     foundAnimal.setAnimalId(id);
                     foundAnimal.setAnimalName(results.getString("animalName"));
                     foundAnimal.setSpecies(results.getString("species"));

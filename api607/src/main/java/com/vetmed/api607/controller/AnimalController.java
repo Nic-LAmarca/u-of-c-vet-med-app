@@ -15,7 +15,7 @@ public class AnimalController {
 
     @CrossOrigin
     @PostMapping("/searchForAnimal{animalId}")
-    public Animal searchForAnimal(@PathParam("animalId") int animalId) {
+    public ArrayList<Animal> searchForAnimal(@PathParam("animalId") int animalId) {
         return db.searchForAnimal(animalId);
     }
 

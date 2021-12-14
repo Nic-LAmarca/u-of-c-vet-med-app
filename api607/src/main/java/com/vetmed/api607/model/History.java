@@ -12,6 +12,6 @@ public class History {
     private String date;
     private int animalId;
     private String measurement;
-    private double value;
+    private double results;
     private int userId;
 }

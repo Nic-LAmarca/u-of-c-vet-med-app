@@ -1,56 +1,113 @@
-@media all and (min-width: 480px) {
+/*@media all and (min-width: 480px) {*/
 
-  .AdminUserManagement-grid-container {
-    display: grid;
-    grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
-    grid-template-rows: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;
-    padding: 10px;
-    grid-gap: 0cm;
+/*<<<<<<< HEAD:api607/src/main/ui/src/UserManagement.css*/
+/*  .UserManagement-grid-container {*/
+/*    display: grid;*/
+/*    grid-template-columns: auto auto auto auto auto auto auto auto auto auto;*/
+/*    grid-template-rows: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;*/
+/*    padding: 10px;*/
+/*    grid-gap: 0cm;*/
 
-  }
-/*Title: User Handling*/
-  .AdminUserManagement-grid-item1 {
-    border: none;
-    text-align: justify;
-    grid-column: 4/span 4;
-    grid-row: 2;
+/*  }*/
+/*!*Title: User Handling*!*/
+/*  .UserManagement-grid-item1 {*/
+/*    border: none;*/
+/*    text-align: justify;*/
+/*    grid-column: 4/span 4;*/
+/*    grid-row: 2;*/
 
-  }
- /*Form*/
-  .AdminUserManagement-grid-item2 {
-    border: none;
-    text-align: left;
-    grid-column: 3/ span 5;
-    grid-row: 6/ span 6;
-  }
-  /*Add User*/
-  .AdminUserManagement-grid-item3 {
-    display: inline-block;
-    width: 150px;
-    border: 1px solid black;
-    background: green;
-    text-align: center;
-    grid-column: 3;
-    grid-row: 14;
-  }
-/*Block User*/
-  .AdminUserManagement-grid-item4 {
-    display: inline-block;
-    width: 150px;
-    border: 1px solid black;
-    background: black;
-    text-align: center;
-    grid-column: 5;
-    grid-row: 14;
-  }
-  /*Remove User*/
-  .AdminUserManagement-grid-item5 {
-    display: inline-block;
-    width: 150px;
-    border: 1px solid black;
-    background: red;
-    text-align: center;
-    grid-column: 7;
-    grid-row: 14;
-  }
-}
+/*  }*/
+/* !*Form*!*/
+/*  .UserManagement-grid-item2 {*/
+/*    border: none;*/
+/*    text-align: left;*/
+/*    grid-column: 3/ span 5;*/
+/*    grid-row: 6/ span 6;*/
+/*  }*/
+/*  !*Add User*!*/
+/*  .UserManagement-grid-item3 {*/
+/*    display: inline-block;*/
+/*    width: 150px;*/
+/*    border: 1px solid black;*/
+/*    background: green;*/
+/*    text-align: center;*/
+/*    grid-column: 3;*/
+/*    grid-row: 14;*/
+/*  }*/
+/*!*Block User*!*/
+/*  .UserManagement-grid-item4 {*/
+/*    display: inline-block;*/
+/*    width: 150px;*/
+/*    border: 1px solid black;*/
+/*    background: black;*/
+/*    text-align: center;*/
+/*    grid-column: 5;*/
+/*    grid-row: 14;*/
+/*  }*/
+/*  !*Remove User*!*/
+/*  .UserManagement-grid-item5 {*/
+/*    display: inline-block;*/
+/*    width: 150px;*/
+/*    border: 1px solid black;*/
+/*    background: red;*/
+/*    text-align: center;*/
+/*    grid-column: 7;*/
+/*    grid-row: 14;*/
+/*  }*/
+/*}*/
+/*=======*/
+/*  .AdminUserManagement-grid-container {*/
+/*    display: grid;*/
+/*    grid-template-columns: auto auto auto auto auto auto auto auto auto auto;*/
+/*    grid-template-rows: 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px 50px;*/
+/*    padding: 10px;*/
+/*    grid-gap: 0cm;*/
+
+/*  }*/
+/*!*Title: User Handling*!*/
+/*  .AdminUserManagement-grid-item1 {*/
+/*    border: none;*/
+/*    text-align: justify;*/
+/*    grid-column: 4/span 4;*/
+/*    grid-row: 2;*/
+
+/*  }*/
+/* !*Form*!*/
+/*  .AdminUserManagement-grid-item2 {*/
+/*    border: none;*/
+/*    text-align: left;*/
+/*    grid-column: 3/ span 5;*/
+/*    grid-row: 6/ span 6;*/
+/*  }*/
+/*  !*Add User*!*/
+/*  .AdminUserManagement-grid-item3 {*/
+/*    display: inline-block;*/
+/*    width: 150px;*/
+/*    border: 1px solid black;*/
+/*    background: green;*/
+/*    text-align: center;*/
+/*    grid-column: 3;*/
+/*    grid-row: 14;*/
+/*  }*/
+/*!*Block User*!*/
+/*  .AdminUserManagement-grid-item4 {*/
+/*    display: inline-block;*/
+/*    width: 150px;*/
+/*    border: 1px solid black;*/
+/*    background: black;*/
+/*    text-align: center;*/
+/*    grid-column: 5;*/
+/*    grid-row: 14;*/
+/*  }*/
+/*  !*Remove User*!*/
+/*  .AdminUserManagement-grid-item5 {*/
+/*    display: inline-block;*/
+/*    width: 150px;*/
+/*    border: 1px solid black;*/
+/*    background: red;*/
+/*    text-align: center;*/
+/*    grid-column: 7;*/
+/*    grid-row: 14;*/
+/*  }*/
+/*}*/
+/*>>>>>>> main:api607/src/main/ui/src/AdminUserManagement.css*/

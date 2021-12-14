@@ -136,8 +136,6 @@ export default function AdminNavigation() {
                                 <Button variant="info" href="/AdminTeachingRequestManagement" >
                                     Teacher Request Management
                                 </Button><br/>
-
-
                                 <Button variant="info" href="/AdminAnimalManagement" >Animal Management</Button><br/>
                                 <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
                                 <Button variant="info" href="/AdminUserManagement" >User Management</Button><br/>

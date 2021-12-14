@@ -19,7 +19,7 @@ public class ImageController {
     private DbController db = new DbController();
 
     @CrossOrigin
-    @GetMapping("/animalImages{animalId}")
+    @PostMapping("/animalImages{animalId}")
     public ArrayList<Image> getAnimalImages(@PathParam("animalId") int animalId) {
         return db.searchForAnimalImages(animalId);
     }

@@ -28,7 +28,6 @@ export default function AdminAnimalProfile() {
                 }
             })
             .then(function(response){
-                console.log(response)
                 setAnimals(Array.from(response.data))
                 var table = document.getElementById("profileTable");
                 const animalFound = response.data
@@ -87,7 +86,7 @@ export default function AdminAnimalProfile() {
             }
         })
         .then(function(response){
-            console.log(response)
+            console.log(response.data)
             setComments(response.data)
         })
         .catch(function(error){
@@ -101,13 +100,13 @@ export default function AdminAnimalProfile() {
                 }
             })
             .then(function(response){
-                console.log(response)
+                console.log(response.data)
                 setImages(response.data)
             })
             .catch(function(error){
                 console.log(error);
             })
-        axios.post('http://localhost:8080/animalTreatments',
+        axios.post('http://localhost:8080/comments',
             null,
             {
                 params:{
@@ -115,13 +114,13 @@ export default function AdminAnimalProfile() {
                 }
             })
             .then(function(response){
-                console.log(response)
+                console.log(response.data)
                 setDiagnosis(response.data)
             })
             .catch(function(error){
                 console.log(error);
             })
-        axios.post('http://localhost:8080/animalPrescriptions',
+        axios.post('http://localhost:8080/comments',
             null,
             {
                 params:{
@@ -129,13 +128,13 @@ export default function AdminAnimalProfile() {
                 }
             })
             .then(function(response){
-                console.log(response)
+                console.log(response.data)
                 setPrescription(response.data)
             })
             .catch(function(error){
                 console.log(error);
             })
-        axios.post('http://localhost:8080/animalRequests',
+        axios.post('http://localhost:8080/comments',
             null,
             {
                 params:{
@@ -143,13 +142,13 @@ export default function AdminAnimalProfile() {
                 }
             })
             .then(function(response){
-                console.log(response)
+                console.log(response.data)
                 setRequest(response.data)
             })
             .catch(function(error){
                 console.log(error);
             })
-        axios.post('http://localhost:8080/animalMedicalRecordHistories',
+        axios.post('http://localhost:8080/comments',
             null,
             {
                 params:{
@@ -157,13 +156,13 @@ export default function AdminAnimalProfile() {
                 }
             })
             .then(function(response){
-                console.log(response)
+                console.log(response.data)
                 setRequest(response.data)
             })
             .catch(function(error){
                 console.log(error);
             })
-        axios.post('http://localhost:8080/animalHistories',
+        axios.post('http://localhost:8080/comments',
           null,
           {
               params:{
@@ -171,13 +170,13 @@ export default function AdminAnimalProfile() {
               }
           })
           .then(function(response){
-              console.log(response)
+            console.log(response.data)
               setRequest(response.data)
           })
           .catch(function(error){
               console.log(error);
           })
-      axios.post('http://localhost:8080/animalStatusHistory',
+      axios.post('http://localhost:8080/comments',
         null,
         {
             params:{
@@ -185,7 +184,7 @@ export default function AdminAnimalProfile() {
             }
         })
         .then(function(response){
-            console.log(response)
+            console.log(response.data)
             setRequest(response.data)
         })
         .catch(function(error){

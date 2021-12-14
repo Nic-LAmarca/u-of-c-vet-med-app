@@ -1100,9 +1100,9 @@ public class DbController {
      * @param dosage is the required dosage to be taken
      * @param deliveryMethod is how the medication should be taken
      */
-    public void addPrescriptionHistory( int userId, int animalId, String date, String drugName, String instructions, double dosage, String deliveryMethod) {
+    public void addPrescriptionHistory(int userId, int animalId, String date, String drugName, String instructions, double dosage, String deliveryMethod) {
         try {
-            String query = "INSERT INTO USER (userId, animalId, date, drugName, instructions, dosage, deliveryMethod) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO PRESCRIPTION_HISTORY (userId, animalId, date, drugName, instructions, dosage, deliveryMethod) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setInt(1, userId);
             myStmt.setInt(2, animalId);

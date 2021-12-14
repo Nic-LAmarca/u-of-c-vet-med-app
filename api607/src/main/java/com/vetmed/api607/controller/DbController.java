@@ -1069,6 +1069,37 @@ public class DbController {
 
     /**
      *
+     * Method is used to return an arraylist of Request objects that are in the database that need a decision from the technician
+     *
+     * @return a new list of Request objects from the db
+     */
+    public ArrayList<Request> getAllTechnicianRequests() {
+        ArrayList<Request> requestArrayList = new ArrayList<Request>();
+        try {
+            String query = "SELECT * FROM REQUEST WHERE adminApproved = false AND technicianApproved = false AND requestComplete = false";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                Request addRequest = new Request();
+                addRequest.setRequestId(results.getInt("requestId"));
+                addRequest.setAnimalId(results.getInt("animalId"));
+                addRequest.setUserId(results.getInt("userId"));
+                addRequest.setAdminApproved(results.getBoolean("adminApproved"));
+                addRequest.setTechnicianApproved(results.getBoolean("technicianApproved"));
+                addRequest.setRequestComplete(results.getBoolean("requestComplete"));
+                addRequest.setRequestSuccessful(results.getBoolean("requestSuccessful"));
+                addRequest.setRequestDate(results.getDate("requestDate").toString());
+                requestArrayList.add(addRequest);
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return requestArrayList;
+    }
+
+    /**
+     *
      * Method is used to add a Request into the database based on the entered credentials
      *
      * @param animalId is the ID of the animal who the prescription history is for
@@ -1091,6 +1122,56 @@ public class DbController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     *
+     * Method used to update the technicianApproved field based on the provided arguments and return the updated arraylist
+     *
+     * @param userId the user who accepted the request
+     * @param requestId the request being accepted
+     * @param decision the decision to approve or deny the request
+     * @return an updated arraylist of treatment requests
+     */
+    public ArrayList<Request> technicianUpdateTeachingRequest(int userId, int requestId, boolean decision) {
+        ArrayList<Request> requestArrayList = new ArrayList<Request>();
+        try {
+            if(decision == false){
+                String query = "UPDATE REQUEST SET technicianApproved = false, requestComplete = true, requestSuccessful = false WHERE requestId = ?";
+                PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+                myStmt.setInt(1, requestId);
+                myStmt.executeUpdate();
+                myStmt.close();
+            }
+            else {
+                String query = "UPDATE REQUEST SET technicianApproved = ? WHERE requestId = ?";
+                PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+                myStmt.setBoolean(1, decision);
+                myStmt.setInt(2, requestId);
+                myStmt.executeUpdate();
+                myStmt.close();
+            }
+
+            String newQuery = "SELECT * FROM REQUEST";
+            PreparedStatement newStmt = this.dbConnect.prepareStatement(newQuery);
+            ResultSet results = newStmt.executeQuery();
+            while (results.next()) {
+                Request addRequest = new Request();
+                addRequest.setRequestId(results.getInt("requestId"));
+                addRequest.setAnimalId(results.getInt("animalId"));
+                addRequest.setUserId(results.getInt("userId"));
+                addRequest.setAdminApproved(results.getBoolean("adminApproved"));
+                addRequest.setTechnicianApproved(results.getBoolean("technicianApproved"));
+                addRequest.setRequestComplete(results.getBoolean("requestComplete"));
+                addRequest.setRequestSuccessful(results.getBoolean("requestSuccessful"));
+                addRequest.setRequestDate(results.getDate("requestDate").toString());
+                requestArrayList.add(addRequest);
+            }
+            newStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return requestArrayList;
     }
     // *********************************************************
     // ****** SECTION USED FOR REQUEST QUERY INTERACTIONS ******
@@ -1304,7 +1385,7 @@ public class DbController {
                 addTH.setAcceptedBy(results.getInt("acceptedBy"));
                 treatmentHistoryArrayList.add(addTH);
             }
-            myStmt.close();
+            newStmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

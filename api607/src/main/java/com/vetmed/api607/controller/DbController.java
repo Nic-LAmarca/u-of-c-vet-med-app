@@ -740,7 +740,7 @@ public class DbController {
      * @param animalId is the animal that the image relates to
      * @param type is the type of image being taken
      */
-    public void addImage(int userId, String creationDate, String file, int animalId, String type){
+    public void addImage(int userId, String creationDate, String file, int animalId){
         try {
             String query = "INSERT INTO" +
                     " IMAGE (userId, creationDate, file, animalId, type) VALUES (?, ?, ?, ?, ?)";
@@ -749,7 +749,6 @@ public class DbController {
             myStmt.setDate(2, Date.valueOf(creationDate));
             myStmt.setString(3, file);
             myStmt.setInt(4, animalId);
-            myStmt.setString(5, type);
             myStmt.executeQuery();
             myStmt.close();
         } catch (Exception e) {

@@ -25,9 +25,9 @@ public class ImageController {
     }
 
     @CrossOrigin
-    @PostMapping("/addImage{userId, creationDate, file, animalId, type}")
+    @PostMapping("/addImage{userId, creationDate, file, animalId}")
     public void addImage(@PathParam("userId") int userId, @PathParam("creationDate") String creationDate, @PathParam("file") String file, @PathParam("animalId") int animalId, @PathParam("type") String type)
     {
-        db.addImage(userId, creationDate, file, animalId, type);
+        db.addImage(userId, creationDate, file, animalId);
     }
 }

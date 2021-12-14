@@ -254,10 +254,10 @@ VALUES (1,                3,                1,                "2020-11-17 00:00:
         (3,                3,                3,                "2020-10-12 00:00:00",                "Tums",                "Take 1 every 2 hours.",                10,                "Chew");
         
 INSERT INTO IMAGE (imageId, userId, creationDate, file, type, animalId)
-VALUES (1,				1,				"2021-03-08 00:00:00",					"image1.png",					"profile",				1),
-		(2,				4,				"2021-03-09 00:00:00",					"image2.png",					"injury",				2),
-        (3,				4,				"2021-03-10 00:00:00",					"image3.png",					"Treatment",			1),
-        (4,				3,				"2021-03-11 00:00:00",					"image4.png",					"injury",				1);
+VALUES (1,				1,				"2021-03-08 00:00:00",					"sparkycover.jpeg",					"profile",				1),
+		(2,				4,				"2021-03-09 00:00:00",					"injuredhorse.jpeg",					"injury",				2),
+        (3,				4,				"2021-03-10 00:00:00",					"sparkyinjured.jpeg",					"Treatment",			1),
+        (4,				3,				"2021-03-11 00:00:00",					"sparkyinjured.jpeg",					"injury",				1);
         
 INSERT INTO STATUS (statusId, imageId, date, description, location, statusType, animalId)
 VALUES (1,				1,				"2021-12-12 00:00:00",					null,					"On Campus",				"Available",				1),

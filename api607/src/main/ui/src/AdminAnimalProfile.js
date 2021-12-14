@@ -14,13 +14,13 @@ export default function AdminAnimalProfile() {
     const [description, setDescription] = useState("");
     const [comments, setComments] = useState([]);
     let [animals, setAnimals] = useState([]);
-    let [images,setImages] = useState([]);
-    let [treatments,setTreatments] = useState([]);
-    let [prescriptions,setPrescriptions] = useState([]);
-    let [requests,setRequests] = useState([]);
-    let [medicalRecordHistories,setMedicalRecordHistories] = useState([]);
-    let [animalHistories,setAnimalHistories] = useState([]);
-    let [statusHistories,setStatusHistories] = useState([]);
+    const [images,setImages] = useState([]);
+    const [treatments,setTreatments] = useState([]);
+    const [prescriptions,setPrescriptions] = useState([]);
+    const [requests,setRequests] = useState([]);
+    const [medicalRecordHistories,setMedicalRecordHistories] = useState([]);
+    const [animalHistories,setAnimalHistories] = useState([]);
+    const [statusHistories,setStatusHistories] = useState([]);
 
     useEffect(() => {
         axios.post('http://localhost:8080/searchForAnimal',
@@ -89,7 +89,6 @@ export default function AdminAnimalProfile() {
             }
         })
         .then(function(response){
-            console.log(response.data)
             setComments(response.data)
         })
         .catch(function(error){
@@ -103,7 +102,6 @@ export default function AdminAnimalProfile() {
                 }
             })
             .then(function(response){
-                console.log(response.data)
                 setImages(response.data)
             })
             .catch(function(error){
@@ -117,7 +115,6 @@ export default function AdminAnimalProfile() {
                 }
             })
             .then(function(response){
-                console.log(response.data)
                 setTreatments(response.data)
             })
             .catch(function(error){
@@ -131,7 +128,6 @@ export default function AdminAnimalProfile() {
                 }
             })
             .then(function(response){
-                console.log(response.data)
                 setPrescriptions(response.data)
             })
             .catch(function(error){
@@ -145,7 +141,6 @@ export default function AdminAnimalProfile() {
                 }
             })
             .then(function(response){
-                console.log(response.data)
                 setRequests(response.data)
             })
             .catch(function(error){
@@ -159,13 +154,12 @@ export default function AdminAnimalProfile() {
                 }
             })
             .then(function(response){
-                console.log(response.data)
                 setMedicalRecordHistories(response.data)
             })
             .catch(function(error){
                 console.log(error);
             })
-        axios.post('http://localhost:8080/comments',
+        axios.post('http://localhost:8080/animalHistory',
           null,
           {
               params:{
@@ -173,13 +167,12 @@ export default function AdminAnimalProfile() {
               }
           })
           .then(function(response){
-            console.log(response.data)
               setAnimalHistories(response.data)
           })
           .catch(function(error){
               console.log(error);
           })
-      axios.post('http://localhost:8080/comments',
+      axios.post('http://localhost:8080/animalStatus',
         null,
         {
             params:{
@@ -187,7 +180,6 @@ export default function AdminAnimalProfile() {
             }
         })
         .then(function(response){
-            console.log(response.data)
             setStatusHistories(response.data)
         })
         .catch(function(error){
@@ -351,13 +343,13 @@ export default function AdminAnimalProfile() {
 
     function renderHistoryTable(){
         return animalHistories.map((value,key) =>{
-            const {historyId, date, measurement, result, userId} = value
+            const {historyId, date, measurement, results, userId} = value
             return(
                 <tr key={historyId}>
                     <td>{historyId}</td>
                     <td>{date}</td>
                     <td>{measurement}</td>
-                    <td>{value}</td>
+                    <td>{results}</td>
                     <td>{userId}</td>
                 </tr>
             )
@@ -543,7 +535,7 @@ export default function AdminAnimalProfile() {
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            {renderCommentTable()}
+                                            {renderHistoryTable()}
                                         </tbody>
                                     </Table>
                                 </Tab.Pane>
@@ -555,7 +547,7 @@ export default function AdminAnimalProfile() {
                                         </tr>
                                         </thead>
                                         <tbody>
-                                            {renderCommentTable()}
+                                            {renderStatusHistoryTable()}
                                         </tbody>
                                     </Table>
                                 </Tab.Pane>

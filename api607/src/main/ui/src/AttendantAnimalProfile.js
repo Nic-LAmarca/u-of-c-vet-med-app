@@ -104,6 +104,11 @@ export default function AttendantAnimalProfile() {
          .catch(function(error){
              console.log(error);
          })
+
+
+
+
+
      },[])
 
      async function addComment(event) {

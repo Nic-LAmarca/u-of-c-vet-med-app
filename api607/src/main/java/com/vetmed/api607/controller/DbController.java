@@ -38,8 +38,8 @@ public class DbController {
      * @param id is the unique id value to search with
      * @return a new Animal object that matches the id passed as an argument
      */
-    public Animal searchForAnimal(int id) {
-        Animal foundAnimal = new Animal();
+    public ArrayList<Animal> searchForAnimal(int id) {
+        ArrayList<Animal> foundAnimals = new ArrayList<Animal>();
         try {
             String query = "SELECT * FROM ANIMAL WHERE animalId = ?";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
@@ -47,6 +47,7 @@ public class DbController {
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
                 if (results.getInt("animalId") == id) {
+                    foundAnimal = new Animal();
                     foundAnimal.setAnimalId(id);
                     foundAnimal.setAnimalName(results.getString("animalName"));
                     foundAnimal.setSpecies(results.getString("species"));
@@ -67,13 +68,14 @@ public class DbController {
                     foundAnimal.setSubspecies(results.getString("subspecies"));
                     foundAnimal.setColor(results.getString("color"));
                     foundAnimal.setDistinguishingFeatures(results.getString("distinguishingFeatures"));
+                    foundAnimals.add(foundAnimal);
                 }
             }
             myStmt.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return foundAnimal;
+        return foundAnimals;
     }
 
     /**
@@ -638,6 +640,41 @@ public class DbController {
             e.printStackTrace();
         }
         return foundImage;
+    }
+
+
+    /**
+     *
+     * Method is used to search the database for Images with the entered animalId and return all images of the animal
+     *
+     * @param animalId is the unique id value to search with
+     * @return a list of images of the specified animalt
+     */
+    public ArrayList<Image> searchForAnimalImages(int animalId) {
+        ArrayList<Image> foundImages= new ArrayList<Image>();
+        try {
+            String query = "SELECT * FROM IMAGE WHERE animalId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, animalId);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                if (results.getInt("animalId") == animalId)
+                {
+                    Image foundImage = new Image();
+                    foundImage.setImageId(results.getInt("imageId"));
+                    foundImage.setUserId(results.getInt("userId"));
+                    foundImage.setCreationDate(results.getDate("creationDate").toString());
+                    foundImage.setFile(results.getString("file"));
+                    foundImage.setAnimalId(results.getInt("animalId"));
+                    foundImage.setType(results.getString("type"));
+                    foundImages.add(foundImage);
+                }
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return foundImages;
     }
 
     /**

@@ -19,6 +19,7 @@ export default function AdminAnimalProfile() {
     const [prescriptions,setPrescriptions] = useState([]);
     const [requests,setRequests] = useState([]);
     const [statusHistories,setStatusHistories] = useState([]);
+    const [fileName, setFileName] = useState("");
 
     useEffect(() => {
         axios.post('http://localhost:8080/searchForAnimal',
@@ -179,6 +180,26 @@ export default function AdminAnimalProfile() {
         .catch(function(error){
             console.log(error);
         })
+    }
+    async function addImage(event) {
+        event.preventDefault();
+        var userId = window.localStorage.getItem("userId");
+        await axios.post('http://localhost:8080/addImage',
+            null,
+            {
+                params: {
+                    userId,
+                    fileName,
+                    animalId,
+
+                }
+            })
+            .then(function(response){
+                console.log(response)
+            })
+            .catch(function(error){
+                console.log(error);
+            })
     }
 
     // *********************************************************
@@ -406,8 +427,18 @@ export default function AdminAnimalProfile() {
                                         </tbody>
                                     </Table>
                                 </Tab.Pane>
-                                <Tab.Pane eventKey="second">
-                                    {renderImage}
+                                <Tab.Pane eventKey="second" >
+                                    <Form.Group controlId="formFileSm" className=" flex-sm-wrap" >
+                                        <Form.Control onChange={(e) => setFileName(e.target.value)}
+                                                      type="file"
+                                                      size="sm"
+                                                      multiple
+                                        />
+                                        <Button variant="success" id="Submit Comment" onClick={addImage}>
+                                            Upload
+                                        </Button>
+                                    </Form.Group>
+                                    {renderImage()}
                                     {/*<h100 className="AdminAnimalProfile-photo-item1">SparkyPhoto1.png</h100>*/}
                                     {/*<h101 className="AdminAnimalProfile-photo-item2">SparkyPhoto2.png</h101>*/}
                                     {/*<h102 className="AdminAnimalProfile-photo-item3">SparkyPhoto3.png</h102>*/}

@@ -14,7 +14,6 @@ export default function AdminAnimalProfile() {
     const [description, setDescription] = useState("");
     const [comments, setComments] = useState([]);
     let [animals, setAnimals] = useState([]);
-    let [images,setImages] = useState([]);
     let [diagnosis,setDiagnosis] = useState([]);
     let [prescription,setPrescription] = useState([]);
     let [request,setRequest] = useState([]);

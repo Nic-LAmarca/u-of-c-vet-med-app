@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MedicalRecordHistory {
+    private int medicalRecordHistoryId;
     private int medicalRecordId;
     private int animalId;
     private String date;

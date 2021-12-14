@@ -18,12 +18,19 @@ export default function AdminAnimalProfile() {
     let [prescription,setPrescription] = useState([]);
     let [request,setRequest] = useState([]);
     let [alert, setAlert] = useState("");
-    const [images,setImages] = useState([]);
     const [treatments,setTreatments] = useState([]);
     const [prescriptions,setPrescriptions] = useState([]);
     const [requests,setRequests] = useState([]);
     const [statusHistories,setStatusHistories] = useState([]);
     const [fileName, setFileName] = useState("");
+    const [drugName, setDrugName] = useState("");
+    const [instructions, setInstructions] = useState("");
+    const [dosage, setDosage] = useState("");
+    const [deliveryMethod, setDeliveryMethod] = useState("");
+    const [statusDescription, setStatusDescription] = useState("");
+    const [location, setLocation] = useState("");
+    const [status, setStatus] = useState("");
+    const [statusImageId, setStatusImageId] = useState("");
 
     useEffect(() => {
         axios.post('http://localhost:8080/searchForAnimal',
@@ -185,9 +192,54 @@ export default function AdminAnimalProfile() {
             console.log(error);
         })
     }
+
+    async function addStatus(event) {
+        event.preventDefault();
+        var userId = window.localStorage.getItem("userId");
+        await axios.post('http://localhost:8080/addStatus',
+        null,
+        {
+            params: {
+                animalId,
+                statusDescription,
+                location,
+                status,
+                statusImageId
+            }
+        })
+        .then(function(response){
+            console.log(response)
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+    }
+
+    async function addPrescription(event) {
+        event.preventDefault();
+        var userId = window.localStorage.getItem("userId");
+        await axios.post('http://localhost:8080/addPrescription',
+        null,
+        {
+            params: {
+                userId,
+                animalId,
+                drugName,
+                instructions,
+                dosage,
+                deliveryMethod
+            }
+        })
+        .then(function(response){
+            console.log(response)
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+    }
+
     async function addImage(event) {
         event.preventDefault();
-        console.log(fileName)
         var userId = window.localStorage.getItem("userId");
         await axios.post('http://localhost:8080/addImage',
             null,
@@ -359,22 +411,12 @@ export default function AdminAnimalProfile() {
     }
 
     function renderPrescriptionTable(){
-
-        return comments.map((value,key) =>{
-            const {prescriptionId, username, drugName,instructions,date} = value
-            return(
-                <tr key={prescriptionId}>
-                    <td>{username}</td>
-                    <td>{drugName}</td>
-                    <td>{instructions}</td>
-
         return prescriptions.map((value,key) =>{
             const {prescriptionId, userId, date, drugName, instructions, dosage, deliveryMethod} = value
             return(
                 <tr key={prescriptionId}>
                     <td>{prescriptionId}</td>
                     <td>{userId}</td>
-
                     <td>{date}</td>
                     <td>{drugName}</td>
                     <td>{instructions}</td>
@@ -458,7 +500,7 @@ export default function AdminAnimalProfile() {
                         placement="end"
                     >
                         <Offcanvas.Header closeButton>
-                            <Offcanvas.Title id="offcanvasNavbarLabel">User Name Here</Offcanvas.Title>
+                            <Offcanvas.Title id="offcanvasNavbarLabel">{window.localStorage.getItem("username")}</Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
@@ -579,9 +621,25 @@ export default function AdminAnimalProfile() {
                                     <InputGroup className="mb-3 flex-sm-wrap">
                                         <FormControl
                                             placeholder="Enter Drug Name Here"
-                                            onChange={(e) => setDescription(e.target.value)}
+                                            onChange={(e) => setDrugName(e.target.value)}
+                                        /><br/>
+                                        <FormControl
+                                            placeholder="Enter Instructions Here"
+                                            onChange={(e) => setInstructions(e.target.value)}
                                         />
-                                        <Button variant="success" id="Submit Prescription" onClick={addComment}>
+                                        </InputGroup>
+                                        <InputGroup className="mb-4 flex-sm-wrap">
+                                        <FormControl
+                                            placeholder="Enter Dosage Here"
+                                            onChange={(e) => setDosage(e.target.value)}
+                                        />
+                                        <FormControl
+                                            placeholder="Enter Delivery Method Here"
+                                            onChange={(e) => setDeliveryMethod(e.target.value)}
+                                        />
+                                        </InputGroup>
+                                        <InputGroup className="mb-5 flex-sm-wrap">
+                                        <Button variant="success" id="Submit Prescription" onClick={addPrescription}>
                                             Submit
                                         </Button>
                                     </InputGroup>
@@ -609,17 +667,42 @@ export default function AdminAnimalProfile() {
                                     </Table>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="sixth">
-                                    <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">
-                                        <thead>
-                                        <tr>
-                                            {renderStatusHistoryHeaders()}
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                            {renderStatusHistoryTable()}
-                                        </tbody>
-                                    </Table>
-                                </Tab.Pane>
+                                    <InputGroup className="mb-3 flex-sm-wrap">
+                                        <FormControl
+                                            placeholder="Enter Description Here"
+                                            onChange={(e) => setStatusDescription(e.target.value)}
+                                        /><br/>
+                                        <FormControl
+                                            placeholder="Enter Location Here"
+                                            onChange={(e) => setLocation(e.target.value)}
+                                        />
+                                        </InputGroup>
+                                        <InputGroup className="mb-4 flex-sm-wrap">
+                                        <FormControl
+                                            placeholder="Enter New Status Here"
+                                            onChange={(e) => setStatus(e.target.value)}
+                                        />
+                                        <FormControl
+                                            placeholder="Associated Image Id"
+                                            onChange={(e) => setStatusImageId(e.target.value)}
+                                        />
+                                        </InputGroup>
+                                        <InputGroup className="mb-5 flex-sm-wrap">
+                                        <Button variant="success" id="Submit Status Update" onClick={addStatus}>
+                                            Submit
+                                        </Button>
+                                        </InputGroup>
+                                        <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">
+                                            <thead>
+                                            <tr>
+                                                {renderStatusHistoryHeaders()}
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                {renderStatusHistoryTable()}
+                                            </tbody>
+                                        </Table>
+                                    </Tab.Pane>
                             </Tab.Content>
                             <Nav variant="pills"  >
                                 <Nav.Item>

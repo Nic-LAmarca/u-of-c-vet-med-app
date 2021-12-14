@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS STATUS
      animalId			int				NOT NULL,
 	 date				datetime		NOT NULL,
      description		VARCHAR(50),
-     locations			VARCHAR(50)		NOT NULL,
+     location			VARCHAR(50)		NOT NULL,
      statusType			VARCHAR(20)		NOT NULL,
      imageId			int				NOT NULL,
      primary key(statusId),
@@ -259,7 +259,7 @@ VALUES (1,				1,				"2021-03-08 00:00:00",					"image1.png",					"profile",				1
         (3,				4,				"2021-03-10 00:00:00",					"image3.png",					"Treatment",			1),
         (4,				3,				"2021-03-11 00:00:00",					"image4.png",					"injury",				1);
         
-INSERT INTO STATUS (statusId, imageId, date, description, locations, statusType, animalId)
+INSERT INTO STATUS (statusId, imageId, date, description, location, statusType, animalId)
 VALUES (1,				1,				"2021-12-12 00:00:00",					null,					"On Campus",				"Available",				1),
 		(2,				2,				"2021-11-01 00:00:00",					"Her foot is injured",	"Hospital",					"Injured",					2);
 	

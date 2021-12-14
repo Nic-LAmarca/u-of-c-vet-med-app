@@ -1,5 +1,6 @@
 package com.vetmed.api607.controller;
 
+import com.vetmed.api607.model.Comment;
 import com.vetmed.api607.model.Request;
 import com.vetmed.api607.model.TreatmentHistory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,12 @@ import java.util.ArrayList;
 @RequestMapping()
 public class RequestController {
     private DbController db = new DbController();
+
+    @CrossOrigin
+    @PostMapping("/animalRequest{animalId}")
+    public ArrayList<Request> getAnimalRequests(@PathParam("animalId") int animalId) {
+        return db.animalRequests(animalId);
+    }
 
     @CrossOrigin
     @PostMapping("/teacherTeachingRequest{animalId, userId, date}")

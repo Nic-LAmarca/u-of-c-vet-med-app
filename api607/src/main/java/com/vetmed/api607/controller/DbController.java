@@ -500,6 +500,40 @@ public class DbController {
 
     /**
      *
+     * Method is used to search the database for all History items related to an animal
+     *
+     * @param animalId is the unique animal id value to search with
+     * @return a new History object ArrayList that matches the animalId passed as an argument
+     */
+    public ArrayList<History> animalHistory(int animalId) {
+        ArrayList<History> historyArrayList= new ArrayList<History>();
+        try {
+            String query = "SELECT * FROM HISTORY WHERE animalId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, animalId);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                if (results.getInt("animalId") == animalId) {
+                    History foundHistory = new History();
+                    foundHistory.setHistoryId(results.getInt("historyId"));
+                    foundHistory.setDate(results.getDate("date").toString());
+                    foundHistory.setAnimalId(results.getInt("animalId"));
+                    foundHistory.setMeasurement(results.getString("measurement"));
+                    foundHistory.setResults(results.getDouble("results"));
+                    foundHistory.setUserId(results.getInt("userId"));
+                    historyArrayList.add(foundHistory);
+                }
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return historyArrayList;
+    }
+
+
+    /**
+     *
      * Method is used to search the database for History with the entered id and return the History object if found
      *
      * @param id is the unique id value to search with
@@ -739,6 +773,38 @@ public class DbController {
     // **************************************************************************
     // ****** SECTION USED FOR MEDICAL RECORD HISTORY QUERY INTERACTIONS ********
     // **************************************************************************
+
+    /**
+     *
+     * Method is used to search the database for all Medical Record items related to an animal
+     *
+     * @param animalId is the unique animal id value to search with
+     * @return a new MedicalRecordHistory object ArrayList that matches the animalId passed as an argument
+     */
+    public ArrayList<MedicalRecordHistory> animalMedicalRecords(int animalId) {
+        ArrayList<MedicalRecordHistory> medicalRecordHistoryArrayList= new ArrayList<MedicalRecordHistory>();
+        try {
+            String query = "SELECT * FROM MEDICAL_RECORD_HISTORY WHERE animalId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, animalId);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                if (results.getInt("animalId") == animalId) {
+                    MedicalRecordHistory addMedicalRecordHistory= new MedicalRecordHistory();
+                    addMedicalRecordHistory.setMedicalRecordHistoryId(results.getInt("medicalRecordHistoryId"));
+                    addMedicalRecordHistory.setMedicalRecordId(results.getInt("medicalRecordId"));
+                    addMedicalRecordHistory.setAnimalId(results.getInt("animalId"));
+                    addMedicalRecordHistory.setDate(results.getDate("date").toString());
+                    medicalRecordHistoryArrayList.add(addMedicalRecordHistory);
+                }
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return medicalRecordHistoryArrayList;
+    }
+
 
     /**
      *
@@ -1075,6 +1141,41 @@ public class DbController {
 
     /**
      *
+     * Method is used to search the database for all Request items related to an animal
+     *
+     * @param animalId is the unique animal id value to search with
+     * @return a new PrescriptionHistory object ArrayList that matches the animalId passed as an argument
+     */
+    public ArrayList<Request> animalRequests(int animalId) {
+        ArrayList<Request> requestArrayList= new ArrayList<Request>();
+        try {
+            String query = "SELECT * FROM REQUEST WHERE animalId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, animalId);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                if (results.getInt("animalId") == animalId) {
+                    Request addRequest = new Request();
+                    addRequest.setRequestId(results.getInt("requestId"));
+                    addRequest.setAnimalId(results.getInt("animalId"));
+                    addRequest.setUserId(results.getInt("userId"));
+                    addRequest.setAdminApproved(results.getBoolean("adminApproved"));
+                    addRequest.setTechnicianApproved(results.getBoolean("technicianApproved"));
+                    addRequest.setRequestComplete(results.getBoolean("requestComplete"));
+                    addRequest.setRequestSuccessful(results.getBoolean("requestSuccessful"));
+                    addRequest.setRequestDate(results.getDate("requestDate").toString());
+                    requestArrayList.add(addRequest);
+                }
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return requestArrayList;
+    }
+
+    /**
+     *
      * Method is used to search the database for a Request with the entered id and return the object if found
      *
      * @param id is the unique id value to search with
@@ -1338,6 +1439,41 @@ public class DbController {
     // ********************************************************
     // ****** SECTION USED FOR STATUS QUERY INTERACTIONS ******
     // ********************************************************
+
+    /**
+     *
+     * Method is used to search the database for all Request items related to an animal
+     *
+     * @param animalId is the unique animal id value to search with
+     * @return a new PrescriptionHistory object ArrayList that matches the animalId passed as an argument
+     */
+    public ArrayList<Status> animalStatuses(int animalId) {
+        ArrayList<Status> statusArrayList= new ArrayList<Status>();
+        try {
+            String query = "SELECT * FROM STATUS WHERE animalId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, animalId);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                if (results.getInt("animalId") == animalId) {
+                    Status addStatus = new Status();
+                    addStatus.setStatusId(results.getInt("statusId"));
+                    addStatus.setAnimalId(results.getInt("animalId"));
+                    addStatus.setDate(results.getDate("date").toString());
+                    addStatus.setLocation(results.getString("location"));
+                    addStatus.setStatusType(results.getString("statusType"));
+                    addStatus.setImageId(results.getInt("imageId"));
+                    statusArrayList.add(addStatus);
+                }
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return statusArrayList;
+    }
+
+
     /**
      *
      * Method is used to search the database for a Status with the entered id and return the object if found
@@ -1443,6 +1579,9 @@ public class DbController {
     // *******************************************************************
     // ****** SECTION USED FOR TREATMENT HISTORY QUERY INTERACTIONS ******
     // *******************************************************************
+
+
+
 
     /**
      *

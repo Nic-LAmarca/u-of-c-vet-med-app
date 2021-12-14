@@ -500,6 +500,40 @@ public class DbController {
 
     /**
      *
+     * Method is used to search the database for all History items related to an animal
+     *
+     * @param animalId is the unique animal id value to search with
+     * @return a new History object ArrayList that matches the animalId passed as an argument
+     */
+    public ArrayList<History> animalHistory(int animalId) {
+        ArrayList<History> historyArrayList= new ArrayList<History>();
+        try {
+            String query = "SELECT * FROM HISTORY WHERE animalId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, animalId);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                if (results.getInt("animalId") == animalId) {
+                    History foundHistory = new History();
+                    foundHistory.setHistoryId(results.getInt("historyId"));
+                    foundHistory.setDate(results.getDate("date").toString());
+                    foundHistory.setAnimalId(results.getInt("animalId"));
+                    foundHistory.setMeasurement(results.getString("measurement"));
+                    foundHistory.setResults(results.getDouble("results"));
+                    foundHistory.setUserId(results.getInt("userId"));
+                    historyArrayList.add(foundHistory);
+                }
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return historyArrayList;
+    }
+
+
+    /**
+     *
      * Method is used to search the database for History with the entered id and return the History object if found
      *
      * @param id is the unique id value to search with

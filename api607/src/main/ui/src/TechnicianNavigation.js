@@ -1,125 +1,102 @@
- import React,{useState} from "react";
+ import React,{useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 
-import {
-    Button,
-    Form,
-    Dropdown,
-    DropdownButton,
-    Table,
-    Navbar,
-    Container,
-    Image,
-    Offcanvas,
-    Nav,
-    Badge
-} from "react-bootstrap";
+import {Button, Col, Row, Badge, Form, InputGroup, Dropdown, DropdownButton, ListGroup, Table, Navbar, Container, Image,Offcanvas,Nav,NavDropdown,FormControl} from "react-bootstrap";
 import axios from "axios";
 import './AttendantNavigation.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
  import images from "./Images/vetmed.png";
- import FormComp from "./Components/FormComp";
- import TableComp from "./Components/TableComp";
+
 
 
 export default function TechnicianNavigation() {
     let [animals,setAnimals] = useState([]);
+
     const [animalName, setAnimalName] = useState("");
     const [animalSpecies, setAnimalSpecies] = useState("");
-    const [animalBreed, setAnimalBreed] = useState("");
     const [animalStatus, setAnimalStatus] = useState("");
+    const [animalId, setAnimalId] = useState();
 
     const history = useNavigate();
 
-    window.onload = function() {
-        allAnimals();
-    };
 
-    // async function personalSettings(event) {
-    //     event.preventDefault();
-    //     history('/PersonalSettings');
-    // }
-    //
-    // async function userManagement(event) {
-    //     event.preventDefault();
-    //     history('/UserManagement');
-    // }
-    //
-    // async function teacherRequestManagement(event) {
-    //     event.preventDefault();
-    //     history('/TeacherRequestManagement');
-    // }
-    //
-    // async function animalManagement(event) {
-    //     event.preventDefault();
-    //     history('/AnimalManagement');
-    // }
-    //
-    // async function logout(event) {
-    //     event.preventDefault();
-    //     history('/');
-    // }
-    //
-    // async function selectAnimal(event) {
-    //     event.preventDefault();
-    //     history('/AdminAnimalProfile');
-    // }
+    async function selectAnimal(event) {
+        event.preventDefault();
+        console.log("Here")
+        window.localStorage.setItem("animal", animalId)
+        history('/TechnicianAnimalProfile');
+    }
 
-    async function allAnimals() {
-        await axios.get('http://localhost:8080/animals',
+    useEffect(() => {
+        axios.get('http://localhost:8080/animals',
             null,
-        )
+            )
             .then(function(response){
                 const animalList = response.data
-                window.localStorage.setItem("animalCount", animalList.length)
+                setAnimals(animalList)
+
                 var table = document.getElementById("table");
-                var j = 1;
-                for(var i = 0; i < animalList.length; i++){
-                    var temp = animalList[i]
-                    var row = table.insertRow(i+1)
-                    for(var k = 0; k < 11; k++){
-                        row.insertCell(k)
+                if(table.rows.length <= 1){
+                    const animalList = response.data
+                    window.localStorage.setItem("animalCount", animalList.length)
+                    var j = 1;
+                    for(var i = 0; i < animalList.length; i++){
+                        var temp = animalList[i]
+                        var row = table.insertRow(i+1)
+                        for(var k = 0; k < 10; k++){
+                            row.insertCell(k)
+                        }
+                        table.rows[j].cells[0].innerHTML = temp.animalId
+                        table.rows[j].cells[1].innerHTML = temp.animalName
+                        table.rows[j].cells[2].innerHTML = temp.species
+                        table.rows[j].cells[3].innerHTML = temp.breed
+                        table.rows[j].cells[4].innerHTML = temp.sex
+                        table.rows[j].cells[5].innerHTML = temp.statusType
+                        table.rows[j].cells[6].innerHTML = temp.available
+                        table.rows[j].cells[7].innerHTML = temp.location
+                        table.rows[j].cells[8].innerHTML = temp.alert
+                        table.rows[j].cells[9].innerHTML = temp.color
+                        j = j + 1
                     }
-                    table.rows[j].cells[0].innerHTML = temp.animalId
-                    table.rows[j].cells[1].innerHTML = temp.animalName
-                    table.rows[j].cells[2].innerHTML = temp.species
-                    table.rows[j].cells[3].innerHTML = temp.breed
-                    table.rows[j].cells[4].innerHTML = temp.sex
-                    table.rows[j].cells[5].innerHTML = temp.statusType
-                    table.rows[j].cells[6].innerHTML = temp.available
-                    table.rows[j].cells[7].innerHTML = temp.location
-                    table.rows[j].cells[8].innerHTML = temp.alert
-                    table.rows[j].cells[9].innerHTML = temp.color
-                    j = j + 1
                 }
             })
             .catch(function(error){
-                    console.log(error);
-                }
-            );
-    }
+                console.log(error);
+            }
+        );
+    },[])
+
+
+
 
     async function searchAnimals(event) {
         event.preventDefault();
-        await axios.get('http://localhost:8080/animals',
-            null,
+
+        console.log(animalName)
+        console.log(animalSpecies)
+        console.log(animalStatus)
+
+        await axios.get('http://localhost:8080/filteredAnimals',
             {
                 params: {
                     animalName,
                     animalSpecies,
-                    animalBreed,
                     animalStatus
                 }
             })
             .then(function(response){
-                const animalList = response.data
-                window.localStorage.setItem("animalCount", animalList.length)
+                const filteredAnimalList = response.data
+                 console.log(filteredAnimalList)
                 var table = document.getElementById("table");
+                var rowCount = table.rows.length
                 var j = 1;
-                for(var i = 0; i < animalList.length; i++){
-                    var temp = animalList[i]
+                for(var i = 1; i < rowCount; i++){
+                    table.deleteRow(j)
+                }
+                for(var i = 0; i < filteredAnimalList.length; i++){
+                    var temp = filteredAnimalList[i]
                     var row = table.insertRow(i+1)
-                    for(var k = 0; k < 11; k++){
+                    for(var k = 0; k < 10; k++){
                         row.insertCell(k)
                     }
                     table.rows[j].cells[0].innerHTML = temp.animalId
@@ -136,10 +113,11 @@ export default function TechnicianNavigation() {
                 }
             })
             .catch(function(error){
-                    console.log(error);
-                }
-            );
+                console.log(error);
+            }
+        );
     }
+
 
     var id =window.localStorage.getItem('userId')
     console.log(id)
@@ -163,13 +141,11 @@ export default function TechnicianNavigation() {
                             <Nav className="justify-content-end flex-grow-1 pe-3">
                                 <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
                                 <Button variant="info" href="/UserManagement" >User Management</Button><br/>
-                                <Button variant="info" href="TeacherRequestManagement" >
+                                <Button variant="info" href="TechnicianTeachingRequestManagement" >
                                     Teaching Request Management
-                                    <Badge className="ms-2" bg = "danger">8</Badge>
                                 </Button><br/>
-                                <Button variant="info" href="TeacherRequestManagement" >
+                                <Button variant="info" href="TechnicianTreatmentRequestManagement" >
                                     Treatment Request Management
-                                    <Badge className="ms-2" bg = "danger">6</Badge>
                                 </Button><br/>
                                 <Button variant="secondary" href="/" >Logout</Button>
 
@@ -177,14 +153,69 @@ export default function TechnicianNavigation() {
                         </Offcanvas.Body>
                     </Navbar.Offcanvas>
                 </Container>
-            </Navbar>
-
+          </Navbar><br/>
             <Container fluid>
-                <FormComp/><br/>
+
+
+
+            <div>
+                <Container fluid>
+                    <Row className="flex-lg-wrap">
+                        <Col lg="3">
+
+                            <InputGroup className="me-2" >
+
+                                <Form.Control
+                                    autoFocus
+                                    placeholder="Animal Name"
+                                     value = {animalName}
+                                      onChange =  {(e) => setAnimalName(e.target.value)}
+
+                                />
+
+                            </InputGroup><br/>
+                        </Col>
+
+                        <Col lg="3">
+
+                            <InputGroup className="me-2"  >
+
+                                <Form.Control
+                                    autoFocus
+                                    placeholder="Species"
+                                     value = {animalSpecies}
+                                     onChange =  {(e) => setAnimalSpecies(e.target.value)}
+                                />
+
+                            </InputGroup><br/>
+                            </Col>
+                        <Col lg="3">
+
+                            <InputGroup className="me-2"  >
+
+                                <Form.Control
+                                    autoFocus
+                                    placeholder="Status"
+                                     value = {animalStatus}
+                                     onChange =  {(e) => setAnimalStatus(e.target.value)}
+                                />
+
+                            </InputGroup><br/>
+
+                        </Col>
+                    </Row><br/>
+
+                    <Button onClick= {searchAnimals} >Search By Filter</Button>
+
+                        <Row xs ={"auto"}>
+                    </Row><br/>
+                </Container>
+            </div>
+
                 <h1>
                     Results
                 </h1>
-                <Table  responsive striped bordered hover id="table">
+                <Table responsive striped bordered hover id="table">
                     <thead>
                     <tr>
                         <th>animalId</th>
@@ -196,26 +227,30 @@ export default function TechnicianNavigation() {
                         <th>available</th>
                         <th>location</th>
                         <th>alert</th>
-                        <th>select</th>
+                        <th>color</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Calvin</td>
-                        <td>Sparky looks healthy</td>
-                        <td>2021-11-24</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <Button variant="light" href="/TechnicianAnimalProfile">Select</Button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </Table>
+                  </Table>
+                        <Row className="flex-lg-wrap">
+                            <Col lg="2">
+
+                                <InputGroup className="me-2"  >
+
+                                    <Form.Control
+                                        autoFocus
+                                        placeholder="Enter Animal ID"
+                                        value = {animalId}
+                                         onChange =  {(e) => setAnimalId(e.target.value)}
+                                    />
+
+                                </InputGroup><br/>
+
+                            </Col>
+                             <Col lg="3">
+                        <Button onClick= {selectAnimal} >Select Animal</Button>
+                            </Col>
+
+                        </Row><br/>
             </Container>
 
         </div>

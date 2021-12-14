@@ -39,7 +39,7 @@ export default function Login() {
                     history("/AttendantNavigation");
                 }
                 else if(userType == "Animal Health Technician"){
-                    history("/TeacherNavigation");
+                    history("/TechnicianNavigation");
                 }
                 else if(userType == "Student"){
                     history("/StudentNavigation");

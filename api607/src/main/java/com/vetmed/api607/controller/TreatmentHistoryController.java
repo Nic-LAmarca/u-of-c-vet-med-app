@@ -20,9 +20,13 @@ public class TreatmentHistoryController {
         return db.getAllTreatmentHistories();
     }
 
-
-    @PostMapping("/technicianRequestApproval{userId, requestId}")
+    @PostMapping("/technicianTreatmentRequestApproval{userId, requestId}")
     public ArrayList<TreatmentHistory> acceptTreatmentRequest(@PathParam("userId") int userId, @PathParam("requestId") int requestId) {
         return db.acceptTreatmentRequest(userId, requestId);
+    }
+
+    @PostMapping("/attendantTreatmentRequest{userId, animalId, treatmentTypeId}")
+    public void makeTreatmentRequest(@PathParam("userId") int userId, @PathParam("animalId") int animalId, @PathParam("treatmentTypeId") int treatmentTypeId) {
+        db.makeTreatmentRequest(userId, animalId, treatmentTypeId);
     }
 }

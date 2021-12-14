@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS HISTORY
 	 date				date			NOT NULL,
      animalId			int				NOT NULL,
 	 measurement		VARCHAR(30)		NOT NULL,
-     value				double,
+     results			double,
      userId				int				NOT NULL,
     primary key(historyId),
     foreign key(animalId) references ANIMAL(animalId),
@@ -144,10 +144,11 @@ CREATE TABLE IF NOT EXISTS HISTORY
     
  
 CREATE TABLE IF NOT EXISTS MEDICAL_RECORD_HISTORY
-	(medicalRecordId	int				NOT NULL auto_increment,
-     animalId			int				NOT NULL,
-     date				date			NOT NULL,
-     primary key(medicalRecordId),
+	(medicalRecordHistoryId	int			NOT NULL auto_increment,
+     medicalRecordId		int			NOT NULL ,
+	 animalId			int				NOT NULL,
+	 date				date			NOT NULL,
+     primary key(medicalRecordHistoryId),
      foreign key(animalId) references ANIMAL(animalId),
      CONSTRAINT medicalRecordHistoryAnimalCascade
      FOREIGN KEY (animalId)
@@ -262,7 +263,7 @@ INSERT INTO STATUS (statusId, imageId, date, description, locations, statusType,
 VALUES (1,				1,				"2021-12-12 00:00:00",					null,					"On Campus",				"Available",				1),
 		(2,				2,				"2021-11-01 00:00:00",					"Her foot is injured",	"Hospital",					"Injured",					2);
 	
-INSERT INTO HISTORY (historyId, userId, measurement, value, date, animalId)
+INSERT INTO HISTORY (historyId, userId, measurement, results, date, animalId)
 VALUES (1,				2,				"Weight",				null,				"2019-04-23 00:00:00",				1),
 		(2,				3,				"Blood Concentration",	null,				"2019-04-26 00:00:00",				1),
         (3,				2,				"Heart Beat",			null,				"2018-11-21 00:00:00",				1),

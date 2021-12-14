@@ -1,24 +1,10 @@
 import React,{useState, useEffect} from "react";
 import {useHistory, useNavigate} from "react-router-dom";
-
-import {
-    Button,
-    Form,
-    Dropdown,
-    DropdownButton,
-    Table,
-    Row,
-    Container,
-    Navbar,
-    Image,
-    Offcanvas,
-    Nav, Badge, NavbarBrand, Col
-} from "react-bootstrap";
+import {Button,Form,Dropdown,DropdownButton,Table,Row,Container,Navbar,Image,Offcanvas,Nav, Badge, NavbarBrand, Col} from "react-bootstrap";
 import axios from "axios";
 import './PersonalSettings.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
 import images from "./Images/vetmed.png";
-
 
 export default function PersonalSettings() {
     const [fName, setFName] = useState("");

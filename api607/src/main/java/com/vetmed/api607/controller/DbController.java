@@ -47,7 +47,6 @@ public class DbController {
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
                 if (results.getInt("animalId") == id) {
-
                     foundAnimal.setAnimalId(id);
                     foundAnimal.setAnimalName(results.getString("animalName"));
                     foundAnimal.setSpecies(results.getString("species"));
@@ -68,7 +67,6 @@ public class DbController {
                     foundAnimal.setSubspecies(results.getString("subspecies"));
                     foundAnimal.setColor(results.getString("color"));
                     foundAnimal.setDistinguishingFeatures(results.getString("distinguishingFeatures"));
-
                 }
             }
             myStmt.close();
@@ -524,7 +522,7 @@ public class DbController {
                     foundHistory.setDate(results.getDate("date").toString());
                     foundHistory.setAnimalId(results.getInt("animalId"));
                     foundHistory.setMeasurement(results.getString("measurement"));
-                    foundHistory.setValue(results.getDouble("value"));
+                    foundHistory.setResults(results.getDouble("results"));
                     foundHistory.setUserId(results.getInt("userId"));
                 }
             }
@@ -553,7 +551,7 @@ public class DbController {
                 addHistory.setDate(results.getDate("date").toString());
                 addHistory.setAnimalId(results.getInt("animalId"));
                 addHistory.setMeasurement(results.getString("measurement"));
-                addHistory.setValue(results.getDouble("value"));
+                addHistory.setResults(results.getDouble("results"));
                 addHistory.setUserId(results.getInt("userId"));
                 historyList.add(addHistory);
             }
@@ -571,17 +569,17 @@ public class DbController {
      * @param date is the date the history is for
      * @param animalId is the animal being recorded
      * @param measurement is the measurement type
-     * @param value is the result of the measurement
+     * @param results is the result of the measurement
      * @param userId is the user entering the history
      */
-    public void addHistory(String date, int animalId, String measurement, Double value, int userId){
+    public void addHistory(String date, int animalId, String measurement, Double results, int userId){
         try {
-            String query = "INSERT INTO HISTORY (date, animalId, measurement, value, userId) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO HISTORY (date, animalId, measurement, results, userId) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setDate(1, Date.valueOf(date));
             myStmt.setInt(2, animalId);
             myStmt.setString(3, measurement);
-            myStmt.setDouble(4, value);
+            myStmt.setDouble(4, results);
             myStmt.setInt(5, userId);
             myStmt.executeQuery();
             myStmt.close();
@@ -762,7 +760,8 @@ public class DbController {
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
                 if (results.getInt("medicalRecordHistoryId") == id) {
-                    foundMedicalRecordHistory.setMedicalRecordId(id);
+                    foundMedicalRecordHistory.setMedicalRecordHistoryId(id);
+                    foundMedicalRecordHistory.setAnimalId(results.getInt("medicalRecordId"));
                     foundMedicalRecordHistory.setAnimalId(results.getInt("animalId"));
                     foundMedicalRecordHistory.setDate(results.getDate("date").toString());
                 }
@@ -788,6 +787,7 @@ public class DbController {
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
                 MedicalRecordHistory addMedicalRecordHistory= new MedicalRecordHistory();
+                addMedicalRecordHistory.setMedicalRecordHistoryId(results.getInt("medicalRecordHistoryId"));
                 addMedicalRecordHistory.setMedicalRecordId(results.getInt("medicalRecordId"));
                 addMedicalRecordHistory.setAnimalId(results.getInt("animalId"));
                 addMedicalRecordHistory.setDate(results.getDate("date").toString());
@@ -804,15 +804,17 @@ public class DbController {
      *
      * Method is used to add Medical Record History into the database
      *
+     * @param medicalRecordId is the id correlating to the medical record type
      * @param animalId is the animal to add Medical Record History for
      * @param date is the date the Medical Record History is being added
      */
-    public void addMedicalRecordHistory(int animalId, String date){
+    public void addMedicalRecordHistory(int medicalRecordId, int animalId, String date){
         try {
             String query = "INSERT INTO MEDICAL_RECORD_HISTORY (AnimalId, date) VALUES (?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
-            myStmt.setInt(1, animalId);
-            myStmt.setDate(2, Date.valueOf(date));
+            myStmt.setInt(1, medicalRecordId);
+            myStmt.setInt(2, animalId);
+            myStmt.setDate(3, Date.valueOf(date));
             myStmt.executeUpdate();
             myStmt.close();
         } catch (Exception e) {

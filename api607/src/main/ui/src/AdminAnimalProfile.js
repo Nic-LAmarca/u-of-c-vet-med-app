@@ -14,12 +14,6 @@ export default function AdminAnimalProfile() {
     const [description, setDescription] = useState("");
     const [comments, setComments] = useState([]);
     let [animals, setAnimals] = useState([]);
-    const [images,setImages] = useState([]);
-    const [treatments,setTreatments] = useState([]);
-    const [prescriptions,setPrescriptions] = useState([]);
-    const [requests,setRequests] = useState([]);
-    const [medicalRecordHistories,setMedicalRecordHistories] = useState([]);
-    const [animalHistories,setAnimalHistories] = useState([]);
     const [statusHistories,setStatusHistories] = useState([]);
 
     useEffect(() => {
@@ -94,84 +88,6 @@ export default function AdminAnimalProfile() {
         .catch(function(error){
             console.log(error);
         })
-        axios.post('http://localhost:8080/animalImages',
-            null,
-            {
-                params:{
-                    animalId
-                }
-            })
-            .then(function(response){
-                setImages(response.data)
-            })
-            .catch(function(error){
-                console.log(error);
-            })
-        axios.post('http://localhost:8080/animalTreatmentHistory',
-            null,
-            {
-                params:{
-                    animalId
-                }
-            })
-            .then(function(response){
-                setTreatments(response.data)
-            })
-            .catch(function(error){
-                console.log(error);
-            })
-        axios.post('http://localhost:8080/animalPrescriptions',
-            null,
-            {
-                params:{
-                    animalId
-                }
-            })
-            .then(function(response){
-                setPrescriptions(response.data)
-            })
-            .catch(function(error){
-                console.log(error);
-            })
-        axios.post('http://localhost:8080/animalRequest',
-            null,
-            {
-                params:{
-                    animalId
-                }
-            })
-            .then(function(response){
-                setRequests(response.data)
-            })
-            .catch(function(error){
-                console.log(error);
-            })
-        axios.post('http://localhost:8080/animalMedicalRecordHistory',
-            null,
-            {
-                params:{
-                    animalId
-                }
-            })
-            .then(function(response){
-                setMedicalRecordHistories(response.data)
-            })
-            .catch(function(error){
-                console.log(error);
-            })
-        axios.post('http://localhost:8080/animalHistory',
-          null,
-          {
-              params:{
-                  animalId
-              }
-          })
-          .then(function(response){
-              setAnimalHistories(response.data)
-          })
-          .catch(function(error){
-              console.log(error);
-          })
       axios.post('http://localhost:8080/animalStatus',
         null,
         {
@@ -229,128 +145,6 @@ export default function AdminAnimalProfile() {
                     <td>{userId}</td>
                     <td>{description}</td>
                     <td>{date}</td>
-                </tr>
-            )
-        })
-    }
-
-    function renderTreatmentHeaders(){
-        const headers =["TreatmentHistoryId","TreatmentId", "Date", "Requested By", "Accepted By"]
-        return headers.map((header)=>{
-            return(
-                <th> {header}</th>
-            )
-        })
-    }
-
-    function renderTreatmentTable(){
-        return treatments.map((value,key) =>{
-            const {treatmentHistoryId, treatmentId, date, requestedBy, acceptedBy} = value
-            return(
-                <tr key={treatmentHistoryId}>
-                    <td>{treatmentHistoryId}</td>
-                    <td>{treatmentId}</td>
-                    <td>{date}</td>
-                    <td>{requestedBy}</td>
-                    <td>{acceptedBy}</td>
-                </tr>
-            )
-        })
-    }
-
-    function renderPrescriptionHeaders(){
-        const headers =["PrescriptionId", "User Id", "Date", "Drug Name","Instructions","Dosage", "Delivery Method"]
-        return headers.map((header)=>{
-            return(
-                <th> {header}</th>
-            )
-        })
-    }
-
-    function renderPrescriptionTable(){
-        return prescriptions.map((value,key) =>{
-            const {prescriptionId, userId, date, drugName, instructions, dosage, deliveryMethod} = value
-            return(
-                <tr key={prescriptionId}>
-                    <td>{prescriptionId}</td>
-                    <td>{userId}</td>
-                    <td>{date}</td>
-                    <td>{drugName}</td>
-                    <td>{instructions}</td>
-                    <td>{dosage}</td>
-                    <td>{deliveryMethod}</td>
-                </tr>
-            )
-        })
-    }
-
-    function renderRequestHeaders(){
-        const headers =["RequestId", "Requested By", "AdminApproved", "TechnicianApproved","Complete","Successful", "Request Date"]
-        return headers.map((header)=>{
-            return(
-                <th> {header}</th>
-            )
-        })
-    }
-
-    function renderRequestTable(){
-        return requests.map((value,key) =>{
-            const {requestId, userId, adminApproved, technicianApproved, requestComplete, requestSuccessful, requestDate} = value
-            return(
-                <tr key={requestId}>
-                    <td>{requestId}</td>
-                    <td>{userId}</td>
-                    <td>{adminApproved}</td>
-                    <td>{technicianApproved}</td>
-                    <td>{requestComplete}</td>
-                    <td>{requestSuccessful}</td>
-                    <td>{requestDate}</td>
-                </tr>
-            )
-        })
-    }
-
-    function renderMedicalRecordHistoryHeaders(){
-        const headers =["Medical Record History Id", "Medical Record Id", "Date"]
-        return headers.map((header)=>{
-            return(
-                <th> {header}</th>
-            )
-        })
-    }
-
-    function renderMedicalRecordHistoryTable(){
-        return medicalRecordHistories.map((value,key) =>{
-            const {medicalRecordHistoryId, medicalRecordId, date} = value
-            return(
-                <tr key={medicalRecordHistoryId}>
-                    <td>{medicalRecordHistoryId}</td>
-                    <td>{medicalRecordId}</td>
-                    <td>{date}</td>
-                </tr>
-            )
-        })
-    }
-
-    function renderHistoryHeaders(){
-        const headers =["History Id","Date", "Measurement", "Value", "Taken By"]
-        return headers.map((header)=>{
-            return(
-                <th> {header}</th>
-            )
-        })
-    }
-
-    function renderHistoryTable(){
-        return animalHistories.map((value,key) =>{
-            const {historyId, date, measurement, results, userId} = value
-            return(
-                <tr key={historyId}>
-                    <td>{historyId}</td>
-                    <td>{date}</td>
-                    <td>{measurement}</td>
-                    <td>{results}</td>
-                    <td>{userId}</td>
                 </tr>
             )
         })
@@ -475,71 +269,6 @@ export default function AdminAnimalProfile() {
                                     </Table>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="second">
-                                    {/*<h100 className="AdminAnimalProfile-photo-item1">SparkyPhoto1.png</h100>*/}
-                                    {/*<h101 className="AdminAnimalProfile-photo-item2">SparkyPhoto2.png</h101>*/}
-                                    {/*<h102 className="AdminAnimalProfile-photo-item3">SparkyPhoto3.png</h102>*/}
-                                </Tab.Pane>
-                                <Tab.Pane eventKey="third">
-                                    <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">
-                                        <thead>
-                                        <tr>
-                                            {renderTreatmentHeaders()}
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                            {renderTreatmentTable()}
-                                        </tbody>
-                                    </Table>
-                                </Tab.Pane>
-                                <Tab.Pane eventKey="fourth">
-                                    <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">
-                                        <thead>
-                                        <tr>
-                                            {renderPrescriptionHeaders()}
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                            {renderPrescriptionTable()}
-                                        </tbody>
-                                    </Table>
-                                </Tab.Pane>
-                                <Tab.Pane eventKey="fifth">
-                                    <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">
-                                        <thead>
-                                        <tr>
-                                            {renderRequestHeaders()}
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                            {renderRequestTable()}
-                                        </tbody>
-                                    </Table>
-                                </Tab.Pane>
-                                <Tab.Pane eventKey="sixth">
-                                    <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">
-                                        <thead>
-                                        <tr>
-                                            {renderMedicalRecordHistoryHeaders()}
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                            {renderMedicalRecordHistoryTable()}
-                                        </tbody>
-                                    </Table>
-                                </Tab.Pane>
-                                <Tab.Pane eventKey="seventh">
-                                    <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">
-                                        <thead>
-                                        <tr>
-                                            {renderHistoryHeaders()}
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                            {renderHistoryTable()}
-                                        </tbody>
-                                    </Table>
-                                </Tab.Pane>
-                                <Tab.Pane eventKey="eighth">
                                     <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">
                                         <thead>
                                         <tr>
@@ -557,25 +286,7 @@ export default function AdminAnimalProfile() {
                                     <Nav.Link eventKey="first">Comments</Nav.Link>
                                 </Nav.Item>
                                 <Nav.Item>
-                                    <Nav.Link eventKey="second">Photos</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <Nav.Link eventKey="third">Treatments</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <Nav.Link eventKey="fourth">Prescriptions</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <Nav.Link eventKey="fifth">Requests</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <Nav.Link eventKey="sixth">Medical Record History</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <Nav.Link eventKey="seventh">Animal History</Nav.Link>
-                                </Nav.Item>
-                                <Nav.Item>
-                                    <Nav.Link eventKey="eighth">Status History</Nav.Link>
+                                    <Nav.Link eventKey="second">Status History</Nav.Link>
                                 </Nav.Item>
                             </Nav>
                         </Tab.Container>

@@ -39,6 +39,12 @@ export default function AdminAnimalManagement() {
 
     const addAnimal = (event) => {
         const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        setValidated(true);
         console.log(rfid)
         axios.post('http://localhost:8080/addAnimal',
             null,
@@ -65,6 +71,7 @@ export default function AdminAnimalManagement() {
             })
             .then(function(response){
                 console.log(response)
+
             })
             .catch(function(error){
                 console.log(error);
@@ -72,7 +79,8 @@ export default function AdminAnimalManagement() {
     }
 
     const removeAnimal = (event) => {
-        const form = event.currentTarget;
+
+        setValidated(true);
         axios.post('http://localhost:8080/removeAnimal',
             null,
             {
@@ -89,7 +97,7 @@ export default function AdminAnimalManagement() {
         };
 
     return (
-        <div className="AdminAnimalManagement-grid-container">
+        <div>
             <Navbar variant="light" expand={false} bg="white">
                 <Container fluid>
                     <Navbar.Brand href = "/AdminNavigation" >
@@ -105,7 +113,7 @@ export default function AdminAnimalManagement() {
                         placement="end"
                     >
                         <Offcanvas.Header closeButton>
-                            <Offcanvas.Title id="offcanvasNavbarLabel">User Name Here</Offcanvas.Title>
+                            <Offcanvas.Title id="offcanvasNavbarLabel">{window.localStorage.getItem("username")}</Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
@@ -344,7 +352,7 @@ export default function AdminAnimalManagement() {
                             />
                         </Col>
                     </Form.Group>
-                    <Container fluid className="d-grid gap-5 d-lg-flex justify-content-md-center">
+                    <Container fluid className="d-grid gap-1 d-sm-flex justify-content-sm-center">
                         <Button variant="success" onClick={addAnimal}>Add Animal</Button>
                         <Button variant="danger" onClick={handleShow}>Remove Animal</Button>
                         <Modal show={show} onHide={handleClose}>
@@ -354,7 +362,6 @@ export default function AdminAnimalManagement() {
                             <Modal.Body>
                                 <Form.Label>RFID</Form.Label>
                                 <Form.Control
-                                    required
                                     type = "name"
                                     placeholder="74575647537"
                                     autoFocus

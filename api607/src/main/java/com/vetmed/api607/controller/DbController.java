@@ -87,9 +87,6 @@ public class DbController {
      */
     public ArrayList<Animal> getFilteredAnimals(String animalName, String animalSpecies, String animalStatus) {
         ArrayList<Animal> animalList = new ArrayList<Animal>();
-        System.out.println( "Name:  " + animalName);
-        System.out.println( "Species:  " + animalSpecies);
-        System.out.println( "Status:  " + animalStatus);
         String query;
         try {
             PreparedStatement myStmt;
@@ -184,7 +181,6 @@ public class DbController {
                 addAnimal.setColor(results.getString("color"));
                 addAnimal.setDistinguishingFeatures(results.getString("distinguishingFeatures"));
                 animalList.add(addAnimal);
-                System.out.println(addAnimal.getAnimalName());
             }
             myStmt.close();
         } catch (Exception e) {

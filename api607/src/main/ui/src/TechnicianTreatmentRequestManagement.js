@@ -36,11 +36,9 @@ export default function TechnicianTreatmentRequestManagement() {
                     <td>{date}</td>
                     <td>{requestedBy}</td>
                     <td>{acceptedBy}</td>
-                    <td>
-                        if(1 == 1){
-                            <td><Button onClick={(e)=>acceptRequest(treatmentHistoryId)} variant="success">Accept</Button></td>
-                        }
-                    </td>
+
+                    <td><Button onClick={(e)=>acceptRequest(requestId)} variant="success">Accept</Button></td>
+
                 </tr>
             )
         })
@@ -53,7 +51,11 @@ export default function TechnicianTreatmentRequestManagement() {
         })
     }
 
+
+
+
     async function acceptRequest(requestId) {
+
         var userId = window.localStorage.getItem("userId")
         axios.post('http://localhost:8080/technicianTreatmentRequestApproval',
              null,
@@ -70,7 +72,7 @@ export default function TechnicianTreatmentRequestManagement() {
              })
              .catch(function(error){
                  console.log(error);
-             });;
+             });
     }
 
     return (
@@ -90,7 +92,7 @@ export default function TechnicianTreatmentRequestManagement() {
                         placement="end"
                     >
                         <Offcanvas.Header closeButton>
-                            <Offcanvas.Title id="offcanvasNavbarLabel">User Name Here</Offcanvas.Title>
+                            <Offcanvas.Title id="offcanvasNavbarLabel">{window.localStorage.getItem("username")}</Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">

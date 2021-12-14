@@ -129,18 +129,16 @@ export default function AdminNavigation() {
                         placement="end"
                     >
                         <Offcanvas.Header closeButton>
-                            <Offcanvas.Title id="offcanvasNavbarLabel">User Name Here</Offcanvas.Title>
+                            <Offcanvas.Title id="offcanvasNavbarLabel">{window.localStorage.getItem("username")}</Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
                                 <Button variant="info" href="/AdminTeachingRequestManagement" >
                                     Teacher Request Management
                                 </Button><br/>
-
-
                                 <Button variant="info" href="/AdminAnimalManagement" >Animal Management</Button><br/>
                                 <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
-                                <Button variant="info" href="/UserManagement" >User Management</Button><br/>
+                                <Button variant="info" href="/AdminUserManagement" >User Management</Button><br/>
                                 <Button variant="secondary" href="/" >Logout</Button>
 
                             </Nav>

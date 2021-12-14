@@ -1,22 +1,22 @@
- import React,{useState} from "react";
+import React,{useState} from "react";
 import {useNavigate} from "react-router-dom";
-
-import {Button, Form,Dropdown,DropdownButton,Table} from "react-bootstrap";
+import {Button,Form,Dropdown,DropdownButton,Navbar,Container,Image,Offcanvas,Nav,Badge,Table} from "react-bootstrap";
 import axios from "axios";
-import './UserManagement.css';
+import './TeacherUserManagement.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
+import images from "./Images/vetmed.png";
 
 
-export default function UserManagement() {
+export default function TeacherUserManagement() {
     const [fName, setFName] = useState("");
     const [lName, setLName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [userType, setUserType] = useState("");
 
     async function addUser(event) {
         event.preventDefault();
         var theUserType = window.localStorage.getItem("userType");
+        var userType = "Student"
         await axios.post('http://localhost:8080/addUser',
             null,
             {
@@ -76,11 +76,39 @@ export default function UserManagement() {
             }
 
     return (
-        <div className="UserManagement-grid-container">
-            <h1 className ="UserManagement-grid-item1">
-                User Management
-            </h1>
-            <Form className="UserManagement-grid-item2">
+    <div>
+        <Navbar variant="light" expand={false} bg="white">
+            <Container fluid>
+                <Navbar.Brand>
+                    <Image href = "/TeacherNavigation" className="d-inline-block align-top tr" src={images} fluid/>
+                </Navbar.Brand>
+                <Navbar.Brand>
+                    User Management
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="offcanvasNavbar"/>
+                <Navbar.Offcanvas
+                    id="offcanvasNavbar me-auto"
+                    aria-labelledby="offcanvasNavbarLabel"
+                    placement="end"
+                >
+                    <Offcanvas.Header closeButton>
+                        <Offcanvas.Title id="offcanvasNavbarLabel">{window.localStorage.getItem("username")}</Offcanvas.Title>
+                    </Offcanvas.Header>
+                    <Offcanvas.Body>
+                        <Nav className="justify-content-end flex-grow-1 pe-3">
+                            <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
+                            <Button variant="info" href="/TeacherUserManagement" >User Management</Button><br/>
+                            <Button variant="info" href="/TeacherTeachingRequest" >
+                                Teaching Request Management
+                            </Button><br/>
+                            <Button variant="secondary" href="/" >Logout</Button>
+                        </Nav>
+                    </Offcanvas.Body>
+                </Navbar.Offcanvas>
+            </Container>
+        </Navbar><br/>
+        <Container>
+            <Form className="TeacherUserManagement-grid-item2">
                 <Form.Group>
                     <Form.Label>First Name</Form.Label>
                     <Form.Control
@@ -109,17 +137,13 @@ export default function UserManagement() {
                         onInput={e=>setPassword(e.target.value)}
                     />
                 </Form.Group>
-                <Form.Group>
-                    <Form.Label>User Type (e.g. Admin, Teacher, Technician etc.)</Form.Label>
-                    <Form.Control
-                        autoFocus
-                        onInput={e=>setUserType(e.target.value)}
-                    />
-                </Form.Group>
             </Form>
-            <Button className = "UserManagement-grid-item3" onClick={addUser}>Add User</Button>
-            <Button className = "UserManagement-grid-item4" onClick={blockUser}>Block User</Button>
-            <Button className = "UserManagement-grid-item5" onClick={removeUser}>Remove User</Button>
-        </div>
+        </Container>
+        <Container>
+            <Button className = "TeacherUserManagement-grid-item3" onClick={addUser}>Add User</Button>
+            <Button className = "TeacherUserManagement-grid-item4" onClick={blockUser}>Block User</Button>
+            <Button className = "TeacherUserManagement-grid-item5" onClick={removeUser}>Remove User</Button>
+        </Container>
+    </div>
     );
 }

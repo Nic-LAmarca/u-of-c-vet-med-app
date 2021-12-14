@@ -30,8 +30,10 @@ export default function Login() {
                 const userArray = userString.split("-")
                 var userId = userArray[0]
                 var userType = userArray[1]
+                var userName = userArray[2]
                 window.localStorage.setItem('userId',userId)
                 window.localStorage.setItem('userType',userType)
+                window.localStorage.setItem('userName',userName)
                 if(userType == "Administrator"){
                     history("/AdminNavigation");
                 }

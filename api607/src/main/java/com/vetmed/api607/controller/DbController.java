@@ -1075,6 +1075,41 @@ public class DbController {
 
     /**
      *
+     * Method is used to search the database for all Request items related to an animal
+     *
+     * @param animalId is the unique animal id value to search with
+     * @return a new PrescriptionHistory object ArrayList that matches the animalId passed as an argument
+     */
+    public ArrayList<Request> animalRequests(int animalId) {
+        ArrayList<Request> requestArrayList= new ArrayList<Request>();
+        try {
+            String query = "SELECT * FROM REQUEST WHERE animalId = ?";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            myStmt.setInt(1, animalId);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                if (results.getInt("animalId") == animalId) {
+                    Request addRequest = new Request();
+                    addRequest.setRequestId(results.getInt("requestId"));
+                    addRequest.setAnimalId(results.getInt("animalId"));
+                    addRequest.setUserId(results.getInt("userId"));
+                    addRequest.setAdminApproved(results.getBoolean("adminApproved"));
+                    addRequest.setTechnicianApproved(results.getBoolean("technicianApproved"));
+                    addRequest.setRequestComplete(results.getBoolean("requestComplete"));
+                    addRequest.setRequestSuccessful(results.getBoolean("requestSuccessful"));
+                    addRequest.setRequestDate(results.getDate("requestDate").toString());
+                    requestArrayList.add(addRequest);
+                }
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return requestArrayList;
+    }
+
+    /**
+     *
      * Method is used to search the database for a Request with the entered id and return the object if found
      *
      * @param id is the unique id value to search with

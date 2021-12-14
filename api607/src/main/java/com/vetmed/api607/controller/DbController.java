@@ -3,6 +3,7 @@ package com.vetmed.api607.controller;
 import com.vetmed.api607.model.*;
 import java.io.FileReader;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.sql.Date;
@@ -203,6 +204,49 @@ public class DbController {
         ArrayList<Animal> animalList = new ArrayList<Animal>();
         try {
             String query = "SELECT * FROM ANIMAL";
+            PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
+            ResultSet results = myStmt.executeQuery();
+            while (results.next()) {
+                Animal addAnimal = new Animal();
+                addAnimal.setAnimalId(results.getInt("animalId"));
+                addAnimal.setAnimalName(results.getString("animalName"));
+                addAnimal.setSpecies(results.getString("species"));
+                addAnimal.setWeight(results.getDouble("weight"));
+                addAnimal.setTattooNum(results.getInt("tattooNum"));
+                addAnimal.setCityTattoo(results.getString("cityTattoo"));
+                addAnimal.setBirthDate(results.getDate("birthDate").toString());
+                addAnimal.setBreed(results.getString("breed"));
+                addAnimal.setSex(results.getString("sex"));
+                addAnimal.setRfid(results.getLong("rfid"));
+                addAnimal.setMicrochip(results.getLong("microchip"));
+                addAnimal.setStatusType(results.getString("statusType"));
+                addAnimal.setAvailable(results.getBoolean("available"));
+                addAnimal.setPurpose(results.getString("location"));
+                addAnimal.setRegion(results.getString("alert"));
+                addAnimal.setPurpose(results.getString("purpose"));
+                addAnimal.setRegion(results.getString("region"));
+                addAnimal.setSubspecies(results.getString("subspecies"));
+                addAnimal.setColor(results.getString("color"));
+                addAnimal.setDistinguishingFeatures(results.getString("distinguishingFeatures"));
+                animalList.add(addAnimal);
+            }
+            myStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return animalList;
+    }
+
+    /**
+     *
+     * Method is used to return an arraylist of Animals that are in the database and available for teacher requests
+     *
+     * @return a new list of Animal objects from the db
+     */
+    public ArrayList<Animal> getTeacherAvailableAnimals() {
+        ArrayList<Animal> animalList = new ArrayList<Animal>();
+        try {
+            String query = "SELECT * FROM ANIMAL WHERE available = true";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             ResultSet results = myStmt.executeQuery();
             while (results.next()) {
@@ -978,11 +1022,11 @@ public class DbController {
                     foundRequest.setRequestId(id);
                     foundRequest.setAnimalId(results.getInt("animalId"));
                     foundRequest.setUserId(results.getInt("userId"));
-                    foundRequest.setNewStatus(results.getBoolean("newStatus"));
                     foundRequest.setAdminApproved(results.getBoolean("adminApproved"));
                     foundRequest.setTechnicianApproved(results.getBoolean("technicianApproved"));
                     foundRequest.setRequestComplete(results.getBoolean("requestComplete"));
                     foundRequest.setRequestSuccessful(results.getBoolean("requestSuccessful"));
+                    foundRequest.setRequestDate(results.getDate("requestDate").toString());
                 }
             }
             myStmt.close();
@@ -1009,11 +1053,11 @@ public class DbController {
                 addRequest.setRequestId(results.getInt("requestId"));
                 addRequest.setAnimalId(results.getInt("animalId"));
                 addRequest.setUserId(results.getInt("userId"));
-                addRequest.setNewStatus(results.getBoolean("newStatus"));
                 addRequest.setAdminApproved(results.getBoolean("adminApproved"));
                 addRequest.setTechnicianApproved(results.getBoolean("technicianApproved"));
                 addRequest.setRequestComplete(results.getBoolean("requestComplete"));
                 addRequest.setRequestSuccessful(results.getBoolean("requestSuccessful"));
+                addRequest.setRequestDate(results.getDate("requestDate").toString());
                 requestArrayList.add(addRequest);
             }
             myStmt.close();
@@ -1027,24 +1071,21 @@ public class DbController {
      *
      * Method is used to add a Request into the database based on the entered credentials
      *
-     * @param userId is the ID of the user prescribing the medication
      * @param animalId is the ID of the animal who the prescription history is for
-     * @param newStatus is the status of if the request is new or not
-     * @param adminApproved states if an admin has approved the request yet or not
-     * @param technicianApproved states if a technician has approved the request yet or not
-     * @param requestComplete states if the request has been completed
-     * @param requestSuccessful states if the request was succesful
+     * @param userId is the ID of the user prescribing the medication
+     * @param date is the date for the teaching request
      */
-    public void addRequest(int animalId, int userId, boolean newStatus, boolean adminApproved, boolean technicianApproved, boolean requestComplete, boolean requestSuccessful) {
+    public void addRequest(int animalId, int userId, String date) {
         try {
-            String query = "INSERT INTO REQUEST (animalId, userId, newStatus, adminApproved, technicianApproved, requestComplete, requestSuccessful) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO REQUEST (animalId, userId, adminApproved, technicianApproved, requestComplete, requestSuccessful, requestDate) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setInt(1, animalId);
             myStmt.setInt(2, userId);
-            myStmt.setBoolean(3, adminApproved);
-            myStmt.setBoolean(4, technicianApproved);
-            myStmt.setBoolean(5, requestComplete);
-            myStmt.setBoolean(6, requestSuccessful);
+            myStmt.setBoolean(3, false);
+            myStmt.setBoolean(4, false);
+            myStmt.setBoolean(5, false);
+            myStmt.setBoolean(6, false);
+            myStmt.setDate(7, Date.valueOf(date));
             myStmt.executeUpdate();
             myStmt.close();
         } catch (Exception e) {
@@ -1274,17 +1315,17 @@ public class DbController {
      *
      * Method is used to add a TreatmentHistory into the database based on the entered credentials
      *
+     * @param userId is the ID of the user who is requesting treatment
      * @param animalId is the ID of the animal who the prescription history is for
-     * @param animalId is the ID of the animal who the prescription history is for
-     * @param date the date the status was created
      */
-    public void addTreatment(int treatmentHistoryId, int animalId, String date) {
+    public void makeTreatmentRequest(int userId, int animalId, int treatmentTypeId) {
         try {
-            String query = "INSERT INTO TREATMENT_HISTORY (treatmentId, animalId, date) VALUES (?, ?)";
+            String query = "INSERT INTO TREATMENT_HISTORY (treatmentId, animalId, date, requestedBy) VALUES (?, ?, ?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
-            myStmt.setInt(1, treatmentHistoryId);
+            myStmt.setInt(1, treatmentTypeId);
             myStmt.setInt(2, animalId);
-            myStmt.setDate(3, Date.valueOf(date));
+            myStmt.setDate(3, Date.valueOf(LocalDate.now()));
+            myStmt.setInt(4, userId);
             myStmt.executeUpdate();
             myStmt.close();
         } catch (Exception e) {

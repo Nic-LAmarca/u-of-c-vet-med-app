@@ -54,11 +54,11 @@ export default function TechnicianTreatmentRequestManagement() {
                     <td>{date}</td>
                     <td>{requestedBy}</td>
                     <td>{acceptedBy}</td>
-                    if(1 == 1){
-                            <div>
-                                <td><Button onClick={(e)=>approveRequest(treatmentHistoryId)} variant="success">Accept</Button></td>
-                            </div>
-                    }
+                    <td>
+                        if(1 == 1){
+                            <td><Button onClick={(e)=>acceptRequest(treatmentHistoryId)} variant="success">Accept</Button></td>
+                        }
+                    </td>
                 </tr>
             )
         })
@@ -69,19 +69,9 @@ export default function TechnicianTreatmentRequestManagement() {
         return headers.map((header)=>{
             return<th> {header}</th>
         })
-
-
     }
 
-    // async function renderHeaders(){
-    //     const header = Object.keys(requests[0])
-    //     console.log(header)
-    //     return header.map((key,value) =>{
-    //         return <th key={value}>{key.toUpperCase()}</th>
-    //     })
-    // }
-
-    async function approveRequest(requestId) {
+    async function acceptRequest(requestId) {
         var userId = window.localStorage.getItem("userId")
         axios.post('http://localhost:8080/technicianRequestApproval',
              null,
@@ -101,24 +91,6 @@ export default function TechnicianTreatmentRequestManagement() {
              .catch(function(error){
                  console.log(error);
              });;
-    }
-
-    async function denyRequest(event) {
-        event.preventDefault();
-        await axios.post('http://localhost:8080/technicianRequestDenial',
-            null,
-            {
-                params: {
-                    requestId
-                }
-            })
-            .then(function(response){
-                setRequestId();
-                setRequestMessage(response.data);
-            })
-            .catch(function(error){
-                console.log(error);
-            });
     }
 
     return (
@@ -165,8 +137,6 @@ export default function TechnicianTreatmentRequestManagement() {
                     <tbody>
                     {renderTableBody()}
                     </tbody>
-
-
                 </Table>
             </Container>
         </div>

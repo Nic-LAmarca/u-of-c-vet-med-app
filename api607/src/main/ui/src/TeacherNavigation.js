@@ -35,36 +35,6 @@ export default function TeacherNavigation() {
         allAnimals();
     };
 
-    // async function personalSettings(event) {
-    //     event.preventDefault();
-    //     history('/PersonalSettings');
-    // }
-    //
-    // async function userManagement(event) {
-    //     event.preventDefault();
-    //     history('/UserManagement');
-    // }
-    //
-    // async function teacherRequestManagement(event) {
-    //     event.preventDefault();
-    //     history('/TeacherRequestManagement');
-    // }
-    //
-    // async function animalManagement(event) {
-    //     event.preventDefault();
-    //     history('/AnimalManagement');
-    // }
-    //
-    // async function logout(event) {
-    //     event.preventDefault();
-    //     history('/');
-    // }
-    //
-    // async function selectAnimal(event) {
-    //     event.preventDefault();
-    //     history('/AdminAnimalProfile');
-    // }
-
     async function allAnimals() {
         await axios.get('http://localhost:8080/animals',
             null,
@@ -163,9 +133,8 @@ export default function TeacherNavigation() {
                             <Nav className="justify-content-end flex-grow-1 pe-3">
                                 <Button variant="info" href="/PersonalSettings" >Personal Settings</Button><br/>
                                 <Button variant="info" href="/UserManagement" >User Management</Button><br/>
-                                <Button variant="info" href="TeacherRequestManagement" >
-                                    Teaching Request Management
-                                    <Badge className="ms-2" bg = "danger">8</Badge>
+                                <Button variant="info" href="/TeacherTeachingRequest" >
+                                    Teaching Requests
                                 </Button><br/>
                                 <Button variant="secondary" href="/" >Logout</Button>
 

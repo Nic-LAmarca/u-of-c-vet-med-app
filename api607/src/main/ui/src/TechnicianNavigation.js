@@ -34,7 +34,7 @@ export default function TechnicianNavigation() {
         })
         .then(function(response){
             if(response.data.animalId > 0){
-                history('/AdminAnimalProfile');
+                history('/TechnicianAnimalProfile');
             }
             else{
                 handleShow();

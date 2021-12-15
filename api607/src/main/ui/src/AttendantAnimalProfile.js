@@ -233,24 +233,32 @@ export default function AdminAnimalProfile() {
 
     async function addStatus(event) {
         event.preventDefault();
-        var userId = window.localStorage.getItem("userId");
-        await axios.post('http://localhost:8080/addStatus',
-        null,
-        {
-            params: {
-                animalId,
-                statusDescription,
-                location,
-                status,
-                statusImageId
-            }
-        })
-        .then(function(response){
-            console.log(response)
-        })
-        .catch(function(error){
-            console.log(error);
-        })
+         if (statusDescription != "" && location != "" && statusImageId > 0 && status != "")
+         {
+            var userId = window.localStorage.getItem("userId");
+            await axios.post('http://localhost:8080/addStatus',
+            null,
+            {
+                params: {
+                    animalId,
+                    statusDescription,
+                    location,
+                    status,
+                    statusImageId
+                }
+            })
+            .then(function(response){
+                console.log(response)
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+
+           }
+           else
+           {
+                handleShow2();
+           }
     }
 
     async function addPrescription(event) {
@@ -542,7 +550,7 @@ export default function AdminAnimalProfile() {
     }
 
     function renderStatusHistoryHeaders(){
-        const headers =["Status Id","Date", "Description", "locations", "Status Type", "Image Id"]
+        const headers =["Status Id","Date", "Description", "location", "Status Type", "Image Id"]
         return headers.map((header)=>{
             return(
                 <th> {header}</th>
@@ -552,15 +560,15 @@ export default function AdminAnimalProfile() {
 
     function renderStatusHistoryTable(){
         return statusHistories.map((value,key) =>{
-            const {statusId, date, description, locations, statusType, imageid} = value
+            const {statusId, date, description, location, statusType, imageId} = value
             return(
                 <tr key={statusId}>
                     <td>{statusId}</td>
                     <td>{date}</td>
                     <td>{description}</td>
-                    <td>{locations}</td>
+                    <td>{location}</td>
                     <td>{statusType}</td>
-                    <td>{imageid}</td>
+                    <td>{imageId}</td>
                 </tr>
             )
         })

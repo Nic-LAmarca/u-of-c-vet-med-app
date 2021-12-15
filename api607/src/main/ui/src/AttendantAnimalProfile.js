@@ -61,7 +61,7 @@ export default function AdminAnimalProfile() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const [images, setImages] = useState([])
+    //const [images, setImages] = useState([])
 
 
 
@@ -692,9 +692,6 @@ export default function AdminAnimalProfile() {
                                         </Modal.Footer>
                                     </Modal><br/>
                                     {renderImage()}
-                                    {/*<h100 className="AdminAnimalProfile-photo-item1">SparkyPhoto1.png</h100>*/}
-                                    {/*<h101 className="AdminAnimalProfile-photo-item2">SparkyPhoto2.png</h101>*/}
-                                    {/*<h102 className="AdminAnimalProfile-photo-item3">SparkyPhoto3.png</h102>*/}
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="third">
                                     <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">

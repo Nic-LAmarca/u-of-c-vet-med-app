@@ -1,38 +1,65 @@
 import React,{useState, useEffect} from "react";
 import {useHistory, useNavigate} from "react-router-dom";
-import {Button,Form,Dropdown,DropdownButton,Table,Row,Container,Navbar,Image,Offcanvas,Nav, Badge, NavbarBrand, Col} from "react-bootstrap";
+import {
+    Button,
+    Form,
+    Dropdown,
+    DropdownButton,
+    Table,
+    Row,
+    Container,
+    Navbar,
+    Image,
+    Offcanvas,
+    Nav,
+    Badge,
+    NavbarBrand,
+    Col,
+    Modal
+} from "react-bootstrap";
 import axios from "axios";
 import './PersonalSettings.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
 import images from "./Images/vetmed.png";
+import {toast} from 'react-toastify';
 
 export default function PersonalSettings() {
+
     const [fName, setFName] = useState("");
     const [lName, setLName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const history = useNavigate();
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
 
     async function updateSettings(event) {
+
         event.preventDefault();
-        var userId = window.localStorage.getItem("userId");
-        await axios.post('http://localhost:8080/personalSettings',
-            null,
-            {
-                params: {
-                    userId,
-                    fName,
-                    lName,
-                    email,
-                    password
-                }
-            })
-            .then(function(response){
-                console.log(response)
-            })
-            .catch(function(error){
-                console.log(error);
-            })
+        if(fName.length > 0 && lName.length >0 && email.length>0 && email.includes("@ucalgary.ca")&&password.length>0){
+            var userId = window.localStorage.getItem("userId");
+            await axios.post('http://localhost:8080/personalSettings',
+                null,
+                {
+                    params: {
+                        userId,
+                        fName,
+                        lName,
+                        email,
+                        password
+                    }
+                })
+                .then(function(response){
+
+                    toast.success("User Successfully Added")
+                })
+                .catch(function(error){
+                    toast.error("User not Added")
+                })
+        }else handleShow();
+
         }
 
     function renderOptions(){
@@ -142,11 +169,12 @@ export default function PersonalSettings() {
             </Container>
         </Navbar><br/>
         <Container fluid>
-            <Form>
+            <Form >
                 <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalName">
                     <Form.Label  column sm= {2}>First Name</Form.Label>
                     <Col sm={5}>
                         <Form.Control
+
                             type = "name"
                             placeholder="First Name"
                             autoFocus
@@ -159,6 +187,7 @@ export default function PersonalSettings() {
                     <Form.Label column sm= {2} >Last Name</Form.Label>
                     <Col sm={5}>
                         <Form.Control
+
                             type = "name"
                             placeholder="Last Name"
                             autoFocus
@@ -170,17 +199,22 @@ export default function PersonalSettings() {
                     <Form.Label column sm= {2} >Email</Form.Label>
                     <Col sm={5}>
                         <Form.Control
+
                             type = "email"
                             placeholder="email@ucalgary.ca"
                             autoFocus
                             onChange={e=>setEmail(e.target.value)}
                         />
+                        <Form.Text id="passwordHelpBlock" muted>
+                            Your email must be a valid @ucalgary.ca email
+                        </Form.Text>
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalPassword">
                     <Form.Label column sm= {2} >Password</Form.Label>
                     <Col sm={5}>
                         <Form.Control
+
                             type = "password"
                             placeholder="Password"
                             autoFocus
@@ -191,6 +225,18 @@ export default function PersonalSettings() {
                 <Container fluid className="d-grid gap-5 d-lg-flex justify-content-md-center">
                 <Button onClick={updateSettings}>Save</Button>
                 </Container>
+                <Container fluid className="d-grid gap-1 d-sm-flex justify-content-sm-center">
+                    <Modal show={show} onHide={handleClose}>
+                        <Modal.Body>
+                            Please Enter Valid User Information
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>
+                                Close
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                </Container><br/>
             </Form>
         </Container>
     </div>

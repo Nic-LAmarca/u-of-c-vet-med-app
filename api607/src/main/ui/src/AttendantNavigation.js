@@ -1,7 +1,7 @@
  import React,{useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-import {Button, Col, Row, Badge, Form, InputGroup, Dropdown, DropdownButton, ListGroup, Table, Navbar, Container, Image,Offcanvas,Nav,NavDropdown,FormControl} from "react-bootstrap";
+import {Button, Col, Row, Badge, Form, InputGroup,Modal, Dropdown, DropdownButton, ListGroup, Table, Navbar, Container, Image,Offcanvas,Nav,NavDropdown,FormControl} from "react-bootstrap";
 import axios from "axios";
 import './AttendantNavigation.css';
  import images from "./Images/vetmed.png";
@@ -13,15 +13,33 @@ export default function AttendantNavigation() {
     const [animalSpecies, setAnimalSpecies] = useState("");
     const [animalStatus, setAnimalStatus] = useState("");
     const [animalId, setAnimalId] = useState();
-
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     const history = useNavigate();
 
-    async function selectAnimal(event) {
-        event.preventDefault();
-        console.log("Here")
-        window.localStorage.setItem("animal", animalId)
-        history('/AttendantAnimalProfile');
-    }
+   async function selectAnimal(event) {
+           event.preventDefault();
+           window.localStorage.setItem("animal", animalId)
+           axios.post('http://localhost:8080/searchForAnimal',
+           null,
+           {
+               params: {
+                   animalId
+               }
+           })
+           .then(function(response){
+               if(response.data.animalId > 0){
+                   history('/AttendantAnimalProfile');
+               }
+               else{
+                   handleShow();
+               }
+           })
+           .catch(function(error){
+               console.log(error);
+           })
+       }
 
 
 
@@ -245,6 +263,16 @@ export default function AttendantNavigation() {
                              </Col>
 
                          </Row><br/>
+                         <Modal show={show} onHide={handleClose}>
+                             <Modal.Body>
+                                 <Form.Label>Animal Not Found</Form.Label>
+                             </Modal.Body>
+                             <Modal.Footer>
+                                 <Button variant="secondary" onClick={handleClose}>
+                                     Close
+                                 </Button>
+                             </Modal.Footer>
+                         </Modal>
              </Container>
 
          </div>

@@ -1,14 +1,16 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-import {Button, Col, Row, Badge, Form, InputGroup, Dropdown, DropdownButton, ListGroup, Table, Navbar, Container, Image,Offcanvas,Nav,NavDropdown,FormControl} from "react-bootstrap";
+import {Button, Col, Row, Badge, Form, InputGroup, Dropdown, DropdownButton, Modal, ListGroup, Table, Navbar, Container, Image,Offcanvas,Nav,NavDropdown,FormControl} from "react-bootstrap";
 import axios from "axios";
 import './AdminNavigation.css';
 import images from "./Images/vetmed.png";
 
 export default function AdminNavigation() {
     let [animals,setAnimals] = useState([]);
-
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     const [animalName, setAnimalName] = useState("");
     const [animalSpecies, setAnimalSpecies] = useState("");
     const [animalStatus, setAnimalStatus] = useState("");
@@ -16,12 +18,27 @@ export default function AdminNavigation() {
 
     const history = useNavigate();
 
-
     async function selectAnimal(event) {
         event.preventDefault();
-        console.log("Here")
         window.localStorage.setItem("animal", animalId)
-        history('/AdminAnimalProfile');
+        axios.post('http://localhost:8080/searchForAnimal',
+        null,
+        {
+            params: {
+                animalId
+            }
+        })
+        .then(function(response){
+            if(response.data.animalId > 0){
+                history('/AdminAnimalProfile');
+            }
+            else{
+                handleShow();
+            }
+        })
+        .catch(function(error){
+            console.log(error);
+        })
     }
 
     useEffect(() => {
@@ -62,9 +79,6 @@ export default function AdminNavigation() {
             }
         );
     },[])
-
-
-
 
     async function searchAnimals(event) {
         event.preventDefault();
@@ -240,10 +254,20 @@ export default function AdminNavigation() {
 
                             </Col>
                              <Col lg="3">
-                        <Button onClick= {selectAnimal} >Select Animal</Button>
+                                <Button onClick= {selectAnimal} >Select Animal</Button>
                             </Col>
 
                         </Row><br/>
+                        <Modal show={show} onHide={handleClose}>
+                            <Modal.Body>
+                                <Form.Label>Animal Not Found</Form.Label>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleClose}>
+                                    Close
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
             </Container>
 
         </div>

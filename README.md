@@ -1,6 +1,15 @@
 # Final-Project
 607 final project
 
+## Important Information
+Final Project Video: https://drive.google.com/file/d/1MNZP3CggKZlRwVsUxiG4eOx-uDQQzMBv/view?usp=sharing
+
+1. Run the sql file "ENSF607PROJECT" in mySQL to build the database and populate all tables.
+2. Run the java file "Api607Application".
+3. Enter the command "nodemon server.js" in the "server folder from the terminal".
+4. Enter the command "npm start" in the "ui" folder from the terminal.
+5. Use the web-application in the desired browser.
+
 ## Endpoints
 These are the stages that were followed in order to build and test each of the endpoints.
 

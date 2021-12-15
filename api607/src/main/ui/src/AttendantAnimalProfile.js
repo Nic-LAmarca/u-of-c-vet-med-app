@@ -22,7 +22,8 @@ export default function AdminAnimalProfile() {
     const [prescriptions,setPrescriptions] = useState([]);
     const [requests,setRequests] = useState([]);
     const [statusHistories,setStatusHistories] = useState([]);
-    const [fileName, setFileName] = useState("");
+    const [fileN, setFile] = useState("");
+    const [fileName, setFileName] = useState(null);
     const [drugName, setDrugName] = useState("");
     const [instructions, setInstructions] = useState("");
     const [dosage, setDosage] = useState("");
@@ -32,6 +33,7 @@ export default function AdminAnimalProfile() {
     const [status, setStatus] = useState("");
     const [statusImageId, setStatusImageId] = useState("");
     const [images, setImages] = useState([])
+
 
     useEffect(() => {
         axios.post('http://localhost:8080/searchForAnimal',
@@ -259,6 +261,7 @@ export default function AdminAnimalProfile() {
             })
     }
 
+
         async function updateAlert(event) {
             await axios.post('http://localhost:8080/animalAlert',
                 null,
@@ -348,6 +351,40 @@ export default function AdminAnimalProfile() {
                 .catch(function(error){
                     console.log(error);
                 })
+    }
+    const onChange = (e) =>{
+        console.log(e.target.files)
+        setFile(e.target.value)
+        setFileName(e.target.files[0])
+    }
+    const onUpload = (e) =>{
+        e.preventDefault()
+        console.log("This is the filename format",fileN);
+        const data = new FormData();
+        data.append('file',fileName);
+        axios.post('http://localhost:8000/upload',data)
+            .then((e) => {
+                console.log("success")
+            })
+            .catch((e)=>{
+                console.error('Error',e)
+            })
+        var userId = window.localStorage.getItem("userId");
+        axios.post('http://localhost:8080/addImage',
+            null,
+            {
+                params: {
+                    userId,
+                    fileN,
+                    animalId
+                }
+            })
+            .then(function(response){
+                console.log(response)
+            })
+            .catch(function(error){
+                console.log(error);
+            })
     }
 
 
@@ -487,6 +524,8 @@ export default function AdminAnimalProfile() {
         })
     }
 
+
+
     return (
         <div>
             <Navbar variant="light" expand={false} bg="white">
@@ -591,13 +630,13 @@ export default function AdminAnimalProfile() {
                                     </Table>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="second" >
-                                    <Form.Group controlId="formFileSm" className=" flex-sm-wrap" >
-                                        <Form.Control onChange={(e) => setFileName(e.target.value)}
+                                    <Form.Group controlId="formFileSm" className=" flex-sm-wrap">
+                                        <Form.Control onChange={onChange}
                                                       type="file"
                                                       size="sm"
                                                       multiple
                                         />
-                                        <Button variant="success" id="Submit Comment" onClick={addImage}>
+                                        <Button variant="success" id="Submit Comment" onClick={onUpload}>
                                             Upload
                                         </Button>
                                     </Form.Group>

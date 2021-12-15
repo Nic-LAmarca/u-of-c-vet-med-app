@@ -34,17 +34,11 @@ export default function AdminAnimalManagement() {
         const form = event.currentTarget;
         event.preventDefault();
         event.stopPropagation();
-        setValidated(true)
     }
 
     const addAnimal = (event) => {
         const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-        }
-
-        setValidated(true);
+        if (form.checkValidity() === true) {
         console.log(rfid)
         axios.post('http://localhost:8080/addAnimal',
             null,
@@ -76,6 +70,12 @@ export default function AdminAnimalManagement() {
             .catch(function(error){
                 console.log(error);
             })
+            }
+            else{
+                event.preventDefault();
+                event.stopPropagation();
+                setValidated(true);
+            }
     }
 
     const removeAnimal = (event) => {

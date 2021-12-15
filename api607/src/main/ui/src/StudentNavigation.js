@@ -1,14 +1,16 @@
 import React,{useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 
-import {Button, Col, Row, Badge, Form, InputGroup, Dropdown, DropdownButton, ListGroup, Table, Navbar, Container, Image,Offcanvas,Nav,NavDropdown,FormControl} from "react-bootstrap";
+import {Button, Col, Row, Badge, Form, InputGroup,Modal, Dropdown, DropdownButton, ListGroup, Table, Navbar, Container, Image,Offcanvas,Nav,NavDropdown,FormControl} from "react-bootstrap";
 import axios from "axios";
 import './StudentNavigation.css';
 import images from "./Images/vetmed.png";
 
 export default function StudentNavigation() {
     let [animals,setAnimals] = useState([]);
-
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     const [animalName, setAnimalName] = useState("");
     const [animalSpecies, setAnimalSpecies] = useState("");
     const [animalStatus, setAnimalStatus] = useState("");
@@ -16,12 +18,28 @@ export default function StudentNavigation() {
 
     const history = useNavigate();
 
-        async function selectAnimal(event) {
-            event.preventDefault();
-            console.log("Here")
-            window.localStorage.setItem("animal", animalId)
-            history('/StudentAnimalProfile');
-        }
+    async function selectAnimal(event) {
+        event.preventDefault();
+        window.localStorage.setItem("animal", animalId)
+        axios.post('http://localhost:8080/searchForAnimal',
+        null,
+        {
+            params: {
+                animalId
+            }
+        })
+        .then(function(response){
+            if(response.data.animalId > 0){
+                history('/AdminAnimalProfile');
+            }
+            else{
+                handleShow();
+            }
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+    }
 
         useEffect(() => {
             axios.get('http://localhost:8080/animals',
@@ -238,6 +256,16 @@ export default function StudentNavigation() {
                             </Col>
 
                         </Row><br/>
+                            <Modal show={show} onHide={handleClose}>
+                                <Modal.Body>
+                                    <Form.Label>Animal Not Found</Form.Label>
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <Button variant="secondary" onClick={handleClose}>
+                                        Close
+                                    </Button>
+                                </Modal.Footer>
+                            </Modal>
             </Container>
 
         </div>

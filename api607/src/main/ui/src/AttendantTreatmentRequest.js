@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Button, Col, Row, InputGroup, Form, Dropdown, DropdownButton, Navbar, Container, Image, Offcanvas, Nav, Badge, Table} from "react-bootstrap";
+import {Button, Col, Row, InputGroup, Form, Modal, Dropdown, DropdownButton, Navbar, Container, Image, Offcanvas, Nav, Badge, Table} from "react-bootstrap";
 import axios from "axios";
 import './AttendantTreatmentRequest.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
@@ -9,6 +9,10 @@ import images from "./Images/vetmed.png";
 export default function AttendantTreatmentRequestManagement() {
     let [animals,setAnimals] = useState([]);
     let [treatmentTypeId, setTreatmentTypeId] = useState();
+    let [treatments,setTreatments] = useState([]);
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const history = useNavigate();
 
@@ -27,7 +31,35 @@ export default function AttendantTreatmentRequestManagement() {
             .catch(function(error){
                 console.log(error);
             })
+        axios.get('http://localhost:8080/treatmentTypes',
+            null
+            )
+            .then(function(response){
+                setTreatments(response.data)
+            })
+            .catch(function(error){
+                console.log(error);
+            })
     },[])
+
+    function renderTreatmentTypeTableBody(){
+        return treatments.map((value,key) =>{
+            const {treatmentId, treatmentType} = value
+            return(
+                <tr key={treatmentId}>
+                    <td>{treatmentId}</td>
+                    <td>{treatmentType}</td>
+                </tr>
+            )
+        })
+    }
+
+    function renderTreatmentTypeHeaders(){
+        const headers =["Treatment Id", "Treatment Type"]
+        return headers.map((header)=>{
+            return<th> {header}</th>
+        })
+    }
 
     function renderTableBody(){
         return animals.map((value,key) =>{
@@ -55,21 +87,26 @@ export default function AttendantTreatmentRequestManagement() {
     async function makeRequest(animalId) {
         var userId = window.localStorage.getItem("userId")
         var treatmentId = treatmentTypeId
-        axios.post('http://localhost:8080/attendantTreatmentRequest',
-             null,
-             {
-                 params: {
-                    userId,
-                    animalId,
-                    treatmentTypeId
-                 }
-             })
-             .then(function(response){
-                console.log(response.data)
-             })
-             .catch(function(error){
-                 console.log(error);
-             });;
+        if(treatmentTypeId > 0 && treatmentTypeId <= treatments.length){
+            axios.post('http://localhost:8080/attendantTreatmentRequest',
+                 null,
+                 {
+                     params: {
+                        userId,
+                        animalId,
+                        treatmentTypeId
+                     }
+                 })
+                 .then(function(response){
+                    console.log(response.data)
+                 })
+                 .catch(function(error){
+                     console.log(error);
+                 })
+             }
+             else{
+                handleShow();
+             }
     }
 
     return (
@@ -112,13 +149,21 @@ export default function AttendantTreatmentRequestManagement() {
 
                             <Form.Control
                                 autoFocus
-                                placeholder="Treatment Request Type"
+                                placeholder="Treatment Request Id"
                                  value = {treatmentTypeId}
                                   onChange =  {(e) => setTreatmentTypeId(e.target.value)}
                             />
                         </InputGroup><br/>
                     </Col>
                 </Row>
+                <Table id = "treatments" striped bordered hover responsive>
+                    <thead>
+                    {renderTreatmentTypeHeaders()}
+                    </thead>
+                    <tbody>
+                    {renderTreatmentTypeTableBody()}
+                    </tbody>
+                </Table>
                 <Table id = "animals" striped bordered hover responsive>
                     <thead>
                     {renderHeaders()}
@@ -127,6 +172,16 @@ export default function AttendantTreatmentRequestManagement() {
                     {renderTableBody()}
                     </tbody>
                 </Table>
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Body>
+                        <Form.Label>Invalid Treatment Id</Form.Label>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Close
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </Container>
         </div>
     );

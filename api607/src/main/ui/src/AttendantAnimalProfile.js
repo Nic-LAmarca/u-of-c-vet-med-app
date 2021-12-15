@@ -61,6 +61,9 @@ export default function AdminAnimalProfile() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const [show2, setShow2] = useState(false);
+    const handleClose2 = () => setShow2(false);
+    const handleShow2 = () => setShow2(true);
 
 
 
@@ -251,25 +254,32 @@ export default function AdminAnimalProfile() {
 
     async function addPrescription(event) {
         event.preventDefault();
-        var userId = window.localStorage.getItem("userId");
-        await axios.post('http://localhost:8080/addPrescription',
-        null,
+        if (drugName != "" && instructions != "" && dosage > 0 && deliveryMethod != "")
         {
-            params: {
-                userId,
-                animalId,
-                drugName,
-                instructions,
-                dosage,
-                deliveryMethod
-            }
-        })
-        .then(function(response){
-            console.log(response)
-        })
-        .catch(function(error){
-            console.log(error);
-        })
+            var userId = window.localStorage.getItem("userId");
+            await axios.post('http://localhost:8080/addPrescription',
+            null,
+            {
+                params: {
+                    userId,
+                    animalId,
+                    drugName,
+                    instructions,
+                    dosage,
+                    deliveryMethod
+                }
+            })
+            .then(function(response){
+                console.log(response)
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+        }
+        else
+        {
+            handleShow2()
+        }
     }
 
     async function addImage(event) {
@@ -732,6 +742,16 @@ export default function AdminAnimalProfile() {
                                         <Button variant="success" id="Submit Prescription" onClick={addPrescription}>
                                             Submit
                                         </Button>
+                                        <Modal show={show2} onHide={handleClose2}>
+                                                                   <Modal.Body>
+                                                                       <Form.Label> One Or More Invalid Entries</Form.Label>
+                                                                   </Modal.Body>
+                                                                   <Modal.Footer>
+                                                                       <Button variant="secondary" onClick={handleClose2}>
+                                                                           Close
+                                                                       </Button>
+                                                                   </Modal.Footer>
+                                                               </Modal>
                                     </InputGroup>
                                     <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">
                                         <thead>

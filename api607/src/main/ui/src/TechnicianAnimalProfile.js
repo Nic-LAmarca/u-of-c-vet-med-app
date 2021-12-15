@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Button,Form,Dropdown,DropdownButton,Table,ListGroup,Tabs,Tab,TabContent,TabContainer,Nav,NavItem,Row,Col,Navbar, Container, Image, Offcanvas,InputGroup,FormControl} from "react-bootstrap";
+import {Button,Form,Dropdown,DropdownButton,Table,ListGroup,Tabs,Tab,TabContent,TabContainer,Nav,NavItem,Row,Col,Navbar, Container, Image, Offcanvas,InputGroup,FormControl,  Modal} from "react-bootstrap";
 import axios from "axios";
 import './AdminAnimalProfile.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
@@ -27,6 +27,10 @@ export default function AdminAnimalProfile() {
     const [location, setLocation] = useState("");
     const [status, setStatus] = useState("");
     const [statusImageId, setStatusImageId] = useState("");
+
+        const [show2, setShow2] = useState(false);
+        const handleClose2 = () => setShow2(false);
+        const handleShow2 = () => setShow2(true);
 
     useEffect(() => {
         axios.post('http://localhost:8080/searchForAnimal',
@@ -169,28 +173,35 @@ export default function AdminAnimalProfile() {
 
         },[])
 
-    async function addPrescription(event) {
-        event.preventDefault();
-        var userId = window.localStorage.getItem("userId");
-        await axios.post('http://localhost:8080/addPrescription',
-        null,
-        {
-            params: {
-                userId,
-                animalId,
-                drugName,
-                instructions,
-                dosage,
-                deliveryMethod
-            }
-        })
-        .then(function(response){
-            console.log(response)
-        })
-        .catch(function(error){
-            console.log(error);
-        })
-    }
+      async function addPrescription(event) {
+          event.preventDefault();
+          if (drugName != "" && instructions != "" && dosage > 0 && deliveryMethod != "")
+          {
+              var userId = window.localStorage.getItem("userId");
+              await axios.post('http://localhost:8080/addPrescription',
+              null,
+              {
+                  params: {
+                      userId,
+                      animalId,
+                      drugName,
+                      instructions,
+                      dosage,
+                      deliveryMethod
+                  }
+              })
+              .then(function(response){
+                  console.log(response)
+              })
+              .catch(function(error){
+                  console.log(error);
+              })
+          }
+          else
+          {
+              handleShow2()
+          }
+      }
 
     async function addStatus(event) {
         event.preventDefault();
@@ -504,6 +515,16 @@ export default function AdminAnimalProfile() {
                                         <Button variant="success" id="Submit Prescription" onClick={addPrescription}>
                                             Submit
                                         </Button>
+                                        <Modal show={show2} onHide={handleClose2}>
+                                       <Modal.Body>
+                                           <Form.Label> One Or More Invalid Entries</Form.Label>
+                                       </Modal.Body>
+                                       <Modal.Footer>
+                                           <Button variant="secondary" onClick={handleClose2}>
+                                               Close
+                                           </Button>
+                                       </Modal.Footer>
+                                   </Modal>
                                     </InputGroup>
                                     <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">
                                         <thead>

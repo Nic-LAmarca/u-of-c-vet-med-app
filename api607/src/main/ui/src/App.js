@@ -24,10 +24,13 @@ import {Col, Container, Image, Navbar, NavbarBrand, Row} from "react-bootstrap";
 import TeacherNavigation from "./TeacherNavigation";
 import TechnicianNavigation from "./TechnicianNavigation";
 import TeacherUserManagement from "./TeacherUserManagement";
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
       <div>
+          <ToastContainer/>
 
 
           <BrowserRouter>

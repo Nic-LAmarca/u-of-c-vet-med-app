@@ -28,57 +28,22 @@ export default function AdminUserManagement() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [userType, setUserType] = useState("");
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     async function addUser(event) {
         event.preventDefault();
         var theUserType = window.localStorage.getItem("userType");
-        await axios.post('http://localhost:8080/addUser',
-            null,
-            {
-                params: {
-                    fName,
-                    lName,
-                    email,
-                    userType,
-                    password
-                }
-            })
-            .then(function(response){
-                console.log(response)
-            })
-            .catch(function(error){
-                console.log(error);
-            })
-        }
-
-        async function blockUser(event) {
-            event.preventDefault();
-            var theUserType = window.localStorage.getItem("userType");
-            await axios.post('http://localhost:8080/blockUser',
+        if(fName.length > 0 && lName.length >0 && email.length>0 && email.includes("@ucalgary.ca")&&password.length>0){
+            await axios.post('http://localhost:8080/addUser',
                 null,
                 {
                     params: {
+                        fName,
+                        lName,
                         email,
-                        password,
-                    }
-                })
-                .then(function(response){
-                    console.log(response)
-                })
-                .catch(function(error){
-                    console.log(error);
-                })
-            }
-
-        async function removeUser(event) {
-            event.preventDefault();
-            var theUserType = window.localStorage.getItem("userType");
-            console.log(fName)
-            await axios.post('http://localhost:8080/removeUser',
-                null,
-                {
-                    params: {
-                        email,
+                        userType,
                         password
                     }
                 })
@@ -88,6 +53,52 @@ export default function AdminUserManagement() {
                 .catch(function(error){
                     console.log(error);
                 })
+        }else handleShow();
+
+        }
+
+        async function blockUser(event) {
+            event.preventDefault();
+            var theUserType = window.localStorage.getItem("userType");
+            if(fName.length > 0 && lName.length >0 && email.length>0 && email.includes("@ucalgary.ca")&&password.length>0){
+                await axios.post('http://localhost:8080/blockUser',
+                    null,
+                    {
+                        params: {
+                            email,
+                            password,
+                        }
+                    })
+                    .then(function(response){
+                        console.log(response)
+                    })
+                    .catch(function(error){
+                        console.log(error);
+                    })
+            }else handleShow();
+
+            }
+
+        async function removeUser(event) {
+            event.preventDefault();
+            var theUserType = window.localStorage.getItem("userType");
+            if(fName.length > 0 && lName.length >0 && email.length>0 && email.includes("@ucalgary.ca")&&password.length>0){
+                await axios.post('http://localhost:8080/removeUser',
+                    null,
+                    {
+                        params: {
+                            email,
+                            password
+                        }
+                    })
+                    .then(function(response){
+                        console.log(response)
+                    })
+                    .catch(function(error){
+                        console.log(error);
+                    })
+            }else handleShow();
+
             }
 
     return (
@@ -125,58 +136,73 @@ export default function AdminUserManagement() {
                     </Navbar.Offcanvas>
                 </Container>
             </Navbar><br/>
-            <Form>
-                <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalName">
-                    <Form.Label  column sm= {2}>First Name</Form.Label>
-                    <Col sm={5}>
-                        <Form.Control
-                            type = "name"
-                            placeholder="First Name"
-                            autoFocus
-                            onChange={e=>setFName(e.target.value)}
-                        />
-                    </Col>
-                </Form.Group>
+            <Container fluid>
+                <Form>
+                    <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalName">
+                        <Form.Label  column sm= {2}>First Name</Form.Label>
+                        <Col sm={5}>
+                            <Form.Control
+                                type = "name"
+                                placeholder="First Name"
+                                autoFocus
+                                onChange={e=>setFName(e.target.value)}
+                            />
+                        </Col>
+                    </Form.Group>
 
-                <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalName">
-                    <Form.Label column sm= {2} >Last Name</Form.Label>
-                    <Col sm={5}>
-                        <Form.Control
-                            type = "name"
-                            placeholder="Last Name"
-                            autoFocus
-                            onChange={e=>setLName(e.target.value)}
-                        />
-                    </Col>
-                </Form.Group>
-                <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalEmail">
-                    <Form.Label column sm= {2} >Email</Form.Label>
-                    <Col sm={5}>
-                        <Form.Control
-                            type = "email"
-                            placeholder="email@ucalgary.ca"
-                            autoFocus
-                            onChange={e=>setEmail(e.target.value)}
-                        />
-                    </Col>
-                </Form.Group>
-                <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalPassword">
-                    <Form.Label column sm= {2} >Password</Form.Label>
-                    <Col sm={5}>
-                        <Form.Control
-                            type = "password"
-                            placeholder="Password"
-                            autoFocus
-                            onChange={e=>setPassword(e.target.value)}
-                        />
-                    </Col>
-                </Form.Group>
-                <Container fluid className="gap-1 d-sm-flex justify-content-sm-center">
-                    <Button variant="success" onClick={addUser}>Add User</Button>
-                    <Button variant="dark" onClick={blockUser}>Block User</Button>
-                    <Button variant= "danger " onClick={removeUser}>Remove User</Button>
-                </Container>
-            </Form>
+                    <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalName">
+                        <Form.Label column sm= {2} >Last Name</Form.Label>
+                        <Col sm={5}>
+                            <Form.Control
+                                type = "name"
+                                placeholder="Last Name"
+                                autoFocus
+                                onChange={e=>setLName(e.target.value)}
+                            />
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalEmail">
+                        <Form.Label column sm= {2} >Email</Form.Label>
+                        <Col sm={5}>
+                            <Form.Control
+                                type = "email"
+                                placeholder="email@ucalgary.ca"
+                                autoFocus
+                                onChange={e=>setEmail(e.target.value)}
+                            />
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row} className="justify-content-center mb-3" controlId="formHoizontalPassword">
+                        <Form.Label column sm= {2} >Password</Form.Label>
+                        <Col sm={5}>
+                            <Form.Control
+                                type = "password"
+                                placeholder="Password"
+                                autoFocus
+                                onChange={e=>setPassword(e.target.value)}
+                            />
+                        </Col>
+                    </Form.Group>
+                    <Container fluid className="gap-1 d-sm-flex justify-content-sm-center">
+                        <Button variant="success" onClick={addUser}>Add User</Button>
+                        <Button variant="dark" onClick={blockUser}>Block User</Button>
+                        <Button variant= "danger " onClick={removeUser}>Remove User</Button>
+                    </Container>
+                </Form>
+                <Container fluid className="d-grid gap-1 d-sm-flex justify-content-sm-center">
+                    <Modal show={show} onHide={handleClose}>
+                        <Modal.Body>
+                            Please Enter Valid User Information
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>
+                                Close
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                </Container><br/>
+            </Container>
+
 
         </div>
 

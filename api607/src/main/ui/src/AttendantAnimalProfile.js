@@ -56,9 +56,13 @@ export default function AdminAnimalProfile() {
     const [location, setLocation] = useState("");
     const [status, setStatus] = useState("");
     const [statusImageId, setStatusImageId] = useState("");
+
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const [images, setImages] = useState([])
+
 
 
     useEffect(() => {

@@ -61,9 +61,6 @@ export default function AdminAnimalProfile() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    //const [images, setImages] = useState([])
-
-
 
     useEffect(() => {
         axios.post('http://localhost:8080/searchForAnimal',

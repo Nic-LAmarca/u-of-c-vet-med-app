@@ -6,7 +6,6 @@ import './AdminAnimalProfile.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
 import logo from "./Images/vetmed.png";
 
-
 export default function AdminAnimalProfile() {
     const [animalId, setAnimalId] = useState(window.localStorage.getItem("animal"));
     const [animalName, setAnimalName] = useState("");
@@ -20,6 +19,14 @@ export default function AdminAnimalProfile() {
     const [prescriptions,setPrescriptions] = useState([]);
     const [requests,setRequests] = useState([]);
     const [statusHistories,setStatusHistories] = useState([]);
+    const [drugName, setDrugName] = useState("");
+    const [instructions, setInstructions] = useState("");
+    const [dosage, setDosage] = useState("");
+    const [deliveryMethod, setDeliveryMethod] = useState("");
+    const [statusDescription, setStatusDescription] = useState("");
+    const [location, setLocation] = useState("");
+    const [status, setStatus] = useState("");
+    const [statusImageId, setStatusImageId] = useState("");
 
     useEffect(() => {
         axios.post('http://localhost:8080/searchForAnimal',
@@ -162,6 +169,51 @@ export default function AdminAnimalProfile() {
 
         },[])
 
+    async function addPrescription(event) {
+        event.preventDefault();
+        var userId = window.localStorage.getItem("userId");
+        await axios.post('http://localhost:8080/addPrescription',
+        null,
+        {
+            params: {
+                userId,
+                animalId,
+                drugName,
+                instructions,
+                dosage,
+                deliveryMethod
+            }
+        })
+        .then(function(response){
+            console.log(response)
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+    }
+
+    async function addStatus(event) {
+        event.preventDefault();
+        var userId = window.localStorage.getItem("userId");
+        await axios.post('http://localhost:8080/addStatus',
+        null,
+        {
+            params: {
+                animalId,
+                statusDescription,
+                location,
+                status,
+                statusImageId
+            }
+        })
+        .then(function(response){
+            console.log(response)
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+    }
+
     async function addComment(event) {
         event.preventDefault();
         var userId = window.localStorage.getItem("userId");
@@ -285,7 +337,7 @@ export default function AdminAnimalProfile() {
     }
 
     function renderStatusHistoryHeaders(){
-        const headers =["Status Id","Date", "Description", "locations", "Status Type", "Image Id"]
+        const headers =["Status Id","Date", "Description", "location", "Status Type", "Image Id"]
         return headers.map((header)=>{
             return(
                 <th> {header}</th>
@@ -295,13 +347,13 @@ export default function AdminAnimalProfile() {
 
     function renderStatusHistoryTable(){
         return statusHistories.map((value,key) =>{
-            const {statusId, date, description, locations, statusType, imageid} = value
+            const {statusId, date, description, location, statusType, imageid} = value
             return(
                 <tr key={statusId}>
                     <td>{statusId}</td>
                     <td>{date}</td>
                     <td>{description}</td>
-                    <td>{locations}</td>
+                    <td>{location}</td>
                     <td>{statusType}</td>
                     <td>{imageid}</td>
                 </tr>
@@ -331,7 +383,7 @@ export default function AdminAnimalProfile() {
                         placement="end"
                     >
                         <Offcanvas.Header closeButton>
-                            <Offcanvas.Title id="offcanvasNavbarLabel">User Name Here</Offcanvas.Title>
+                            <Offcanvas.Title id="offcanvasNavbarLabel">{window.localStorage.getItem("username")}</Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
@@ -428,6 +480,31 @@ export default function AdminAnimalProfile() {
                                     </Table>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="fourth">
+                                    <InputGroup className="mb-3 flex-sm-wrap">
+                                        <FormControl
+                                            placeholder="Enter Drug Name Here"
+                                            onChange={(e) => setDrugName(e.target.value)}
+                                        /><br/>
+                                        <FormControl
+                                            placeholder="Enter Instructions Here"
+                                            onChange={(e) => setInstructions(e.target.value)}
+                                        />
+                                        </InputGroup>
+                                        <InputGroup className="mb-4 flex-sm-wrap">
+                                        <FormControl
+                                            placeholder="Enter Dosage Here"
+                                            onChange={(e) => setDosage(e.target.value)}
+                                        />
+                                        <FormControl
+                                            placeholder="Enter Delivery Method Here"
+                                            onChange={(e) => setDeliveryMethod(e.target.value)}
+                                        />
+                                        </InputGroup>
+                                        <InputGroup className="mb-5 flex-sm-wrap">
+                                        <Button variant="success" id="Submit Prescription" onClick={addPrescription}>
+                                            Submit
+                                        </Button>
+                                    </InputGroup>
                                     <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">
                                         <thead>
                                         <tr>
@@ -452,6 +529,31 @@ export default function AdminAnimalProfile() {
                                     </Table>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="sixth">
+                                <InputGroup className="mb-3 flex-sm-wrap">
+                                    <FormControl
+                                        placeholder="Enter Description Here"
+                                        onChange={(e) => setStatusDescription(e.target.value)}
+                                    /><br/>
+                                    <FormControl
+                                        placeholder="Enter Location Here"
+                                        onChange={(e) => setLocation(e.target.value)}
+                                    />
+                                    </InputGroup>
+                                    <InputGroup className="mb-4 flex-sm-wrap">
+                                    <FormControl
+                                        placeholder="Enter New Status Here"
+                                        onChange={(e) => setStatus(e.target.value)}
+                                    />
+                                    <FormControl
+                                        placeholder="Associated Image Id"
+                                        onChange={(e) => setStatusImageId(e.target.value)}
+                                    />
+                                    </InputGroup>
+                                    <InputGroup className="mb-5 flex-sm-wrap">
+                                    <Button variant="success" id="Submit Status Update" onClick={addStatus}>
+                                        Submit
+                                    </Button>
+                                    </InputGroup>
                                     <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">
                                         <thead>
                                         <tr>

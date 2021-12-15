@@ -26,7 +26,7 @@ public class CommentController {
 
     @CrossOrigin
     @PostMapping("/addComment{userId, animalId, description}")
-    public void getAnimalComments(@PathParam("userId") int userId, @PathParam("animalId") int animalId, @PathParam("description") String description) {
+    public void addAnimalComment(@PathParam("userId") int userId, @PathParam("animalId") int animalId, @PathParam("description") String description) {
         String date = LocalDate.now().toString();
         db.addComment(userId, animalId, description, date);
     }

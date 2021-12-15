@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 @CrossOrigin (origins = "http://localhost:3000")
@@ -26,10 +27,11 @@ public class StatusController {
     }
 
     @CrossOrigin
-    @PostMapping("/addStatus{animalId, date, description, location, statusType, imageId}")
-    public void addHistory(@PathParam("animalId") int animalId, @PathParam("date") String date, @PathParam("description") String description, @PathParam("location") String location, @PathParam("statusType") String statusType,  @PathParam("imageId") int imageId )
+    @PostMapping("/addStatus{animalId, statusDescription, location, status, statusImageId}")
+    public void addStatus(@PathParam("animalId") int animalId, @PathParam("statusDescription") String statusDescription, @PathParam("location") String location, @PathParam("status") String status, @PathParam("statusImageId") int statusImageId)
     {
-        db.addStatus(animalId, date, description, location, statusType, imageId);
+        String date = LocalDate.now().toString();
+        db.addStatus(animalId, date, statusDescription, location, status, statusImageId);
     }
 
 }

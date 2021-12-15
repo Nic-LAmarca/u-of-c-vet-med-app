@@ -14,13 +14,25 @@ export default function AdminAnimalProfile() {
     const [description, setDescription] = useState("");
     const [comments, setComments] = useState([]);
     let [animals, setAnimals] = useState([]);
-    const [images,setImages] = useState([]);
+    let [diagnosis,setDiagnosis] = useState([]);
+    let [prescription,setPrescription] = useState([]);
+    let [request,setRequest] = useState([]);
+    let [alert, setAlert] = useState("");
     const [treatments,setTreatments] = useState([]);
     const [prescriptions,setPrescriptions] = useState([]);
     const [requests,setRequests] = useState([]);
     const [statusHistories,setStatusHistories] = useState([]);
     const [fileN, setFile] = useState("");
     const [fileName, setFileName] = useState(null);
+    const [drugName, setDrugName] = useState("");
+    const [instructions, setInstructions] = useState("");
+    const [dosage, setDosage] = useState("");
+    const [deliveryMethod, setDeliveryMethod] = useState("");
+    const [statusDescription, setStatusDescription] = useState("");
+    const [location, setLocation] = useState("");
+    const [status, setStatus] = useState("");
+    const [statusImageId, setStatusImageId] = useState("");
+
 
     useEffect(() => {
         axios.post('http://localhost:8080/searchForAnimal',
@@ -182,26 +194,199 @@ export default function AdminAnimalProfile() {
             console.log(error);
         })
     }
-    // async function addImage(event) {
-    //     event.preventDefault();
-    //     console.log(fileName)
-    //     var userId = window.localStorage.getItem("userId");
-    //     await axios.post('http://localhost:8080/addImage',
-    //         null,
-    //         {
-    //             params: {
-    //                 userId,
-    //                 fileName,
-    //                 animalId
-    //             }
-    //         })
-    //         .then(function(response){
-    //             console.log(response)
-    //         })
-    //         .catch(function(error){
-    //             console.log(error);
-    //         })
-    // }
+
+    async function addStatus(event) {
+        event.preventDefault();
+        var userId = window.localStorage.getItem("userId");
+        await axios.post('http://localhost:8080/addStatus',
+        null,
+        {
+            params: {
+                animalId,
+                statusDescription,
+                location,
+                status,
+                statusImageId
+            }
+        })
+        .then(function(response){
+            console.log(response)
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+    }
+
+    async function addPrescription(event) {
+        event.preventDefault();
+        var userId = window.localStorage.getItem("userId");
+        await axios.post('http://localhost:8080/addPrescription',
+        null,
+        {
+            params: {
+                userId,
+                animalId,
+                drugName,
+                instructions,
+                dosage,
+                deliveryMethod
+            }
+        })
+        .then(function(response){
+            console.log(response)
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+    }
+
+    async function addImage(event) {
+        event.preventDefault();
+        var userId = window.localStorage.getItem("userId");
+        await axios.post('http://localhost:8080/addImage',
+            null,
+            {
+                params: {
+                    userId,
+                    fileName,
+                    animalId
+                }
+            })
+            .then(function(response){
+                console.log(response)
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+    }
+
+
+        async function updateAlert(event) {
+            await axios.post('http://localhost:8080/animalAlert',
+                null,
+                {
+                    params: {
+                        animalId,
+                        alert
+                    }
+                  })
+                     .then(function(response){
+                    console.log(response)
+                    reRenderTable();
+                                })
+                    .catch(function(error){
+                        console.log(error);
+                    })
+
+            }
+
+
+
+    async function reRenderTable()
+    {
+     var animalId = window.localStorage.getItem("animal")
+     axios.post('http://localhost:8080/searchForAnimal',
+                null,
+                {
+                    params: {
+                        animalId
+                    }
+                })
+                .then(function(response){
+                    console.log(response)
+                    setAnimals(Array.from(response.data))
+                    var table = document.getElementById("profileTable");
+                    var rowCount = table.rows.length
+                    var j = 1;
+                    for(var i = 1; i < rowCount; i++){
+                    table.deleteRow(j)
+                    }
+                    for(var i = 1; i < 17; i++){
+                        var row = table.insertRow(i)
+                        for(var j = 0; j < 2; j++){
+                                row.insertCell(j)
+                            }
+                        }
+                    const animalFound = response.data
+                    setAnimalName(animalFound.animalName)
+                    setAnimalSpecies(animalFound.animalSpecies)
+                    setAnimalStatus(animalFound.statusType)
+                    setAlert(animalFound.alert)
+
+                        table.rows[1].cells[0].innerHTML = "Species"
+                        table.rows[2].cells[0].innerHTML = "Weight"
+                        table.rows[3].cells[0].innerHTML = "Tattoo Number"
+                        table.rows[4].cells[0].innerHTML = "City Tattoo"
+                        table.rows[5].cells[0].innerHTML = "Birth Date"
+                        table.rows[6].cells[0].innerHTML = "Breed"
+                        table.rows[7].cells[0].innerHTML = "Sex"
+                        table.rows[8].cells[0].innerHTML = "RFID"
+                        table.rows[9].cells[0].innerHTML = "Microchip"
+                        table.rows[10].cells[0].innerHTML = "Location"
+                        table.rows[11].cells[0].innerHTML = "Alert"
+                        table.rows[12].cells[0].innerHTML = "Purpose"
+                        table.rows[13].cells[0].innerHTML = 'Region'
+                        table.rows[14].cells[0].innerHTML = "Subspecies"
+                        table.rows[15].cells[0].innerHTML = "Color"
+                        table.rows[16].cells[0].innerHTML = "Distinguishing Features"
+                        table.rows[1].cells[1].innerHTML = animalFound.species
+                        table.rows[2].cells[1].innerHTML = animalFound.weight
+                        table.rows[3].cells[1].innerHTML = animalFound.tattooNum
+                        table.rows[4].cells[1].innerHTML = animalFound.cityTattoo
+                        table.rows[5].cells[1].innerHTML = animalFound.birthDate
+                        table.rows[6].cells[1].innerHTML = animalFound.breed
+                        table.rows[7].cells[1].innerHTML = animalFound.sex
+                        table.rows[8].cells[1].innerHTML = animalFound.rfid
+                        table.rows[9].cells[1].innerHTML = animalFound.microchip
+                        table.rows[10].cells[1].innerHTML = animalFound.location
+                        table.rows[11].cells[1].innerHTML = animalFound.alert
+                        table.rows[12].cells[1].innerHTML = animalFound.purpose
+                        table.rows[13].cells[1].innerHTML = animalFound.region
+                        table.rows[14].cells[1].innerHTML = animalFound.subspecies
+                        table.rows[15].cells[1].innerHTML = animalFound.color
+                        table.rows[16].cells[1].innerHTML = animalFound.distinguishingFeatures
+
+                })
+                .catch(function(error){
+                    console.log(error);
+                })
+    }
+    const onChange = (e) =>{
+        console.log(e.target.files)
+        setFile(e.target.value)
+        setFileName(e.target.files[0])
+    }
+    const onUpload = (e) =>{
+        e.preventDefault()
+        console.log("This is the filename format",fileN);
+        const data = new FormData();
+        data.append('file',fileName);
+        axios.post('http://localhost:8000/upload',data)
+            .then((e) => {
+                console.log("success")
+            })
+            .catch((e)=>{
+                console.error('Error',e)
+            })
+        var userId = window.localStorage.getItem("userId");
+        axios.post('http://localhost:8080/addImage',
+            null,
+            {
+                params: {
+                    userId,
+                    fileN,
+                    animalId
+                }
+            })
+            .then(function(response){
+                console.log(response)
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+    }
+
+
 
     // *********************************************************
     // ****** SECTION USED FOR Rendering Tables ******
@@ -338,40 +523,7 @@ export default function AdminAnimalProfile() {
         })
     }
 
-    const onChange = (e) =>{
-        console.log(e.target.files)
-        setFile(e.target.value)
-        setFileName(e.target.files[0])
-    }
-    const onUpload = (e) =>{
-        e.preventDefault()
-        console.log("This is the filename format",fileN);
-        const data = new FormData();
-        data.append('file',fileName);
-        axios.post('http://localhost:8000/upload',data)
-            .then((e) => {
-                console.log("success")
-            })
-            .catch((e)=>{
-                console.error('Error',e)
-            })
-        var userId = window.localStorage.getItem("userId");
-        axios.post('http://localhost:8080/addImage',
-            null,
-            {
-                params: {
-                    userId,
-                    fileN,
-                    animalId
-                }
-            })
-            .then(function(response){
-                console.log(response)
-            })
-            .catch(function(error){
-                console.log(error);
-            })
-    }
+
 
     return (
         <div>
@@ -387,7 +539,7 @@ export default function AdminAnimalProfile() {
                         placement="end"
                     >
                         <Offcanvas.Header closeButton>
-                            <Offcanvas.Title id="offcanvasNavbarLabel">User Name Here</Offcanvas.Title>
+                            <Offcanvas.Title id="offcanvasNavbarLabel">{window.localStorage.getItem("username")}</Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
                             <Nav className="justify-content-end flex-grow-1 pe-3">
@@ -425,6 +577,7 @@ export default function AdminAnimalProfile() {
                 </Row>
             </Container ><br/>
             <Container fluid>
+
                 <Row>
                     <Col>
                         <Table variant="dark" striped bordered hover  id="profileTable">
@@ -437,6 +590,17 @@ export default function AdminAnimalProfile() {
                         </Table>
                     </Col>
                     <Col>
+                      <InputGroup className="mb-3 flex-sm-wrap">
+                        <FormControl
+                            placeholder="Enter Alert Here"
+                            onChange={(e) => setAlert(e.target.value)}
+                        />
+                        <Button variant="danger" id="Set/Clear Alert" onClick={updateAlert}>
+                                                                 Set/Clear Alert
+                                                              </Button>
+                    </InputGroup>
+
+
                         <Tab.Container id="left-tabs-example" defaultActiveKey="first" >
                             <Tab.Content >
                                 <Tab.Pane eventKey="first">
@@ -447,9 +611,10 @@ export default function AdminAnimalProfile() {
                                             aria-describedby="Submit Comment"
                                             onChange={(e) => setDescription(e.target.value)}
                                         />
-                                        <Button variant="success" id="Submit Comment" onClick={addComment}>
-                                            Submit
-                                        </Button>
+                                          <Button variant="success" id="Submit Comment" onClick={addComment}>
+                                                                    Submit
+                                                                </Button>
+
                                     </InputGroup>
                                     <Table responsive variant="dark" striped bordered hover id="commentTable">
                                         <thead>
@@ -495,9 +660,25 @@ export default function AdminAnimalProfile() {
                                     <InputGroup className="mb-3 flex-sm-wrap">
                                         <FormControl
                                             placeholder="Enter Drug Name Here"
-                                            onChange={(e) => setDescription(e.target.value)}
+                                            onChange={(e) => setDrugName(e.target.value)}
+                                        /><br/>
+                                        <FormControl
+                                            placeholder="Enter Instructions Here"
+                                            onChange={(e) => setInstructions(e.target.value)}
                                         />
-                                        <Button variant="success" id="Submit Prescription" onClick={addComment}>
+                                        </InputGroup>
+                                        <InputGroup className="mb-4 flex-sm-wrap">
+                                        <FormControl
+                                            placeholder="Enter Dosage Here"
+                                            onChange={(e) => setDosage(e.target.value)}
+                                        />
+                                        <FormControl
+                                            placeholder="Enter Delivery Method Here"
+                                            onChange={(e) => setDeliveryMethod(e.target.value)}
+                                        />
+                                        </InputGroup>
+                                        <InputGroup className="mb-5 flex-sm-wrap">
+                                        <Button variant="success" id="Submit Prescription" onClick={addPrescription}>
                                             Submit
                                         </Button>
                                     </InputGroup>
@@ -525,17 +706,42 @@ export default function AdminAnimalProfile() {
                                     </Table>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="sixth">
-                                    <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">
-                                        <thead>
-                                        <tr>
-                                            {renderStatusHistoryHeaders()}
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                            {renderStatusHistoryTable()}
-                                        </tbody>
-                                    </Table>
-                                </Tab.Pane>
+                                    <InputGroup className="mb-3 flex-sm-wrap">
+                                        <FormControl
+                                            placeholder="Enter Description Here"
+                                            onChange={(e) => setStatusDescription(e.target.value)}
+                                        /><br/>
+                                        <FormControl
+                                            placeholder="Enter Location Here"
+                                            onChange={(e) => setLocation(e.target.value)}
+                                        />
+                                        </InputGroup>
+                                        <InputGroup className="mb-4 flex-sm-wrap">
+                                        <FormControl
+                                            placeholder="Enter New Status Here"
+                                            onChange={(e) => setStatus(e.target.value)}
+                                        />
+                                        <FormControl
+                                            placeholder="Associated Image Id"
+                                            onChange={(e) => setStatusImageId(e.target.value)}
+                                        />
+                                        </InputGroup>
+                                        <InputGroup className="mb-5 flex-sm-wrap">
+                                        <Button variant="success" id="Submit Status Update" onClick={addStatus}>
+                                            Submit
+                                        </Button>
+                                        </InputGroup>
+                                        <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">
+                                            <thead>
+                                            <tr>
+                                                {renderStatusHistoryHeaders()}
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                                {renderStatusHistoryTable()}
+                                            </tbody>
+                                        </Table>
+                                    </Tab.Pane>
                             </Tab.Content>
                             <Nav variant="pills"  >
                                 <Nav.Item>

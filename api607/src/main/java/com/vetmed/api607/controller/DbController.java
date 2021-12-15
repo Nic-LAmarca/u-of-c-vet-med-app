@@ -61,7 +61,7 @@ public class DbController {
                     foundAnimal.setStatusType(results.getString("statusType"));
                     foundAnimal.setAvailable(results.getBoolean("available"));
                     foundAnimal.setPurpose(results.getString("location"));
-                    foundAnimal.setRegion(results.getString("alert"));
+                    foundAnimal.setAlert(results.getString("alert"));
                     foundAnimal.setPurpose(results.getString("purpose"));
                     foundAnimal.setRegion(results.getString("region"));
                     foundAnimal.setSubspecies(results.getString("subspecies"));
@@ -170,7 +170,7 @@ public class DbController {
                 addAnimal.setStatusType(results.getString("statusType"));
                 addAnimal.setAvailable(results.getBoolean("available"));
                 addAnimal.setPurpose(results.getString("location"));
-                addAnimal.setRegion(results.getString("alert"));
+                addAnimal.setAlert(results.getString("alert"));
                 addAnimal.setPurpose(results.getString("purpose"));
                 addAnimal.setRegion(results.getString("region"));
                 addAnimal.setSubspecies(results.getString("subspecies"));
@@ -214,7 +214,7 @@ public class DbController {
                 addAnimal.setStatusType(results.getString("statusType"));
                 addAnimal.setAvailable(results.getBoolean("available"));
                 addAnimal.setPurpose(results.getString("location"));
-                addAnimal.setRegion(results.getString("alert"));
+                addAnimal.setAlert(results.getString("alert"));
                 addAnimal.setPurpose(results.getString("purpose"));
                 addAnimal.setRegion(results.getString("region"));
                 addAnimal.setSubspecies(results.getString("subspecies"));
@@ -257,7 +257,7 @@ public class DbController {
                 addAnimal.setStatusType(results.getString("statusType"));
                 addAnimal.setAvailable(results.getBoolean("available"));
                 addAnimal.setPurpose(results.getString("location"));
-                addAnimal.setRegion(results.getString("alert"));
+                addAnimal.setAlert(results.getString("alert"));
                 addAnimal.setPurpose(results.getString("purpose"));
                 addAnimal.setRegion(results.getString("region"));
                 addAnimal.setSubspecies(results.getString("subspecies"));
@@ -347,6 +347,26 @@ public class DbController {
             newStmt.setInt(1, animalId);
             newStmt.executeUpdate();
             newStmt.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Updates alert for an animal in the database.
+     * @param animalId the id of the message to be updated
+     * @param alert the alert message
+     */
+    public void updateAlert(int animalId, String alert)  {
+        try {
+            String query = "UPDATE ANIMAL SET alert= ? WHERE animalId = ?";
+            PreparedStatement myStmt = dbConnect.prepareStatement(query);
+            myStmt.setString(1, alert);
+            myStmt.setInt(2, animalId);
+            myStmt.executeUpdate();
+            myStmt.close();
+            System.out.println(animalId);
+            System.out.println(alert);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1100,9 +1120,9 @@ public class DbController {
      * @param dosage is the required dosage to be taken
      * @param deliveryMethod is how the medication should be taken
      */
-    public void addPrescriptionHistory( int userId, int animalId, String date, String drugName, String instructions, double dosage, String deliveryMethod) {
+    public void addPrescriptionHistory(int userId, int animalId, String date, String drugName, String instructions, double dosage, String deliveryMethod) {
         try {
-            String query = "INSERT INTO USER (userId, animalId, date, drugName, instructions, dosage, deliveryMethod) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO PRESCRIPTION_HISTORY (userId, animalId, date, drugName, instructions, dosage, deliveryMethod) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement myStmt = this.dbConnect.prepareStatement(query);
             myStmt.setInt(1, userId);
             myStmt.setInt(2, animalId);

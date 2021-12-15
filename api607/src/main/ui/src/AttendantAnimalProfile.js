@@ -1,10 +1,33 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Button,Form,Dropdown,DropdownButton,Table,ListGroup,Tabs,Tab,TabContent,TabContainer,Nav,NavItem,Row,Col,Navbar, Container, Image, Offcanvas,InputGroup,FormControl} from "react-bootstrap";
+import {
+    Button,
+    Form,
+    Dropdown,
+    DropdownButton,
+    Table,
+    ListGroup,
+    Tabs,
+    Tab,
+    TabContent,
+    TabContainer,
+    Nav,
+    NavItem,
+    Row,
+    Col,
+    Navbar,
+    Container,
+    Image,
+    Offcanvas,
+    InputGroup,
+    FormControl,
+    Modal
+} from "react-bootstrap";
 import axios from "axios";
 import './AdminAnimalProfile.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
 import logo from "./Images/vetmed.png";
+import {toast} from "react-toastify";
 
 export default function AdminAnimalProfile() {
     const [animalId, setAnimalId] = useState(window.localStorage.getItem("animal"));
@@ -14,6 +37,7 @@ export default function AdminAnimalProfile() {
     const [description, setDescription] = useState("");
     const [comments, setComments] = useState([]);
     let [animals, setAnimals] = useState([]);
+    let [images,setImages] = useState([]);
     let [diagnosis,setDiagnosis] = useState([]);
     let [prescription,setPrescription] = useState([]);
     let [request,setRequest] = useState([]);
@@ -32,7 +56,13 @@ export default function AdminAnimalProfile() {
     const [location, setLocation] = useState("");
     const [status, setStatus] = useState("");
     const [statusImageId, setStatusImageId] = useState("");
+
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     const [images, setImages] = useState([])
+
 
 
     useEffect(() => {
@@ -116,7 +146,9 @@ export default function AdminAnimalProfile() {
                     }
                 })
                 .then(function(response){
+                    console.log(response.data[0])
                     setImages(response.data)
+
                 })
                 .catch(function(error){
                     console.log(error);
@@ -364,10 +396,10 @@ export default function AdminAnimalProfile() {
         data.append('file',fileName);
         axios.post('http://localhost:8000/upload',data)
             .then((e) => {
-                console.log("success")
+                toast.success("Upload Successful")
             })
             .catch((e)=>{
-                console.error('Error',e)
+                toast.error("Upload Unsuccessful")
             })
         var userId = window.localStorage.getItem("userId");
         axios.post('http://localhost:8080/addImage',
@@ -631,15 +663,34 @@ export default function AdminAnimalProfile() {
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="second" >
                                     <Form.Group controlId="formFileSm" className=" flex-sm-wrap">
-                                        <Form.Control onChange={onChange}
-                                                      type="file"
-                                                      size="sm"
-                                                      multiple
-                                        />
-                                        <Button variant="success" id="Submit Comment" onClick={onUpload}>
-                                            Upload
+                                        {/*<Form.Control onChange={onChange}*/}
+                                        {/*              type="file"*/}
+                                        {/*              size="sm"*/}
+                                        {/*              multiple*/}
+                                        {/*/>*/}
+                                        <Button variant="success" id="Submit Comment" onClick={handleShow}>
+                                            Upload A Photo
                                         </Button>
                                     </Form.Group>
+                                    <Modal show={show} onHide={handleClose}>
+                                        <Modal.Header closeButton>
+                                            <Modal.Title>Upload File</Modal.Title>
+                                        </Modal.Header>
+                                        <Modal.Body>
+                                            <Form.Control onChange={onChange}
+                                                          type="file"
+                                                          size="sm"
+                                            />
+                                        </Modal.Body>
+                                        <Modal.Footer>
+                                            <Button variant="secondary" onClick={handleClose}>
+                                                Close
+                                            </Button>
+                                            <Button variant="success" onClick={onUpload}>
+                                                Upload
+                                            </Button>
+                                        </Modal.Footer>
+                                    </Modal><br/>
                                     {renderImage()}
                                     {/*<h100 className="AdminAnimalProfile-photo-item1">SparkyPhoto1.png</h100>*/}
                                     {/*<h101 className="AdminAnimalProfile-photo-item2">SparkyPhoto2.png</h101>*/}

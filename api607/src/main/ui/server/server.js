@@ -7,12 +7,13 @@ const app = express();
 
 app.use(cors());
 
+
 const storage = multer.diskStorage({
     destination:(re,file,cb) => {
-        cb(null,'public')
+        cb(null,'../public')
     },
     filename:(req,file,cb) => {
-        cb(null, Date.now() + '-'+file.originalname)
+        cb(null, Date.now()+file.originalname)
     }
 });
 

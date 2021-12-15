@@ -1,6 +1,22 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {Button, Col, Row, InputGroup, Form, Dropdown, DropdownButton, Navbar, Container, Image, Offcanvas, Nav, Badge, Table} from "react-bootstrap";
+import {
+    Button,
+    Col,
+    Row,
+    InputGroup,
+    Form,
+    Dropdown,
+    DropdownButton,
+    Navbar,
+    Container,
+    Image,
+    Offcanvas,
+    Nav,
+    Badge,
+    Table,
+    Modal
+} from "react-bootstrap";
 import axios from "axios";
 import './TeacherTeachingRequest.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
@@ -10,6 +26,9 @@ import DropdownItem from "react-bootstrap/DropdownItem";
 export default function TeacherTeachingRequest() {
     let [animals,setAnimals] = useState([]);
     const [requestDate, setRequestDate] = useState("");
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     const history = useNavigate();
 
@@ -56,6 +75,7 @@ export default function TeacherTeachingRequest() {
     async function makeRequest(animalId) {
         var userId = window.localStorage.getItem("userId")
         var date = requestDate
+        console.log(date);
         axios.post('http://localhost:8080/teacherTeachingRequest',
              null,
              {
@@ -128,6 +148,18 @@ export default function TeacherTeachingRequest() {
                     {renderTableBody()}
                     </tbody>
                 </Table>
+                <Container fluid className="d-grid gap-1 d-sm-flex justify-content-sm-center">
+                    <Modal show={show} onHide={handleClose}>
+                        <Modal.Body>
+                            Please Enter Valid User Information
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>
+                                Close
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                </Container><br/>
             </Container>
         </div>
     );

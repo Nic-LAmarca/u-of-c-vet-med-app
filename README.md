@@ -1,6 +1,8 @@
 # Final-Project
 607 final project
 
+Final Project Video: https://drive.google.com/file/d/1MNZP3CggKZlRwVsUxiG4eOx-uDQQzMBv/view?usp=sharing
+
 ## Endpoints
 These are the stages that were followed in order to build and test each of the endpoints.
 

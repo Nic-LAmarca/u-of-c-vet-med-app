@@ -21,6 +21,7 @@ import axios from "axios";
 import './TeacherTeachingRequest.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
  import images from "./Images/vetmed.png";
+ import {toast} from "react-toastify";
 
 
 export default function TeacherTeachingRequest() {
@@ -75,22 +76,31 @@ export default function TeacherTeachingRequest() {
     async function makeRequest(animalId) {
         var userId = window.localStorage.getItem("userId")
         var date = requestDate
-        console.log(date);
-        axios.post('http://localhost:8080/teacherTeachingRequest',
-             null,
-             {
-                 params: {
-                    userId,
-                    animalId,
-                    date
-                 }
-             })
-             .then(function(response){
-                console.log(response.data)
-             })
-             .catch(function(error){
-                 console.log(error);
-             });;
+        var date_regex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/
+        if (!(date_regex.test(date))) {
+            handleShow()
+        }
+        else{
+            axios.post('http://localhost:8080/teacherTeachingRequest',
+                null,
+                {
+                    params: {
+                        userId,
+                        animalId,
+                        date
+                    }
+                })
+                .then(function(response){
+                    toast.success("Request Successful")
+                    console.log(response.data)
+                    setRequestDate("")
+                })
+                .catch(function(error){
+                    toast.error("Request Unsuccessful")
+                    console.log(error);
+                });
+        }
+
     }
 
     return (
@@ -137,9 +147,13 @@ export default function TeacherTeachingRequest() {
                                  value = {requestDate}
                                   onChange =  {(e) => setRequestDate(e.target.value)}
                             />
-                        </InputGroup><br/>
+
+                        </InputGroup>
+                        <Form.Text id="passwordHelpBlock" muted>
+                            Your date must be YYYY-MM-DD
+                        </Form.Text>
                     </Col>
-                </Row>
+                </Row><br/>
                 <Table id = "animals" striped bordered hover responsive>
                     <thead>
                     {renderHeaders()}
@@ -151,7 +165,7 @@ export default function TeacherTeachingRequest() {
                 <Container fluid className="d-grid gap-1 d-sm-flex justify-content-sm-center">
                     <Modal show={show} onHide={handleClose}>
                         <Modal.Body>
-                            Please Enter Valid User Information
+                            Please Enter Valid Date
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={handleClose}>

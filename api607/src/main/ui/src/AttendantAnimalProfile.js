@@ -61,6 +61,12 @@ export default function AdminAnimalProfile() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const [show2, setShow2] = useState(false);
+    const handleClose2 = () => setShow2(false);
+    const handleShow2 = () => setShow2(true);
+
+
+
 
     useEffect(() => {
         axios.post('http://localhost:8080/searchForAnimal',
@@ -227,47 +233,62 @@ export default function AdminAnimalProfile() {
 
     async function addStatus(event) {
         event.preventDefault();
-        var userId = window.localStorage.getItem("userId");
-        await axios.post('http://localhost:8080/addStatus',
-        null,
-        {
-            params: {
-                animalId,
-                statusDescription,
-                location,
-                status,
-                statusImageId
-            }
-        })
-        .then(function(response){
-            console.log(response)
-        })
-        .catch(function(error){
-            console.log(error);
-        })
+         if (statusDescription != "" && location != "" && statusImageId > 0 && status != "")
+         {
+            var userId = window.localStorage.getItem("userId");
+            await axios.post('http://localhost:8080/addStatus',
+            null,
+            {
+                params: {
+                    animalId,
+                    statusDescription,
+                    location,
+                    status,
+                    statusImageId
+                }
+            })
+            .then(function(response){
+                console.log(response)
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+
+           }
+           else
+           {
+                handleShow2();
+           }
     }
 
     async function addPrescription(event) {
         event.preventDefault();
-        var userId = window.localStorage.getItem("userId");
-        await axios.post('http://localhost:8080/addPrescription',
-        null,
+        if (drugName != "" && instructions != "" && dosage > 0 && deliveryMethod != "")
         {
-            params: {
-                userId,
-                animalId,
-                drugName,
-                instructions,
-                dosage,
-                deliveryMethod
-            }
-        })
-        .then(function(response){
-            console.log(response)
-        })
-        .catch(function(error){
-            console.log(error);
-        })
+            var userId = window.localStorage.getItem("userId");
+            await axios.post('http://localhost:8080/addPrescription',
+            null,
+            {
+                params: {
+                    userId,
+                    animalId,
+                    drugName,
+                    instructions,
+                    dosage,
+                    deliveryMethod
+                }
+            })
+            .then(function(response){
+                console.log(response)
+            })
+            .catch(function(error){
+                console.log(error);
+            })
+        }
+        else
+        {
+            handleShow2()
+        }
     }
 
     async function addImage(event) {
@@ -529,7 +550,7 @@ export default function AdminAnimalProfile() {
     }
 
     function renderStatusHistoryHeaders(){
-        const headers =["Status Id","Date", "Description", "locations", "Status Type", "Image Id"]
+        const headers =["Status Id","Date", "Description", "location", "Status Type", "Image Id"]
         return headers.map((header)=>{
             return(
                 <th> {header}</th>
@@ -539,15 +560,15 @@ export default function AdminAnimalProfile() {
 
     function renderStatusHistoryTable(){
         return statusHistories.map((value,key) =>{
-            const {statusId, date, description, locations, statusType, imageid} = value
+            const {statusId, date, description, location, statusType, imageId} = value
             return(
                 <tr key={statusId}>
                     <td>{statusId}</td>
                     <td>{date}</td>
                     <td>{description}</td>
-                    <td>{locations}</td>
+                    <td>{location}</td>
                     <td>{statusType}</td>
-                    <td>{imageid}</td>
+                    <td>{imageId}</td>
                 </tr>
             )
         })
@@ -727,6 +748,16 @@ export default function AdminAnimalProfile() {
                                         <Button variant="success" id="Submit Prescription" onClick={addPrescription}>
                                             Submit
                                         </Button>
+                                        <Modal show={show2} onHide={handleClose2}>
+                                                                   <Modal.Body>
+                                                                       <Form.Label> One Or More Invalid Entries</Form.Label>
+                                                                   </Modal.Body>
+                                                                   <Modal.Footer>
+                                                                       <Button variant="secondary" onClick={handleClose2}>
+                                                                           Close
+                                                                       </Button>
+                                                                   </Modal.Footer>
+                                                               </Modal>
                                     </InputGroup>
                                     <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">
                                         <thead>

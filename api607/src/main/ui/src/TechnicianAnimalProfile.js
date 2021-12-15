@@ -1,28 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {
-    Button,
-    Form,
-    Dropdown,
-    DropdownButton,
-    Table,
-    ListGroup,
-    Tabs,
-    Tab,
-    TabContent,
-    TabContainer,
-    Nav,
-    NavItem,
-    Row,
-    Col,
-    Navbar,
-    Container,
-    Image,
-    Offcanvas,
-    InputGroup,
-    FormControl,
-    Modal
-} from "react-bootstrap";
+
+import {Button,Form,Dropdown,DropdownButton,Table,ListGroup,Tabs,Tab,TabContent,TabContainer,Nav,NavItem,Row,Col,Navbar, Container, Image, Offcanvas,InputGroup,FormControl,  Modal} from "react-bootstrap";
 import axios from "axios";
 import './AdminAnimalProfile.css';
 import DropdownItem from "react-bootstrap/DropdownItem";
@@ -55,6 +34,15 @@ export default function AdminAnimalProfile() {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const [show2, setShow2] = useState(false);
+    const handleClose2 = () => setShow2(false);
+    const handleShow2 = () => setShow2(true);
+
+
+    const [show3, setShow3] = useState(false);
+    const handleClose3 = () => setShow3(false);
+    const handleShow3 = () => setShow3(true);
 
     useEffect(() => {
         axios.post('http://localhost:8080/searchForAnimal',
@@ -197,49 +185,63 @@ export default function AdminAnimalProfile() {
 
         },[])
 
-    async function addPrescription(event) {
-        event.preventDefault();
-        var userId = window.localStorage.getItem("userId");
-        await axios.post('http://localhost:8080/addPrescription',
-        null,
-        {
-            params: {
-                userId,
-                animalId,
-                drugName,
-                instructions,
-                dosage,
-                deliveryMethod
-            }
-        })
-        .then(function(response){
-            console.log(response)
-        })
-        .catch(function(error){
-            console.log(error);
-        })
-    }
+      async function addPrescription(event) {
+             event.preventDefault()
+          if (drugName != "" && instructions != "" && dosage > 0 && deliveryMethod != "")
+          {
+              var userId = window.localStorage.getItem("userId");
+              await axios.post('http://localhost:8080/addPrescription',
+              null,
+              {
+                  params: {
+                      userId,
+                      animalId,
+                      drugName,
+                      instructions,
+                      dosage,
+                      deliveryMethod
+                  }
+              })
+              .then(function(response){
+                  console.log(response)
+              })
+              .catch(function(error){
+                  console.log(error);
+              })
+          }
+          else
+          {
+              handleShow2()
+          }
+      }
 
     async function addStatus(event) {
-        event.preventDefault();
+           event.preventDefault()
         var userId = window.localStorage.getItem("userId");
-        await axios.post('http://localhost:8080/addStatus',
-        null,
-        {
-            params: {
-                animalId,
-                statusDescription,
-                location,
-                status,
-                statusImageId
-            }
-        })
-        .then(function(response){
-            console.log(response)
-        })
-        .catch(function(error){
-            console.log(error);
-        })
+           if (statusDescription != "" && location != "" && statusImageId > 0 && status != "")
+           {
+                await axios.post('http://localhost:8080/addStatus',
+                null,
+                {
+                    params: {
+                        animalId,
+                        statusDescription,
+                        location,
+                        status,
+                        statusImageId
+                    }
+                })
+                .then(function(response){
+                    console.log(response)
+                })
+                .catch(function(error){
+                    console.log(error);
+                })
+           }
+           else
+           {
+                handleShow3();
+           }
     }
 
     async function addComment(event) {
@@ -411,7 +413,7 @@ export default function AdminAnimalProfile() {
 
     function renderStatusHistoryTable(){
         return statusHistories.map((value,key) =>{
-            const {statusId, date, description, location, statusType, imageid} = value
+            const {statusId, date, description, location, statusType, statusImageId} = value
             return(
                 <tr key={statusId}>
                     <td>{statusId}</td>
@@ -419,7 +421,7 @@ export default function AdminAnimalProfile() {
                     <td>{description}</td>
                     <td>{location}</td>
                     <td>{statusType}</td>
-                    <td>{imageid}</td>
+                    <td>{statusImageId}</td>
                 </tr>
             )
         })
@@ -595,6 +597,16 @@ export default function AdminAnimalProfile() {
                                         <Button variant="success" id="Submit Prescription" onClick={addPrescription}>
                                             Submit
                                         </Button>
+                                        <Modal show={show2} onHide={handleClose2}>
+                                       <Modal.Body>
+                                           <Form.Label> One Or More Invalid Entries</Form.Label>
+                                       </Modal.Body>
+                                       <Modal.Footer>
+                                           <Button variant="secondary" onClick={handleClose2}>
+                                               Close
+                                           </Button>
+                                       </Modal.Footer>
+                                   </Modal>
                                     </InputGroup>
                                     <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">
                                         <thead>
@@ -644,6 +656,16 @@ export default function AdminAnimalProfile() {
                                     <Button variant="success" id="Submit Status Update" onClick={addStatus}>
                                         Submit
                                     </Button>
+                                        <Modal show={show3} onHide={handleClose3}>
+                                           <Modal.Body>
+                                               <Form.Label> One Or More Invalid Entries</Form.Label>
+                                           </Modal.Body>
+                                           <Modal.Footer>
+                                               <Button variant="secondary" onClick={handleClose3}>
+                                                   Close
+                                               </Button>
+                                           </Modal.Footer>
+                                       </Modal>
                                     </InputGroup>
                                     <Table responsive variant="dark" striped bordered hover className="AdminAnimalProfile-grid-item100">
                                         <thead>
